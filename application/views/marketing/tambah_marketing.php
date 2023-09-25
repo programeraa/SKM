@@ -31,24 +31,24 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="emd" class="col-form-label">Upline EMD</label>
+                                <label for="emd" class="col-form-label">Upline 1</label>
                                 <select class="form-control select2bs4" id="emd" name="emd">
                                     <option value="">Pilih Nama</option>
                                     <?php 
                                     foreach($marketing as $each){ ?>
-                                        <option value="<?php echo $each->nama_mar; ?>">
+                                        <option value="<?php echo $each->id_mar; ?>">
                                             <?php echo $each->nama_mar; ?> (<?php echo $each->nomor_mar; ?>)
                                         </option>;
                                     <?php } ?>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="cmo" class="col-form-label">Upline CMO</label>
+                                <label for="cmo" class="col-form-label">Upline 2</label>
                                 <select class="form-control select2bs4" id="cmo" name="cmo">
                                     <option value="">Pilih Nama</option>
                                     <?php 
                                     foreach($marketing as $each){ ?>
-                                        <option value="<?php echo $each->nama_mar; ?>">
+                                        <option value="<?php echo $each->id_mar; ?>">
                                             <?php echo $each->nama_mar; ?> (<?php echo $each->nomor_mar; ?>)
                                         </option>;
                                     <?php } ?>
