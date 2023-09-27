@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="<?= base_url('Marketing/tambah'); ?>">
+                <form method="post" action="<?= base_url('Marketing/tambah'); ?>" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -72,6 +72,14 @@
                             <div class="form-group">
                                 <label for="jabatan" class="col-form-label">Jabatan</label>
                                 <input type="text" class="form-control" id="jabatan" name="jabatan">
+                            </div>
+                            <div class="form-group">
+                                <label for="g_ktp" class="col-form-label">Foto KTP</label>
+                                <input type="file" class="form-control" id="g_ktp" name="g_ktp">
+                            </div>
+                            <div class="form-group">
+                                <label for="g_npwp" class="col-form-label">Foto NPWP</label>
+                                <input type="file" class="form-control" id="g_npwp" name="g_npwp">
                             </div>
                         </div>
                     </div>
