@@ -29,7 +29,19 @@
                     </thead>
                     <tbody>
                         <?php $no = 1;
-                        foreach ($marketing as $mkt) { ?>
+                        foreach ($marketing as $mkt) { 
+                            if (!empty($mkt->gambar_ktp_mar)) {
+                                $gambar_ktp = 1;
+                            }else{
+                                $gambar_ktp = 0;
+                            }
+
+                            if(!empty($mkt->gambar_npwp_mar)) {
+                                $gambar_npwp = 1;
+                            }else{
+                                $gambar_npwp = 0;
+                            }
+                            ?>
                             <tr>
                                 <td><?= $no; ?></td>
                                 <td><?= $mkt->nama_mar;?> (<?= $mkt->nomor_mar;?>)</td>
@@ -71,24 +83,24 @@
                             }
                             ?>
                             <td>
-                               <?= $cmo_baru; ?>
-                            </td>
-                            <td>
-                                <a href="#" data-toggle="modal" data-target="#lihat_marketing<?php echo $mkt->id_mar; ?>" class="btn btn-primary"><i class="fas fa-eye" title="Lihat"></i></a>
+                             <?= $cmo_baru; ?>
+                         </td>
+                         <td>
+                            <a href="#" data-toggle="modal" data-target="#lihat_marketing<?php echo $mkt->id_mar; ?>" class="btn btn-primary"><i class="fas fa-eye" title="Lihat"></i></a>
 
-                                <?php include "marketing/lihat_marketing.php" ?>
+                            <?php include "marketing/lihat_marketing.php" ?>
 
-                                <a href="<?= base_url('marketing/edit/' . $mkt->id_mar); ?>" class="btn btn-success" data-target="#editModal"><i class="fas fa-edit" title="Edit"></i></a>
+                            <a href="<?= base_url('marketing/edit/' . $mkt->id_mar); ?>" class="btn btn-success" data-target="#editModal"><i class="fas fa-edit" title="Edit"></i></a>
 
-                                <a href="<?= base_url('marketing/hapus/' . $mkt->id_mar); ?>" onclick="javascript:return confirm('Apakah Anda yakin ingin menghapus data marketing?')" class="btn btn-danger"><i class="fas fa-trash" title="Hapus"></i></a>
-                            </td>
-                        </tr>
-                        <?php $no++;
-                    } ?>
-                </tbody>
-            </table>
-        </div>
+                            <a href="<?= base_url('marketing/hapus/' . $mkt->id_mar); ?>" onclick="javascript:return confirm('Apakah Anda yakin ingin menghapus data marketing?')" class="btn btn-danger"><i class="fas fa-trash" title="Hapus"></i></a>
+                        </td>
+                    </tr>
+                    <?php $no++;
+                } ?>
+            </tbody>
+        </table>
     </div>
+</div>
 </div>
 </div>
 </div>
