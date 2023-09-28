@@ -20,6 +20,10 @@ class M_marketing extends CI_Model{
     	return $this->db->get_where('marketing',$where);
     }
 
+    function get_marketing_by_id($id_mar){
+        return $this->db->get_where('marketing', array('id_mar' => $id_mar))->row();
+    }
+
     function update($where,$data){
     	$this->db->where($where);
     	$this->db->update('marketing',$data);
