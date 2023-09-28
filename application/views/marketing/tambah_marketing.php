@@ -31,6 +31,16 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label for="norek" class="col-form-label">No. Rekening</label>
+                                <input type="text" class="form-control" id="norek" name="norek" placeholder="Misal : BCA-xxxxxxxx (Citra)">
+                            </div>
+                            <div class="form-group">
+                                <label for="fasilitas" class="col-form-label">Fasilitas</label>
+                                <input type="text" class="form-control" id="fasilitas" name="fasilitas">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <label for="emd" class="col-form-label">Upline 1</label>
                                 <select class="form-control select2bs4" id="emd" name="emd">
                                     <option value="">Pilih Nama</option>
@@ -54,21 +64,11 @@
                                     <?php } ?>
                                 </select>
                             </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="npwp" class="col-form-label">NPWP</label>
                                 <input type="text" class="form-control" id="npwp" name="npwp">
-                            </div>
-                            <div class="form-group">
-                                <label for="norek" class="col-form-label">No. Rekening</label>
-                                <input type="text" class="form-control" id="norek" name="norek" placeholder="Misal : BCA-xxxxxxxx (Citra)">
-                            </div>
-                            <div class="form-group">
-                                <label for="fasilitas" class="col-form-label">Fasilitas</label>
-                                <input type="text" class="form-control" id="fasilitas" name="fasilitas">
-                            </div>
+                            </div> -->
+                            
                             <div class="form-group">
                                 <label for="jabatan" class="col-form-label">Jabatan</label>
                                 <input type="text" class="form-control" id="jabatan" name="jabatan">
