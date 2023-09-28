@@ -1,3 +1,4 @@
+<?php include "session_identitas.php"; ?>
 <div class="container pt-5 pb-5">
     <div class="d-flex justify-content-between mb-2">
         <?php require'v_navigasi.php'; ?>
