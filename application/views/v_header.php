@@ -1,6 +1,4 @@
-<?php 
-$level = $this->session->userdata('level');?>
-
+<?php include "session_identitas.php"; ?>
 <!doctype html>
     <html lang="en">
 
@@ -34,21 +32,12 @@ $level = $this->session->userdata('level');?>
         <!-- Select2 -->
         <link rel="stylesheet" href="<?php echo base_url('plugin/select2/css/select2.min.css'); ?>">
         <link rel="stylesheet" href="<?php echo base_url('plugin/select2-bootstrap4-theme/select2-bootstrap4.min.css'); ?>">
-        
-
-
-        
-
-
-        
-
-
     </head>
 
     <body>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
             <div class="container d-flex justify-content-between">
-                <a class="navbar-brand" href="">Sistem Hitung Komisi Marketing</a>
-                <a class="navbar-brand text-uppercase mr-0" href="#">A&A Indonesia</a>
+                <a class="navbar-brand" href="">A&A INDONESIA</a>
+                <a class="navbar-brand mr-0" href="#"><?= $nama ?> - <?= $level; ?></a>
             </div>
         </nav>
