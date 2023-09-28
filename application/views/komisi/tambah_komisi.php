@@ -57,7 +57,7 @@
                                             $mm_listing = 80;
                                         }  
 
-                                        if (!empty($each->npwp_mar)) {
+                                        if (!empty($each->gambar_npwp_mar)) {
                                             $npwp_mar = 1;
                                         }else{
                                             $npwp_mar = 0;
@@ -66,7 +66,7 @@
                                         //tampilkan upline 1 listing
                                         foreach ($marketing as $upline) {
                                             if ($upline->id_mar == $each->upline_emd_mar) {
-                                                $a = $upline->npwp_mar;
+                                                $a = $upline->gambar_npwp_mar;
                                                 break;
                                             }elseif($each->upline_emd_mar == null){
                                                 $a = null;
@@ -84,7 +84,7 @@
                                         //tampilkan upline 2 listing
                                         foreach ($marketing as $upline2) {
                                             if ($upline2->id_mar == $each->upline_cmo_mar) {
-                                                $b = $upline2->npwp_mar;
+                                                $b = $upline2->gambar_npwp_mar;
                                                 break;
                                             }elseif($each->upline_cmo_mar == null){
                                                 $b = null;
@@ -130,7 +130,7 @@
                                                 $mm_selling = 80;
                                             }  
 
-                                            if (!empty($each->npwp_mar)) {
+                                            if (!empty($each->gambar_npwp_mar)) {
                                                 $npwp_mar = 1;
                                             }else{
                                                 $npwp_mar = 0;
@@ -139,7 +139,7 @@
                                             //tampilkan upline 1 selling
                                             foreach ($marketing as $upline) {
                                                 if ($upline->id_mar == $each->upline_emd_mar) {
-                                                    $a = $upline->npwp_mar;
+                                                    $a = $upline->gambar_npwp_mar;
                                                     break;
                                                 }elseif($each->upline_emd_mar == null){
                                                     $a = null;
@@ -158,7 +158,7 @@
                                             //tampilkan upline 2 selling
                                             foreach ($marketing as $upline2) {
                                                 if ($upline2->id_mar == $each->upline_cmo_mar) {
-                                                    $b = $upline2->npwp_mar;
+                                                    $b = $upline2->gambar_npwp_mar;
                                                     break;
                                                 }elseif($each->upline_cmo_mar == null){
                                                     $b = null;
