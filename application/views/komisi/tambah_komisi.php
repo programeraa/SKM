@@ -223,8 +223,11 @@
                                             <label for="npwpum_selling2" class="col-form-label">NPWP UMS2</label>
                                             <input type="text" class="form-control" id="npwpum_selling2" name="npwpum_selling2">
                                         </div>
+                                        <div class="form-group">
+                                            <label for="admin" class="col-form-label">Admin</label>
+                                            <input type="text" class="form-control" id="admin" name="admin" value="<?php echo $id ?>">
+                                        </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
