@@ -49,6 +49,14 @@ class M_komisi extends CI_Model{
 		$this->db->insert('sub_komisi',$data2);
 	}
 
+	function simpan_co_broke($data3){
+		$this->db->insert('co_broke',$data3);
+	}
+
+	function simpan_potongan($data4){
+		$this->db->insert('potongan',$data4);
+	}
+
 	function edit($where){
     	return $this->db->get_where('komisi',$where);
     }
