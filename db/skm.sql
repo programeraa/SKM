@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 28, 2023 at 02:20 PM
+-- Generation Time: Sep 29, 2023 at 03:34 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -81,6 +81,28 @@ INSERT INTO `marketing` (`id_mar`, `nama_mar`, `nomor_mar`, `member_mar`, `uplin
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pengguna`
+--
+
+CREATE TABLE `pengguna` (
+  `id_pengguna` int(250) NOT NULL,
+  `nama_pengguna` varchar(250) NOT NULL,
+  `username_pengguna` varchar(250) NOT NULL,
+  `pass_pengguna` varchar(250) NOT NULL,
+  `level_pengguna` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pengguna`
+--
+
+INSERT INTO `pengguna` (`id_pengguna`, `nama_pengguna`, `username_pengguna`, `pass_pengguna`, `level_pengguna`) VALUES
+(1, 'Rohman', 'rohman', '2397977a0e43fb1f5ee26fe993674b5b', 'Administrator'),
+(4, 'Julia', 'julia', 'c2e285cb33cecdbeb83d2189e983a8c0', 'CMO');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sub_komisi`
 --
 
@@ -124,6 +146,12 @@ ALTER TABLE `marketing`
   ADD PRIMARY KEY (`id_mar`);
 
 --
+-- Indexes for table `pengguna`
+--
+ALTER TABLE `pengguna`
+  ADD PRIMARY KEY (`id_pengguna`);
+
+--
 -- Indexes for table `sub_komisi`
 --
 ALTER TABLE `sub_komisi`
@@ -145,6 +173,12 @@ ALTER TABLE `komisi`
 --
 ALTER TABLE `marketing`
   MODIFY `id_mar` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `pengguna`
+--
+ALTER TABLE `pengguna`
+  MODIFY `id_pengguna` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `sub_komisi`
