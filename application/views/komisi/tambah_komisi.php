@@ -261,14 +261,14 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="komisi" class="col-form-label">Potongan Lainnya</label>
-                                                <input type="text" class="form-control" id="komisi" name="komisi">
+                                                <label for="potongan" class="col-form-label">Potongan Lainnya</label>
+                                                <input type="text" class="form-control" id="potongan" name="potongan">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="komisi" class="col-form-label">Jumlah</label>
-                                                <input type="text" class="form-control" id="komisi" name="komisi">
+                                                <label for="j_potongan" class="col-form-label">Jumlah</label>
+                                                <input type="text" class="form-control" id="j_potongan" name="j_potongan">
                                             </div>
                                         </div>
                                     </div>
