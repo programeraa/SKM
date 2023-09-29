@@ -52,6 +52,7 @@ class Komisi extends CI_Controller {
 		$ml = $this->input->post('marketing_listing');
 		$ms = $this->input->post('marketing_selling');
 		$komisi = $this->input->post('komisi');
+		$admin = $this->input->post('admin');
 
 		//tambahan m listing
 		$mm_listing = $this->input->post('mm_listing');
@@ -126,7 +127,8 @@ class Komisi extends CI_Controller {
 			'mm_selling_komisi' => $mm_selling,
 			'npwpm_selling_komisi' => $npwpm_selling,
 			'npwpum_selling_komisi' => $npwpum_selling,
-			'npwpum_selling2_komisi' => $npwpum_selling2
+			'npwpum_selling2_komisi' => $npwpum_selling2,
+			'admin_pengguna' => $admin
 		);
 		
 		$this->m_komisi->simpan_sub_komisi($data2);
