@@ -6,8 +6,13 @@ class Pengguna extends CI_Controller {
 		$this->load->model('m_pengguna');
 	}
 
-	public function index()
-	{
+	public function index(){
+		$level = $this->session->userdata('level');
+		if ($level == '') {
+			$this->session->set_flashdata('gagal','Anda Belum Login');
+			redirect(base_url('login'));
+		}
+
 		$data['title'] = "Data Pengguna";
 		$data['pengguna'] = $this->m_pengguna->tampil_data()->result();
 
