@@ -8,6 +8,12 @@ class Marketing extends CI_Controller {
 
 	public function index()
 	{
+		$level = $this->session->userdata('level');
+		if ($level == '') {
+			$this->session->set_flashdata('gagal','Anda Belum Login');
+			redirect(base_url('login'));
+		}
+
 		$data['title'] = "Data Marketing";
 		$data['marketing'] = $this->m_marketing->tampil_data()->result();
 
@@ -108,6 +114,11 @@ class Marketing extends CI_Controller {
 
 
     public function edit($id){
+    	$level = $this->session->userdata('level');
+		if ($level == '') {
+			$this->session->set_flashdata('gagal','Anda Belum Login');
+			redirect(base_url('login'));
+		}
 
     	$where = array('id_mar'=>$id);
     	$data['marketing'] = $this->m_marketing->edit($where)->result();
