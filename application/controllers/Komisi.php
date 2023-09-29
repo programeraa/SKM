@@ -12,6 +12,12 @@ class Komisi extends CI_Controller {
 
 	public function index()
 	{	
+		$level = $this->session->userdata('level');
+		if ($level == '') {
+			$this->session->set_flashdata('gagal','Anda Belum Login');
+			redirect(base_url('login'));
+		}
+
 		$data['title'] = 'Dashboard';
 		// $data['data_pengajuan'] = $this->m_dashboard->data_pengajuan()->row_array();
 		// $data['disetujui'] = $this->m_dashboard->disetujui()->row_array();
@@ -24,6 +30,11 @@ class Komisi extends CI_Controller {
 	}
 
 	public function komisi(){
+		$level = $this->session->userdata('level');
+		if ($level == '') {
+			$this->session->set_flashdata('gagal','Anda Belum Login');
+			redirect(base_url('login'));
+		}
 		
 		$data['title'] = 'Data Komisi Marketing';
 		$data['komisi'] = $this->m_komisi->tampil_data()->result();
@@ -93,6 +104,12 @@ class Komisi extends CI_Controller {
 
 	}
 	public function rincian_komisi($id_komisi){
+		$level = $this->session->userdata('level');
+		if ($level == '') {
+			$this->session->set_flashdata('gagal','Anda Belum Login');
+			redirect(base_url('login'));
+		}
+
 		$where = array('id_komisi'=>$id_komisi);
 		$data['title'] = 'Rincian Komisi Marketing';
 		$data['komisi'] = $this->m_komisi->tampil_data_rincian($where)->result();
@@ -104,6 +121,12 @@ class Komisi extends CI_Controller {
 	}
 
 	public function edit_komisi($id_komisi){
+		$level = $this->session->userdata('level');
+		if ($level == '') {
+			$this->session->set_flashdata('gagal','Anda Belum Login');
+			redirect(base_url('login'));
+		}
+		
 		$where = array('id_komisi'=>$id_komisi);
 		$data['title'] = 'Edit Data Komisi Marketing';
 		$data['komisi'] = $this->m_komisi->edit($where)->result();
