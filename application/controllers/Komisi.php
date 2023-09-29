@@ -68,6 +68,33 @@ class Komisi extends CI_Controller {
 		date_default_timezone_set("Asia/Jakarta");
 		$waktu = date("Y-m-d H:i:s");
 
+		//co-broke
+		$pilih_ml = $this->input->post('ml');
+		$pilih_ms = $this->input->post('ms');
+
+		if ($pilih_ml == 'Broker') {
+			$broker_1 = $this->input->post('broker_1');
+			$j_broker = $this->input->post('j_broker');
+			$status_broker = 'Listing'; 
+		}
+		if ($pilih_ms == 'Broker2') {
+			$broker_2 = $this->input->post('broker_2');
+			$j_broker2 = $this->input->post('j_broker2');
+			$status_broker = 'Selling'; 
+		}
+
+		if (!empty($broker_1 && $j_broker)) {
+			$nama_broker = $broker_1;
+			$jenis_broker = $j_broker;
+		}else{
+			$nama_broker = $broker_2;
+			$jenis_broker = $j_broker2;
+		}
+
+		//potongan
+		$potongan = $this->input->post('potongan');
+		$j_potongan = $this->input->post('j_potongan');
+
 		$data = array(
 			'alamat_komisi' => $alamat,
 			'jt_komisi' => $jt,
@@ -96,6 +123,23 @@ class Komisi extends CI_Controller {
 		);
 		
 		$this->m_komisi->simpan_sub_komisi($data2);
+
+		$data3 = array(
+			'id_komisi' => $id_komisi_baru,
+			'nama_cobroke' => $nama_broker,
+			'status_cobroke' => $status_broker,
+			'jenis_cobroke' => $jenis_broker
+		);
+		
+		$this->m_komisi->simpan_co_broke($data3);
+
+		$data4 = array(
+			'id_komisi' => $id_komisi_baru,
+			'keterangan_potongan' => $potongan,
+			'jumlah_potongan' => $j_potongan
+		);
+		
+		$this->m_komisi->simpan_potongan($data4);
 
 		echo '<script>
 		alert("Selamat! Berhasil Menambah Data Komisi");
