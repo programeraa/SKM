@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2023 at 03:34 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Waktu pembuatan: 29 Sep 2023 pada 09.50
+-- Versi server: 10.4.22-MariaDB
+-- Versi PHP: 7.3.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `komisi`
+-- Struktur dari tabel `co_broke`
+--
+
+CREATE TABLE `co_broke` (
+  `id_cobroke` int(250) NOT NULL,
+  `id_komisi` int(250) NOT NULL,
+  `nama_cobroke` varchar(250) NOT NULL,
+  `status_cobroke` varchar(250) NOT NULL,
+  `jenis_cobroke` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `komisi`
 --
 
 CREATE TABLE `komisi` (
@@ -39,7 +53,7 @@ CREATE TABLE `komisi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `komisi`
+-- Dumping data untuk tabel `komisi`
 --
 
 INSERT INTO `komisi` (`id_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_komisi`, `mar_listing_komisi`, `mar_selling_komisi`, `bruto_komisi`, `waktu_komisi`) VALUES
@@ -48,7 +62,7 @@ INSERT INTO `komisi` (`id_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_ko
 -- --------------------------------------------------------
 
 --
--- Table structure for table `marketing`
+-- Struktur dari tabel `marketing`
 --
 
 CREATE TABLE `marketing` (
@@ -67,13 +81,13 @@ CREATE TABLE `marketing` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `marketing`
+-- Dumping data untuk tabel `marketing`
 --
 
 INSERT INTO `marketing` (`id_mar`, `nama_mar`, `nomor_mar`, `member_mar`, `upline_emd_mar`, `upline_cmo_mar`, `npwp_mar`, `norek_mar`, `fasilitas_mar`, `jabatan_mar`, `gambar_ktp_mar`, `gambar_npwp_mar`) VALUES
-(2, 'Henny', 'AA001', 'Gold Express', '9', '3', '', 'BCA-6730311638 (HENNY)', '', '', '', 'Apa_Itu_Teknologi_VPN,_Definisi,_Cara_Kerja_Hingga_Manfaat_VPN.png'),
-(3, 'Jonatan / Lydia', 'AA002', 'Silver', '', '', '', 'BCA-0100359723 (LYDIA SUSANTO)', '', '', '', 'pexels-stefan-coders-2064586.jpg'),
-(7, 'Purnomo', 'AA004', 'Prime Pro', '3', '', '', '78654 - Purnomo', '', '', 'Buat_Daftar_Tugas.jpg', 'Rencanakan_Jadwal_Harian.jpg'),
+(2, 'Henny', 'AA001', 'Gold Express', '9', '3', '', 'BCA-6730311638 (HENNY)', '', '', '', ''),
+(3, 'Jonatan / Lydia', 'AA002', 'Silver', '', '', '', 'BCA-0100359723 (LYDIA SUSANTO)', '', '', '', '1.jpg'),
+(7, 'Purnomo', 'AA004', 'Prime Pro', '3', '', '', '78654 - Purnomo', '', '', '', ''),
 (9, 'Yenny', 'AA005', 'Black Jack', '3', '', '', 'BCA-89897899 - Yenny', '', '', '', ''),
 (10, 'Julia / Jeffy', 'AA006', 'Silver', '', '', '', '9090 - Julia Jeffy', '', '', '', ''),
 (11, 'Claudia', 'AA007', 'Gold Express', '10', '', '', 'BCA-4700271779 (Claudia Florensia Sri P)', '', '', '', '');
@@ -81,7 +95,7 @@ INSERT INTO `marketing` (`id_mar`, `nama_mar`, `nomor_mar`, `member_mar`, `uplin
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pengguna`
+-- Struktur dari tabel `pengguna`
 --
 
 CREATE TABLE `pengguna` (
@@ -93,7 +107,7 @@ CREATE TABLE `pengguna` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `pengguna`
+-- Dumping data untuk tabel `pengguna`
 --
 
 INSERT INTO `pengguna` (`id_pengguna`, `nama_pengguna`, `username_pengguna`, `pass_pengguna`, `level_pengguna`) VALUES
@@ -103,7 +117,20 @@ INSERT INTO `pengguna` (`id_pengguna`, `nama_pengguna`, `username_pengguna`, `pa
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sub_komisi`
+-- Struktur dari tabel `potongan`
+--
+
+CREATE TABLE `potongan` (
+  `id_potongan` int(250) NOT NULL,
+  `id_komisi` int(250) NOT NULL,
+  `keterangan_potongan` varchar(250) NOT NULL,
+  `jumlah_potongan` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `sub_komisi`
 --
 
 CREATE TABLE `sub_komisi` (
@@ -121,7 +148,7 @@ CREATE TABLE `sub_komisi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `sub_komisi`
+-- Dumping data untuk tabel `sub_komisi`
 --
 
 INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `npwpm_listing_komisi`, `npwpum_listing_komisi`, `npwpum_listing2_komisi`, `mm_selling_komisi`, `npwpm_selling_komisi`, `npwpum_selling_komisi`, `npwpum_selling2_komisi`, `admin_pengguna`) VALUES
@@ -132,7 +159,13 @@ INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `np
 --
 
 --
--- Indexes for table `komisi`
+-- Indeks untuk tabel `co_broke`
+--
+ALTER TABLE `co_broke`
+  ADD PRIMARY KEY (`id_cobroke`);
+
+--
+-- Indeks untuk tabel `komisi`
 --
 ALTER TABLE `komisi`
   ADD PRIMARY KEY (`id_komisi`),
@@ -140,58 +173,76 @@ ALTER TABLE `komisi`
   ADD KEY `mar_selling_komisi` (`mar_selling_komisi`);
 
 --
--- Indexes for table `marketing`
+-- Indeks untuk tabel `marketing`
 --
 ALTER TABLE `marketing`
   ADD PRIMARY KEY (`id_mar`);
 
 --
--- Indexes for table `pengguna`
+-- Indeks untuk tabel `pengguna`
 --
 ALTER TABLE `pengguna`
   ADD PRIMARY KEY (`id_pengguna`);
 
 --
--- Indexes for table `sub_komisi`
+-- Indeks untuk tabel `potongan`
+--
+ALTER TABLE `potongan`
+  ADD PRIMARY KEY (`id_potongan`);
+
+--
+-- Indeks untuk tabel `sub_komisi`
 --
 ALTER TABLE `sub_komisi`
   ADD PRIMARY KEY (`id_sub_komisi`),
   ADD KEY `id_komisi` (`id_komisi`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `komisi`
+-- AUTO_INCREMENT untuk tabel `co_broke`
+--
+ALTER TABLE `co_broke`
+  MODIFY `id_cobroke` int(250) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `komisi`
 --
 ALTER TABLE `komisi`
   MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
--- AUTO_INCREMENT for table `marketing`
+-- AUTO_INCREMENT untuk tabel `marketing`
 --
 ALTER TABLE `marketing`
   MODIFY `id_mar` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT for table `pengguna`
+-- AUTO_INCREMENT untuk tabel `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id_pengguna` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pengguna` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `sub_komisi`
+-- AUTO_INCREMENT untuk tabel `potongan`
+--
+ALTER TABLE `potongan`
+  MODIFY `id_potongan` int(250) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `sub_komisi`
 --
 ALTER TABLE `sub_komisi`
   MODIFY `id_sub_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `sub_komisi`
+-- Ketidakleluasaan untuk tabel `sub_komisi`
 --
 ALTER TABLE `sub_komisi`
   ADD CONSTRAINT `sub_komisi_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
