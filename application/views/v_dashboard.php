@@ -59,7 +59,7 @@
                 </div>
             </div>
         </div>
-        <<div class="d-flex justify-content-start mt-3">
+        <div class="d-flex justify-content-start mt-3">
             <div class="text-right">
                 <a href="<?= base_url('login/logout');?>">
                     <button type="button" class="btn btn-danger" data-whatever="@getbootstrap" >Log Out</button></a>
