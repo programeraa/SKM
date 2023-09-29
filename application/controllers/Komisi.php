@@ -72,6 +72,13 @@ class Komisi extends CI_Controller {
 		$pilih_ml = $this->input->post('ml');
 		$pilih_ms = $this->input->post('ms');
 
+		$broker_1 = '';
+		$j_broker = '';
+
+		$broker_2 = '';
+		$j_broker2 = '';
+		$status_broker = 'Tidak Ada';
+
 		if ($pilih_ml == 'Broker') {
 			$broker_1 = $this->input->post('broker_1');
 			$j_broker = $this->input->post('j_broker');
