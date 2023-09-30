@@ -69,6 +69,7 @@ class Komisi extends CI_Controller {
 		date_default_timezone_set("Asia/Jakarta");
 		$waktu = date("Y-m-d H:i:s");
 
+		//==================================================================
 		//co-broke
 		$pilih_ml = $this->input->post('ml');
 		$pilih_ms = $this->input->post('ms');
@@ -98,17 +99,49 @@ class Komisi extends CI_Controller {
 			$nama_broker = $broker_2;
 			$jenis_broker = $j_broker2;
 		}
+		//===============================================
 
 		//potongan
 		$potongan = $this->input->post('potongan');
 		$j_potongan = $this->input->post('j_potongan');
 
+		//setting marketing listing dan selling
+		if (!empty($ml)) {
+			$ml_baru = $ml[0];
+		}else{
+			$ml_baru = $broker_1;
+		}
+
+		if (!empty($ms)) {
+			$ms_baru = $ms[0];
+		}else{
+			$ms_baru = $broker_2;
+		}
+
+		//==============================================
+		if (!empty($ml[1])) {
+			$ml_new = $ml[1];
+		}else{
+			$ml_new = '';
+		}
+
+		if (!empty($ms[1])) {
+			$ms_new = $ms[1];
+		}else{
+			$ms_new = '';
+		}
+
+		//setting jumlah marketing A&A 
+		//===============================================
+
 		$data = array(
 			'alamat_komisi' => $alamat,
 			'jt_komisi' => $jt,
 			'tgl_closing_komisi' => $tgl_closing,
-			'mar_listing_komisi' => $ml,
-			'mar_selling_komisi' => $ms,
+			'mar_listing_komisi' => $ml_baru,
+			'mar_listing2_komisi' => $ml_new,
+			'mar_selling_komisi' => $ms_baru,
+			'mar_selling2_komisi' => $ms_new,
 			'bruto_komisi' => $komisi,
 			'waktu_komisi' => $waktu
 		);
@@ -117,17 +150,118 @@ class Komisi extends CI_Controller {
 
 		$id_komisi_baru = $this->m_komisi->get_last_inserted_id();
 
+		$mm_listing_baru = explode(', ', $mm_listing[0]);
+		$mm_selling_baru = explode(', ', $mm_selling[0]);
+
+		if (!empty($mm_listing_baru[0])) {
+			$new_mm_listing_awal = $mlb[0] = explode(', ', $mm_listing[0]); 
+			$new_npwpm_listing_awal = $mlb[0] = explode(', ', $npwpm_listing[0]); 
+			$new_npwpum_listing_awal = $mlb[0] = explode(', ', $npwpum_listing[0]); 
+			$new_npwpum_listing2_awal = $mlb[0] = explode(', ', $npwpum_listing2[0]); 
+
+			$mbl_1 = $new_mm_listing_awal[0]; 
+			$mbl_2 = $new_npwpm_listing_awal[0]; 
+			$mbl_3 = $new_npwpum_listing_awal[0]; 
+			$mbl_4 = $new_npwpum_listing2_awal[0]; 
+
+			$new_mm_listing = $mbl_1;
+			$new_npwpm_listing = $mbl_2;
+			$new_npwpum_listing = $mbl_3;
+			$new_npwpum_listing2 = $mbl_4;
+		}else{
+			$new_mm_listing = '';
+			$new_npwpm_listing = '';
+			$new_npwpum_listing = '';
+			$new_npwpum_listing2 = '';
+		}
+
+		if (!empty($mm_listing_baru[1])) {
+			$new_mm2_listing_awal = $mlb2[1] = explode(', ', $mm_listing[0]);
+			$new_npwpm2_listing_awal = $mlb2[1] = explode(', ', $npwpm_listing[0]);
+			$new_npwpum2_listing_awal = $mlb2[1] = explode(', ', $npwpum_listing[0]);
+			$new_npwpum2_listing2_awal = $mlb2[1] = explode(', ', $npwpum_listing2[0]);
+
+			$mbl2_1 = $new_mm2_listing_awal[1]; 
+			$mbl2_2 = $new_npwpm2_listing_awal[1]; 
+			$mbl2_3 = $new_npwpum2_listing_awal[1]; 
+			$mbl2_4 = $new_npwpum2_listing2_awal[1];
+
+			$new_mm2_listing = $mbl2_1;
+			$new_npwpm2_listing = $mbl2_2;
+			$new_npwpum2_listing = $mbl2_3;
+			$new_npwpum2_listing2 = $mbl2_4; 
+		}else{
+			$new_mm2_listing = '';
+			$new_npwpm2_listing = '';
+			$new_npwpum2_listing = '';
+			$new_npwpum2_listing2 = '';
+		}
+
+		if (!empty($mm_selling_baru[0])) {
+			$new_mm_selling_awal = $msb[0] = explode(', ', $mm_selling[0]); 
+			$new_npwpm_selling_awal = $msb[0] = explode(', ', $npwpm_selling[0]); 
+			$new_npwpum_selling_awal = $msb[0] = explode(', ', $npwpum_selling[0]); 
+			$new_npwpum_selling2_awal = $msb[0] = explode(', ', $npwpum_selling2[0]); 
+
+			$msb_1 = $new_mm_selling_awal[0]; 
+			$msb_2 = $new_npwpm_selling_awal[0]; 
+			$msb_3 = $new_npwpum_selling_awal[0]; 
+			$msb_4 = $new_npwpum_selling2_awal[0]; 
+
+			$new_mm_selling = $msb_1;
+			$new_npwpm_selling = $msb_2;
+			$new_npwpum_selling = $msb_3;
+			$new_npwpum_selling2 = $msb_4;
+		}else{
+			$new_mm_selling = '';
+			$new_npwpm_selling = '';
+			$new_npwpum_selling = '';
+			$new_npwpum_selling2 = '';
+		}
+
+		if (!empty($mm_selling_baru[1])) {
+			$new_mm2_selling_awal = $msb2[1] = explode(', ', $mm_selling[0]); 
+			$new_npwpm2_selling_awal = $msb2[1] = explode(', ', $npwpm_selling[0]); 
+			$new_npwpum2_selling_awal = $msb2[1] = explode(', ', $npwpum_selling[0]); 
+			$new_npwpum2_selling2_awal = $msb2[1] = explode(', ', $npwpum_selling2[0]); 
+
+			$msb_1 = $new_mm2_selling_awal[1]; 
+			$msb_2 = $new_npwpm2_selling_awal[1]; 
+			$msb_3 = $new_npwpum2_selling_awal[1]; 
+			$msb_4 = $new_npwpum2_selling2_awal[1]; 
+
+			$new_mm2_selling = $msb_1;
+			$new_npwpm2_selling = $msb_2;
+			$new_npwpum2_selling = $msb_3;
+			$new_npwpum2_selling2 = $msb_4;
+		}else{
+			$new_mm2_selling = '';
+			$new_npwpm2_selling = '';
+			$new_npwpum2_selling = '';
+			$new_npwpum2_selling2 = '';
+		}
+
 		$data2 = array(
 			'id_komisi' => $id_komisi_baru,
-			'mm_listing_komisi' => $mm_listing,
-			'npwpm_listing_komisi' => $npwpm_listing,
-			'npwpum_listing_komisi' => $npwpum_listing,
-			'npwpum_listing2_komisi' => $npwpum_listing2,
+			'mm_listing_komisi' => $new_mm_listing,
+			'npwpm_listing_komisi' => $new_npwpm_listing,
+			'npwpum_listing_komisi' => $new_npwpum_listing,
+			'npwpum_listing2_komisi' => $new_npwpum_listing2,
 
-			'mm_selling_komisi' => $mm_selling,
-			'npwpm_selling_komisi' => $npwpm_selling,
-			'npwpum_selling_komisi' => $npwpum_selling,
-			'npwpum_selling2_komisi' => $npwpum_selling2,
+			'mm2_listing_komisi' => $new_mm2_listing,
+			'npwpm2_listing_komisi' => $new_npwpm2_listing,
+			'npwpum2_listing_komisi' => $new_npwpum2_listing,
+			'npwpum2_listing2_komisi' => $new_npwpum2_listing2,
+
+			'mm_selling_komisi' => $new_mm_selling,
+			'npwpm_selling_komisi' => $new_npwpm_selling,
+			'npwpum_selling_komisi' => $new_npwpum_selling,
+			'npwpum_selling2_komisi' => $new_npwpum_selling2,
+
+			'mm2_selling_komisi' => $new_mm2_selling,
+			'npwpm2_selling_komisi' => $new_npwpm2_selling,
+			'npwpum2_selling_komisi' => $new_npwpum2_selling,
+			'npwpum2_selling2_komisi' => $new_npwpum2_selling2,
 			'admin_pengguna' => $admin
 		);
 		
