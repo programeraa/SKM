@@ -11,9 +11,19 @@ class M_komisi extends CI_Model{
 
 			d.id_komisi, d.mm_listing_komisi, d.npwpm_listing_komisi, d.npwpum_listing_komisi, d.npwpum_listing2_komisi, d.mm_selling_komisi, d.npwpm_selling_komisi, d.npwpum_selling_komisi, d.npwpum_selling2_komisi,d.admin_pengguna,
 
-			e.id_pengguna, e.nama_pengguna, e.level_pengguna
+			e.id_pengguna, e.nama_pengguna, e.level_pengguna,
 
-			FROM komisi as a INNER JOIN marketing as b ON a.mar_listing_komisi = b.id_mar INNER JOIN marketing as c ON a.mar_selling_komisi = c.id_mar INNER JOIN sub_komisi as d ON a.id_komisi = d.id_komisi INNER JOIN pengguna as e ON e.id_pengguna = d.admin_pengguna');
+			f.id_cobroke, f.id_komisi, f.nama_cobroke, f.jenis_cobroke,
+
+			g.id_potongan, g.id_komisi, g.keterangan_potongan, g.jumlah_potongan
+
+			FROM komisi as a INNER JOIN marketing as b ON a.mar_listing_komisi = b.id_mar INNER JOIN marketing as c ON a.mar_selling_komisi = c.id_mar INNER JOIN sub_komisi as d ON a.id_komisi = d.id_komisi INNER JOIN pengguna as e ON e.id_pengguna = d.admin_pengguna
+
+			INNER JOIN co_broke as f ON f.id_komisi = a.id_komisi
+
+			INNER JOIN potongan as g ON g.id_komisi = a.id_komisi
+
+			');
 		return $hasil;
 	}
 
@@ -31,9 +41,19 @@ class M_komisi extends CI_Model{
 
 			d.id_komisi, d.mm_listing_komisi, d.npwpm_listing_komisi, d.npwpum_listing_komisi, d.npwpum_listing2_komisi, d.mm_selling_komisi, d.npwpm_selling_komisi, d.npwpum_selling_komisi, d.npwpum_selling2_komisi,d.admin_pengguna,
 
-			e.id_pengguna, e.nama_pengguna, e.level_pengguna
+			e.id_pengguna, e.nama_pengguna, e.level_pengguna,
 
-			FROM komisi as a INNER JOIN marketing as b ON a.mar_listing_komisi = b.id_mar INNER JOIN marketing as c ON a.mar_selling_komisi = c.id_mar INNER JOIN sub_komisi as d ON a.id_komisi = d.id_komisi INNER JOIN pengguna as e ON e.id_pengguna = d.admin_pengguna WHERE a.id_komisi = '$data'");
+			f.id_cobroke, f.id_komisi, f.nama_cobroke, f.jenis_cobroke,
+
+			g.id_potongan, g.id_komisi, g.keterangan_potongan, g.jumlah_potongan
+
+			FROM komisi as a INNER JOIN marketing as b ON a.mar_listing_komisi = b.id_mar INNER JOIN marketing as c ON a.mar_selling_komisi = c.id_mar INNER JOIN sub_komisi as d ON a.id_komisi = d.id_komisi INNER JOIN pengguna as e ON e.id_pengguna = d.admin_pengguna 
+
+			INNER JOIN co_broke as f ON f.id_komisi = a.id_komisi
+
+			INNER JOIN potongan as g ON g.id_komisi = a.id_komisi
+
+			WHERE a.id_komisi = '$data'");
 		return $hasil;
 	}
 
