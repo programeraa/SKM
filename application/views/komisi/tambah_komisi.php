@@ -23,7 +23,6 @@
                                     <option value="Jual">Jual</option>
                                     <option value="Sewa">Sewa</option>
                                     <option value="Jual/Sewa">Jual / Sewa</option>
-                                    <option value="Lainnya">Lainnya</option>
                                 </select>
                             </div>
                             <div class="form-group">
