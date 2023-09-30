@@ -34,6 +34,7 @@ class Login extends CI_Controller{
 				$data = $cekLogin->row_array();
 
 				$data_session = array(
+					'id' => $data['id_pengguna'],
 					'level' => $data['level_pengguna'],
 					'nama' => $data['nama_pengguna']
 				);
