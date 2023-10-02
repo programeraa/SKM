@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Okt 2023 pada 10.34
+-- Waktu pembuatan: 02 Okt 2023 pada 10.48
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -158,7 +158,8 @@ CREATE TABLE `sub_komisi` (
 -- Indeks untuk tabel `co_broke`
 --
 ALTER TABLE `co_broke`
-  ADD PRIMARY KEY (`id_cobroke`);
+  ADD PRIMARY KEY (`id_cobroke`),
+  ADD KEY `co_broke_ibfk_2` (`id_komisi_unik`);
 
 --
 -- Indeks untuk tabel `komisi`
@@ -202,13 +203,13 @@ ALTER TABLE `sub_komisi`
 -- AUTO_INCREMENT untuk tabel `co_broke`
 --
 ALTER TABLE `co_broke`
-  MODIFY `id_cobroke` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_cobroke` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT untuk tabel `komisi`
 --
 ALTER TABLE `komisi`
-  MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 
 --
 -- AUTO_INCREMENT untuk tabel `marketing`
@@ -226,17 +227,24 @@ ALTER TABLE `pengguna`
 -- AUTO_INCREMENT untuk tabel `potongan`
 --
 ALTER TABLE `potongan`
-  MODIFY `id_potongan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_potongan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT untuk tabel `sub_komisi`
 --
 ALTER TABLE `sub_komisi`
-  MODIFY `id_sub_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id_sub_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
+
+--
+-- Ketidakleluasaan untuk tabel `co_broke`
+--
+ALTER TABLE `co_broke`
+  ADD CONSTRAINT `co_broke_ibfk_1` FOREIGN KEY (`id_komisi_unik`) REFERENCES `komisi` (`mar_listing_komisi`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `co_broke_ibfk_2` FOREIGN KEY (`id_komisi_unik`) REFERENCES `komisi` (`mar_selling_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `potongan`
