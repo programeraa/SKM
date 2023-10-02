@@ -13,13 +13,13 @@ class M_komisi extends CI_Model{
 
 			e.id_pengguna, e.nama_pengguna, e.level_pengguna,
 
-			f.id_cobroke, f.id_komisi, f.nama_cobroke, f.jenis_cobroke,
+			f.id_cobroke, f.id_komisi_unik, f.nama_cobroke, f.jenis_cobroke,
 
 			g.id_potongan, g.id_komisi, g.keterangan_potongan, g.jumlah_potongan
 
 			FROM komisi as a INNER JOIN marketing as b ON a.mar_listing_komisi = b.id_mar INNER JOIN marketing as c ON a.mar_selling_komisi = c.id_mar INNER JOIN sub_komisi as d ON a.id_komisi = d.id_komisi INNER JOIN pengguna as e ON e.id_pengguna = d.admin_pengguna
 
-			INNER JOIN co_broke as f ON f.id_komisi = a.id_komisi
+			INNER JOIN co_broke as f ON f.id_komisi_unik = a.id_komisi
 
 			INNER JOIN potongan as g ON g.id_komisi = a.id_komisi
 
