@@ -105,17 +105,24 @@ class Komisi extends CI_Controller {
 		$potongan = $this->input->post('potongan');
 		$j_potongan = $this->input->post('j_potongan');
 
+		// Menentukan biji (seed)
+		$seed = microtime(true) * 10000;
+		mt_srand($seed);
+
+		// Menghasilkan nomor acak dengan biji yang telah ditentukan
+		$id_komisi_unik = mt_rand(1000, 9999);
+
 		//setting marketing listing dan selling
 		if (!empty($ml)) {
 			$ml_baru = $ml[0];
 		}else{
-			$ml_baru = $broker_1;
+			$ml_baru = $id_komisi_unik;
 		}
 
 		if (!empty($ms)) {
 			$ms_baru = $ms[0];
 		}else{
-			$ms_baru = $broker_2;
+			$ms_baru = $id_komisi_unik;
 		}
 
 		//==============================================
@@ -268,21 +275,24 @@ class Komisi extends CI_Controller {
 		$this->m_komisi->simpan_sub_komisi($data2);
 
 		$data3 = array(
-			'id_komisi' => $id_komisi_baru,
+			'id_komisi_unik' => $id_komisi_unik,
 			'nama_cobroke' => $nama_broker,
 			'status_cobroke' => $status_broker,
 			'jenis_cobroke' => $jenis_broker
 		);
-		
-		$this->m_komisi->simpan_co_broke($data3);
+
+		if (!empty($broker_1 || $broker_2)) {
+			$this->m_komisi->simpan_co_broke($data3);
+		}
 
 		$data4 = array(
 			'id_komisi' => $id_komisi_baru,
 			'keterangan_potongan' => $potongan,
 			'jumlah_potongan' => $j_potongan
 		);
-		
-		$this->m_komisi->simpan_potongan($data4);
+		if (!empty($potongan || $j_potongan)) {
+			$this->m_komisi->simpan_potongan($data4);
+		}
 
 		echo '<script>
 		alert("Selamat! Berhasil Menambah Data Komisi");
