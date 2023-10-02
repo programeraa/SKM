@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Sep 2023 pada 08.19
+-- Waktu pembuatan: 02 Okt 2023 pada 10.34
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -29,21 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `co_broke` (
   `id_cobroke` int(250) NOT NULL,
-  `id_komisi` int(250) NOT NULL,
+  `id_komisi_unik` int(250) NOT NULL,
   `nama_cobroke` varchar(250) NOT NULL,
   `status_cobroke` varchar(250) NOT NULL,
   `jenis_cobroke` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `co_broke`
---
-
-INSERT INTO `co_broke` (`id_cobroke`, `id_komisi`, `nama_cobroke`, `status_cobroke`, `jenis_cobroke`) VALUES
-(12, 133, '', 'Tidak Ada', ''),
-(13, 134, '', 'Tidak Ada', ''),
-(14, 135, 'Kucing', 'Listing', '2'),
-(15, 136, 'Fandi', 'Listing', '3');
 
 -- --------------------------------------------------------
 
@@ -56,23 +46,13 @@ CREATE TABLE `komisi` (
   `alamat_komisi` varchar(250) NOT NULL,
   `jt_komisi` varchar(250) NOT NULL,
   `tgl_closing_komisi` date NOT NULL,
-  `mar_listing_komisi` varchar(500) NOT NULL,
-  `mar_listing2_komisi` varchar(500) NOT NULL,
-  `mar_selling_komisi` varchar(500) NOT NULL,
-  `mar_selling2_komisi` varchar(500) NOT NULL,
+  `mar_listing_komisi` int(250) NOT NULL,
+  `mar_listing2_komisi` int(250) NOT NULL,
+  `mar_selling_komisi` int(250) NOT NULL,
+  `mar_selling2_komisi` int(250) NOT NULL,
   `bruto_komisi` varchar(250) NOT NULL,
   `waktu_komisi` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `komisi`
---
-
-INSERT INTO `komisi` (`id_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_komisi`, `mar_listing_komisi`, `mar_listing2_komisi`, `mar_selling_komisi`, `mar_selling2_komisi`, `bruto_komisi`, `waktu_komisi`) VALUES
-(133, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual', '2023-09-20', '2', '', '3', '', '3800000', '2023-09-30'),
-(134, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Sewa', '2023-09-19', '2', '7', '3', '9', '68781750', '2023-09-30'),
-(135, 'Jl. Darmo Indah Selatan KK 50, Surabaya 6', 'Jual/Sewa', '2023-09-20', 'Kucing', '', '2', '3', '2500000', '2023-09-30'),
-(136, ' Jl. Dr. Sutomo No. 41, Surabaya', 'Sewa', '2023-09-17', 'Fandi', '', '3', '11', '24250000', '2023-09-30');
 
 -- --------------------------------------------------------
 
@@ -142,16 +122,6 @@ CREATE TABLE `potongan` (
   `jumlah_potongan` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `potongan`
---
-
-INSERT INTO `potongan` (`id_potongan`, `id_komisi`, `keterangan_potongan`, `jumlah_potongan`) VALUES
-(12, 133, '', ''),
-(13, 134, '', ''),
-(14, 135, '', ''),
-(15, 136, '', '');
-
 -- --------------------------------------------------------
 
 --
@@ -181,16 +151,6 @@ CREATE TABLE `sub_komisi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `sub_komisi`
---
-
-INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `npwpm_listing_komisi`, `npwpum_listing_komisi`, `npwpum_listing2_komisi`, `mm2_listing_komisi`, `npwpm2_listing_komisi`, `npwpum2_listing_komisi`, `npwpum2_listing2_komisi`, `mm_selling_komisi`, `npwpm_selling_komisi`, `npwpum_selling_komisi`, `npwpum_selling2_komisi`, `mm2_selling_komisi`, `npwpm2_selling_komisi`, `npwpum2_selling_komisi`, `npwpum2_selling2_komisi`, `admin_pengguna`) VALUES
-(36, 133, 60, 1, 0, 1, 0, 0, 0, 0, 50, 1, 0, 0, 0, 0, 0, 0, 1),
-(37, 134, 60, 1, 0, 1, 70, 0, 1, 0, 50, 1, 0, 0, 80, 0, 1, 0, 1),
-(38, 135, 0, 0, 0, 0, 0, 0, 0, 0, 60, 1, 0, 1, 50, 1, 0, 0, 1),
-(39, 136, 0, 0, 0, 0, 0, 0, 0, 0, 50, 1, 0, 0, 60, 0, 0, 0, 1);
-
---
 -- Indexes for dumped tables
 --
 
@@ -198,8 +158,7 @@ INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `np
 -- Indeks untuk tabel `co_broke`
 --
 ALTER TABLE `co_broke`
-  ADD PRIMARY KEY (`id_cobroke`),
-  ADD KEY `id_komisi` (`id_komisi`);
+  ADD PRIMARY KEY (`id_cobroke`);
 
 --
 -- Indeks untuk tabel `komisi`
@@ -243,13 +202,13 @@ ALTER TABLE `sub_komisi`
 -- AUTO_INCREMENT untuk tabel `co_broke`
 --
 ALTER TABLE `co_broke`
-  MODIFY `id_cobroke` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_cobroke` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `komisi`
 --
 ALTER TABLE `komisi`
-  MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
 -- AUTO_INCREMENT untuk tabel `marketing`
@@ -267,23 +226,17 @@ ALTER TABLE `pengguna`
 -- AUTO_INCREMENT untuk tabel `potongan`
 --
 ALTER TABLE `potongan`
-  MODIFY `id_potongan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_potongan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `sub_komisi`
 --
 ALTER TABLE `sub_komisi`
-  MODIFY `id_sub_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_sub_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
-
---
--- Ketidakleluasaan untuk tabel `co_broke`
---
-ALTER TABLE `co_broke`
-  ADD CONSTRAINT `co_broke_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `potongan`
