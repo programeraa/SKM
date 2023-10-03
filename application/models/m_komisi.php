@@ -3,7 +3,9 @@
 class M_komisi extends CI_Model{
 
 	function tampil_data(){
-		$hasil = $this->db->query('SELECT a.id_komisi, a.alamat_komisi, a.jt_komisi, a.tgl_closing_komisi, a.bruto_komisi, a.mar_listing_komisi, a.mar_selling_komisi, a.waktu_komisi, 
+		$hasil = $this->db->query('SELECT a.id_komisi, a.alamat_komisi, a.jt_komisi, a.tgl_closing_komisi, a.bruto_komisi, a.mar_listing_komisi, a.mar_selling_komisi, a.waktu_komisi,
+
+			a.mar_listing2_komisi, a.mar_selling2_komisi, 
 
 			b.id_mar, b.nama_mar, b.member_mar as member_listing, b.npwp_mar as npwp_listing, c.id_mar, c.member_mar as member_selling, b.upline_emd_mar as up_1_listing, b.upline_cmo_mar as up_2_listing, b.norek_mar as norek_listing, 
 
@@ -13,15 +15,23 @@ class M_komisi extends CI_Model{
 
 			e.id_pengguna, e.nama_pengguna, e.level_pengguna,
 
-			f.id_cobroke, f.id_komisi_unik, f.nama_cobroke, f.jenis_cobroke,
+			-- f.id_cobroke, f.id_komisi, f.id_komisi_unik, f.nama_cobroke, f.jenis_cobroke,
 
-			g.id_potongan, g.id_komisi, g.keterangan_potongan, g.jumlah_potongan
+			-- g.id_potongan, g.id_komisi, g.keterangan_potongan, g.jumlah_potongan
 
-			FROM komisi as a INNER JOIN marketing as b ON a.mar_listing_komisi = b.id_mar INNER JOIN marketing as c ON a.mar_selling_komisi = c.id_mar INNER JOIN sub_komisi as d ON a.id_komisi = d.id_komisi INNER JOIN pengguna as e ON e.id_pengguna = d.admin_pengguna
+			h.nama_mar as listing_2,
 
-			INNER JOIN co_broke as f ON f.id_komisi_unik = a.id_komisi
+			i.nama_mar as selling_2
 
-			INNER JOIN potongan as g ON g.id_komisi = a.id_komisi
+			FROM komisi as a LEFT JOIN marketing as b ON a.mar_listing_komisi = b.id_mar LEFT JOIN marketing as c ON a.mar_selling_komisi = c.id_mar INNER JOIN sub_komisi as d ON a.id_komisi = d.id_komisi INNER JOIN pengguna as e ON e.id_pengguna = d.admin_pengguna
+
+			-- LEFT JOIN co_broke as f ON f.id_komisi_unik = a.mar_listing_komisi or f.id_komisi_unik = a.mar_selling_komisi
+
+			-- INNER JOIN potongan as g ON g.id_komisi = a.id_komisi
+
+			LEFT JOIN marketing as h ON h.id_mar = a.mar_listing2_komisi
+
+			LEFT JOIN marketing as i ON i.id_mar = a.mar_selling2_komisi
 
 			');
 		return $hasil;
@@ -29,6 +39,10 @@ class M_komisi extends CI_Model{
 
 	function tampil_data_marketing(){
 		return $this->db->get('marketing');
+	}
+
+	function tampil_data_cobroke(){
+		return $this->db->get('co_broke');
 	}
 
 	function tampil_data_rincian($where){
@@ -41,17 +55,17 @@ class M_komisi extends CI_Model{
 
 			d.id_komisi, d.mm_listing_komisi, d.npwpm_listing_komisi, d.npwpum_listing_komisi, d.npwpum_listing2_komisi, d.mm_selling_komisi, d.npwpm_selling_komisi, d.npwpum_selling_komisi, d.npwpum_selling2_komisi,d.admin_pengguna,
 
-			e.id_pengguna, e.nama_pengguna, e.level_pengguna,
+			e.id_pengguna, e.nama_pengguna, e.level_pengguna
 
-			f.id_cobroke, f.id_komisi, f.nama_cobroke, f.jenis_cobroke,
+			-- f.id_cobroke, f.id_komisi, f.nama_cobroke, f.jenis_cobroke,
 
-			g.id_potongan, g.id_komisi, g.keterangan_potongan, g.jumlah_potongan
+			-- g.id_potongan, g.id_komisi, g.keterangan_potongan, g.jumlah_potongan
 
 			FROM komisi as a INNER JOIN marketing as b ON a.mar_listing_komisi = b.id_mar INNER JOIN marketing as c ON a.mar_selling_komisi = c.id_mar INNER JOIN sub_komisi as d ON a.id_komisi = d.id_komisi INNER JOIN pengguna as e ON e.id_pengguna = d.admin_pengguna 
 
-			INNER JOIN co_broke as f ON f.id_komisi = a.id_komisi
+			-- INNER JOIN co_broke as f ON f.id_komisi = a.id_komisi
 
-			INNER JOIN potongan as g ON g.id_komisi = a.id_komisi
+			-- INNER JOIN potongan as g ON g.id_komisi = a.id_komisi
 
 			WHERE a.id_komisi = '$data'");
 		return $hasil;
