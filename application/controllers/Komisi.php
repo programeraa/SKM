@@ -7,8 +7,7 @@ class Komisi extends CI_Controller {
 		parent::__construct();
 		$this->load->model('m_komisi');
 		$this->load->model('m_dashboard');
-		$this->load->model('m_marketing');
-	}
+		$this->load->model('m_marketing');	}
 
 	public function index()
 	{	
@@ -39,6 +38,7 @@ class Komisi extends CI_Controller {
 		$data['title'] = 'Data Komisi Marketing';
 		$data['komisi'] = $this->m_komisi->tampil_data()->result();
 		$data['marketing'] = $this->m_komisi->tampil_data_marketing()->result();
+		$data['co_broke'] = $this->m_komisi->tampil_data_cobroke()->result();
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_komisi', $data);
@@ -275,6 +275,7 @@ class Komisi extends CI_Controller {
 		$this->m_komisi->simpan_sub_komisi($data2);
 
 		$data3 = array(
+			'id_komisi' => $id_komisi_baru,
 			'id_komisi_unik' => $id_komisi_unik,
 			'nama_cobroke' => $nama_broker,
 			'status_cobroke' => $status_broker,
@@ -328,6 +329,7 @@ class Komisi extends CI_Controller {
 		$data['title'] = 'Edit Data Komisi Marketing';
 		$data['komisi'] = $this->m_komisi->edit($where)->result();
 		$data['marketing'] = $this->m_komisi->tampil_data_marketing()->result();
+		$data['co_broke'] = $this->m_komisi->tampil_data_cobroke()->result();
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_edit_komisi', $data);
