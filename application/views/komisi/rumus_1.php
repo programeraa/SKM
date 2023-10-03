@@ -1,4 +1,55 @@
 <?php 
+//bruto paling awal
+$bruto_awal = $komisi->bruto_komisi;
+
+//cek apakah ada referal awal
+foreach ($potongan as $potongan) {
+    if ($potongan->id_komisi == $komisi->id_komisi) {
+        $potongan_1 = $potongan->jumlah_potongan;
+        break;
+    }
+}
+
+//cek apakah ada co-broke
+foreach ($co_broke as $kubruk) {
+    if ($kubruk->id_komisi == $komisi->id_komisi) {
+        $kubruk_awal = $kubruk->status_selling;
+        break;
+    }
+}
+
+// //langkah 1
+// if (!empty($potongan_1) && $potongan_1 == 'Listing' ) {
+//     // code...
+// }
+
+// if (!empty($kubruk_awal)) {
+//     echo "ada";
+// }else{
+//     echo "Tidak ada";
+// }
+// $referal_awal = 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //total bruto
 $bruto = $komisi->bruto_komisi;
 
