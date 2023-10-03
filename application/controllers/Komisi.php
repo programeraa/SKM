@@ -340,8 +340,8 @@ class Komisi extends CI_Controller {
 		$alamat = $this->input->post('alamat');
 		$jt = $this->input->post('jt');
 		$tgl_closing = $this->input->post('tgl_closing');
-		$ml = $this->input->post('marketing_listing');
-		$ms = $this->input->post('marketing_selling');
+		//$ml = $this->input->post('marketing_listing');
+		//$ms = $this->input->post('marketing_selling');
 		$komisi = $this->input->post('komisi');
 		$id_komisi = $this->input->post('id_komisi');
 
@@ -349,8 +349,8 @@ class Komisi extends CI_Controller {
 			'alamat_komisi' => $alamat,
 			'jt_komisi' => $jt,
 			'tgl_closing_komisi' => $tgl_closing,
-			'mar_listing_komisi' => $ml,
-			'mar_selling_komisi' => $ms,
+			//'mar_listing_komisi' => $ml,
+			//'mar_selling_komisi' => $ms,
 			'bruto_komisi' => $komisi
 		);
 		
