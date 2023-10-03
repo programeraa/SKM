@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <form method="post" action=" ">
                     <div class="row">
-                     <div class="col-md-6">
+                       <div class="col-md-6">
                         <div class="form-group">
                             <label for="alamat" class="col-form-label">Alamat</label>
                             <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $komisi->alamat_komisi ?>" readonly>
@@ -29,11 +29,11 @@
 
                         <div class="form-group">
                             <label for="marketing_listing" class="col-form-label">Marketing Listing</label>
-                            <input type="text" class="form-control" id="marketing_listing" name="marketing_listing" value="<?= $komisi->nama_mar; ?>" readonly>
+                            <input type="text" class="form-control" id="marketing_listing" name="marketing_listing" value="<?= $listing_1; ?> <?= $listing2_baru?>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="marketing_selling" class="col-form-label">Marketing Selling</label>
-                            <input type="text" class="form-control" id="marketing_selling" name="marketing_selling" value="<?= $komisi->nama_mar2; ?>" readonly>
+                            <input type="text" class="form-control" id="marketing_selling" name="marketing_selling" value="<?= $selling_1; ?> <?= $selling2_baru?>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="komisi" class="col-form-label">Komisi Bruto</label>
