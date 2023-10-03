@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <form method="post" action="<?= base_url('komisi/tambah_komisi'); ?>">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="alamat" class="col-form-label">Alamat Closing</label>
                                 <input type="text" class="form-control" id="alamat" name="alamat">
@@ -29,8 +29,42 @@
                                 <label for="tgl_closing" class="col-form-label">Tanggal Closing</label>
                                 <input type="date" class="form-control" id="tgl_closing" name="tgl_closing">
                             </div>
+                            <div class="form-group">
+                                <label for="komisi" class="col-form-label">Komisi Bruto</label>
+                                <input type="text" class="form-control" id="komisi" name="komisi">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-0">
+                                    <div class="form-group">
+                                        <label for="referal" class="col-form-label">Referal</label>
+                                        <input type="text" class="form-control" id="referal" name="referal">
+                                    </div>
+                                </div> 
+                                <div class="col-md-4 pr-0 pl-5" style="margin-top: 33px; margin-right: 0px;">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="jenis_referal" id="referal_1" value="0">
+                                        <label class="form-check-label" for="referal_1">
+                                            Ikut Awal
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="jenis_referal" id="referal_2" value="1">
+                                        <label class="form-check-label" for="referal_2">
+                                            Ikut A&A
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pl-0">
+                                    <div class="form-group">
+                                        <label for="j_referal" class="col-form-label">Jumlah
+                                        </label>
+                                        <input type="text" class="form-control" id="j_referal" name="j_referal">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-4">
+
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="ml" class="col-form-label">Marketing Listing</label>
                                 <select class="form-control" id="ml" name="ml" onchange="showOtherInput(this.value);">
@@ -40,30 +74,14 @@
                                 </select>
                             </div>
 
-                            <div class="form-group">
-                                <label for="ms" class="col-form-label">Marketing Selling</label>
-                                <select class="form-control" id="ms" name="ms" onchange="showOtherInput_2(this.value);">
-                                    <option value="">Pilih Marketing</option>
-                                    <option value="A&A2">Sesama A&A</option>
-                                    <option value="Broker2">CO-Broker Lain</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="komisi" class="col-form-label">Komisi Bruto</label>
-                                <input type="text" class="form-control" id="komisi" name="komisi">
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                         <!-- Marketing A&A Indonesia -->
-                         <div id="marketing_listing2" class="form-group" style="display: none;">
-                            <label for="marketing_listing" class="col-form-label">Marketing Listing</label>
-                            <select class="form-control select2bs4" id="marketing_listing2" name="marketing_listing[]" multiple onchange="changeValue(this)">
-                                <option value="">Pilih Nama</option>
-                                <?php 
-                                $jsArray = "var prdName = new Array();\n";
-                                foreach($marketing as $each){ 
+                            <!-- Marketing A&A Indonesia -->
+                            <div id="marketing_listing2" class="form-group" style="display: none;">
+                                <label for="marketing_listing" class="col-form-label">Marketing Listing</label>
+                                <select class="form-control select2bs4" id="marketing_listing2" name="marketing_listing[]" multiple onchange="changeValue(this)">
+                                    <option value="">Pilih Nama</option>
+                                    <?php 
+                                    $jsArray = "var prdName = new Array();\n";
+                                    foreach($marketing as $each){ 
                                         $a = ''; // Inisialisasi $a di sini
 
                                         ?>
@@ -156,6 +174,15 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ms" class="col-form-label">Marketing Selling</label>
+                                    <select class="form-control" id="ms" name="ms" onchange="showOtherInput_2(this.value);">
+                                        <option value="">Pilih Marketing</option>
+                                        <option value="A&A2">Sesama A&A</option>
+                                        <option value="Broker2">CO-Broker Lain</option>
+                                    </select>
                                 </div>
 
                                 <!-- Marketing A&A Indonesia -->
@@ -256,7 +283,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -271,7 +297,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="d-xl-none">
                                         <!--tambahan input marketing listing-->
                                         <div class="form-group">
