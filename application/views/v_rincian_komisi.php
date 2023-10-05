@@ -9,6 +9,14 @@
                 foreach ($co_broke as $kubruk) {
                     if ($komisi->mar_listing_komisi == $kubruk->id_komisi_unik && $komisi->id_komisi == $kubruk->id_komisi ) {
                         $listing_1 = $kubruk->nama_cobroke;
+                        if ($listing_2 = $kubruk->jenis_cobroke == 2) {
+                            $j_cobroke = 'Badan';
+                        }elseif ($listing_2 = $kubruk->jenis_cobroke == 2.5) {
+                            $j_cobroke = 'Non-Badan (NPWP)';
+                        }else{
+                            $j_cobroke = 'Non-Badan (Non-NPWP)';
+                        }
+                        //$j_cobroke_angka = $kubruk->jenis_cobroke;
                     }
                 }
             }
@@ -23,6 +31,14 @@
                 foreach ($co_broke as $kubruk) {
                     if ($komisi->mar_selling_komisi == $kubruk->id_komisi_unik && $komisi->id_komisi == $kubruk->id_komisi ) {
                         $selling_1 = $kubruk->nama_cobroke;
+                        if ($selling_2 = $kubruk->jenis_cobroke == 2) {
+                            $s_cobroke = 'Badan';
+                        }elseif ($selling_2 = $kubruk->jenis_cobroke == 2.5) {
+                            $s_cobroke = 'Non-Badan (NPWP)';
+                        }else{
+                            $s_cobroke = 'Non-Badan (Non-NPWP)';
+                        }
+                        //$s_cobroke_angka = $kubruk->jenis_cobroke;
                     }
                 }
             }
@@ -61,7 +77,7 @@
                 </div>
             </div>
 
-            <?php if ($komisi->mar_listing_komisi == $komisi->mar_selling_komisi){
+            <?php if ($komisi->mar_listing_komisi == $komisi->mar_selling_komisi && !empty($j_cobroke) || !empty($s_cobroke)){
                 include "komisi/rincian_komisi_1_marketing.php";
             }else{
                 include "komisi/rincian_komisi_2_marketing.php";
