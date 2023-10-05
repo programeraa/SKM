@@ -17,9 +17,9 @@ class M_komisi extends CI_Model{
 
 			e.id_pengguna, e.nama_pengguna, e.level_pengguna,
 
-			h.nama_mar as listing_2, h.norek_mar as norek_listing2,
+			h.nama_mar as listing_2, h.norek_mar as norek_listing2, h.upline_emd_mar as up_1_listing2, h.upline_cmo_mar as up_2_listing2,
 
-			i.nama_mar as selling_2, i.norek_mar as norek_selling2
+			i.nama_mar as selling_2, i.norek_mar as norek_selling2, i.upline_emd_mar as up_1_selling2, i.upline_cmo_mar as up_2_selling2
 
 			FROM komisi as a LEFT JOIN marketing as b ON a.mar_listing_komisi = b.id_mar LEFT JOIN marketing as c ON a.mar_selling_komisi = c.id_mar INNER JOIN sub_komisi as d ON a.id_komisi = d.id_komisi INNER JOIN pengguna as e ON e.id_pengguna = d.admin_pengguna
 
@@ -63,9 +63,9 @@ class M_komisi extends CI_Model{
 
 			e.id_pengguna, e.nama_pengguna, e.level_pengguna,
 
-			h.nama_mar as listing_2, h.norek_mar as norek_listing2,
+			h.nama_mar as listing_2, h.norek_mar as norek_listing2, h.upline_emd_mar as up_1_listing2, h.upline_cmo_mar as up_2_listing2,
 
-			i.nama_mar as selling_2, i.norek_mar as norek_selling2
+			i.nama_mar as selling_2, i.norek_mar as norek_selling2, i.upline_emd_mar as up_1_selling2, i.upline_cmo_mar as up_2_selling2
 
 			FROM komisi as a LEFT JOIN marketing as b ON a.mar_listing_komisi = b.id_mar LEFT JOIN marketing as c ON a.mar_selling_komisi = c.id_mar INNER JOIN sub_komisi as d ON a.id_komisi = d.id_komisi INNER JOIN pengguna as e ON e.id_pengguna = d.admin_pengguna
 
