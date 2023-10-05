@@ -1,8 +1,6 @@
-<?php 
-//upline listing
-// $up_1_l = $komisi->up_1_listing;
-// $up_2_l = $komisi->up_2_listing;
-
+<?php
+//=================================================== cari upline listing 1 dan 2
+//cari upline listing 1
 foreach ($marketing as $mkt) {
     if ($mkt->id_mar == $komisi->up_1_listing) {
         $up_1_listing = $mkt->nama_mar;
@@ -38,7 +36,44 @@ if (!empty($up_2_listing)) {
     $up_listing_2 = 0;
 }
 
-//hitung upline listing 1
+//============================================================
+//cari upline listing 2
+foreach ($marketing as $mkt) {
+    if ($mkt->id_mar == $komisi->up_1_listing2) {
+        $up_1_listing2 = $mkt->nama_mar;
+        break;
+    }else{
+        $up_1_listing2 = '';
+    }
+}
+
+$up_1_listing2;
+
+foreach ($marketing as $mkt) {
+    if ($mkt->id_mar == $komisi->up_2_listing2) {
+        $up_2_listing2 = $mkt->nama_mar;
+        break;
+    }else{
+        $up_2_listing2 = '';
+    }
+}
+
+$up_2_listing2;
+
+//cek upline marketing listing ada atau tidak
+if (!empty($up_1_listing2)) {
+    $up_listing2_1 = 1;
+} else {
+    $up_listing2_1 = 0;
+}
+
+if (!empty($up_2_listing2)) {
+    $up_listing2_2 = 1;
+} else {
+    $up_listing2_2 = 0;
+}
+
+//===================================================== hitung upline 1 listing 1
 //fee kotor
 
 $fuk = 5 / 100 * $fkl;
@@ -46,17 +81,6 @@ $fuk = 5 / 100 * $fkl;
 //string to rupiah
 $fuk_n = stringToNumber($fuk);
 $fuk_r = numberToRupiah($fuk_n);
-
-//fuk listing dikurangi pajak
-//$a = null;
-
-
-// foreach ($marketing as $upline) {
-//     if ($komisi->up_1_listing == $upline->nama_mar) {
-//         $a = $upline->npwp_mar;
-//             break; // Hentikan iterasi setelah menemukan kesamaan pertama
-//         } 
-//     }
 
 $a = $komisi->npwpum_listing_komisi;
 
@@ -87,7 +111,7 @@ $netto_listing_1_r = numberToRupiah($netto_listing_1_n);
 
 //===============================================================
 
-//hitung upline listing 2
+//hitung upline 2 listing 1
 //fee kotor
 
 $fuk2 = 5 / 100 * $fkl;
@@ -95,16 +119,6 @@ $fuk2 = 5 / 100 * $fkl;
 //string to rupiah
 $fuk2_n = stringToNumber($fuk2);
 $fuk2_r = numberToRupiah($fuk2_n);
-
-//fuk listing dikurangi pajak
-    //$a = null;
-
-    // foreach ($marketing as $upline) {
-    //     if ($komisi->up_2_listing == $upline->nama_mar) {
-    //         $a2 = $upline->npwp_mar;
-    //         break; // Hentikan iterasi setelah menemukan kesamaan pertama
-    //     } 
-    // }
 
 $a2 = $komisi->npwpum_listing2_komisi;
 
@@ -133,7 +147,109 @@ $netto_listing_2 = $fuk - $pajak_listing_2;
 $netto_listing_2_n = stringToNumber($netto_listing_2);
 $netto_listing_2_r = numberToRupiah($netto_listing_2_n);
 
+//=============================================================== xxx
+//hitung upline 1 listing 2 
+//fee kotor
+
+$fuk3 = 5 / 100 * $fkl2;
+
+//string to rupiah
+$fuk3_n = stringToNumber($fuk3);
+$fuk3_r = numberToRupiah($fuk3_n);
+
+$a3 = $komisi->npwpum2_listing_komisi;
+
+if ($a3 == 1) {
+    $npwp_upline1_listing2 = 2.5;
+} else {
+    $npwp_upline1_listing2 = 3;
+}
+
+if ($npwp_upline1_listing2 == 2.5) {
+    $teks_pajak1_listing_2 = '2.5% - NPWP';
+}else{
+    $teks_pajak1_listing_2 = '3% - Non NPWP';
+}
+
+$pajak1_listing_2 = $npwp_upline1_listing2 / 100 * $fuk3;
+
+//string to rupiah
+$pajak1_listing_2_n = stringToNumber($pajak1_listing_2);
+$pajak1_listing_2_r = numberToRupiah($pajak1_listing_2_n);
+
+//netto 1
+$netto1_listing_2 = $fuk3 - $pajak1_listing_2;
+
+//string to rupiah
+$netto1_listing_2_n = stringToNumber($netto1_listing_2);
+$netto1_listing_2_r = numberToRupiah($netto1_listing_2_n);
+
 //===============================================================
+
+//hitung upline 2 listing 2
+//fee kotor
+
+$fuk4 = 5 / 100 * $fkl2;
+
+//string to rupiah
+$fuk4_n = stringToNumber($fuk4);
+$fuk4_r = numberToRupiah($fuk4_n);
+
+$a4 = $komisi->npwpum2_listing2_komisi;
+
+if ($a4 == 1) {
+    $npwp_upline2_listing2 = 2.5;
+} else {
+    $npwp_upline2_listing2 = 3;
+}
+
+if ($npwp_upline2_listing2 == 2.5) {
+    $teks_pajak2_listing_2 = '2.5% - NPWP';
+}else{
+    $teks_pajak2_listing_2 = '3% - Non NPWP';
+}
+
+$pajak2_listing_2 = $npwp_upline2_listing2 / 100 * $fuk4;
+
+//string to rupiah
+$pajak2_listing_2_n = stringToNumber($pajak2_listing_2);
+$pajak2_listing_2_r = numberToRupiah($pajak2_listing_2_n);
+
+//netto 1
+$netto2_listing_2 = $fuk4 - $pajak2_listing_2;
+
+//string to rupiah
+$netto2_listing_2_n = stringToNumber($netto2_listing_2);
+$netto2_listing_2_r = numberToRupiah($netto2_listing_2_n);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //===============================================================
 
 //upline selling
@@ -269,7 +385,7 @@ $netto_selling_2 = $fuk2_s - $pajak_selling_2;
 $netto_selling_2_n = stringToNumber($netto_selling_2);
 $netto_selling_2_r = numberToRupiah($netto_selling_2_n);
 
-//norek upline 1 listing
+//norek upline 1 listing 1
 foreach ($marketing as $upline) {
     if ($upline->nama_mar == $up_1_listing) {
         $norek_up_listing1 = $upline->norek_mar;
@@ -277,10 +393,26 @@ foreach ($marketing as $upline) {
             } 
         }
 
-//norek upline 2 listing
+//norek upline 2 listing 1
         foreach ($marketing as $upline) {
             if ($upline->nama_mar == $up_2_listing) {
                 $norek_up_listing2 = $upline->norek_mar;
+            break; // Hentikan iterasi setelah menemukan kesamaan pertama
+        } 
+    }
+
+//norek upline 1 listing 2
+foreach ($marketing as $upline) {
+    if ($upline->nama_mar == $up_1_listing2) {
+        $norek_up1_listing2 = $upline->norek_mar;
+                break; // Hentikan iterasi setelah menemukan kesamaan pertama
+            } 
+        }
+
+//norek upline 2 listing 2
+        foreach ($marketing as $upline) {
+            if ($upline->nama_mar == $up_2_listing2) {
+                $norek_up2_listing2 = $upline->norek_mar;
             break; // Hentikan iterasi setelah menemukan kesamaan pertama
         } 
     }
