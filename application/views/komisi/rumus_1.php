@@ -99,7 +99,7 @@ if (!empty($marketing_selling_2)) {
 }
 
 //pengaturan listing dan selling (jika ada kesamaan)
-if ($komisi->mar_listing_komisi == $komisi->mar_selling_komisi) {
+if ($komisi->mar_listing_komisi == $komisi->mar_selling_komisi && !empty($j_cobroke) || !empty($s_cobroke)) {
     $total_marketing = 1;
 }else{
     $total_marketing = $m_listing + $m_selling + $m_listing_2 + $m_selling_2;
@@ -123,6 +123,55 @@ $l_member2 = $komisi->mm2_listing_komisi;
 $s_member = $komisi->mm_selling_komisi;
 
 $s_member2 = $komisi->mm2_selling_komisi;
+
+//====================================================== cari fee marketing listing/selling co broke
+//fee marketing co broke listing
+foreach ($co_broke as $cobroke) {
+    if ($cobroke->id_komisi == $komisi->id_komisi) {
+        $j_cobroke_angka = $cobroke->jenis_cobroke;
+        break;
+    }else{
+        $j_cobroke_angka = 0;
+    }
+}
+
+$pph_cobroke_listing = $j_cobroke_angka / 100 * $fmk;
+
+//string to rupiah
+$pph_cobroke_listing_n = stringToNumber($pph_cobroke_listing);
+$pph_cobroke_listing_r = numberToRupiah($pph_cobroke_listing_n);
+
+//fee cobroke listing diterima
+$fee_cobroke_listing = $fmk - $pph_cobroke_listing;
+
+//string to rupiah
+$fee_cobroke_listing_n = stringToNumber($fee_cobroke_listing);
+$fee_cobroke_listing_r = numberToRupiah($fee_cobroke_listing_n);
+
+//==============================================================
+
+//fee marketing co broke selling
+foreach ($co_broke as $cobroke) {
+    if ($cobroke->id_komisi == $komisi->id_komisi) {
+        $s_cobroke_angka = $cobroke->jenis_cobroke;
+        break;
+    }else{
+        $s_cobroke_angka = 0;
+    }
+}
+
+$pph_cobroke_selling = $s_cobroke_angka / 100 * $fmk;
+
+//string to rupiah
+$pph_cobroke_selling_n = stringToNumber($pph_cobroke_selling);
+$pph_cobroke_selling_r = numberToRupiah($pph_cobroke_selling_n);
+
+//fee cobroke listing diterima
+$fee_cobroke_selling = $fmk - $pph_cobroke_selling;
+
+//string to rupiah
+$fee_cobroke_selling_n = stringToNumber($fee_cobroke_selling);
+$fee_cobroke_selling_r = numberToRupiah($fee_cobroke_selling_n);
 
 //====================================================== cari fee marketing listing 1 & 2
 //fee marketing listing
