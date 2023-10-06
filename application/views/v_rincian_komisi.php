@@ -88,6 +88,17 @@
                 break;
             }
         }
+
+        $cek_cobroke = 0;
+        foreach ($co_broke as $cek_kubruk) {
+            if ($komisi->mar_selling_komisi == $cek_kubruk->id_komisi_unik && $komisi->id_komisi == $cek_kubruk->id_komisi) {
+                $cek_nama_kubruk = $cek_kubruk->nama_cobroke;
+                if (!empty($cek_nama_kubruk)) {
+                    $cek_cobroke = 1;
+                }
+            }
+        }
+
         ?>
 
         <div class="d-flex justify-content-between mb-2">
@@ -100,7 +111,7 @@
                 </div>
             </div>
 
-            <?php if ($komisi->mar_listing_komisi == $komisi->mar_selling_komisi && !empty($j_cobroke) || !empty($s_cobroke)){
+            <?php if ($komisi->mar_listing_komisi == $komisi->mar_selling_komisi){
                 include "komisi/rincian_komisi_1_marketing.php";
             }else{
                 include "komisi/rincian_komisi_2_marketing.php";
