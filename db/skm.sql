@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 06 Okt 2023 pada 11.10
--- Versi server: 10.4.22-MariaDB
--- Versi PHP: 7.3.33
+-- Generation Time: Oct 06, 2023 at 04:35 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `co_broke`
+-- Table structure for table `co_broke`
 --
 
 CREATE TABLE `co_broke` (
@@ -36,10 +36,22 @@ CREATE TABLE `co_broke` (
   `jenis_cobroke` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `co_broke`
+--
+
+INSERT INTO `co_broke` (`id_cobroke`, `id_komisi`, `id_komisi_unik`, `nama_cobroke`, `status_cobroke`, `jenis_cobroke`) VALUES
+(51, 213, 5792, 'Rohman', 'Selling', '2.5'),
+(52, 214, 3563, 'Fandi - BT', 'Listing', '3'),
+(53, 215, 2390, 'Gremenmania', 'Selling', '2'),
+(54, 216, 2539, 'Donny BT', 'Listing', '2.5'),
+(55, 217, 6496, 'Pocong', 'Listing', '2.5'),
+(56, 218, 2546, 'Pocong 2', 'Selling', '2.5');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `komisi`
+-- Table structure for table `komisi`
 --
 
 CREATE TABLE `komisi` (
@@ -56,16 +68,26 @@ CREATE TABLE `komisi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `komisi`
+-- Dumping data for table `komisi`
 --
 
 INSERT INTO `komisi` (`id_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_komisi`, `mar_listing_komisi`, `mar_listing2_komisi`, `mar_selling_komisi`, `mar_selling2_komisi`, `bruto_komisi`, `waktu_komisi`) VALUES
-(200, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual', '2023-10-04', 2, 3, 10, 11, '5000000', '2023-10-06');
+(207, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-11', 2, 0, 3, 0, '6000000', '2023-10-06'),
+(208, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-11', 2, 0, 3, 7, '6000000', '2023-10-06'),
+(209, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-11', 2, 0, 2, 0, '6000000', '2023-10-06'),
+(210, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-11', 9, 10, 2, 0, '6000000', '2023-10-06'),
+(211, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-11', 9, 10, 2, 11, '6000000', '2023-10-06'),
+(213, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-11', 9, 0, 5792, 0, '6000000', '2023-10-06'),
+(214, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-11', 3563, 0, 2, 0, '6000000', '2023-10-06'),
+(215, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-11', 7, 10, 2390, 0, '6000000', '2023-10-06'),
+(216, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-11', 2539, 0, 2, 11, '6000000', '2023-10-06'),
+(217, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual', '2023-10-08', 6496, 0, 2, 3, '6200000', '2023-10-06'),
+(218, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual', '2023-10-08', 2, 3, 2546, 0, '6200000', '2023-10-06');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `marketing`
+-- Table structure for table `marketing`
 --
 
 CREATE TABLE `marketing` (
@@ -84,7 +106,7 @@ CREATE TABLE `marketing` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `marketing`
+-- Dumping data for table `marketing`
 --
 
 INSERT INTO `marketing` (`id_mar`, `nama_mar`, `nomor_mar`, `member_mar`, `upline_emd_mar`, `upline_cmo_mar`, `npwp_mar`, `norek_mar`, `fasilitas_mar`, `jabatan_mar`, `gambar_ktp_mar`, `gambar_npwp_mar`) VALUES
@@ -98,7 +120,7 @@ INSERT INTO `marketing` (`id_mar`, `nama_mar`, `nomor_mar`, `member_mar`, `uplin
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengguna`
+-- Table structure for table `pengguna`
 --
 
 CREATE TABLE `pengguna` (
@@ -110,7 +132,7 @@ CREATE TABLE `pengguna` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `pengguna`
+-- Dumping data for table `pengguna`
 --
 
 INSERT INTO `pengguna` (`id_pengguna`, `nama_pengguna`, `username_pengguna`, `pass_pengguna`, `level_pengguna`) VALUES
@@ -120,7 +142,7 @@ INSERT INTO `pengguna` (`id_pengguna`, `nama_pengguna`, `username_pengguna`, `pa
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `potongan`
+-- Table structure for table `potongan`
 --
 
 CREATE TABLE `potongan` (
@@ -130,10 +152,18 @@ CREATE TABLE `potongan` (
   `jumlah_potongan` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `potongan`
+--
+
+INSERT INTO `potongan` (`id_potongan`, `id_komisi`, `keterangan_potongan`, `jumlah_potongan`) VALUES
+(33, 217, 'Biaya Pengiriman', '100000'),
+(34, 218, 'Biaya Pengiriman', '100000');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `referal`
+-- Table structure for table `referal`
 --
 
 CREATE TABLE `referal` (
@@ -144,10 +174,18 @@ CREATE TABLE `referal` (
   `jumlah_referal` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `referal`
+--
+
+INSERT INTO `referal` (`id_referal`, `id_komisi`, `keterangan_referal`, `jenis_referal`, `jumlah_referal`) VALUES
+(4, 217, 'Catenary', 0, '100000'),
+(5, 218, 'Catenary', 0, '100000');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sub_komisi`
+-- Table structure for table `sub_komisi`
 --
 
 CREATE TABLE `sub_komisi` (
@@ -173,25 +211,35 @@ CREATE TABLE `sub_komisi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `sub_komisi`
+-- Dumping data for table `sub_komisi`
 --
 
 INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `npwpm_listing_komisi`, `npwpum_listing_komisi`, `npwpum_listing2_komisi`, `mm2_listing_komisi`, `npwpm2_listing_komisi`, `npwpum2_listing_komisi`, `npwpum2_listing2_komisi`, `mm_selling_komisi`, `npwpm_selling_komisi`, `npwpum_selling_komisi`, `npwpum_selling2_komisi`, `mm2_selling_komisi`, `npwpm2_selling_komisi`, `npwpum2_selling_komisi`, `npwpum2_selling2_komisi`, `admin_pengguna`) VALUES
-(99, 200, 60, 1, 1, 1, 50, 1, 0, 0, 50, 0, 0, 1, 60, 1, 0, 1, 1);
+(106, 207, 60, 1, 1, 1, 0, 0, 0, 0, 50, 1, 0, 0, 0, 0, 0, 0, 1),
+(107, 208, 60, 1, 1, 1, 0, 0, 0, 0, 50, 1, 0, 0, 70, 0, 1, 0, 1),
+(108, 209, 60, 1, 1, 1, 0, 0, 0, 0, 60, 1, 1, 1, 0, 0, 0, 0, 1),
+(109, 210, 80, 1, 1, 0, 50, 0, 0, 1, 60, 1, 1, 1, 0, 0, 0, 0, 1),
+(110, 211, 80, 1, 1, 0, 50, 0, 0, 1, 60, 1, 1, 1, 60, 1, 0, 1, 1),
+(112, 213, 80, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
+(113, 214, 0, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 1, 0, 0, 0, 0, 1),
+(114, 215, 70, 0, 1, 0, 50, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1),
+(115, 216, 0, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 1, 60, 1, 0, 1, 1),
+(116, 217, 0, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 1, 50, 1, 0, 0, 1),
+(117, 218, 60, 1, 1, 1, 50, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `co_broke`
+-- Indexes for table `co_broke`
 --
 ALTER TABLE `co_broke`
   ADD PRIMARY KEY (`id_cobroke`),
   ADD KEY `id_komisi` (`id_komisi`);
 
 --
--- Indeks untuk tabel `komisi`
+-- Indexes for table `komisi`
 --
 ALTER TABLE `komisi`
   ADD PRIMARY KEY (`id_komisi`),
@@ -199,108 +247,108 @@ ALTER TABLE `komisi`
   ADD KEY `mar_selling_komisi` (`mar_selling_komisi`);
 
 --
--- Indeks untuk tabel `marketing`
+-- Indexes for table `marketing`
 --
 ALTER TABLE `marketing`
   ADD PRIMARY KEY (`id_mar`);
 
 --
--- Indeks untuk tabel `pengguna`
+-- Indexes for table `pengguna`
 --
 ALTER TABLE `pengguna`
   ADD PRIMARY KEY (`id_pengguna`);
 
 --
--- Indeks untuk tabel `potongan`
+-- Indexes for table `potongan`
 --
 ALTER TABLE `potongan`
   ADD PRIMARY KEY (`id_potongan`),
   ADD KEY `id_komisi` (`id_komisi`);
 
 --
--- Indeks untuk tabel `referal`
+-- Indexes for table `referal`
 --
 ALTER TABLE `referal`
   ADD PRIMARY KEY (`id_referal`),
   ADD KEY `id_komisi` (`id_komisi`);
 
 --
--- Indeks untuk tabel `sub_komisi`
+-- Indexes for table `sub_komisi`
 --
 ALTER TABLE `sub_komisi`
   ADD PRIMARY KEY (`id_sub_komisi`),
   ADD KEY `id_komisi` (`id_komisi`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `co_broke`
+-- AUTO_INCREMENT for table `co_broke`
 --
 ALTER TABLE `co_broke`
-  MODIFY `id_cobroke` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_cobroke` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
--- AUTO_INCREMENT untuk tabel `komisi`
+-- AUTO_INCREMENT for table `komisi`
 --
 ALTER TABLE `komisi`
-  MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
+  MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=219;
 
 --
--- AUTO_INCREMENT untuk tabel `marketing`
+-- AUTO_INCREMENT for table `marketing`
 --
 ALTER TABLE `marketing`
   MODIFY `id_mar` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT untuk tabel `pengguna`
+-- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
   MODIFY `id_pengguna` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `potongan`
+-- AUTO_INCREMENT for table `potongan`
 --
 ALTER TABLE `potongan`
-  MODIFY `id_potongan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_potongan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT untuk tabel `referal`
+-- AUTO_INCREMENT for table `referal`
 --
 ALTER TABLE `referal`
-  MODIFY `id_referal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_referal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `sub_komisi`
+-- AUTO_INCREMENT for table `sub_komisi`
 --
 ALTER TABLE `sub_komisi`
-  MODIFY `id_sub_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id_sub_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `co_broke`
+-- Constraints for table `co_broke`
 --
 ALTER TABLE `co_broke`
   ADD CONSTRAINT `co_broke_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `potongan`
+-- Constraints for table `potongan`
 --
 ALTER TABLE `potongan`
   ADD CONSTRAINT `potongan_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `referal`
+-- Constraints for table `referal`
 --
 ALTER TABLE `referal`
   ADD CONSTRAINT `referal_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `sub_komisi`
+-- Constraints for table `sub_komisi`
 --
 ALTER TABLE `sub_komisi`
   ADD CONSTRAINT `sub_komisi_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
