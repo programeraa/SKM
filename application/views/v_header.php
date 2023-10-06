@@ -38,6 +38,6 @@
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
             <div class="container d-flex justify-content-between">
                 <a class="navbar-brand" href="">A&A INDONESIA</a>
-                <a class="navbar-brand mr-0" href="#"><?= $nama ?> - <?= $level; ?></a>
+                <a class="navbar-brand mr-0" href="<?= base_url('Komisi');?>"><?= $nama ?> - <?= $level; ?></a>
             </div>
         </nav>
