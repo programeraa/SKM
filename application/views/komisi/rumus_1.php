@@ -2,6 +2,10 @@
 //============================================================ bruto paling awal
 $bruto_awal = $komisi->bruto_komisi;
 
+//string to rupiah
+$bruto_awal_n = stringToNumber($bruto_awal);
+$bruto_awal_r = numberToRupiah($bruto_awal_n);
+
 //====================================== cek apakah ada referal, co broke dan potongan
 foreach ($referal as $referal) {
     if ($referal->id_komisi == $komisi->id_komisi) {
@@ -21,10 +25,10 @@ foreach ($co_broke as $kubruk) {
 }
 
 //cek apakah ada potongan
-foreach ($potongan as $potongan) {
-    if ($potongan->id_komisi == $komisi->id_komisi) {
-        $potongan_jumlah = $potongan->jumlah_potongan;
-        $potongan_keterangan = $potongan->keterangan_potongan;
+foreach ($potongan as $potongan_item) {
+    if ($potongan_item->id_komisi == $komisi->id_komisi) {
+        $potongan_jumlah = $potongan_item->jumlah_potongan;
+        $potongan_keterangan = $potongan_item->keterangan_potongan;
         break;
     }
 }
@@ -126,12 +130,11 @@ $s_member2 = $komisi->mm2_selling_komisi;
 
 //====================================================== cari fee marketing listing/selling co broke
 //fee marketing co broke listing
+$j_cobroke_angka = 0;
 foreach ($co_broke as $cobroke) {
     if ($cobroke->id_komisi == $komisi->id_komisi) {
         $j_cobroke_angka = $cobroke->jenis_cobroke;
         break;
-    }else{
-        $j_cobroke_angka = 0;
     }
 }
 
@@ -151,12 +154,11 @@ $fee_cobroke_listing_r = numberToRupiah($fee_cobroke_listing_n);
 //==============================================================
 
 //fee marketing co broke selling
+$s_cobroke_angka = 0;
 foreach ($co_broke as $cobroke) {
     if ($cobroke->id_komisi == $komisi->id_komisi) {
         $s_cobroke_angka = $cobroke->jenis_cobroke;
         break;
-    }else{
-        $s_cobroke_angka = 0;
     }
 }
 
