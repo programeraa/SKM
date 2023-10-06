@@ -66,7 +66,12 @@
                     </tr>
                 <?php }?>
 
-                <?php if ($cek_cobroke == 1) {?>
+                <?php if ((!empty($referal_jumlah) || !empty($potongan_jumlah)) && !empty($kubruk_nama)) {?>
+                    <tr>
+                        <th class="tg-0lax" colspan="4">Komisi Bruto</th>
+                        <th scope="col" class="text-right text-warning"><?php echo $bruto_2_r;?></th>
+                    </tr>
+                <?php }elseif (!empty($kubruk_nama)) {?>
                     <tr class="d-xl-none"></tr>
                 <?php }else{ ?>
                     <tr>
@@ -206,7 +211,7 @@
                         <tbody>
                           <tr>
                             <td class="tg-0lax">Fee Marketing Co-Broke</td>
-                            <td class="tg-0lax text-right"><?php echo $fmk_r; ?></td>
+                            <td class="tg-0lax text-right"><?php echo $bruto_cobroke_r; ?></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$j_cobroke_angka.'% - '.$j_cobroke.')'?></td>
@@ -260,7 +265,7 @@
                 <tbody>
                   <tr>
                     <td class="tg-0lax">Fee Marketing Co-Broke</td>
-                    <td class="tg-0lax text-right"><?php echo $fmk_r; ?></td>
+                    <td class="tg-0lax text-right"><?php echo $bruto_cobroke_r; ?></td>
                 </tr>
                 <tr>
                     <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$s_cobroke_angka.'% - '.$s_cobroke.')'?></td>
