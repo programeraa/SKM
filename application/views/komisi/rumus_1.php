@@ -17,9 +17,11 @@ foreach ($referal as $referal) {
 }
 
 //cek apakah ada co-broke
+$id_unik_cobroke = null;
 foreach ($co_broke as $kubruk) {
     if ($kubruk->id_komisi == $komisi->id_komisi) {
         $kubruk_nama = $kubruk->nama_cobroke;
+        echo $id_unik_cobroke = $kubruk->id_komisi_unik;
         break;
     }
 }
@@ -47,6 +49,10 @@ if (!empty($potongan_keterangan)) {
 }else{
     $bruto_2 = $bruto_1;
 }
+
+//string to rupiah
+$bruto_2_n = stringToNumber($bruto_2);
+$bruto_2_r = numberToRupiah($bruto_2_n);
 
 //langkah 3 - hitung bila ada cobroke
 if (!empty($kubruk_nama)) {
@@ -120,15 +126,25 @@ if (!empty($marketing_selling_2)) {
 
 //pengaturan listing dan selling (jika ada kesamaan)
 if ($komisi->mar_listing_komisi == $komisi->mar_selling_komisi) {
-    $total_marketing = 1;
+    echo $total_marketing = 1;
 }else{
-    $total_marketing = $m_listing + $m_selling + $m_listing_2 + $m_selling_2;
+    echo $total_marketing = $m_listing + $m_selling + $m_listing_2 + $m_selling_2;
 }
 
+echo " \ ". $marketing_listing." - ";
 //====================================================== cari fee marketing kotor
 //cari fee marketing kotor (FMK)
 //cek jika ada co broke
-$fmk = $bruto / $total_marketing; 
+if (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_cobroke) && $marketing_listing_2 == 0 && $marketing_selling_2 == 0) {
+    echo "- ".$fmk = $bruto_2 / $total_marketing; 
+    echo "A";
+}elseif (!empty($kubruk_nama) && ($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_cobroke)) {
+    echo "- ".$fmk = $bruto_3 / 2 ;
+    echo "B";
+}else{
+    echo "- ".$fmk = $bruto / $total_marketing; 
+    echo "C";
+}
 
 //string to rupiah
 $fmk_n = stringToNumber($fmk);
@@ -146,6 +162,16 @@ $s_member = $komisi->mm_selling_komisi;
 $s_member2 = $komisi->mm2_selling_komisi;
 
 //====================================================== cari fee marketing listing/selling co broke
+if (!empty($marketing_listing) && !empty($kubruk_nama) && $marketing_listing_2 || $marketing_selling_2 != 0){
+    $bruto_cobroke = $bruto_3;
+}else{
+    $bruto_cobroke = $fmk;
+}
+
+//string to rupiah
+$bruto_cobroke_n = stringToNumber($bruto_cobroke);
+$bruto_cobroke_r = numberToRupiah($bruto_cobroke_n);
+
 //fee marketing co broke listing
 $j_cobroke_angka = 0;
 foreach ($co_broke as $cobroke) {
@@ -155,21 +181,20 @@ foreach ($co_broke as $cobroke) {
     }
 }
 
-$pph_cobroke_listing = $j_cobroke_angka / 100 * $fmk;
+$pph_cobroke_listing = $j_cobroke_angka / 100 * $bruto_cobroke;
 
 //string to rupiah
 $pph_cobroke_listing_n = stringToNumber($pph_cobroke_listing);
 $pph_cobroke_listing_r = numberToRupiah($pph_cobroke_listing_n);
 
 //fee cobroke listing diterima
-$fee_cobroke_listing = $fmk - $pph_cobroke_listing;
+$fee_cobroke_listing = $bruto_cobroke - $pph_cobroke_listing;
 
 //string to rupiah
 $fee_cobroke_listing_n = stringToNumber($fee_cobroke_listing);
 $fee_cobroke_listing_r = numberToRupiah($fee_cobroke_listing_n);
 
 //==============================================================
-
 //fee marketing co broke selling
 $s_cobroke_angka = 0;
 foreach ($co_broke as $cobroke) {
@@ -179,14 +204,14 @@ foreach ($co_broke as $cobroke) {
     }
 }
 
-$pph_cobroke_selling = $s_cobroke_angka / 100 * $fmk;
+$pph_cobroke_selling = $s_cobroke_angka / 100 * $bruto_cobroke;
 
 //string to rupiah
 $pph_cobroke_selling_n = stringToNumber($pph_cobroke_selling);
 $pph_cobroke_selling_r = numberToRupiah($pph_cobroke_selling_n);
 
 //fee cobroke listing diterima
-$fee_cobroke_selling = $fmk - $pph_cobroke_selling;
+$fee_cobroke_selling = $bruto_cobroke - $pph_cobroke_selling;
 
 //string to rupiah
 $fee_cobroke_selling_n = stringToNumber($fee_cobroke_selling);
