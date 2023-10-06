@@ -44,7 +44,27 @@
         <div class="col">
             <table class="tg table table-dark" width="100">
                 <thead>
-                  <tr>
+                    <?php if (!empty($ket_referal) || !empty($ket_potongan)) {?>
+                      <tr>
+                        <th class="tg-0lax" colspan="4">Komisi Awal Diterima</th>
+                        <th scope="col" class="text-right"><?php echo $bruto_awal_r;?></th> 
+                    </tr>
+                <?php } ?>
+
+                <?php if (!empty($ket_referal)) {?>
+                    <tr>
+                        <th class="tg-0lax text-warning" colspan="4">Referal (<?= $ket_referal; ?>)</th>
+                        <th scope="col" class="text-right"><?php echo $jumlah_referal_r;?></th>
+                    </tr>
+                <?php }?>
+
+                <?php if (!empty($ket_potongan)) {?>
+                    <tr>
+                        <th class="tg-0lax text-warning" colspan="4">Potongan (<?= $ket_potongan; ?>)</th>
+                        <th scope="col" class="text-right"><?php echo $jumlah_potongan_r;?></th>
+                    </tr>
+                <?php }?>
+                <tr>
                     <th class="tg-0lax" colspan="1">Komisi Bruto</th>
                     <th scope="col" class="text-right"><?php echo $bruto_r;?></th>
                 </tr>
@@ -91,14 +111,12 @@
                 <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
                 <td class="tg-0lax text-right text-warning"><?php echo $fmb_l_r; ?></td>
             </tr>
+            <tr>
+                <td class="tg-0lax text-right" colspan="2"><?php echo $norek_listing; ?></td>
+            </tr>
         </tbody>
     </table>
 </form>
-</div>
-<div class="card-header-sm text-dark">
-    <div class="d-flex justify-content-end mb-2">
-        <h6 class="card-title p-0 m-0 font-weight-bold" style="text-align: center;"><?php echo $norek_listing; ?></h6>
-    </div>
 </div>
 </div>
 
@@ -113,8 +131,20 @@
     <!--upline 1 & 2 listing -->
     <div class="card-header-sm text-dark">
         <div class="d-flex justify-content-between mb-2">
-            <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 1 (<?php echo $up_1_listing; ?>)</h4>
-            <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 2 (<?php echo $up_2_listing; ?>)</h4>
+            <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 1 (<?php 
+                if (!empty($up_1_listing)) {
+                    echo $up_1_listing;
+                }else{
+                    echo "Tidak Ada";
+                }
+            ?>)</h4>
+            <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 2 (<?php 
+                if ($up_2_listing) {
+                    echo $up_2_listing;
+                }else{
+                    echo "Tidak Ada"; 
+                }
+            ?>)</h4>
         </div>
     </div>
 
@@ -127,27 +157,30 @@
                             <tbody>
                               <tr>
                                 <td class="tg-0lax"><?php echo 'Fee Upline'?></td>
-                                <td class="tg-0lax"><?php echo $fkl_r; ?> * 5%</td>
+                                <td class="tg-0lax text-right"><?php echo $fkl_r; ?> * 5%</td>
                             </tr>
                             <tr>
                                 <td class="tg-0lax text-warning"></td>
-                                <td class="tg-0lax"><?php echo $fuk_r; ?></td>
+                                <td class="tg-0lax text-right"><?php echo $fuk_r; ?></td>
                             </tr>
                             <tr>
                                 <td class="tg-0lax text-warning">Dikurangi Pajak (<?= $teks_pajak_listing_1  ?>)</td>
-                                <td class="tg-0lax"><?php echo $fuk_r ?> * <?= $npwp_upline1_listing ?>%</td>
+                                <td class="tg-0lax text-right"><?php echo $fuk_r ?> * <?= $npwp_upline1_listing ?>%</td>
                             </tr>
                             <tr>
                                 <td class="tg-0lax text-warning"></td>
-                                <td class="tg-0lax"><?php echo $pajak_listing_1_r ?></td>
+                                <td class="tg-0lax text-right"><?php echo $pajak_listing_1_r ?></td>
                             </tr>
                             <tr>
                                 <td class="tg-0lax"><?php echo 'Fee Diterima (Netto)'?></td>
-                                <td class="tg-0lax"><?php echo $fuk_r; ?> - <?= $pajak_listing_1_r ?></td>
+                                <td class="tg-0lax text-right"><?php echo $fuk_r; ?> - <?= $pajak_listing_1_r ?></td>
                             </tr>
                             <tr>
                                 <td class="tg-0lax text-warning"></td>
-                                <td class="tg-0lax text-warning"><?php echo $netto_listing_1_r; ?></td>
+                                <td class="tg-0lax text-warning text-right"><?php echo $netto_listing_1_r; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax text-right" colspan="2"><?php echo $norek_up_listing1; ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -160,27 +193,30 @@
                         <tbody>
                           <tr>
                             <td class="tg-0lax"><?php echo 'Fee Upline'?></td>
-                            <td class="tg-0lax"><?php echo $fkl_r; ?> * 5%</td>
+                            <td class="tg-0lax text-right"><?php echo $fkl_r; ?> * 5%</td>
                         </tr>
                         <tr>
                             <td class="tg-0lax text-warning"></td>
-                            <td class="tg-0lax"><?php echo $fuk2_r; ?></td>
+                            <td class="tg-0lax text-right"><?php echo $fuk2_r; ?></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax text-warning">Dikurangi Pajak (<?= $teks_pajak_listing_2  ?>)</td>
-                            <td class="tg-0lax"><?php echo $fuk2_r ?> * <?= $npwp_upline2_listing ?>%</td>
+                            <td class="tg-0lax text-right"><?php echo $fuk2_r ?> * <?= $npwp_upline2_listing ?>%</td>
                         </tr>
                         <tr>
                             <td class="tg-0lax text-warning"></td>
-                            <td class="tg-0lax"><?php echo $pajak_listing_2_r ?></td>
+                            <td class="tg-0lax text-right"><?php echo $pajak_listing_2_r ?></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax"><?php echo 'Fee Diterima (Netto)'?></td>
-                            <td class="tg-0lax"><?php echo $fuk2_r; ?> - <?= $pajak_listing_2_r ?></td>
+                            <td class="tg-0lax text-right"><?php echo $fuk2_r; ?> - <?= $pajak_listing_2_r ?></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax text-warning"></td>
-                            <td class="tg-0lax text-warning"><?php echo $netto_listing_2_r; ?></td>
+                            <td class="tg-0lax text-warning text-right"><?php echo $netto_listing_2_r; ?></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax text-right" colspan="2"><?php echo $norek_up_listing2; ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -188,18 +224,6 @@
         </div>
     </div>
 </form>
-</div>
-
-
-<div class="card-header-sm text-dark">
-    <div class="d-flex justify-content-between mb-2">
-        <?php if ($up_listing_1 == 1) { ?>
-            <h6 class="card-title p-0 m-0 font-weight-bold" style="text-align: center;"><?php echo $norek_up_listing1; ?></h6>
-        <?php } ?>
-        <?php if ($up_listing_2 == 1) { ?>
-            <h6 class="card-title p-0 m-0 font-weight-bold" style="text-align: center;"><?php echo $norek_up_listing2; ?></h6>
-        <?php } ?>
-    </div>
 </div>
 
 </div>
