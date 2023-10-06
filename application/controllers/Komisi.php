@@ -13,7 +13,6 @@ class Komisi extends CI_Controller {
 		{	
 			$level = $this->session->userdata('level');
 			if ($level == '') {
-				$this->session->set_flashdata('gagal','Anda Belum Login');
 				redirect(base_url('login'));
 			}
 
