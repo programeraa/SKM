@@ -65,6 +65,29 @@
         }else{
             $selling2_baru = '';
         }
+
+        foreach ($referal as $ref) {
+            if ($komisi->id_komisi == $ref->id_komisi) {
+                $ket_referal = $ref->keterangan_referal;
+                $jenis_referal = $ref->jenis_referal;
+                $jumlah_referal = $ref->jumlah_referal;
+
+                $jumlah_referal_n = stringToNumber($jumlah_referal);
+                $jumlah_referal_r = numberToRupiah($jumlah_referal_n);
+                break;
+            }
+        }
+
+        foreach ($potongan as $potongan_item) {
+            if ($komisi->id_komisi == $potongan_item->id_komisi) {
+                $ket_potongan = $potongan_item->keterangan_potongan;
+                $jumlah_potongan = $potongan_item->jumlah_potongan;
+
+                $jumlah_potongan_n = stringToNumber($jumlah_potongan);
+                $jumlah_potongan_r = numberToRupiah($jumlah_potongan_n);
+                break;
+            }
+        }
         ?>
 
         <div class="d-flex justify-content-between mb-2">
