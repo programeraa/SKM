@@ -55,6 +55,10 @@ if (!empty($kubruk_nama)) {
     $bruto_3 = $bruto_2;
 }
 
+//string to rupiah
+$bruto_3_n = stringToNumber($bruto_3);
+$bruto_3_r = numberToRupiah($bruto_3_n);
+
 //langkah 4 - hitung apakah ada referal untuk a&a
 if (!empty($referal_keterangan) && $referal_jenis == 1) {
     $bruto = $bruto_3 - $referal_jumlah;
@@ -67,7 +71,7 @@ if (!empty($referal_keterangan) && $referal_jenis == 1) {
 //$bruto = $komisi->bruto_komisi;
 
 //hitung_marketing_listing
-$marketing_listing = $komisi->nama_mar; 
+$marketing_listing = $komisi->mar_listing_komisi; 
 
 if (!empty($marketing_listing)) {
     $m_listing = 1;
@@ -75,8 +79,14 @@ if (!empty($marketing_listing)) {
     $m_listing = 0;
 }
 
+foreach ($marketing as $nama_listing_1) {
+    if ($komisi->mar_listing_komisi == $nama_listing_1->id_mar) {
+        $nama_marketing_listing_1 = $nama_listing_1->nama_mar;
+    }
+}
+
 //hitung_marketing_listing ke 2
-$marketing_listing_2 = $komisi->listing_2; 
+$marketing_listing_2 = $komisi->mar_listing2_komisi; 
 
 if (!empty($marketing_listing_2)) {
     $m_listing_2 = 1;
@@ -85,7 +95,7 @@ if (!empty($marketing_listing_2)) {
 }
 
 //hitung_marketing_selling
-$marketing_selling = $komisi->nama_mar2; 
+$marketing_selling = $komisi->mar_selling_komisi; 
 
 if (!empty($marketing_selling)) {
     $m_selling = 1;
@@ -93,8 +103,14 @@ if (!empty($marketing_selling)) {
     $m_selling = 0;
 }
 
+foreach ($marketing as $nama_selling_1) {
+    if ($komisi->mar_selling_komisi == $nama_selling_1->id_mar) {
+        $nama_marketing_selling_1 = $nama_selling_1->nama_mar;
+    }
+}
+
 //hitung_marketing_selling ke 2
-$marketing_selling_2 = $komisi->selling_2; 
+$marketing_selling_2 = $komisi->mar_selling2_komisi; 
 
 if (!empty($marketing_selling_2)) {
     $m_selling_2 = 1;
@@ -103,7 +119,7 @@ if (!empty($marketing_selling_2)) {
 }
 
 //pengaturan listing dan selling (jika ada kesamaan)
-if ($komisi->mar_listing_komisi == $komisi->mar_selling_komisi && !empty($j_cobroke) || !empty($s_cobroke)) {
+if ($komisi->mar_listing_komisi == $komisi->mar_selling_komisi) {
     $total_marketing = 1;
 }else{
     $total_marketing = $m_listing + $m_selling + $m_listing_2 + $m_selling_2;
@@ -111,6 +127,7 @@ if ($komisi->mar_listing_komisi == $komisi->mar_selling_komisi && !empty($j_cobr
 
 //====================================================== cari fee marketing kotor
 //cari fee marketing kotor (FMK)
+//cek jika ada co broke
 $fmk = $bruto / $total_marketing; 
 
 //string to rupiah
