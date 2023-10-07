@@ -9,7 +9,6 @@ $bruto_awal_r = numberToRupiah($bruto_awal_n);
 //====================================== cek apakah ada referal, co broke dan potongan
 foreach ($referal as $referal) {
     if ($referal->id_komisi == $komisi->id_komisi) {
-        $referal_jenis = $referal->jenis_referal;
         $referal_jumlah = $referal->jumlah_referal;
         $referal_keterangan = $referal->keterangan_referal;
         break;
@@ -21,7 +20,7 @@ $id_unik_cobroke = null;
 foreach ($co_broke as $kubruk) {
     if ($kubruk->id_komisi == $komisi->id_komisi) {
         $kubruk_nama = $kubruk->nama_cobroke;
-        echo $id_unik_cobroke = $kubruk->id_komisi_unik;
+        $id_unik_cobroke = $kubruk->id_komisi_unik;
         break;
     }
 }
@@ -37,11 +36,22 @@ foreach ($potongan as $potongan_item) {
 
 //================================================================ langkah 1 - 4 
 //langkah 1 - hitung apakah ada referal awal
-if (!empty($referal_keterangan) && $referal_jenis == 0) {
-    $bruto_1 = $bruto_awal - $referal_jumlah;
+$hitung_referal = null;
+//cek jika ada referal dan tidak ada co broke, maka referal dipotong di awal
+if (!empty($referal_keterangan) && empty($kubruk_nama)) {
+    if (strlen($referal_jumlah) <= 2) {
+        $hitung_referal = $referal_jumlah / 100 * $bruto_awal;
+        $bruto_1 = $bruto_awal - $hitung_referal;
+    }else{
+        $bruto_1 = $bruto_awal - $referal_jumlah;
+    }
 }else{
     $bruto_1 = $bruto_awal;
 }
+
+//string to rupiah
+$hitung_referal_n = stringToNumber($hitung_referal);
+$hitung_referal_r = numberToRupiah($hitung_referal_n);
 
 //langkah 2 - hitung apakah ada potongan
 if (!empty($potongan_keterangan)) {
@@ -65,9 +75,18 @@ if (!empty($kubruk_nama)) {
 $bruto_3_n = stringToNumber($bruto_3);
 $bruto_3_r = numberToRupiah($bruto_3_n);
 
+$bruto = null;
+$ref_aa = null;
 //langkah 4 - hitung apakah ada referal untuk a&a
-if (!empty($referal_keterangan) && $referal_jenis == 1) {
-    $bruto = $bruto_3 - $referal_jumlah;
+if (!empty($referal_keterangan) && !empty($kubruk_nama)) {
+    if (strlen($referal_jumlah) <= 2) {
+        $hitung_referal = $referal_jumlah / 100 * $bruto_3;
+        $bruto = $bruto_3 - $hitung_referal;
+        $ref_aa = 1;
+    }else{
+        $bruto = $bruto_3 - $referal_jumlah;
+        $ref_aa = 1;
+    }
 }else{
     $bruto = $bruto_3;
 }
@@ -126,24 +145,29 @@ if (!empty($marketing_selling_2)) {
 
 //pengaturan listing dan selling (jika ada kesamaan)
 if ($komisi->mar_listing_komisi == $komisi->mar_selling_komisi) {
-    echo $total_marketing = 1;
+    $total_marketing = 1;
 }else{
-    echo $total_marketing = $m_listing + $m_selling + $m_listing_2 + $m_selling_2;
+    $total_marketing = $m_listing + $m_selling + $m_listing_2 + $m_selling_2;
 }
 
-echo " \ ". $marketing_listing." - ";
 //====================================================== cari fee marketing kotor
 //cari fee marketing kotor (FMK)
 //cek jika ada co broke
-if (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_cobroke) && $marketing_listing_2 == 0 && $marketing_selling_2 == 0) {
-    echo "- ".$fmk = $bruto_2 / $total_marketing; 
-    echo "A";
+if (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_cobroke) && $ref_aa == 1 && $marketing_listing_2 == 0 && $marketing_selling_2 == 0) {
+    $fmk = $bruto; 
+    //echo "A";
+}elseif (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_cobroke) && $marketing_listing_2 == 0 && $marketing_selling_2 == 0) {
+    $fmk = $bruto_2 / $total_marketing; 
+    //echo "B";
+}elseif (!empty($kubruk_nama) && $ref_aa == 1 && ($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_cobroke)) {
+    $fmk = $bruto / 2 ;
+    //echo "C";
 }elseif (!empty($kubruk_nama) && ($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_cobroke)) {
-    echo "- ".$fmk = $bruto_3 / 2 ;
-    echo "B";
+    $fmk = $bruto_3 / 2 ;
+    //echo "D";
 }else{
-    echo "- ".$fmk = $bruto / $total_marketing; 
-    echo "C";
+    $fmk = $bruto / $total_marketing; 
+    //echo "E";
 }
 
 //string to rupiah
