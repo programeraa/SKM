@@ -34,27 +34,13 @@
                                 <input type="text" class="form-control" id="komisi" name="komisi">
                             </div>
                             <div class="row">
-                                <div class="col-md-4 pr-0">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="referal" class="col-form-label">Referal</label>
                                         <input type="text" class="form-control" id="referal" name="referal">
                                     </div>
                                 </div> 
-                                <div class="col-md-4 pr-0 pl-5" style="margin-top: 33px; margin-right: 0px;">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="jenis_referal" id="referal_1" value="0">
-                                        <label class="form-check-label" for="referal_1">
-                                            Ikut Awal
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="jenis_referal" id="referal_2" value="1">
-                                        <label class="form-check-label" for="referal_2">
-                                            Ikut A&A
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 pl-0">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="j_referal" class="col-form-label">Jumlah
                                         </label>
