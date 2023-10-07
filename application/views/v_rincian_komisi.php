@@ -69,7 +69,6 @@
         foreach ($referal as $ref) {
             if ($komisi->id_komisi == $ref->id_komisi) {
                 $ket_referal = $ref->keterangan_referal;
-                $jenis_referal = $ref->jenis_referal;
                 $jumlah_referal = $ref->jumlah_referal;
 
                 $jumlah_referal_n = stringToNumber($jumlah_referal);
