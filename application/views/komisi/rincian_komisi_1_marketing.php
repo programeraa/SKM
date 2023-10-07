@@ -46,28 +46,44 @@
                 <thead>
                     <?php if (!empty($ket_referal) || !empty($ket_potongan)) {?>
                       <tr>
-                        <th class="tg-0lax" colspan="4">Komisi Awal Diterima</th>
+                        <th class="tg-0lax" colspan="1">Komisi Awal Diterima</th>
                         <th scope="col" class="text-right"><?php echo $bruto_awal_r;?></th> 
                     </tr>
                 <?php } ?>
 
                 <?php if (!empty($ket_referal)) {?>
                     <tr>
-                        <th class="tg-0lax text-warning" colspan="4">Referal (<?= $ket_referal; ?>)</th>
-                        <th scope="col" class="text-right"><?php echo $jumlah_referal_r;?></th>
+                        <th class="tg-0lax text-warning" colspan="1">Referal (<?= $ket_referal; ?>)</th>
+                        <?php if (strlen($referal_jumlah) <= 2) {?>
+                            <th scope="col" class="text-right"><?php echo $jumlah_referal_r;?> % : <?= $hitung_referal_r; ?></th>
+                        <?php }else{ ?>
+                            <th scope="col" class="text-right"><?php echo $jumlah_referal_r;?></th>
+                        <?php } ?>
                     </tr>
                 <?php }?>
 
                 <?php if (!empty($ket_potongan)) {?>
                     <tr>
-                        <th class="tg-0lax text-warning" colspan="4">Potongan (<?= $ket_potongan; ?>)</th>
+                        <th class="tg-0lax text-warning" colspan="1">Potongan (<?= $ket_potongan; ?>)</th>
                         <th scope="col" class="text-right"><?php echo $jumlah_potongan_r;?></th>
                     </tr>
                 <?php }?>
-                <tr>
-                    <th class="tg-0lax" colspan="1">Komisi Bruto</th>
-                    <th scope="col" class="text-right"><?php echo $bruto_r;?></th>
-                </tr>
+
+                <?php if (!empty($referal_jumlah) || !empty($potongan_jumlah)) {?>
+                    <tr>
+                        <th class="tg-0lax" colspan="1">Komisi Bruto</th>
+                        <th scope="col" class="text-right text-warning"><?php echo $bruto_2_r;?></th>
+                    </tr>
+                    <tr>
+                        <th class="tg-0lax bg-light" colspan="1"></th>
+                        <th scope="col" class="bg-light"></th>
+                    </tr>
+                <?php }else{?>
+                    <tr>
+                        <th class="tg-0lax" colspan="1">Komisi Bruto</th>
+                        <th scope="col" class="text-right"><?php echo $bruto_r;?></th>
+                    </tr>
+                <?php } ?>
             </thead>
             <tbody>
                 <tr>
@@ -84,7 +100,7 @@
 </div>
 
 <div class="card-header-sm text-dark">
-    <h4 class="card-title p-2 m-0" style="text-align: center;">Rincian Komisi <?php echo $marketing_listing; ?></h4>
+    <h4 class="card-title p-2 m-0" style="text-align: center;">Rincian Komisi <?php echo $nama_marketing_listing_1; ?></h4>
 </div>
 
 <div class="card-body p-0 pt-2">
