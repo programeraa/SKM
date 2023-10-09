@@ -27,6 +27,26 @@ class Pengguna extends CI_Controller {
 		$password = md5($this->input->post('password'));
 		$level = $this->input->post('level');
 
+		$config['upload_path'] = './assets/foto_ttd/';
+		$config['allowed_types'] = 'jpg|jpeg|png|gif';
+		$config['max_size'] = 2048;
+
+		$this->load->library('upload', $config);
+
+		$upload_ttd_success = true;
+		$gambar_ttd = ''; // Inisialisasi gambar_ktp dengan string kosong
+
+		// Periksa apakah file gambar ttd dipilih sebelum mencoba unggah
+		if (!empty($_FILES['g_ttd']['name'])) {
+			if ($this->upload->do_upload('g_ttd')) {
+				$upload_ttd = $this->upload->data();
+				$gambar_ttd = $upload_ttd['file_name'];
+			} else {
+            // Jika gagal unggah, set upload_ttd_success ke false
+				$upload_ttd_success = false;
+			}
+		}
+
 		$data = array(
 			'nama_pengguna' => $nama,
 			'username_pengguna' => $username,
@@ -34,12 +54,42 @@ class Pengguna extends CI_Controller {
 			'level_pengguna' => $level
 		);
 
+		if ($upload_ttd_success) {
+			$data['gambar_ttd_pengguna'] = $gambar_ttd;
+		} else {
+            // Jika tidak diunggah, set gambar_ktp_mar ke string kosong
+			$data['gambar_ttd_pengguna'] = '';
+		}
+
 		$this->m_pengguna->simpan($data);
 
 		echo '<script>
 		alert("Selamat! Berhasil Menambah Data Pengguna");
 		window.location="' . base_url('pengguna') . '"
 		</script>';
+	}
+
+	public function hapus_gambar_ttd($id_pengguna)
+	{
+    // Dapatkan data pengguna berdasarkan ID
+		$pengguna = $this->m_pengguna->get_pengguna_by_id($id_pengguna);
+
+    // Pastikan pengguna ditemukan
+		if ($pengguna) {
+        // Hapus gambar TTD dari direktori
+			$gambar_ttd_path = './assets/foto_ttd/' . $pengguna->gambar_ttd_pengguna;
+			if (file_exists($gambar_ttd_path) && is_file($gambar_ttd_path)) {
+				unlink($gambar_ttd_path);
+			}
+
+        // Update data pengguna dengan menghapus gambar TTD
+			$data = array('gambar_ttd_pengguna' => '');
+			$where = array('id_pengguna' => $id_pengguna);
+			$this->m_pengguna->update($where, $data);
+
+        // Redirect kembali ke halaman edit pengguna
+			redirect('pengguna/');
+		}
 	}
 
 	public function update_pengguna(){
@@ -55,6 +105,27 @@ class Pengguna extends CI_Controller {
 
 		$level = $this->input->post('level');
 
+		$upload_ttd_success = false;
+		$gambar_ttd = ''; // Inisialisasi gambar_ktp dengan string kosong
+
+		$config['upload_path'] = './assets/foto_ttd/';
+		$config['allowed_types'] = 'jpg|jpeg|png|gif';
+		$config['max_size'] = 2048;
+
+		$this->load->library('upload', $config);
+
+		// Periksa apakah file gambar ttd dipilih sebelum mencoba unggah
+		if (!empty($_FILES['g_ttd']['name'])) {
+			if ($this->upload->do_upload('g_ttd')) {
+				$upload_ttd = $this->upload->data();
+				$gambar_ttd = $upload_ttd['file_name'];
+				$upload_ttd_success = true;
+			} else {
+            // Jika gagal unggah, set upload_ttd_success ke false
+				$upload_ttd_success = false;
+			}
+		}
+
 		if ($kunci == 1) {
 			$data = array(
 				'nama_pengguna' => $nama,
@@ -68,6 +139,18 @@ class Pengguna extends CI_Controller {
 				'username_pengguna' => $username,
 				'level_pengguna' => $level
 			);
+		}
+
+		// Hanya jika gambar TTD diunggah, simpan nama file gambar TTD
+		if ($upload_ttd_success) {
+			$gambar_ttd_path = './assets/foto_ttd/' . $this->input->post('g_ttd2');
+			if (file_exists($gambar_ttd_path) && is_file($gambar_ttd_path)) {
+				unlink($gambar_ttd_path);
+			}
+			$data['gambar_ttd_pengguna'] = $gambar_ttd;
+		} else {
+	        // Jika tidak diunggah, gunakan data gambar TTD lama dari database
+			$data['gambar_ttd_pengguna'] = $this->input->post('g_ttd2');
 		}
 
 		$where = array('id_pengguna'=>$id);
