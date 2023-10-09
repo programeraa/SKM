@@ -107,7 +107,6 @@ class Komisi extends CI_Controller {
 		//referal
 			$referal = $this->input->post('referal');
 			$j_referal = $this->input->post('j_referal');
-			$jenis_referal = $this->input->post('jenis_referal');
 
 		// Menentukan biji (seed)
 			$seed = microtime(true) * 10000;
@@ -154,7 +153,8 @@ class Komisi extends CI_Controller {
 				'mar_selling_komisi' => $ms_baru,
 				'mar_selling2_komisi' => $ms_new,
 				'bruto_komisi' => $komisi,
-				'waktu_komisi' => $waktu
+				'waktu_komisi' => $waktu,
+				'status_komisi' => 'Belum Disetujui'
 			);
 
 			$this->m_komisi->simpan($data);
@@ -302,11 +302,10 @@ class Komisi extends CI_Controller {
 			$data5 = array(
 				'id_komisi' => $id_komisi_baru,
 				'keterangan_referal' => $referal,
-				'jenis_referal' => $jenis_referal,
 				'jumlah_referal' => $j_referal
 			);
 
-			if (!empty($referal || $j_referal || $jenis_referal)) {
+			if (!empty($referal || $j_referal)) {
 				$this->m_komisi->simpan_referal($data5);
 			}
 
@@ -358,24 +357,42 @@ class Komisi extends CI_Controller {
 			$alamat = $this->input->post('alamat');
 			$jt = $this->input->post('jt');
 			$tgl_closing = $this->input->post('tgl_closing');
-		//$ml = $this->input->post('marketing_listing');
-		//$ms = $this->input->post('marketing_selling');
+			//$ml = $this->input->post('marketing_listing');
+			//$ms = $this->input->post('marketing_selling');
 			$komisi = $this->input->post('komisi');
+			$status_komisi = $this->input->post('status_komisi');
+			$admin = $this->input->post('admin');
 			$id_komisi = $this->input->post('id_komisi');
+
+			date_default_timezone_set("Asia/Jakarta");
+			$waktu = date("Y-m-d H:i:s");
 
 			$data = array(
 				'alamat_komisi' => $alamat,
 				'jt_komisi' => $jt,
 				'tgl_closing_komisi' => $tgl_closing,
-			//'mar_listing_komisi' => $ml,
-			//'mar_selling_komisi' => $ms,
-				'bruto_komisi' => $komisi
+				//'mar_listing_komisi' => $ml,
+				//'mar_selling_komisi' => $ms,
+				'bruto_komisi' => $komisi,
+				'status_komisi' => $status_komisi
 			);
+
+			$data2 = array();
+			if ($status_komisi == 'Disetujui') {
+				$data['tgl_disetujui'] = $waktu;
+				$data2['admin_status_komisi'] = $admin;
+			}else{
+				$data['tgl_disetujui'] = 0000-00-00;
+				$data2['admin_status_komisi'] = 0;
+			}
 
 			$where = array('id_komisi'=>$id_komisi);
 
 			if (isset($where)) {
 				$eksekusi = $this->m_komisi->update($where,$data);
+				$eksekusi2 = $this->m_komisi->update_sub_komisi($where,$data2);
+
+
 				echo '<script>
 				alert("Selamat! Berhasil Update Data Komisi");
 				window.location="' . base_url('komisi/komisi') . '"
