@@ -10,6 +10,10 @@ class M_pengguna extends CI_Model{
     	$this->db->insert('pengguna',$data);
     }
 
+    function get_pengguna_by_id($id_pengguna){
+        return $this->db->get_where('pengguna', array('id_pengguna' => $id_pengguna))->row();
+    }
+
     function edit($where){
     	return $this->db->get_where('pengguna',$where);
     }
