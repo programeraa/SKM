@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="col-md-6">
-                       <div class="form-group">
+                     <div class="form-group">
                         <label for="m_listing" class="col-form-label">Marketing Listing</label>
                         <input type="text" class="form-control" id="m_listing" name="m_listing" value="<?= $listing_1 ?> <?= $listing2_baru ?>" readonly>
                     </div>
@@ -212,7 +212,11 @@
             <?php if (!empty($j_cobroke)) {?>
                 <h4 class="card-title p-0 m-0" style="text-align: center;">Rincian Komisi <?php echo $listing_1; ?></h4>
             <?php }else{ ?>
-                <h4 class="card-title p-0 m-0" style="text-align: center;">Rincian Komisi <?php echo $nama_marketing_listing_1; ?></h4>
+                <?php if ($m_afw == 'Ang/Fran/Win') {?>
+                    <h4 class="card-title p-0 m-0" style="text-align: center;">Rincian Komisi Ang</h4>
+                <?php }else{ ?>
+                    <h4 class="card-title p-0 m-0" style="text-align: center;">Rincian Komisi <?php echo $nama_marketing_listing_1; ?></h4>
+                <?php } ?>
             <?php } ?>
 
             <?php if (!empty($s_cobroke)) {?>
@@ -251,6 +255,41 @@
                     </tbody>
                 </table>
             <?php }else{ ?>
+
+                <?php if ($m_afw == 'Ang/Fran/Win') {?>
+                    <table class="tg table table-striped table-dark">
+                        <tbody>
+                          <tr>
+                            <td class="tg-0lax"><?php echo 'Fee Marketing Sebelum Dibagi 2'?></td>
+                            <td class="tg-0lax text-right"><?php echo $afw_1_r; ?></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax"><?php echo 'Fee Marketing'?></td>
+                            <td class="tg-0lax text-right"><?php echo $afw_2_r; ?></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax text-warning"><?php echo 'Dikurangi Admin Sebesar 2.5%'?></td>
+                            <td class="tg-0lax text-right"><?php echo $admin_listing_ang_r; ?></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax"><?php echo 'Fee Marketing Sementara'?></td>
+                            <td class="tg-0lax text-right"><?php echo $fmk3_listing_ang_r; ?></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$pph_listing_ang.')'?></td>
+                            <td class="tg-0lax text-right"><?php echo $biaya_pph_l_ang_r ?></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
+                            <td class="tg-0lax text-warning text-right"><?php echo $fmb_l_ang_r; ?></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax text-right" colspan="2"><?php echo $norek_ang; ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            <?php }else{ ?>
                 <table class="tg table table-striped table-dark">
                     <tbody>
                       <tr>
@@ -279,25 +318,26 @@
                 </tbody>
             </table>
         <?php } ?>
-    </div>
+    <?php } ?>
+</div>
 
-    <div class="col-md-6">
-        <?php if (!empty($s_cobroke)) {?>
-            <!-- hitung marketing selling co broke-->
-            <table class="tg table table-striped table-dark">
-                <tbody>
-                  <tr>
-                    <td class="tg-0lax">Fee Marketing Co-Broke</td>
-                    <td class="tg-0lax text-right"><?php echo $bruto_cobroke_r; ?></td>
-                </tr>
-                <tr>
-                    <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$s_cobroke_angka.'% - '.$s_cobroke.')'?></td>
-                    <td class="tg-0lax text-right"><?php echo $pph_cobroke_selling_r ?></td>
-                </tr>
-                <tr>
-                    <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
-                    <td class="tg-0lax text-warning text-right"><?php echo $fee_cobroke_selling_r; ?></td>
-                </tr>
+<div class="col-md-6">
+    <?php if (!empty($s_cobroke)) {?>
+        <!-- hitung marketing selling co broke-->
+        <table class="tg table table-striped table-dark">
+            <tbody>
+              <tr>
+                <td class="tg-0lax">Fee Marketing Co-Broke</td>
+                <td class="tg-0lax text-right"><?php echo $bruto_cobroke_r; ?></td>
+            </tr>
+            <tr>
+                <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$s_cobroke_angka.'% - '.$s_cobroke.')'?></td>
+                <td class="tg-0lax text-right"><?php echo $pph_cobroke_selling_r ?></td>
+            </tr>
+            <tr>
+                <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
+                <td class="tg-0lax text-warning text-right"><?php echo $fee_cobroke_selling_r; ?></td>
+            </tr>
                         <!-- <tr>
                             <td class="tg-0lax">No Rekening</td>
                             <td class="tg-0lax text-right"><?php echo $norek_listing; ?></td>
@@ -305,7 +345,7 @@
                     </tbody>
                 </table>
             <?php }else{ ?>
-               <table class="tg table table-striped table-dark">
+             <table class="tg table table-striped table-dark">
                 <tbody>
                   <tr>
                     <td class="tg-0lax"><?php echo 'Fee Marketing'?></td>
@@ -337,6 +377,133 @@
 </div>
 </form>
 </div>
+
+<!-- Kasus jika Ang/Fran/Win-->
+<?php if ($m_afw == 'Ang/Fran/Win') {?>
+    <div class="card-header-sm text-dark">
+        <div class="d-flex justify-content-between mb-2">
+            <h4 class="card-title p-0 m-0" style="text-align: center;">Rincian Komisi Fran</h4>
+        </div>
+    </div>
+
+    <div class="card-body p-0 pt-2">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="tg table table-striped table-dark">
+                        <tbody>
+                          <tr>
+                            <td class="tg-0lax"><?php echo 'Fee Marketing Sebelum Dibagi 2'?></td>
+                            <td class="tg-0lax text-right"><?php echo $afw_1_r; ?></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax"><?php echo 'Fee Marketing'?></td>
+                            <td class="tg-0lax text-right"><?php echo $afw_2_r; ?></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax text-warning"><?php echo 'Dikurangi Admin Sebesar 2.5%'?></td>
+                            <td class="tg-0lax text-right"><?php echo $admin_listing_2_r; ?></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax"><?php echo 'Fee Marketing Sementara'?></td>
+                            <td class="tg-0lax text-right"><?php echo $fmk3_listing_2_r; ?></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$pph_listing_2.')'?></td>
+                            <td class="tg-0lax text-right"><?php echo $biaya_pph_l_2_r ?></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
+                            <td class="tg-0lax text-warning text-right"><?php echo $fmb_l_2_r; ?></td>
+                        </tr>
+                        <tr>
+                            <td class="tg-0lax text-right" colspan="2"><?php echo $norek_fran; ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="card-header-sm text-dark">
+    <div class="d-flex justify-content-between mb-2">
+        <h4 class="card-title p-0 m-0" style="text-align: center;">Rincian Komisi Winata</h4>
+    </div>
+</div>
+
+<div class="card-body p-0 pt-2">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <table class="tg table table-striped table-dark">
+                    <tbody>
+                      <tr>
+                        <td class="tg-0lax"><?php echo 'Fee Marketing'?></td>
+                        <td class="tg-0lax text-right"><?php echo $afw_1_r; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-0lax text-warning"><?php echo 'Dikurangi Admin Sebesar 2.5%'?></td>
+                        <td class="tg-0lax text-right"><?php echo $admin_listing_3_r; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-0lax"><?php echo 'Fee Marketing Sementara'?></td>
+                        <td class="tg-0lax text-right"><?php echo $fmk3_listing_3_r; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$pph_listing_3.')'?></td>
+                        <td class="tg-0lax text-right"><?php echo $biaya_pph_l_3_r ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
+                        <td class="tg-0lax text-warning text-right"><?php echo $fmb_l_3_r; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-0lax text-right" colspan="2"><?php echo $norek_win; ?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
+</div>
+<?php } ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- Kasus jika 4 marketing (listing 2 dan selling 2)-->
 <?php if (!empty($m_listing_2 || $m_selling_2)) { ?>
@@ -385,7 +552,7 @@
             
             <div class="col-md-6">
                 <?php if (!empty($m_selling_2)) {?>
-                   <table class="tg table table-striped table-dark">
+                 <table class="tg table table-striped table-dark">
                     <tbody>
                       <tr>
                         <td class="tg-0lax"><?php echo 'Fee Marketing'?></td>
@@ -433,10 +600,10 @@
         <div class="d-flex justify-content-between mb-2">
             <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 1 Listing (<?php 
                 if (!empty($up_1_listing)) {
-                   echo $up_1_listing;
-               }else{ echo "Tidak Ada"; 
-           } 
-       ?>)</h4>
+                 echo $up_1_listing;
+             }else{ echo "Tidak Ada"; 
+         } 
+     ?>)</h4>
             <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 1 Selling (<?php 
                 if (!empty($up_1_selling)) {
                     echo $up_1_selling;
