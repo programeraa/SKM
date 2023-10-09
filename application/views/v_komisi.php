@@ -22,6 +22,7 @@
                             <th>Marketing Listing</th>
                             <th>Marketing Selling</th> 
                             <th>Bruto</th>
+                            <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -72,6 +73,14 @@
                                 <td><?= $listing_1 ?> <?= $listing2_baru?> </td>
                                 <td><?= $selling_1 ?> <?= $selling2_baru?></td>
                                 <td><?= $bruto_r ?></td>
+                                <td>
+                                    <?php 
+                                    if ($komisi->status_komisi=='Belum Disetujui') {
+                                        echo "<span class='badge badge-warning p-2'>Belum Disetujui</span>";
+                                    }else{
+                                        echo "<span class='badge badge-success p-2'>Disetujui</span>";
+                                    }?>
+                                </td>
                                 <td>
                                     <a href="#" data-toggle="modal" data-target="#lihat_komisi<?php echo $komisi->id_komisi; ?>" class="btn btn-primary btn-sm mt-1"><i class="fas fa-eye" title="Detail"></i></a>
 
