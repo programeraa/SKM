@@ -136,7 +136,7 @@
                             </p>
                             <a href="#" class="btn btn-primary"><?= $komisi->admin_disetujui ?> - <?= $komisi->level_disetujui ?></a>
                         </div>
-                        <div class="card-footer text-muted">
+                        <div class="card-footer">
                             A&A Indonesia
                         </div>
                     </div>
