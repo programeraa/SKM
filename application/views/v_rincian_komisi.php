@@ -117,6 +117,34 @@
             } 
             ?>
 
+            <?php if ($komisi->status_komisi == "Disetujui") {?>
+                <div class="card-header-sm bg-dark text-white">
+                    <h4 class="card-title p-2 m-0" style="text-align: center;">Status Komisi</h4>
+                </div>
+
+                <div class="card-body">
+                    <div class="card-body p-0 pt-2">
+                        <div class="card text-center w-50 mx-auto my-auto">
+                          <div class="card-header">
+                            Surabaya, <?= date("d-m-Y", strtotime($komisi->tgl_disetujui)); ?>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Mengetahui</h5>
+                            <p class="card-text">
+                                <img style="width : 80px; height: auto;" class="profile-img" src="<?php echo base_url('').'ttd ku baru.jpg'; ?>"
+                                alt="">
+                            </p>
+                            <a href="#" class="btn btn-primary"><?= $komisi->admin_disetujui ?> - <?= $komisi->level_disetujui ?></a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            A&A Indonesia
+                        </div>
+                    </div>
+                </div>
+            </div>
         <?php } ?>
     </div>
+
+<?php } ?>
+</div>
 </body>
