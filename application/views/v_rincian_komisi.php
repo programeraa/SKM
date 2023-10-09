@@ -131,7 +131,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Mengetahui</h5>
                             <p class="card-text">
-                                <img style="width : 80px; height: auto;" class="profile-img" src="<?php echo base_url('').'ttd ku baru.jpg'; ?>"
+                                <img style="width : 80px; height: auto;" class="profile-img" src="<?php echo base_url('assets/foto_ttd/').$komisi->gambar_ttd_pengguna; ?>"
                                 alt="">
                             </p>
                             <a href="#" class="btn btn-primary"><?= $komisi->admin_disetujui ?> - <?= $komisi->level_disetujui ?></a>
