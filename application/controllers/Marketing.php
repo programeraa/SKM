@@ -28,7 +28,7 @@ class Marketing extends CI_Controller {
 		$member = $this->input->post('member');
 		$emd = $this->input->post('emd');
 		$cmo = $this->input->post('cmo');
-		$npwp = $this->input->post('npwp');
+		//$npwp = $this->input->post('npwp');
 		$norek = $this->input->post('norek');
 		$fasilitas = $this->input->post('fasilitas');
 		$jabatan = $this->input->post('jabatan');
@@ -75,7 +75,7 @@ class Marketing extends CI_Controller {
     			'member_mar' => $member,
     			'upline_emd_mar' => $emd,
     			'upline_cmo_mar' => $cmo,
-    			'npwp_mar' => $npwp,
+    			//'npwp_mar' => $npwp,
     			'norek_mar' => $norek,
     			'fasilitas_mar' => $fasilitas,
     			'jabatan_mar' => $jabatan,
