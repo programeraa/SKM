@@ -23,8 +23,12 @@
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
                     <div class="form-group">
+                        <label for="g_ttd" class="col-form-label">Foto Tanda Tangan</label>
+                        <input type="file" class="form-control" id="g_ttd" name="g_ttd">
+                    </div>
+                    <div class="form-group">
                         <label for="level" class="col-form-label">Level Akun</label>
-                        <select class="form-control" id="level" name="level" required>
+                        <select class="form-control" id="level" name="level">
                             <option value="">Pilih Level</option>
                             <option value="Administrator">Administrator</option>
                             <option value="CMO">CMO</option>
