@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Okt 2023 pada 08.12
+-- Waktu pembuatan: 09 Okt 2023 pada 11.14
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -36,6 +36,13 @@ CREATE TABLE `co_broke` (
   `jenis_cobroke` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `co_broke`
+--
+
+INSERT INTO `co_broke` (`id_cobroke`, `id_komisi`, `id_komisi_unik`, `nama_cobroke`, `status_cobroke`, `jenis_cobroke`) VALUES
+(64, 250, 4009, 'TOMI BRIGHTON JEMURSARI', 'Selling', '2');
+
 -- --------------------------------------------------------
 
 --
@@ -52,8 +59,19 @@ CREATE TABLE `komisi` (
   `mar_selling_komisi` int(250) NOT NULL,
   `mar_selling2_komisi` int(250) NOT NULL,
   `bruto_komisi` varchar(250) NOT NULL,
-  `waktu_komisi` date NOT NULL
+  `waktu_komisi` date NOT NULL,
+  `tgl_disetujui` date NOT NULL,
+  `status_komisi` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `komisi`
+--
+
+INSERT INTO `komisi` (`id_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_komisi`, `mar_listing_komisi`, `mar_listing2_komisi`, `mar_selling_komisi`, `mar_selling2_komisi`, `bruto_komisi`, `waktu_komisi`, `tgl_disetujui`, `status_komisi`) VALUES
+(246, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual', '2023-10-04', 2, 0, 3, 0, '3800000', '2023-10-09', '2023-10-09', 'Disetujui'),
+(248, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Sewa', '2023-10-14', 3, 0, 10, 0, '73000000', '2023-10-09', '2023-10-09', 'Disetujui'),
+(250, 'JL. Manyar Rejo X/39, Surabaya', 'Jual', '2023-09-28', 38, 0, 4009, 0, '25000000', '2023-10-09', '0000-00-00', 'Belum Disetujui');
 
 -- --------------------------------------------------------
 
@@ -85,8 +103,12 @@ INSERT INTO `marketing` (`id_mar`, `nama_mar`, `nomor_mar`, `member_mar`, `uplin
 (3, 'Jonatan / Lydia', 'AA002', 'Silver', '', '', '', 'BCA-0100359723 (Lydia Susanto)', '', '', '', '1.jpg'),
 (7, 'Purnomo', 'AA004', 'Prime Pro', '3', '10', '', '78654 - Purnomo', '', '', '', ''),
 (9, 'Yenny', 'AA005', 'Black Jack', '3', '', '', 'BCA-89897899 - Yenny', '', '', '10.jpg', '9.jpg'),
-(10, 'Julia / Jeffy', 'AA006', 'Silver', '', '3', '', '9090 - Julia Jeffy', '', '', '', ''),
-(11, 'Claudia', 'AA007', 'Gold Express', '10', '9', '', 'BCA-4700271779 (Claudia Florensia Sri P)', '', '', '', '6.jpg');
+(10, 'Julia / Jeffy', 'AA006', 'Silver', '', '', '', '9090 - Julia Jeffy', '', '', '', ''),
+(11, 'Claudia', 'AA007', 'Gold Express', '10', '9', '', 'BCA-4700271779 (Claudia Florensia Sri P)', '', '', '', '6.jpg'),
+(35, 'Ang', 'AA0010', 'Silver', '10', '', '', 'BCA 472-018-1717 (Anggraini Angkawidjaya)', '', '', '', 'ttd_ku_baru2.jpg'),
+(36, 'Fran', 'AA0011', 'Silver', '35', '', '', 'BCA 102-031-4776 (Fransiska)', '', '', '', ''),
+(37, 'Winata', 'AA0012', 'Silver', '35', '', '', 'BCA 018-365-6161 (Winata Ciputra)', '', '', '', ''),
+(38, 'Ang/Fran/Win', 'AA0013', 'Silver', '', '', '', '-', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -99,6 +121,7 @@ CREATE TABLE `pengguna` (
   `nama_pengguna` varchar(250) NOT NULL,
   `username_pengguna` varchar(250) NOT NULL,
   `pass_pengguna` varchar(250) NOT NULL,
+  `gambar_ttd_pengguna` varchar(250) NOT NULL,
   `level_pengguna` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -106,9 +129,11 @@ CREATE TABLE `pengguna` (
 -- Dumping data untuk tabel `pengguna`
 --
 
-INSERT INTO `pengguna` (`id_pengguna`, `nama_pengguna`, `username_pengguna`, `pass_pengguna`, `level_pengguna`) VALUES
-(1, 'Rohman', 'rohman', '2397977a0e43fb1f5ee26fe993674b5b', 'Administrator'),
-(4, 'Julia', 'julia', 'c2e285cb33cecdbeb83d2189e983a8c0', 'CMO');
+INSERT INTO `pengguna` (`id_pengguna`, `nama_pengguna`, `username_pengguna`, `pass_pengguna`, `gambar_ttd_pengguna`, `level_pengguna`) VALUES
+(1, 'Rohman', 'rohman', '2397977a0e43fb1f5ee26fe993674b5b', 'ttd_ku_baru.jpg', 'Administrator'),
+(4, 'Julia', 'julia', 'c2e285cb33cecdbeb83d2189e983a8c0', '', 'CMO'),
+(6, 'Fandi', 'fandi', '9bb773615bccfc87168aa059884ca038', 'image_amC.png', 'Administrator'),
+(9, 'Henny R', 'gun', '5161ebb0cce4b7987ba8b6935d60a180', '8-TKgm4cgncXgwpL4_(1).png', 'CMO');
 
 -- --------------------------------------------------------
 
@@ -122,6 +147,13 @@ CREATE TABLE `potongan` (
   `keterangan_potongan` varchar(250) NOT NULL,
   `jumlah_potongan` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `potongan`
+--
+
+INSERT INTO `potongan` (`id_potongan`, `id_komisi`, `keterangan_potongan`, `jumlah_potongan`) VALUES
+(47, 248, 'Biaya pengantaran', '2000000');
 
 -- --------------------------------------------------------
 
@@ -161,8 +193,18 @@ CREATE TABLE `sub_komisi` (
   `npwpm2_selling_komisi` int(250) NOT NULL,
   `npwpum2_selling_komisi` int(250) NOT NULL,
   `npwpum2_selling2_komisi` int(250) NOT NULL,
-  `admin_pengguna` int(250) NOT NULL
+  `admin_pengguna` int(250) NOT NULL,
+  `admin_status_komisi` int(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `sub_komisi`
+--
+
+INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `npwpm_listing_komisi`, `npwpum_listing_komisi`, `npwpum_listing2_komisi`, `mm2_listing_komisi`, `npwpm2_listing_komisi`, `npwpum2_listing_komisi`, `npwpum2_listing2_komisi`, `mm_selling_komisi`, `npwpm_selling_komisi`, `npwpum_selling_komisi`, `npwpum_selling2_komisi`, `mm2_selling_komisi`, `npwpm2_selling_komisi`, `npwpum2_selling_komisi`, `npwpum2_selling2_komisi`, `admin_pengguna`, `admin_status_komisi`) VALUES
+(145, 246, 60, 1, 1, 1, 0, 0, 0, 0, 50, 1, 0, 0, 0, 0, 0, 0, 1, 1),
+(147, 248, 50, 1, 0, 0, 0, 0, 0, 0, 50, 0, 0, 1, 0, 0, 0, 0, 6, 6),
+(149, 250, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0);
 
 --
 -- Indexes for dumped tables
@@ -224,31 +266,31 @@ ALTER TABLE `sub_komisi`
 -- AUTO_INCREMENT untuk tabel `co_broke`
 --
 ALTER TABLE `co_broke`
-  MODIFY `id_cobroke` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id_cobroke` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT untuk tabel `komisi`
 --
 ALTER TABLE `komisi`
-  MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=243;
+  MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
 
 --
 -- AUTO_INCREMENT untuk tabel `marketing`
 --
 ALTER TABLE `marketing`
-  MODIFY `id_mar` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_mar` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id_pengguna` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pengguna` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `potongan`
 --
 ALTER TABLE `potongan`
-  MODIFY `id_potongan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id_potongan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT untuk tabel `referal`
@@ -260,7 +302,7 @@ ALTER TABLE `referal`
 -- AUTO_INCREMENT untuk tabel `sub_komisi`
 --
 ALTER TABLE `sub_komisi`
-  MODIFY `id_sub_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+  MODIFY `id_sub_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
