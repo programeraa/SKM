@@ -28,7 +28,13 @@
                     </thead>
                     <tbody>
                         <?php $no = 1;
-                        foreach ($pengguna as $user) { ?>
+                        foreach ($pengguna as $user) { 
+                            if (!empty($user->gambar_ttd_pengguna)) {
+                                $gambar_ttd = 1;
+                            }else{
+                                $gambar_ttd = 0;
+                            }
+                            ?>
                             <tr>
                                 <td><?= $no; ?></td>
                                 <td><?= $user->nama_pengguna ?></td>
