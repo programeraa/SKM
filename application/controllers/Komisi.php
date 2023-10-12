@@ -83,20 +83,24 @@ class Komisi extends CI_Controller {
 			if ($pilih_ml == 'Broker') {
 				$broker_1 = $this->input->post('broker_1');
 				$j_broker = $this->input->post('j_broker');
+				$persen_komisi_1 = $this->input->post('persen_komisi_1');
 				$status_broker = 'Listing'; 
 			}
 			if ($pilih_ms == 'Broker2') {
 				$broker_2 = $this->input->post('broker_2');
 				$j_broker2 = $this->input->post('j_broker2');
+				$persen_komisi_2 = $this->input->post('persen_komisi_2');
 				$status_broker = 'Selling'; 
 			}
 
 			if (!empty($broker_1 && $j_broker)) {
 				$nama_broker = $broker_1;
 				$jenis_broker = $j_broker;
+				$persen_cobroke = $persen_komisi_1;
 			}else{
 				$nama_broker = $broker_2;
 				$jenis_broker = $j_broker2;
+				$persen_cobroke = $persen_komisi_2;
 			}
 		//===============================================
 
@@ -278,14 +282,15 @@ class Komisi extends CI_Controller {
 
 			$this->m_komisi->simpan_sub_komisi($data2);
 
-			$id_sub_komisi_baru = $this->m_komisi->get_last_inserted_id_sub_komisi();
+			//$id_sub_komisi_baru = $this->m_komisi->get_last_inserted_id_sub_komisi();
 
 			$data3 = array(
 				'id_komisi' => $id_komisi_baru,
 				'id_komisi_unik' => $id_komisi_unik,
 				'nama_cobroke' => $nama_broker,
 				'status_cobroke' => $status_broker,
-				'jenis_cobroke' => $jenis_broker
+				'jenis_cobroke' => $jenis_broker,
+				'persen_komisi_cobroke' => $persen_cobroke
 			);
 
 			if (!empty($broker_1 || $broker_2)) {
