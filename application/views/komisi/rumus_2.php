@@ -222,16 +222,6 @@ $netto2_listing_2 = $fuk4 - $pajak2_listing_2;
 $netto2_listing_2_n = stringToNumber($netto2_listing_2);
 $netto2_listing_2_r = numberToRupiah($netto2_listing_2_n);
 
-
-
-
-
-
-
-
-
-
-
 //=================================================== cari upline selling 1 dan 2
 //cari upline selling 1
 foreach ($marketing as $mkt) {
@@ -474,9 +464,9 @@ foreach ($marketing as $upline) {
     }
 
 //norek upline 1 listing 2
-foreach ($marketing as $upline) {
-    if ($upline->nama_mar == $up_1_listing2) {
-        $norek_up1_listing2 = $upline->norek_mar;
+    foreach ($marketing as $upline) {
+        if ($upline->nama_mar == $up_1_listing2) {
+            $norek_up1_listing2 = $upline->norek_mar;
                 break; // Hentikan iterasi setelah menemukan kesamaan pertama
             } 
         }
@@ -523,5 +513,51 @@ foreach ($marketing as $upline) {
             break; // Hentikan iterasi setelah menemukan kesamaan pertama
         } 
     }
+
+
+
+
+//====================================================================== Kasus ANG FRAN WIN
+
+//Cari Upline ANG
+
+    // foreach ($marketing as $ang) { 
+    //     if ($ang->nama_mar == "Ang") {
+    //         foreach ($marketing as $ang_2) {
+    //             if ($ang_2->id_mar == $ang->upline_emd_mar) {
+    //                 $nama_upline1_ang = $ang_2->nama_mar;
+    //                 $npwp_upline1_ang = $ang_2->gambar_npwp_mar;
+    //                 $norek_upline1_ang = $ang_2->norek_mar;
+    //             }else{
+    //                 $nama_upline1_ang = '';
+    //                 $npwp_upline1_ang = '';
+    //                 $norek_upline1_ang = '';
+    //             }
+
+    //             if (!empty($npwp_upline1_ang)) {
+    //                 $npwp_up1_ang = 1;
+    //             }else{
+    //                 $npwp_up1_ang = 0;
+    //             }
+    //         }
+
+    //         echo $test = $nama_upline1_ang;
+
+    //         foreach ($marketing as $ang_3) {
+    //             if ($ang_3->id_mar == $ang->upline_cmo_mar) {
+    //                 $nama_upline2_ang = $ang_3->nama_mar;
+    //                 $npwp_upline2_ang = $ang_3->gambar_npwp_mar;
+    //                 $norek_upline2_ang = $ang_3->norek_mar;
+    //             }
+
+    //             if (!empty($npwp_upline2_ang)) {
+    //                 $npwp_up2_ang = 1;
+    //             }else{
+    //                 $npwp_up2_ang = 0;
+    //             }
+    //         }
+    //     }
+    // }
+
 
 ?>
