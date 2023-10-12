@@ -37,6 +37,24 @@
   })
 </script>
 
+<script>
+	function formatRupiah(input, resultId) {
+        var formatTitik = input.value.replace(/\D/g, ''); // Hapus semua karakter selain angka
+        var formattedValue = '';
+
+        if (formatTitik.length > 0) {
+        	formattedValue = (parseInt(formatTitik, 10)).toLocaleString("id-ID");
+        }
+
+        // Tampilkan yang diformat dengan tanda titik
+        input.value = formattedValue;
+
+        // Simpan yang tanpa tanda titik ke input hidden
+        document.getElementById(resultId).value = formatTitik;
+    }
+</script>
+
+
 <script src="https://cdn.datatables.net/buttons/2.3.5/js/dataTables.buttons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
