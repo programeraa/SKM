@@ -31,7 +31,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="komisi" class="col-form-label">Komisi Bruto</label>
-                                <input type="text" class="form-control" id="komisi" name="komisi">
+                                <input type="text" class="form-control" name="tampil_komisi" id="tampil_komisi" onkeyup="formatRupiah(this, 'komisi')">
+                                <input type="hidden" id="komisi" name="komisi">
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
@@ -44,7 +45,8 @@
                                     <div class="form-group">
                                         <label for="j_referal" class="col-form-label">Jumlah
                                         </label>
-                                        <input type="text" class="form-control" id="j_referal" name="j_referal">
+                                        <input type="text" class="form-control" name="tampil_referal" id="tampil_referal" onkeyup="formatRupiah(this, 'j_referal')">
+                                        <input type="hidden" class="form-control" id="j_referal" name="j_referal">
                                     </div>
                                 </div>
                             </div>
@@ -142,21 +144,28 @@
                                 <!-- Broker 1 -->
                                 <div id="broker_1" style="display:none;">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                             <div class="form-group">
                                                 <label for="broker_1" class="col-form-label">Nama Broker</label>
                                                 <input type="text" class="form-control" id="broker_1" name="broker_1">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                             <div class="form-group">
                                                 <label for="j_broker" class="col-form-label">Jenis Broker</label>
                                                 <select class="form-control" id="j_broker" name="j_broker">
                                                     <option value="">Pilih Broker</option>
+                                                    <option value="0">Ada SKB</option>
                                                     <option value="2">Badan</option>
                                                     <option value="2.5">Non-Badan (NPWP)</option>
                                                     <option value="3">Non-Badan (Non NPWP)</option>
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 ml-auto">
+                                            <div class="form-group">
+                                                <label for="persen_komisi_1" class="col-form-label">% Komisi</label>
+                                                <input type="number" class="form-control" id="persen_komisi_1" name="persen_komisi_1" value="50">
                                             </div>
                                         </div>
                                     </div>
@@ -250,21 +259,28 @@
                                     <!-- Broker 2 -->
                                     <div id="broker_2" style="display:none;">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-5">
                                                 <div class="form-group">
                                                     <label for="broker_2" class="col-form-label">Nama Broker</label>
                                                     <input type="text" class="form-control" id="broker_2" name="broker_2">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-5">
                                                 <div class="form-group">
                                                     <label for="j_broker2" class="col-form-label">Jenis Broker</label>
                                                     <select class="form-control" id="j_broker2" name="j_broker2">
                                                         <option value="">Pilih Broker</option>
+                                                        <option value="0">Ada SKB</option>
                                                         <option value="2">Badan</option>
                                                         <option value="2.5">Non-Badan (NPWP)</option>
                                                         <option value="3">Non-Badan (Non NPWP)</option>
                                                     </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 ml-auto">
+                                                <div class="form-group">
+                                                    <label for="persen_komisi_2" class="col-form-label">% Komisi</label>
+                                                    <input type="number" class="form-control" id="persen_komisi_2" name="persen_komisi_2" value="50">
                                                 </div>
                                             </div>
                                         </div>
@@ -279,7 +295,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="j_potongan" class="col-form-label">Jumlah</label>
-                                                <input type="text" class="form-control" id="j_potongan" name="j_potongan">
+                                                <input type="text" class="form-control" name="tampil_potongan" id="tampil_potongan" onkeyup="formatRupiah(this, 'j_potongan')">
+                                                <input type="hidden" class="form-control" id="j_potongan" name="j_potongan">
                                             </div>
                                         </div>
                                     </div>
