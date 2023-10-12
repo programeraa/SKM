@@ -126,7 +126,7 @@
                         <?php if (!empty($j_cobroke)) {?>
 
                             <td class="tg-0lax"><?php echo 'Co-Broke : '.''.$listing_1.''?></td>
-                            <td class="tg-0lax text-right"></td>
+                            <td class="tg-0lax text-right">Komisi : <?= $persen_cobroke ?> %</td>
 
                         <?php }else{ ?>
 
@@ -138,7 +138,7 @@
                         <?php if (!empty($s_cobroke)) {?>
 
                             <td class="tg-0lax"><?php echo 'Co-Broke : '.''.$selling_1.''?></td>
-                            <td class="tg-0lax text-right"></td>
+                            <td class="tg-0lax text-right">Komisi : <?= $persen_cobroke ?> %</td>
 
                         <?php }else{ ?>
 
