@@ -181,31 +181,31 @@ if (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_co
     }else{
         $fmk = $bruto;
     } 
-    echo "A";
+    //echo "A";
 }elseif (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_cobroke) && $marketing_listing_2 == 0 && $marketing_selling_2 == 0) {
     if ($persen_cobroke > 50) {
         $fmk = ((100 - $persen_cobroke) / 100) * $bruto_2;
     }else{
         $fmk = $bruto_2 / $total_marketing; 
     }
-    echo "B";
+    //echo "B";
 }elseif (!empty($kubruk_nama) && $ref_aa == 1 && ($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_cobroke)) {
     if ($persen_cobroke > 50) {
         $fmk = ((((100 - $persen_cobroke) / 100) * $bruto_2) - $referal_jumlah) / 2;
     }else{
         $fmk = $bruto / 2 ;
     }
-    echo "C";
+    //echo "C";
 }elseif (!empty($kubruk_nama) && ($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_cobroke)) {
     if ($persen_cobroke > 50) {
         $fmk = (((100 - $persen_cobroke) / 100) * $bruto_2) / 2;
     }else{
         $fmk = $bruto_3 / 2 ;
     }
-    echo "D";
+    //echo "D";
 }else{
     $fmk = $bruto / $total_marketing; 
-    echo "E";
+    //echo "E";
 }
 
 //string to rupiah
@@ -567,19 +567,19 @@ $fmb_s2_r = numberToRupiah($fmb_s2_n);
 $afw_1 = null;
 if (!empty($ml_afw)) {
     $afw_1 = $fmk2_listing / 2;
-    echo "A";
+    //echo "A";
 }
 if (!empty($ml_2_afw)) {
     $afw_1 = $fmk2_listing2 / 2;
-    echo "B";
+    //echo "B";
 }
 if (!empty($ms_afw)) {
     $afw_1 = $fmk2_selling / 2;
-    echo "C";
+    //echo "C";
 }
 if(!empty($ms_2_afw)) {
     $afw_1 = $fmk2_selling2 / 2;
-    echo "D";
+    //echo "D";
 }
 
 //$afw_1 = $fmk2_listing / 2;
