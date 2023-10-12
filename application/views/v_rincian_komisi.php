@@ -13,8 +13,11 @@
                             $j_cobroke = 'Badan';
                         }elseif ($listing_2 = $kubruk->jenis_cobroke == 2.5) {
                             $j_cobroke = 'Non-Badan (NPWP)';
-                        }else{
+                        }elseif($listing_2 = $kubruk->jenis_cobroke == 3){
                             $j_cobroke = 'Non-Badan (Non-NPWP)';
+                        }
+                        else{
+                            $j_cobroke = 'Badan (Ada SKB)';
                         }
                         //$j_cobroke_angka = $kubruk->jenis_cobroke;
                     }
@@ -35,8 +38,11 @@
                             $s_cobroke = 'Badan';
                         }elseif ($selling_2 = $kubruk->jenis_cobroke == 2.5) {
                             $s_cobroke = 'Non-Badan (NPWP)';
-                        }else{
+                        }elseif($selling_2 = $kubruk->jenis_cobroke == 3){
                             $s_cobroke = 'Non-Badan (Non-NPWP)';
+                        }
+                        else{
+                            $s_cobroke = 'Badan (Ada SKB)';
                         }
                         //$s_cobroke_angka = $kubruk->jenis_cobroke;
                     }
