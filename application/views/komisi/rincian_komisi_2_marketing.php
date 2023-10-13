@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="col-md-6">
-                       <div class="form-group">
+                     <div class="form-group">
                         <label for="m_listing" class="col-form-label">Marketing Listing</label>
                         <input type="text" class="form-control" id="m_listing" name="m_listing" value="<?= $listing_1 ?> <?= $listing2_baru ?>" readonly>
                     </div>
@@ -326,7 +326,7 @@
                     <?php include "rincian_komisi_afw.php" ?>
 
                 <?php }else{ ?>
-                   <table class="tg table table-striped table-dark">
+                 <table class="tg table table-striped table-dark">
                     <tbody>
                       <tr>
                         <td class="tg-0lax"><?php echo 'Fee Marketing'?></td>
@@ -427,7 +427,7 @@
 
                 <?php }else{ ?>
                     <?php if (!empty($m_selling_2)) {?>
-                       <table class="tg table table-striped table-dark">
+                     <table class="tg table table-striped table-dark">
                         <tbody>
                           <tr>
                             <td class="tg-0lax"><?php echo 'Fee Marketing'?></td>
@@ -470,30 +470,56 @@
 <div class="card-body">
     <!-- rumus 2 -->
     <?php include "rumus_2.php" ?>
-
     <!--upline listing dan selling 1-->
     <div class="card-header-sm text-dark">
         <div class="d-flex justify-content-between mb-2">
-            <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 1 Listing (<?php 
-                if (!empty($up_1_listing)) {
-                   echo $up_1_listing;
-               }else{ echo "Tidak Ada"; 
-           } 
-       ?>)</h4>
-            <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 1 Selling (<?php 
-                if (!empty($up_1_selling)) {
-                    echo $up_1_selling;
-                }else{
-                    echo "Tidak Ada";
-                }
-            ?>)</h4>
-        </div>
-    </div>
+            <?php if ($ml_afw == "Ang/Fran/Win") { ?>
+                <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 1 Ang : (<?php
+                    if ($nama_upline1_ang) {
+                        echo $nama_upline1_ang;
+                    }else{
+                        echo "Tidak Ada";
+                    }?>)
+                </h4>
+            <?php }else{ ?>
 
-    <div class="card-body p-0 pt-2">
-        <form method="post" action="">
-            <div class="row">
-                <div class="col-md-6">
+                <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 1 Listing (<?php 
+                    if (!empty($up_1_listing)) {
+                     echo $up_1_listing;
+                 }else{ echo "Tidak Ada"; 
+             } ?>)
+         </h4>
+     <?php } ?>
+
+     <?php if ($ms_afw == "Ang/Fran/Win") { ?>
+        <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 1 Ang : (<?php 
+            if ($nama_upline1_ang) {
+                echo $nama_upline1_ang;
+            }else{
+                echo "Tidak Ada";
+            }?>)
+        </h4>
+    <?php }else{ ?>
+     <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 1 Selling (<?php 
+        if (!empty($up_1_selling)) {
+            echo $up_1_selling;
+        }else{
+            echo "Tidak Ada";
+        }?>)
+    </h4>
+<?php } ?>
+</div>
+</div>
+
+<div class="card-body p-0 pt-2">
+    <form method="post" action="">
+        <div class="row">
+            <div class="col-md-6">
+                <?php if ($ml_afw == "Ang/Fran/Win") { ?>
+
+                    <?php include "upline_afw_2.php" ?>
+
+                <?php }else{ ?>
                     <?php if ($up_listing_1 == 1) { ?>
                         <table class="tg table table-striped table-dark">
                             <tbody>
@@ -527,9 +553,15 @@
                         </tbody>
                     </table>
                 <?php } ?>
-            </div>
+            <?php } ?>
+        </div>
 
-            <div class="col-md-6">
+        <div class="col-md-6">
+            <?php if ($ms_afw == "Ang/Fran/Win") { ?>
+
+                <?php include "upline_afw_2.php" ?>
+
+            <?php }else{ ?>
                 <?php if ($up_selling_1 == 1) { ?>
                     <table class="tg table table-striped table-dark">
                         <tbody>
@@ -563,8 +595,9 @@
                     </tbody>
                 </table>
             <?php } ?>
-        </div>
+        <?php } ?>
     </div>
+</div>
 </form>
 </div>
 
@@ -678,20 +711,41 @@
     <!--upline listing dan selling 2-->
     <div class="card-header-sm text-dark">
         <div class="d-flex justify-content-between mb-2">
-            <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 1 Listing 2 (<?php 
-                if ($up_1_listing2) {
-                    echo $up_1_listing2;
-                }else{
-                    echo "Tidak Ada";
-                }
-            ?>)</h4>
-            <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 1 Selling 2 (<?php 
-                if ($up_1_selling2) {
-                    echo $up_1_selling2;
-                }else{
-                    echo "Tidak Ada";
-                }
-            ?>)</h4>
+            <?php if ($ml_2_afw == "Ang/Fran/Win") { ?>
+                <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 1 Ang : (<?php
+                    if ($nama_upline1_ang) {
+                        echo $nama_upline1_ang;
+                    }else{
+                        echo "Tidak Ada";
+                    }?>)
+                </h4>
+            <?php }else{ ?>
+                <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 1 Listing 2 (<?php 
+                    if ($up_1_listing2) {
+                        echo $up_1_listing2;
+                    }else{
+                        echo "Tidak Ada";
+                    }?>)
+                </h4>
+            <?php } ?>
+
+            <?php if ($ms_2_afw == "Ang/Fran/Win") { ?>
+                <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 1 Ang : (<?php
+                    if ($nama_upline1_ang) {
+                        echo $nama_upline1_ang;
+                    }else{
+                        echo "Tidak Ada";
+                    }?>)
+                </h4>
+            <?php }else{ ?>
+                <h4 class="card-title p-0 m-0" style="text-align: center;">Upline 1 Selling 2 (<?php 
+                    if ($up_1_selling2) {
+                        echo $up_1_selling2;
+                    }else{
+                        echo "Tidak Ada";
+                    }?>)
+                </h4>
+            <?php } ?>
         </div>
     </div>
 
@@ -699,74 +753,86 @@
         <form method="post" action="">
             <div class="row">
                 <div class="col-md-6">
-                    <?php if ($up_listing2_1 == 1) { ?>
-                        <table class="tg table table-striped table-dark">
-                            <tbody>
-                              <tr>
-                                <td class="tg-0lax"><?php echo 'Fee Upline'?></td>
-                                <td class="tg-0lax text-right"><?php echo $fkl2_r; ?> * 5%</td>
-                            </tr>
-                            <tr>
-                                <td class="tg-0lax text-warning"></td>
-                                <td class="tg-0lax text-right"><?php echo $fuk3_r; ?></td>
-                            </tr>
-                            <tr>
-                                <td class="tg-0lax text-warning">Dikurangi Pajak (<?= $teks_pajak1_listing_2  ?>)</td>
-                                <td class="tg-0lax text-right"><?php echo $fuk3_r ?> * <?= $npwp_upline1_listing2 ?>%</td>
-                            </tr>
-                            <tr>
-                                <td class="tg-0lax text-warning"></td>
-                                <td class="tg-0lax text-right"><?php echo $pajak1_listing_2_r ?></td>
-                            </tr>
-                            <tr>
-                                <td class="tg-0lax"><?php echo 'Fee Diterima (Netto)'?></td>
-                                <td class="tg-0lax text-right"><?php echo $fuk3_r; ?> - <?= $pajak1_listing_2_r ?></td>
-                            </tr>
-                            <tr>
-                                <td class="tg-0lax text-warning"></td>
-                                <td class="tg-0lax text-warning text-right"><?php echo $netto1_listing_2_r; ?></td>
-                            </tr>
-                            <tr>
-                                <td class="tg-0lax text-right" colspan="2"><?php echo $norek_up1_listing2; ?></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <?php if ($ml_2_afw == 'Ang/Fran/Win') { ?>
+
+                        <?php include "upline_afw_2.php" ?>
+
+                    <?php }else{ ?>
+                        <?php if ($up_listing2_1 == 1) { ?>
+                            <table class="tg table table-striped table-dark">
+                                <tbody>
+                                  <tr>
+                                    <td class="tg-0lax"><?php echo 'Fee Upline'?></td>
+                                    <td class="tg-0lax text-right"><?php echo $fkl2_r; ?> * 5%</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-0lax text-warning"></td>
+                                    <td class="tg-0lax text-right"><?php echo $fuk3_r; ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-0lax text-warning">Dikurangi Pajak (<?= $teks_pajak1_listing_2  ?>)</td>
+                                    <td class="tg-0lax text-right"><?php echo $fuk3_r ?> * <?= $npwp_upline1_listing2 ?>%</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-0lax text-warning"></td>
+                                    <td class="tg-0lax text-right"><?php echo $pajak1_listing_2_r ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-0lax"><?php echo 'Fee Diterima (Netto)'?></td>
+                                    <td class="tg-0lax text-right"><?php echo $fuk3_r; ?> - <?= $pajak1_listing_2_r ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-0lax text-warning"></td>
+                                    <td class="tg-0lax text-warning text-right"><?php echo $netto1_listing_2_r; ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-0lax text-right" colspan="2"><?php echo $norek_up1_listing2; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <?php } ?>
                 <?php } ?>
             </div>
 
             <div class="col-md-6">
-                <?php if ($up_selling2_1 == 1) { ?>
-                    <table class="tg table table-striped table-dark">
-                        <tbody>
-                          <tr>
-                            <td class="tg-0lax"><?php echo 'Fee Upline'?></td>
-                            <td class="tg-0lax text-right"><?php echo $fks2_r; ?> * 5%</td>
-                        </tr>
-                        <tr>
-                            <td class="tg-0lax text-warning"></td>
-                            <td class="tg-0lax text-right"><?php echo $fuk3_s_r; ?></td>
-                        </tr>
-                        <tr>
-                            <td class="tg-0lax text-warning">Dikurangi Pajak (<?= $teks_pajak1_selling_2  ?>)</td>
-                            <td class="tg-0lax text-right"><?php echo $fuk3_s_r ?> * <?= $npwp_upline1_selling2 ?>%</td>
-                        </tr>
-                        <tr>
-                            <td class="tg-0lax text-warning"></td>
-                            <td class="tg-0lax text-right"><?php echo $pajak1_selling_2_r ?></td>
-                        </tr>
-                        <tr>
-                            <td class="tg-0lax"><?php echo 'Fee Diterima (Netto)'?></td>
-                            <td class="tg-0lax text-right"><?php echo $fuk3_s_r; ?> - <?= $pajak1_selling_2_r ?></td>
-                        </tr>
-                        <tr>
-                            <td class="tg-0lax text-warning"></td>
-                            <td class="tg-0lax text-warning text-right"><?php echo $netto1_selling_2_r; ?></td>
-                        </tr>
-                        <tr>
-                            <td class="tg-0lax text-right" colspan="2"><?php echo $norek_up1_selling2; ?></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <?php if ($ms_2_afw == 'Ang/Fran/Win') { ?>
+
+                    <?php include "upline_afw_2.php" ?>
+
+                <?php }else{ ?>
+                    <?php if ($up_selling2_1 == 1) { ?>
+                        <table class="tg table table-striped table-dark">
+                            <tbody>
+                              <tr>
+                                <td class="tg-0lax"><?php echo 'Fee Upline'?></td>
+                                <td class="tg-0lax text-right"><?php echo $fks2_r; ?> * 5%</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax text-warning"></td>
+                                <td class="tg-0lax text-right"><?php echo $fuk3_s_r; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax text-warning">Dikurangi Pajak (<?= $teks_pajak1_selling_2  ?>)</td>
+                                <td class="tg-0lax text-right"><?php echo $fuk3_s_r ?> * <?= $npwp_upline1_selling2 ?>%</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax text-warning"></td>
+                                <td class="tg-0lax text-right"><?php echo $pajak1_selling_2_r ?></td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax"><?php echo 'Fee Diterima (Netto)'?></td>
+                                <td class="tg-0lax text-right"><?php echo $fuk3_s_r; ?> - <?= $pajak1_selling_2_r ?></td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax text-warning"></td>
+                                <td class="tg-0lax text-warning text-right"><?php echo $netto1_selling_2_r; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax text-right" colspan="2"><?php echo $norek_up1_selling2; ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <?php } ?>
             <?php } ?>
         </div>
     </div>
@@ -870,6 +936,7 @@
 </div>
 </form>
 </div>
+
 </div>
 <?php endif ?>
 </div>
