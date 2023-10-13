@@ -40,21 +40,25 @@ foreach ($potongan as $potongan_item) {
 $ml_afw = null;
 if ($komisi->mar_listing_komisi == 38) {
     $ml_afw = 'Ang/Fran/Win';
+    //echo "1";
 }
 
 $ml_2_afw = null;
 if ($komisi->mar_listing2_komisi == 38) {
     $ml_2_afw = 'Ang/Fran/Win';
+    //echo "2";
 }
 
 $ms_afw = null;
 if ($komisi->mar_selling_komisi == 38) {
     $ms_afw = 'Ang/Fran/Win';
+    //echo "3";
 }
 
 $ms_2_afw = null;
 if ($komisi->mar_selling2_komisi == 38) {
     $ms_2_afw = 'Ang/Fran/Win';
+    //echo "4";
 }
 
 //================================================================ langkah 1 - 4 
