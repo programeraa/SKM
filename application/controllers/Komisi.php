@@ -284,7 +284,7 @@ class Komisi extends CI_Controller {
 
 			$this->m_komisi->simpan_sub_komisi($data2);
 
-			//$id_sub_komisi_baru = $this->m_komisi->get_last_inserted_id_sub_komisi();
+			$id_sub_komisi_baru = $this->m_komisi->get_last_inserted_id_sub_komisi();
 
 			$data3 = array(
 				'id_komisi' => $id_komisi_baru,
@@ -317,6 +317,30 @@ class Komisi extends CI_Controller {
 			if (!empty($referal || $j_referal)) {
 				$this->m_komisi->simpan_referal($data5);
 			}
+
+			$data6 = array(
+				'id_sub_komisi' => $id_sub_komisi_baru,
+				'm_ang' => $this->input->post('m_ang'),
+				'npwp_ang' => $this->input->post('npwp_ang'),
+				'npwp_up_ang' => $this->input->post('npwp_up_ang'),
+				'npwp_up2_ang' => $this->input->post('npwp_up2_ang'),
+
+				'm_fran' => $this->input->post('m_fran'),
+				'npwp_fran' => $this->input->post('npwp_fran'),
+				'npwp_up_fran' => $this->input->post('npwp_up_fran'),
+				'npwp_up2_fran' => $this->input->post('npwp_up2_fran'),
+
+				'm_win' => $this->input->post('m_win'),
+				'npwp_win' => $this->input->post('npwp_win'),
+				'npwp_up_win' => $this->input->post('npwp_up_win'),
+				'npwp_up2_win' => $this->input->post('npwp_up2_win')
+			);
+
+			if ($ml_baru == 38 || $ms_baru == 38) {
+				$this->m_komisi->simpan_sub_komisi_afw($data6);
+			}
+
+			$id_sub_komisi = $this->input->post('alamat');
 
 			echo '<script>
 			alert("Selamat! Berhasil Menambah Data Komisi");
