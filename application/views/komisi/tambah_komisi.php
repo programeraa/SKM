@@ -341,243 +341,104 @@
                                             <input type="text" class="form-control" id="admin" name="admin" value="<?php echo $id ?>">
                                         </div>
 
-                                        <?php 
-                                        $npwp_up_ang = 0;
-                                        $npwp_up2_ang = 0;
-
-                                        foreach ($marketing as $ang) {
-                                            if ($ang->nama_mar == "Ang") {
-
-                                                if ($ang->member_mar == 'Silver') {
-                                                    $member_ang = 50;
-                                                } elseif ($ang->member_mar == 'Gold Express') {
-                                                    $member_ang = 60;
-                                                } elseif ($ang->member_mar == 'Prime Pro') {
-                                                    $member_ang = 70;
-                                                } elseif ($ang->member_mar == 'Black Jack') {
-                                                    $member_ang = 80;
-                                                }
-
-                                                if (!empty($ang->gambar_npwp_mar)) {
-                                                    $npwp_ang = 1;
-                                                } else {
-                                                    $npwp_ang = 0;
-                                                }
-
-                                                $up_ang = $ang->upline_emd_mar;
-                                                $up2_ang = $ang->upline_cmo_mar;
-                                            }else{
-                                                $up_ang = '';
-                                                $up2_ang = '';
-                                            }
-
-                                            foreach ($marketing as $ang_2) {
-                                             if ($ang_2->id_mar == $up_ang ) {
-                                                 if (!empty($ang_2->gambar_npwp_mar)) {
-                                                     $npwp_up_ang = 1;
-                                                 }
-                                             }
-                                         }
-
-                                         foreach ($marketing as $ang_3) {
-                                             if ($ang_3->id_mar == $up2_ang ) {
-                                                 if (!empty($ang_3->gambar_npwp_mar)) {
-                                                     $npwp_up2_ang = 1;
-                                                 }
-                                             }
-                                         }
-                                     }
+                                        <!-- Kasus AFW -->
+                                        <?php include "input_afw.php"; ?>
+                                        
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="m_ang" name="m_ang" value="<?php echo $member_ang ?>">
+                                            <input type="text" class="form-control" id="npwp_ang" name="npwp_ang" value="<?php echo $npwp_ang ?>">
+                                            <input type="text" class="form-control" id="npwp_up_ang" name="npwp_up_ang" value="<?php echo $npwp_up_ang ?>">
+                                            <input type="text" class="form-control" id="npwp_up2_ang" name="npwp_up2_ang" value="<?php echo $npwp_up2_ang ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="m_fran" name="m_fran" value="<?php echo $member_fran ?>">
+                                            <input type="text" class="form-control" id="npwp_fran" name="npwp_fran" value="<?php echo $npwp_fran ?>">
+                                            <input type="text" class="form-control" id="npwp_up_fran" name="npwp_up_fran" value="<?php echo $npwp_up_fran ?>">
+                                            <input type="text" class="form-control" id="npwp_up2_fran" name="npwp_up2_fran" value="<?php echo $npwp_up2_fran ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="m_win" name="m_win" value="<?php echo $member_win ?>">
+                                            <input type="text" class="form-control" id="npwp_win" name="npwp_win" value="<?php echo $npwp_win ?>">
+                                            <input type="text" class="form-control" id="npwp_up_win" name="npwp_up_win" value="<?php echo $npwp_up_win ?>">
+                                            <input type="text" class="form-control" id="npwp_up2_win" name="npwp_up2_win" value="<?php echo $npwp_up2_win ?>">
+                                        </div>
 
 
-                                     $npwp_up_fran = 0;
-                                     $npwp_up2_fran = 0;
-
-                                     foreach ($marketing as $fran) {
-                                        if ($fran->nama_mar == "Fran") {
-
-                                            if ($fran->member_mar == 'Silver') {
-                                                $member_fran = 50;
-                                            } elseif ($fran->member_mar == 'Gold Express') {
-                                                $member_fran = 60;
-                                            } elseif ($fran->member_mar == 'Prime Pro') {
-                                                $member_fran = 70;
-                                            } elseif ($fran->member_mar == 'Black Jack') {
-                                                $member_fran = 80;
-                                            }
-
-                                            if (!empty($fran->gambar_npwp_mar)) {
-                                                $npwp_fran = 1;
-                                            } else {
-                                                $npwp_fran = 0;
-                                            }
-
-                                            $up_fran = $fran->upline_emd_mar;
-                                            $up2_fran = $fran->upline_cmo_mar;
-                                        }else{
-                                            $up_fran = '';
-                                            $up2_fran = '';
-                                        }
-
-                                        foreach ($marketing as $fran_2) {
-                                         if ($fran_2->id_mar == $up_fran ) {
-                                             if (!empty($fran_2->gambar_npwp_mar)) {
-                                                 $npwp_up_fran = 1;
-                                             }
-                                         }
-                                     }
-
-                                     foreach ($marketing as $fran_3) {
-                                         if ($fran_3->id_mar == $up2_fran ) {
-                                             if (!empty($fran_3->gambar_npwp_mar)) {
-                                                 $npwp_up2_fran = 1;
-                                             }
-                                         }
-                                     }
-                                 }
-
-                                 $npwp_up_win = 0;
-                                 $npwp_up2_win = 0;
-
-                                 foreach ($marketing as $win) {
-                                    if ($win->nama_mar == "Winata") {
-
-                                        if ($win->member_mar == 'Silver') {
-                                            $member_win = 50;
-                                        } elseif ($win->member_mar == 'Gold Express') {
-                                            $member_win = 60;
-                                        } elseif ($win->member_mar == 'Prime Pro') {
-                                            $member_win = 70;
-                                        } elseif ($win->member_mar == 'Black Jack') {
-                                            $member_win = 80;
-                                        }
-
-                                        if (!empty($win->gambar_npwp_mar)) {
-                                            $npwp_win = 1;
-                                        } else {
-                                            $npwp_win = 0;
-                                        }
-
-                                        $up_win = $win->upline_emd_mar;
-                                        $up2_win = $win->upline_cmo_mar;
-                                    }else{
-                                        $up_win = '';
-                                        $up2_win = '';
-                                    }
-
-                                    foreach ($marketing as $win_2) {
-                                     if ($win_2->id_mar == $up_win ) {
-                                         if (!empty($win_2->gambar_npwp_mar)) {
-                                             $npwp_up_win = 1;
-                                         }
-                                     }
-                                 }
-
-                                 foreach ($marketing as $win_3) {
-                                     if ($win_3->id_mar == $up2_win ) {
-                                         if (!empty($win_3->gambar_npwp_mar)) {
-                                             $npwp_up2_win = 1;
-                                         }
-                                     }
-                                 }
-                             }
-
-                             ?>
-
-                             <div class="form-group">
-                                <input type="text" class="form-control" id="m_ang" name="m_ang" value="<?php echo $member_ang ?>">
-                                <input type="text" class="form-control" id="npwp_ang" name="npwp_ang" value="<?php echo $npwp_ang ?>">
-                                <input type="text" class="form-control" id="npwp_up_ang" name="npwp_up_ang" value="<?php echo $npwp_up_ang ?>">
-                                <input type="text" class="form-control" id="npwp_up2_ang" name="npwp_up2_ang" value="<?php echo $npwp_up2_ang ?>">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="m_fran" name="m_fran" value="<?php echo $member_fran ?>">
-                                <input type="text" class="form-control" id="npwp_fran" name="npwp_fran" value="<?php echo $npwp_fran ?>">
-                                <input type="text" class="form-control" id="npwp_up_fran" name="npwp_up_fran" value="<?php echo $npwp_up_fran ?>">
-                                <input type="text" class="form-control" id="npwp_up2_fran" name="npwp_up2_fran" value="<?php echo $npwp_up2_fran ?>">
+                            <div class="modal-footer pr-0">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="m_win" name="m_win" value="<?php echo $member_win ?>">
-                                <input type="text" class="form-control" id="npwp_win" name="npwp_win" value="<?php echo $npwp_win ?>">
-                                <input type="text" class="form-control" id="npwp_up_win" name="npwp_up_win" value="<?php echo $npwp_up_win ?>">
-                                <input type="text" class="form-control" id="npwp_up2_win" name="npwp_up2_win" value="<?php echo $npwp_up2_win ?>">
-                            </div>
-
-
                         </div>
-                    </div>
-                </div>
-                <div class="modal-footer pr-0">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
             </div>
-        </form>
-    </div>
-</div>
-</div>
+        </div>
 
-<!-- JS Marketing Listing -->
-<script type="text/javascript">
-    <?php echo $jsArray; ?>
+        <!-- JS Marketing Listing -->
+        <script type="text/javascript">
+            <?php echo $jsArray; ?>
 
-    function changeValue(select) {
-        var selectedOptions = select.selectedOptions;
-        var mm_listing = [];
-        var npwpm_listing = [];
-        var npwpum_listing = [];
-        var npwpum_listing2 = [];
+            function changeValue(select) {
+                var selectedOptions = select.selectedOptions;
+                var mm_listing = [];
+                var npwpm_listing = [];
+                var npwpum_listing = [];
+                var npwpum_listing2 = [];
 
-        for (var i = 0; i < selectedOptions.length; i++) {
-            var id = selectedOptions[i].value;
-            mm_listing.push(prdName[id].member_mar);
-            npwpm_listing.push(prdName[id].npwp_mar);
-            npwpum_listing.push(prdName[id].npwpum_listing);
-            npwpum_listing2.push(prdName[id].npwpum_listing2);
-        }
+                for (var i = 0; i < selectedOptions.length; i++) {
+                    var id = selectedOptions[i].value;
+                    mm_listing.push(prdName[id].member_mar);
+                    npwpm_listing.push(prdName[id].npwp_mar);
+                    npwpum_listing.push(prdName[id].npwpum_listing);
+                    npwpum_listing2.push(prdName[id].npwpum_listing2);
+                }
 
-        document.getElementById('mm_listing').value = mm_listing.join(', ');
-        document.getElementById('npwpm_listing').value = npwpm_listing.join(', ');
-        document.getElementById('npwpum_listing').value = npwpum_listing.join(', ');
-        document.getElementById('npwpum_listing2').value = npwpum_listing2.join(', ');
-    }
-</script>
+                document.getElementById('mm_listing').value = mm_listing.join(', ');
+                document.getElementById('npwpm_listing').value = npwpm_listing.join(', ');
+                document.getElementById('npwpum_listing').value = npwpum_listing.join(', ');
+                document.getElementById('npwpum_listing2').value = npwpum_listing2.join(', ');
+            }
+        </script>
 
-<!-- JS Marketing Selling -->
-<script type="text/javascript">
-    <?php echo $jsArray_s; ?>
+        <!-- JS Marketing Selling -->
+        <script type="text/javascript">
+            <?php echo $jsArray_s; ?>
 
-    function changeValue_s(select) {
-        var selectedOptions = select.selectedOptions;
-        var mm_selling = [];
-        var npwpm_selling = [];
-        var npwpum_selling = [];
-        var npwpum_selling2 = [];
+            function changeValue_s(select) {
+                var selectedOptions = select.selectedOptions;
+                var mm_selling = [];
+                var npwpm_selling = [];
+                var npwpum_selling = [];
+                var npwpum_selling2 = [];
 
-        for (var i = 0; i < selectedOptions.length; i++) {
-            var id = selectedOptions[i].value;
-            mm_selling.push(prdName_s[id].member_mar);
-            npwpm_selling.push(prdName_s[id].npwp_mar);
-            npwpum_selling.push(prdName_s[id].npwpum_selling);
-            npwpum_selling2.push(prdName_s[id].npwpum_selling2);
-        }
+                for (var i = 0; i < selectedOptions.length; i++) {
+                    var id = selectedOptions[i].value;
+                    mm_selling.push(prdName_s[id].member_mar);
+                    npwpm_selling.push(prdName_s[id].npwp_mar);
+                    npwpum_selling.push(prdName_s[id].npwpum_selling);
+                    npwpum_selling2.push(prdName_s[id].npwpum_selling2);
+                }
 
-        document.getElementById('mm_selling').value = mm_selling.join(', ');
-        document.getElementById('npwpm_selling').value = npwpm_selling.join(', ');
-        document.getElementById('npwpum_selling').value = npwpum_selling.join(', ');
-        document.getElementById('npwpum_selling2').value = npwpum_selling2.join(', ');
-    }
-</script>
+                document.getElementById('mm_selling').value = mm_selling.join(', ');
+                document.getElementById('npwpm_selling').value = npwpm_selling.join(', ');
+                document.getElementById('npwpum_selling').value = npwpum_selling.join(', ');
+                document.getElementById('npwpum_selling2').value = npwpum_selling2.join(', ');
+            }
+        </script>
 
-<!-- JS Tampil Marketing Listing A&A dan Broker -->
-<script>
-    function showOtherInput(selectedValue) {
-        var marketingListingInput = document.getElementById('marketing_listing2');
-        var brokerInput = document.getElementById('broker_1');
+        <!-- JS Tampil Marketing Listing A&A dan Broker -->
+        <script>
+            function showOtherInput(selectedValue) {
+                var marketingListingInput = document.getElementById('marketing_listing2');
+                var brokerInput = document.getElementById('broker_1');
 
-        var marketingListingOption = "A&A";
-        var brokerOption = "Broker";
+                var marketingListingOption = "A&A";
+                var brokerOption = "Broker";
 
-        if (selectedValue === marketingListingOption) {
+                if (selectedValue === marketingListingOption) {
             marketingListingInput.style.display = 'block'; // Tampilkan input teks jika 'A&A' dipilih
             brokerInput.style.display = 'none'; // Sembunyikan input teks broker
         } else if (selectedValue === brokerOption) {
