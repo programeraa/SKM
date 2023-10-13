@@ -17,6 +17,7 @@ foreach ($referal as $referal) {
 
 //cek apakah ada co-broke
 $id_unik_cobroke = null;
+$persen_cobroke = null;
 foreach ($co_broke as $kubruk) {
     if ($kubruk->id_komisi == $komisi->id_komisi) {
         $kubruk_nama = $kubruk->nama_cobroke;
@@ -598,21 +599,11 @@ $afw_2_r = numberToRupiah($afw_2_n);
 //================================================== Hitung ANG
 foreach ($marketing as $ang) {
     if ($ang->nama_mar == "Ang") {
-        $npwp_ang = $ang->gambar_npwp_mar; 
         $norek_ang = $ang->norek_mar;
-        $l_member_ang = $ang->member_mar;
     }
 }
 
-if ($l_member_ang == 'Silver') {
-    $l_member_ang_2 = 50;
-}elseif($l_member_fran == 'Gold Express'){
-    $l_member_ang_2 = 60;
-}elseif($l_member_fran == 'Prime Pro'){
-    $l_member_ang_2 = 70;
-}else{
-    $l_member_ang_2 = 80;
-}
+$l_member_ang_2 = $komisi->m_ang;
 
 if ($l_member_ang_2 > 50) {
     $admin_listing_ang = 2.5 / 100 * $afw_2;
@@ -632,19 +623,7 @@ $fmk3_listing_ang_n = stringToNumber($fmk3_listing_ang);
 $fmk3_listing_ang_r = numberToRupiah($fmk3_listing_ang_n);
 
 //rincian biaya pph marketing listing
-if (!empty($npwp_ang)) {
-    $npwp_ang_2 = 1;
-}else{
-    $npwp_ang_2 = 0;
-}
-
-$npwp_listing_ang = $npwp_ang_2; 
-
-if ($npwp_listing_ang == 1) {
-    $n_listing_ang = 1;
-} else {
-    $n_listing_ang = 0;
-}
+$n_listing_ang = $komisi->npwp_ang;
 
 if ($n_listing_ang == 1) {
     $pph_listing_ang = '2.5% - NPWP';
@@ -671,25 +650,14 @@ $fmb_l_ang = $fmk3_listing_ang - $biaya_pph_l_ang;
 $fmb_l_ang_n = stringToNumber($fmb_l_ang);
 $fmb_l_ang_r = numberToRupiah($fmb_l_ang_n);
 
-
 //==================================================== Hitung FRAN
 foreach ($marketing as $fran) {
     if ($fran->nama_mar == "Fran") {
-        $npwp_fran = $fran->gambar_npwp_mar; 
         $norek_fran = $fran->norek_mar;
-        $l_member_fran = $fran->member_mar;
     }
 }
 
-if ($l_member_fran == 'Silver') {
-    $l_member_fran_2 = 50;
-}elseif($l_member_fran == 'Gold Express'){
-    $l_member_fran_2 = 60;
-}elseif($l_member_fran == 'Prime Pro'){
-    $l_member_fran_2 = 70;
-}else{
-    $l_member_fran_2 = 80;
-}
+$l_member_fran_2 = $komisi->m_fran;
 
 if ($l_member_fran_2 > 50) {
     $admin_listing_fran = 2.5 / 100 * $afw_2;
@@ -709,19 +677,7 @@ $fmk3_listing_fran_n = stringToNumber($fmk3_listing_fran);
 $fmk3_listing_fran_r = numberToRupiah($fmk3_listing_fran_n);
 
 //rincian biaya pph marketing listing
-if (!empty($npwp_fran)) {
-    $npwp_fran_2 = 1;
-}else{
-    $npwp_fran_2 = 0;
-}
-
-$npwp_listing_fran = $npwp_fran_2; 
-
-if ($npwp_listing_fran == 1) {
-    $n_listing_fran = 1;
-} else {
-    $n_listing_fran = 0;
-}
+$n_listing_fran = $komisi->npwp_fran;
 
 if ($n_listing_fran == 1) {
     $pph_listing_fran = '2.5% - NPWP';
@@ -752,21 +708,11 @@ $fmb_l_fran_r = numberToRupiah($fmb_l_fran_n);
 //==================================================== Hitung WIN
 foreach ($marketing as $win) {
     if ($win->nama_mar == "Winata") {
-        $npwp_win = $win->gambar_npwp_mar; 
         $norek_win = $win->norek_mar;
-        $l_member_win = $win->member_mar;
     }
 }
 
-if ($l_member_win == 'Silver') {
-    $l_member_win_2 = 50;
-}elseif($l_member_win == 'Gold Express'){
-    $l_member_win_2 = 60;
-}elseif($l_member_win == 'Prime Pro'){
-    $l_member_win_2 = 70;
-}else{
-    $l_member_win_2 = 80;
-}
+$l_member_win_2 = $komisi->m_win;
 
 if ($l_member_win_2 > 50) {
     $admin_listing_win = 2.5 / 100 * $afw_1;
@@ -786,19 +732,7 @@ $fmk3_listing_win_n = stringToNumber($fmk3_listing_win);
 $fmk3_listing_win_r = numberToRupiah($fmk3_listing_win_n);
 
 //rincian biaya pph marketing listing
-if (!empty($npwp_win)) {
-    $npwp_win_3 = 1;
-}else{
-    $npwp_win_3 = 0;
-}
-
-$npwp_listing_win = $npwp_win_3; 
-
-if ($npwp_listing_win == 1) {
-    $n_listing_win = 1;
-} else {
-    $n_listing_win = 0;
-}
+$n_listing_win = $komisi->npwp_win;
 
 if ($n_listing_win == 1) {
     $pph_listing_win = '2.5% - NPWP';
