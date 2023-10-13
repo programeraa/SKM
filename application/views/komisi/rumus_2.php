@@ -520,44 +520,339 @@ foreach ($marketing as $upline) {
 //====================================================================== Kasus ANG FRAN WIN
 
 //Cari Upline ANG
+    $nama_upline1_ang = '';
+    $npwp_upline1_ang = '';
+    $norek_upline1_ang = '';
 
-    // foreach ($marketing as $ang) { 
-    //     if ($ang->nama_mar == "Ang") {
-    //         foreach ($marketing as $ang_2) {
-    //             if ($ang_2->id_mar == $ang->upline_emd_mar) {
-    //                 $nama_upline1_ang = $ang_2->nama_mar;
-    //                 $npwp_upline1_ang = $ang_2->gambar_npwp_mar;
-    //                 $norek_upline1_ang = $ang_2->norek_mar;
-    //             }else{
-    //                 $nama_upline1_ang = '';
-    //                 $npwp_upline1_ang = '';
-    //                 $norek_upline1_ang = '';
-    //             }
+    $nama_upline2_ang = '';
+    $npwp_upline2_ang = '';
+    $norek_upline2_ang = '';
 
-    //             if (!empty($npwp_upline1_ang)) {
-    //                 $npwp_up1_ang = 1;
-    //             }else{
-    //                 $npwp_up1_ang = 0;
-    //             }
-    //         }
+    foreach ($marketing as $ang) { 
+        if ($ang->nama_mar == "Ang") {
+            foreach ($marketing as $ang_2) {
+                if ($ang_2->id_mar == $ang->upline_emd_mar) {
+                    $nama_upline1_ang = $ang_2->nama_mar;
+                    $npwp_upline1_ang = $ang_2->gambar_npwp_mar;
+                    $norek_upline1_ang = $ang_2->norek_mar;
+                }
 
-    //         echo $test = $nama_upline1_ang;
+                if (!empty($npwp_upline1_ang)) {
+                    $npwp_up1_ang = 1;
+                }else{
+                    $npwp_up1_ang = 0;
+                }
+            }
 
-    //         foreach ($marketing as $ang_3) {
-    //             if ($ang_3->id_mar == $ang->upline_cmo_mar) {
-    //                 $nama_upline2_ang = $ang_3->nama_mar;
-    //                 $npwp_upline2_ang = $ang_3->gambar_npwp_mar;
-    //                 $norek_upline2_ang = $ang_3->norek_mar;
-    //             }
+            foreach ($marketing as $ang_3) {
+                if ($ang_3->id_mar == $ang->upline_cmo_mar) {
+                    $nama_upline2_ang = $ang_3->nama_mar;
+                    $npwp_upline2_ang = $ang_3->gambar_npwp_mar;
+                    $norek_upline2_ang = $ang_3->norek_mar;
+                }
 
-    //             if (!empty($npwp_upline2_ang)) {
-    //                 $npwp_up2_ang = 1;
-    //             }else{
-    //                 $npwp_up2_ang = 0;
-    //             }
-    //         }
-    //     }
-    // }
+                if (!empty($npwp_upline2_ang)) {
+                    $npwp_up2_ang = 1;
+                }else{
+                    $npwp_up2_ang = 0;
+                }
+            }
+        }
+    }
+
+    //================================================================ upline 1 ang
+    $fuk_ang = 5 / 100 * $afw_2;
+
+//string to rupiah
+    $fuk_ang_n = stringToNumber($fuk_ang);
+    $fuk_ang_r = numberToRupiah($fuk_ang_n);
+
+    $npwp_upline_ang = $komisi->npwp_up_ang;
+
+    if ($npwp_upline_ang == 1) {
+        $npwp_upline_ang_angka = 2.5;
+    } else {
+        $npwp_upline_ang_angka = 3;
+    }
+
+    if ($npwp_upline_ang_angka == 2.5) {
+        $teks_pajak_upline_ang = '2.5% - NPWP';
+    }else{
+        $teks_pajak_upline_ang = '3% - Non NPWP';
+    }
+
+    $pajak_upline_ang = $npwp_upline_ang_angka / 100 * $fuk_ang;
+
+//string to rupiah
+    $pajak_upline_ang_n = stringToNumber($pajak_upline_ang);
+    $pajak_upline_ang_r = numberToRupiah($pajak_upline_ang_n);
+
+//netto 1
+    $netto_upline_ang = $fuk_ang - $pajak_upline_ang;
+
+//string to rupiah
+    $netto_upline_ang_n = stringToNumber($netto_upline_ang);
+    $netto_upline_ang_r = numberToRupiah($netto_upline_ang_n);
+
+//================================================================ upline 2 ang
+    $fuk_ang2 = 5 / 100 * $afw_2;
+
+//string to rupiah
+    $fuk_ang2_n = stringToNumber($fuk_ang2);
+    $fuk_ang2_r = numberToRupiah($fuk_ang2_n);
+
+    $npwp_upline_ang2 = $komisi->npwp_up2_ang;
+
+    if ($npwp_upline_ang2 == 1) {
+        $npwp_upline_ang2_angka = 2.5;
+    } else {
+        $npwp_upline_ang2_angka = 3;
+    }
+
+    if ($npwp_upline_ang2_angka == 2.5) {
+        $teks_pajak_upline_ang2 = '2.5% - NPWP';
+    }else{
+        $teks_pajak_upline_ang2 = '3% - Non NPWP';
+    }
+
+    $pajak_upline_ang2 = $npwp_upline_ang2_angka / 100 * $fuk_ang2;
+
+//string to rupiah
+    $pajak_upline_ang2_n = stringToNumber($pajak_upline_ang2);
+    $pajak_upline_ang2_r = numberToRupiah($pajak_upline_ang2_n);
+
+//netto 1
+    $netto_upline_ang2 = $fuk_ang2 - $pajak_upline_ang2;
+
+//string to rupiah
+    $netto_upline_ang2_n = stringToNumber($netto_upline_ang2);
+    $netto_upline_ang2_r = numberToRupiah($netto_upline_ang2_n);
+
+//===============================================================
+
+
+//Cari Upline FRAN
+    $nama_upline1_fran = '';
+    $npwp_upline1_fran = '';
+    $norek_upline1_fran = '';
+
+    $nama_upline2_fran = '';
+    $npwp_upline2_fran = '';
+    $norek_upline2_fran = '';
+
+    foreach ($marketing as $fran) { 
+        if ($fran->nama_mar == "Fran") {
+            foreach ($marketing as $fran_2) {
+                if ($fran_2->id_mar == $fran->upline_emd_mar) {
+                    $nama_upline1_fran = $fran_2->nama_mar;
+                    $npwp_upline1_fran = $fran_2->gambar_npwp_mar;
+                    $norek_upline1_fran = $fran_2->norek_mar;
+                }
+
+                if (!empty($npwp_upline1_fran)) {
+                    $npwp_up1_fran = 1;
+                }else{
+                    $npwp_up1_fran = 0;
+                }
+            }
+
+            foreach ($marketing as $fran_3) {
+                if ($fran_3->id_mar == $fran->upline_cmo_mar) {
+                    $nama_upline2_fran = $fran_3->nama_mar;
+                    $npwp_upline2_fran = $fran_3->gambar_npwp_mar;
+                    $norek_upline2_fran = $fran_3->norek_mar;
+                }
+
+                if (!empty($npwp_upline2_fran)) {
+                    $npwp_up2_fran = 1;
+                }else{
+                    $npwp_up2_fran = 0;
+                }
+            }
+        }
+    }
+
+    //================================================================ upline 1 fran
+    $fuk_fran = 5 / 100 * $afw_2;
+
+//string to rupiah
+    $fuk_fran_n = stringToNumber($fuk_fran);
+    $fuk_fran_r = numberToRupiah($fuk_fran_n);
+
+    $npwp_upline_fran = $komisi->npwp_up_fran;
+
+    if ($npwp_upline_fran == 1) {
+        $npwp_upline_fran_angka = 2.5;
+    } else {
+        $npwp_upline_fran_angka = 3;
+    }
+
+    if ($npwp_upline_fran_angka == 2.5) {
+        $teks_pajak_upline_fran = '2.5% - NPWP';
+    }else{
+        $teks_pajak_upline_fran = '3% - Non NPWP';
+    }
+
+    $pajak_upline_fran = $npwp_upline_fran_angka / 100 * $fuk_fran;
+
+//string to rupiah
+    $pajak_upline_fran_n = stringToNumber($pajak_upline_fran);
+    $pajak_upline_fran_r = numberToRupiah($pajak_upline_fran_n);
+
+//netto 1
+    $netto_upline_fran = $fuk_fran - $pajak_upline_fran;
+
+//string to rupiah
+    $netto_upline_fran_n = stringToNumber($netto_upline_fran);
+    $netto_upline_fran_r = numberToRupiah($netto_upline_fran_n);
+
+//================================================================ upline 2 fran
+    $fuk_fran2 = 5 / 100 * $afw_2;
+
+//string to rupiah
+    $fuk_fran2_n = stringToNumber($fuk_fran2);
+    $fuk_fran2_r = numberToRupiah($fuk_fran2_n);
+
+    $npwp_upline_fran2 = $komisi->npwp_up2_fran;
+
+    if ($npwp_upline_fran2 == 1) {
+        $npwp_upline_fran2_angka = 2.5;
+    } else {
+        $npwp_upline_fran2_angka = 3;
+    }
+
+    if ($npwp_upline_fran2_angka == 2.5) {
+        $teks_pajak_upline_fran2 = '2.5% - NPWP';
+    }else{
+        $teks_pajak_upline_fran2 = '3% - Non NPWP';
+    }
+
+    $pajak_upline_fran2 = $npwp_upline_fran2_angka / 100 * $fuk_fran2;
+
+//string to rupiah
+    $pajak_upline_fran2_n = stringToNumber($pajak_upline_fran2);
+    $pajak_upline_fran2_r = numberToRupiah($pajak_upline_fran2_n);
+
+//netto 1
+    $netto_upline_fran2 = $fuk_fran2 - $pajak_upline_fran2;
+
+//string to rupiah
+    $netto_upline_fran2_n = stringToNumber($netto_upline_fran2);
+    $netto_upline_fran2_r = numberToRupiah($netto_upline_fran2_n);
+
+//===============================================================
+
+
+//Cari Upline WIN
+    $nama_upline1_win = '';
+    $npwp_upline1_win = '';
+    $norek_upline1_win = '';
+
+    $nama_upline2_win = '';
+    $npwp_upline2_win = '';
+    $norek_upline2_win = '';
+
+    foreach ($marketing as $win) { 
+        if ($win->nama_mar == "Winata") {
+            foreach ($marketing as $win_2) {
+                if ($win_2->id_mar == $win->upline_emd_mar) {
+                    $nama_upline1_win = $win_2->nama_mar;
+                    $npwp_upline1_win = $win_2->gambar_npwp_mar;
+                    $norek_upline1_win = $win_2->norek_mar;
+                }
+
+                if (!empty($npwp_upline1_win)) {
+                    $npwp_up1_win = 1;
+                }else{
+                    $npwp_up1_win = 0;
+                }
+            }
+
+            foreach ($marketing as $win_3) {
+                if ($win_3->id_mar == $win->upline_cmo_mar) {
+                    $nama_upline2_win = $win_3->nama_mar;
+                    $npwp_upline2_win = $win_3->gambar_npwp_mar;
+                    $norek_upline2_win = $win_3->norek_mar;
+                }
+
+                if (!empty($npwp_upline2_win)) {
+                    $npwp_up2_win = 1;
+                }else{
+                    $npwp_up2_win = 0;
+                }
+            }
+        }
+    }
+
+    //================================================================ upline 1 win
+    $fuk_win = 5 / 100 * $afw_1;
+
+//string to rupiah
+    $fuk_win_n = stringToNumber($fuk_win);
+    $fuk_win_r = numberToRupiah($fuk_win_n);
+
+    $npwp_upline_win = $komisi->npwp_up_win;
+
+    if ($npwp_upline_win == 1) {
+        $npwp_upline_win_angka = 2.5;
+    } else {
+        $npwp_upline_win_angka = 3;
+    }
+
+    if ($npwp_upline_win_angka == 2.5) {
+        $teks_pajak_upline_win = '2.5% - NPWP';
+    }else{
+        $teks_pajak_upline_win = '3% - Non NPWP';
+    }
+
+    $pajak_upline_win = $npwp_upline_win_angka / 100 * $fuk_win;
+
+//string to rupiah
+    $pajak_upline_win_n = stringToNumber($pajak_upline_win);
+    $pajak_upline_win_r = numberToRupiah($pajak_upline_win_n);
+
+//netto 1
+    $netto_upline_win = $fuk_win - $pajak_upline_win;
+
+//string to rupiah
+    $netto_upline_win_n = stringToNumber($netto_upline_win);
+    $netto_upline_win_r = numberToRupiah($netto_upline_win_n);
+
+//================================================================ upline 2 win
+    $fuk_win2 = 5 / 100 * $afw_1;
+
+//string to rupiah
+    $fuk_win2_n = stringToNumber($fuk_win2);
+    $fuk_win2_r = numberToRupiah($fuk_win2_n);
+
+    $npwp_upline_win2 = $komisi->npwp_up2_win;
+
+    if ($npwp_upline_win2 == 1) {
+        $npwp_upline_win2_angka = 2.5;
+    } else {
+        $npwp_upline_win2_angka = 3;
+    }
+
+    if ($npwp_upline_win2_angka == 2.5) {
+        $teks_pajak_upline_win2 = '2.5% - NPWP';
+    }else{
+        $teks_pajak_upline_win2 = '3% - Non NPWP';
+    }
+
+    $pajak_upline_win2 = $npwp_upline_win2_angka / 100 * $fuk_win2;
+
+//string to rupiah
+    $pajak_upline_win2_n = stringToNumber($pajak_upline_win2);
+    $pajak_upline_win2_r = numberToRupiah($pajak_upline_win2_n);
+
+//netto 1
+    $netto_upline_win2 = $fuk_win2 - $pajak_upline_win2;
+
+//string to rupiah
+    $netto_upline_win2_n = stringToNumber($netto_upline_win2);
+    $netto_upline_win2_r = numberToRupiah($netto_upline_win2_n);
+
+//===============================================================
 
 
 ?>
