@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="col-md-6">
-                     <div class="form-group">
+                       <div class="form-group">
                         <label for="m_listing" class="col-form-label">Marketing Listing</label>
                         <input type="text" class="form-control" id="m_listing" name="m_listing" value="<?php echo $komisi->nama_mar; ?>" readonly>
                     </div>
@@ -104,40 +104,53 @@
     </div>
 
     <div class="card-header-sm text-dark">
-        <h4 class="card-title p-2 m-0" style="text-align: center;">Rincian Komisi <?php echo $nama_marketing_listing_1; ?></h4>
+        <?php if ($ml_afw || $ml_2_afw || $ms_afw || $ms_2_afw   == 'Ang/Fran/Win') {?>
+            <h4 class="card-title pt-1 pb-2" style="text-align: left;">Rincian Komisi Ang</h4>
+        <?php }else{ ?>
+            <h4 class="card-title p-2 m-0" style="text-align: center;">Rincian Komisi <?php echo $nama_marketing_listing_1; ?></h4>
+        <?php } ?>
     </div>
 
-    <div class="card-body p-0 pt-2">
-        <form method="post" action="">
-            <table class="tg table table-striped table-dark">
-                <tbody>
-                  <tr>
-                    <td class="tg-0lax"><?php echo 'Fee Marketing'?></td>
-                    <td class="tg-0lax text-right"><?php echo $fmk2_listing_r; ?></td>
-                </tr>
-                <tr>
-                    <td class="tg-0lax text-warning"><?php echo 'Dikurangi Admin Sebesar 2.5%'?></td>
-                    <td class="tg-0lax text-right"><?php echo $admin_listing_r; ?></td>
-                </tr>
-                <tr>
-                    <td class="tg-0lax"><?php echo 'Fee Marketing Sementara'?></td>
-                    <td class="tg-0lax text-right"><?php echo $fmk3_listing_r; ?></td>
-                </tr>
-                <tr>
-                    <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$pph_listing.')'?></td>
-                    <td class="tg-0lax text-right"><?php echo $biaya_pph_l_r ?></td>
-                </tr>
-                <tr>
-                    <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
-                    <td class="tg-0lax text-right text-warning"><?php echo $fmb_l_r; ?></td>
-                </tr>
-                <tr>
-                    <td class="tg-0lax text-right" colspan="2"><?php echo $norek_listing; ?></td>
-                </tr>
-            </tbody>
-        </table>
-    </form>
-</div>
+    <?php if ($ml_afw || $ml_2_afw || $ms_afw || $ms_2_afw   == 'Ang/Fran/Win') {?>
+
+        <?php include "rincian_komisi_afw.php"; ?>
+
+    <?php }else{ ?>
+
+        <div class="card-body p-0 pt-2">
+            <form method="post" action="">
+                <table class="tg table table-striped table-dark">
+                    <tbody>
+                      <tr>
+                        <td class="tg-0lax"><?php echo 'Fee Marketing'?></td>
+                        <td class="tg-0lax text-right"><?php echo $fmk2_listing_r; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-0lax text-warning"><?php echo 'Dikurangi Admin Sebesar 2.5%'?></td>
+                        <td class="tg-0lax text-right"><?php echo $admin_listing_r; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-0lax"><?php echo 'Fee Marketing Sementara'?></td>
+                        <td class="tg-0lax text-right"><?php echo $fmk3_listing_r; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$pph_listing.')'?></td>
+                        <td class="tg-0lax text-right"><?php echo $biaya_pph_l_r ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
+                        <td class="tg-0lax text-right text-warning"><?php echo $fmb_l_r; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-0lax text-right" colspan="2"><?php echo $norek_listing; ?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+<?php } ?>
+
 </div>
 
 <div class="card-header-sm bg-dark text-white">
