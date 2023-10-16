@@ -72,7 +72,8 @@ if (!empty($referal_keterangan) && empty($kubruk_nama)) {
     }else{
         $bruto_1 = $bruto_awal - $referal_jumlah;
     }
-}else{
+}
+else{
     $bruto_1 = $bruto_awal;
 }
 
@@ -104,11 +105,14 @@ $bruto_3_r = numberToRupiah($bruto_3_n);
 
 $bruto = null;
 $ref_aa = null;
+
 //langkah 4 - hitung apakah ada referal untuk a&a
+$hitung_referal_baru = null;
 if (!empty($referal_keterangan) && !empty($kubruk_nama)) {
     if (strlen($referal_jumlah) <= 2) {
-        $hitung_referal = $referal_jumlah / 100 * $bruto_3;
-        $bruto = $bruto_3 - $hitung_referal;
+        $sisa_cobroke = $bruto_2 - $bruto_3;
+        $hitung_referal_baru = $referal_jumlah / 100 * $sisa_cobroke;
+        $bruto = $sisa_cobroke - $hitung_referal_baru;
         $ref_aa = 1;
     }else{
         $bruto = $bruto_3 - $referal_jumlah;
@@ -117,6 +121,10 @@ if (!empty($referal_keterangan) && !empty($kubruk_nama)) {
 }else{
     $bruto = $bruto_3;
 }
+
+//string to rupiah
+$hitung_referal_baru_n = stringToNumber($hitung_referal_baru);
+$hitung_referal_baru_r = numberToRupiah($hitung_referal_baru_n);
 
 //====================================================== hitung jumlah marketing yang terlibat
 //total bruto
@@ -181,7 +189,10 @@ if ($komisi->mar_listing_komisi == $komisi->mar_selling_komisi) {
 //cari fee marketing kotor (FMK)
 //cek jika ada co broke
 if (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_cobroke) && $ref_aa == 1 && $marketing_listing_2 == 0 && $marketing_selling_2 == 0) {
-    if ($persen_cobroke > 50) {
+    if (strlen($referal_jumlah) <= 2) {
+        $fmk = $bruto;
+    }
+    elseif ($persen_cobroke > 50) {
         $fmk = (((100 - $persen_cobroke) / 100) * $bruto_2) - $referal_jumlah;
     }else{
         $fmk = $bruto;
@@ -195,7 +206,9 @@ if (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_co
     }
     //echo "B";
 }elseif (!empty($kubruk_nama) && $ref_aa == 1 && ($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_cobroke)) {
-    if ($persen_cobroke > 50) {
+    if (strlen($referal_jumlah) <= 2) {
+        $fmk = $bruto / 2;
+    }elseif ($persen_cobroke > 50) {
         $fmk = ((((100 - $persen_cobroke) / 100) * $bruto_2) - $referal_jumlah) / 2;
     }else{
         $fmk = $bruto / 2 ;
