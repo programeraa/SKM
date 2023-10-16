@@ -69,7 +69,7 @@
 
                     <?php if (!empty($ket_potongan)) {?>
                         <tr>
-                            <th class="tg-0lax text-warning" colspan="4">Potongan (<?= $ket_potongan; ?>)</th>
+                            <th class="tg-0lax text-warning" colspan="4">Potongan (<?= $ket_potongan;?>)</th>
                             <th scope="col" class="text-right"><?php echo $jumlah_potongan_r;?></th>
                         </tr>
                     <?php }?>
@@ -98,7 +98,7 @@
                         <tr>
                             <th class="tg-0lax text-warning" colspan="4">Referal (<?= $ket_referal; ?>)</th>
                             <?php if (strlen($referal_jumlah) <= 2) {?>
-                                <th scope="col" class="text-right"><?php echo $jumlah_referal_r;?> % : <?= $hitung_referal_r; ?></th>
+                                <th scope="col" class="text-right"><?php echo $jumlah_referal_r;?> % : <?= $hitung_referal_baru_r; ?></th>
                             <?php }else{ ?>
                                 <th scope="col" class="text-right"><?php echo $jumlah_referal_r;?></th>
                             <?php } ?>
@@ -701,7 +701,7 @@
 
 </div>
 
-<?php if (!empty($komisi->up_1_listing2) || !empty($komisi->up_2_listing2) || !empty($komisi->up_1_selling2) || !empty($komisi->up_2_selling2)):?>
+<?php if (!empty($komisi->up_1_listing2) || !empty($komisi->up_2_listing2) || !empty($komisi->up_1_selling2) || !empty($komisi->up_2_selling2) || $ml_2_afw == "Ang/Fran/Win" || $ms_2_afw == "Ang/Fran/Win") :?>
 <!-- kasus jika ada upline co listing dan co selling-->
 <div class="card-header-sm bg-dark text-white">
     <h4 class="card-title p-2 m-0" style="text-align: center;">Rincian Fee Upline 2</h4>
