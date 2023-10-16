@@ -335,8 +335,8 @@ class Komisi extends CI_Controller {
 				'npwp_up_win' => $this->input->post('npwp_up_win'),
 				'npwp_up2_win' => $this->input->post('npwp_up2_win')
 			);
-
-			if ($ml_baru == 38 || $ms_baru == 38) {
+			
+			if ($ml_baru == 38 || $ms_baru || $ml_2_baru == 38 || $ms_2_baru == 38) {
 				$this->m_komisi->simpan_sub_komisi_afw($data6);
 			}
 
