@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Okt 2023 pada 11.09
+-- Waktu pembuatan: 16 Okt 2023 pada 11.05
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -44,7 +44,10 @@ CREATE TABLE `co_broke` (
 INSERT INTO `co_broke` (`id_cobroke`, `id_komisi`, `id_komisi_unik`, `nama_cobroke`, `status_cobroke`, `jenis_cobroke`, `persen_komisi_cobroke`) VALUES
 (79, 284, 1091, 'Evvy-BT', 'Listing', '2', 50),
 (80, 286, 8642, 'Hartini - BT', 'Selling', '2', 50),
-(81, 287, 4147, 'TOMI BRIGHTON JEMURSARI', 'Selling', '0', 50);
+(81, 287, 4147, 'TOMI BRIGHTON JEMURSARI', 'Selling', '0', 50),
+(82, 290, 6118, 'Brighton', 'Listing', '2', 50),
+(83, 293, 8731, 'Bramastyo', 'Listing', '3', 60),
+(84, 294, 9138, 'Fandi Ahmad Maulana', 'Selling', '3', 60);
 
 -- --------------------------------------------------------
 
@@ -72,12 +75,20 @@ CREATE TABLE `komisi` (
 --
 
 INSERT INTO `komisi` (`id_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_komisi`, `mar_listing_komisi`, `mar_listing2_komisi`, `mar_selling_komisi`, `mar_selling2_komisi`, `bruto_komisi`, `waktu_komisi`, `tgl_disetujui`, `status_komisi`) VALUES
-(283, 'Grand Sungkono Lagoon Tower Venetian Unit 3708', 'Sewa', '2023-08-08', 2, 0, 2, 0, '5000000', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
+(283, 'Grand Sungkono Lagoon Tower Venetian Unit 3708', 'Sewa', '2023-08-08', 2, 0, 2, 0, '90000000', '2023-10-13', '2023-10-16', 'Disetujui'),
 (284, 'Apartemen Grand Sungkono Lagoon Tower Venetian Unit 2801', 'Sewa', '2023-08-01', 1091, 0, 2, 0, '5000000', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
 (285, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual', '2023-06-26', 2, 0, 11, 0, '68781750', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
 (286, 'Woodland Blok WL No. 5 Citraland, Surabaya', 'Jual', '2023-08-04', 11, 0, 8642, 0, '50000000', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
 (287, 'JL. Manyar Rejo X/39, Surabaya', 'Jual', '2023-09-28', 38, 0, 4147, 0, '25000000', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
-(288, 'Raya Darmo Permai I No. 60, Surabaya', 'Sewa', '2023-08-29', 11, 0, 11, 0, '16500000', '2023-10-13', '0000-00-00', 'Belum Disetujui');
+(288, 'Raya Darmo Permai I No. 60, Surabaya', 'Sewa', '2023-08-29', 11, 0, 11, 0, '16500000', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
+(289, ' Jl. Raya Dukuh Kupang 39A, Surabaya ', 'Sewa', '2023-08-12', 7, 10, 11, 0, '12050000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
+(290, 'Jl. Darmo Indah Selatan KK 50, Surabaya', 'Jual/Sewa', '2023-10-16', 6118, 0, 2, 38, '25000000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
+(291, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-12', 3, 9, 10, 11, '50000000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
+(292, 'Jl. Dukuh Kupang XXIII, No 2, Surabaya', 'Jual', '2023-10-12', 38, 0, 38, 0, '10000000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
+(293, 'Desa Compreng, Widang, Tuban', 'Jual', '2023-10-14', 8731, 0, 38, 0, '12000000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
+(294, 'Compreng, Widang, Tuban', 'Jual', '2023-10-10', 2, 3, 9138, 0, '10000000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
+(295, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-13', 11, 38, 2, 9, '52000000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
+(300, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-13', 11, 38, 2, 9, '52000000', '2023-10-16', '0000-00-00', 'Belum Disetujui');
 
 -- --------------------------------------------------------
 
@@ -112,7 +123,7 @@ INSERT INTO `marketing` (`id_mar`, `nama_mar`, `nomor_mar`, `member_mar`, `uplin
 (10, 'Julia / Jeffy', 'AA006', 'Silver', '', '', '', '9090 - Julia Jeffy', '', '', '', 'yanes_nira_used1.png'),
 (11, 'Claudia', 'AA007', 'Prime Pro', '10', '', '', 'BCA-4700271779 (Claudia Florensia Sri P)', '', '', '', '6.jpg'),
 (35, 'Ang', 'AA0010', 'Silver', '10', '', '', 'BCA 472-018-1717 (Anggraini Angkawidjaya)', '', '', '', 'yanes_nira_used.png'),
-(36, 'Fran', 'AA0011', 'Gold Express', '35', '', '', 'BCA 102-031-4776 (Fransiska)', '', '', '', 'Owen_Used.png'),
+(36, 'Fran', 'AA0011', 'Silver', '35', '7', '', 'BCA 102-031-4776 (Fransiska)', '', '', '', 'Owen_Used.png'),
 (37, 'Winata', 'AA0012', 'Silver', '35', '', '', 'BCA 018-365-6161 (Winata Ciputra)', '', '', '', 'yanes_nira_used2.png'),
 (38, 'Ang/Fran/Win', 'AA0013', 'Silver', '', '', '', '-', '', '', '', '');
 
@@ -159,7 +170,11 @@ CREATE TABLE `potongan` (
 --
 
 INSERT INTO `potongan` (`id_potongan`, `id_komisi`, `keterangan_potongan`, `jumlah_potongan`) VALUES
-(53, 288, 'Biaya Lainnya', '500000');
+(53, 288, 'Biaya Lainnya', '500000'),
+(54, 289, 'Banner ', '50000'),
+(55, 293, 'Biaya Pengantaran', '1000000'),
+(56, 295, 'Banner', '500000'),
+(61, 300, 'Banner ', '500000');
 
 -- --------------------------------------------------------
 
@@ -179,7 +194,14 @@ CREATE TABLE `referal` (
 --
 
 INSERT INTO `referal` (`id_referal`, `id_komisi`, `keterangan_referal`, `jumlah_referal`) VALUES
-(31, 288, 'Rohman', '1000000');
+(31, 288, 'Rohman', '1000000'),
+(32, 289, 'Fandi', '10'),
+(33, 290, 'Rohman', '1000000'),
+(34, 291, 'Vania', '20'),
+(35, 293, 'Gremenmania', '20'),
+(36, 294, 'Stefano', '1000000'),
+(37, 295, 'Stefano', '1500000'),
+(42, 300, 'Stefano', '1500000');
 
 -- --------------------------------------------------------
 
@@ -215,12 +237,20 @@ CREATE TABLE `sub_komisi` (
 --
 
 INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `npwpm_listing_komisi`, `npwpum_listing_komisi`, `npwpum_listing2_komisi`, `mm2_listing_komisi`, `npwpm2_listing_komisi`, `npwpum2_listing_komisi`, `npwpum2_listing2_komisi`, `mm_selling_komisi`, `npwpm_selling_komisi`, `npwpum_selling_komisi`, `npwpum_selling2_komisi`, `mm2_selling_komisi`, `npwpm2_selling_komisi`, `npwpum2_selling_komisi`, `npwpum2_selling2_komisi`, `admin_pengguna`, `admin_status_komisi`) VALUES
-(182, 283, 60, 1, 1, 1, 0, 0, 0, 0, 60, 1, 1, 1, 0, 0, 0, 0, 1, 0),
+(182, 283, 60, 1, 1, 1, 0, 0, 0, 0, 60, 1, 1, 1, 0, 0, 0, 0, 1, 6),
 (183, 284, 0, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 1, 0, 0, 0, 0, 1, 0),
 (184, 285, 50, 1, 1, 1, 0, 0, 0, 0, 60, 1, 1, 0, 0, 0, 0, 0, 1, 0),
 (185, 286, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
 (186, 287, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
-(187, 288, 70, 1, 1, 0, 0, 0, 0, 0, 70, 1, 1, 0, 0, 0, 0, 0, 1, 0);
+(187, 288, 70, 1, 1, 0, 0, 0, 0, 0, 70, 1, 1, 0, 0, 0, 0, 0, 1, 0),
+(188, 289, 70, 0, 1, 1, 50, 1, 0, 0, 70, 1, 1, 0, 0, 0, 0, 0, 1, 0),
+(189, 290, 0, 0, 0, 0, 0, 0, 0, 0, 50, 1, 1, 1, 50, 0, 0, 0, 1, 0),
+(190, 291, 50, 1, 0, 0, 80, 1, 1, 0, 50, 1, 0, 0, 70, 1, 1, 0, 1, 0),
+(191, 292, 50, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+(192, 293, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+(193, 294, 50, 1, 1, 1, 50, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+(194, 295, 70, 1, 1, 0, 50, 0, 0, 0, 50, 1, 1, 1, 80, 1, 1, 0, 1, 0),
+(199, 300, 70, 1, 1, 0, 50, 0, 0, 0, 50, 1, 1, 1, 80, 1, 1, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -250,7 +280,10 @@ CREATE TABLE `sub_komisi_afw` (
 --
 
 INSERT INTO `sub_komisi_afw` (`id_afw`, `id_sub_komisi`, `m_ang`, `npwp_ang`, `npwp_up_ang`, `npwp_up2_ang`, `m_fran`, `npwp_fran`, `npwp_up_fran`, `npwp_up2_fran`, `m_win`, `npwp_win`, `npwp_up_win`, `npwp_up2_win`) VALUES
-(6, 186, 50, 1, 1, 0, 60, 1, 1, 0, 60, 1, 1, 0);
+(6, 186, 50, 1, 1, 0, 60, 1, 1, 0, 60, 1, 1, 0),
+(7, 191, 50, 1, 1, 0, 50, 1, 1, 0, 50, 1, 1, 0),
+(8, 192, 50, 1, 1, 0, 50, 1, 1, 0, 50, 1, 1, 0),
+(9, 199, 50, 1, 1, 0, 50, 1, 1, 0, 50, 1, 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -319,13 +352,13 @@ ALTER TABLE `sub_komisi_afw`
 -- AUTO_INCREMENT untuk tabel `co_broke`
 --
 ALTER TABLE `co_broke`
-  MODIFY `id_cobroke` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id_cobroke` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT untuk tabel `komisi`
 --
 ALTER TABLE `komisi`
-  MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=289;
+  MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=301;
 
 --
 -- AUTO_INCREMENT untuk tabel `marketing`
@@ -343,25 +376,25 @@ ALTER TABLE `pengguna`
 -- AUTO_INCREMENT untuk tabel `potongan`
 --
 ALTER TABLE `potongan`
-  MODIFY `id_potongan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id_potongan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT untuk tabel `referal`
 --
 ALTER TABLE `referal`
-  MODIFY `id_referal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_referal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT untuk tabel `sub_komisi`
 --
 ALTER TABLE `sub_komisi`
-  MODIFY `id_sub_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
+  MODIFY `id_sub_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
 
 --
 -- AUTO_INCREMENT untuk tabel `sub_komisi_afw`
 --
 ALTER TABLE `sub_komisi_afw`
-  MODIFY `id_afw` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_afw` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
