@@ -32,6 +32,9 @@
         <!-- Select2 -->
         <link rel="stylesheet" href="<?php echo base_url('plugin/select2/css/select2.min.css'); ?>">
         <link rel="stylesheet" href="<?php echo base_url('plugin/select2-bootstrap4-theme/select2-bootstrap4.min.css'); ?>">
+
+        <link rel="stylesheet" type="text/css" media="print" href="<?php echo base_url('web_print.css'); ?>">
+
     </head>
 
     <body>
