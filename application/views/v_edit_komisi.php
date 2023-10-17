@@ -131,7 +131,10 @@
             </div>
             <div class="form-group">
                 <label for="komisi" class="col-form-label">Komisi Bruto</label>
-                <input type="text" class="form-control" id="komisi" name="komisi" value="<?= $komisi->bruto_komisi ?>">
+
+                <input type="text" class="form-control" id="tampil_komisi" name="tampil_komisi" value="<?= $komisi->bruto_komisi ?>" onkeyup="formatRupiah(this, 'komisi')">
+
+                <input type="hidden" class="form-control" id="komisi" name="komisi" value="<?= $komisi->bruto_komisi ?>">
             </div>
             <div class="form-group">
                 <label for="status_komisi" class="col-form-label">Status</label>
