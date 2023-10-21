@@ -131,6 +131,20 @@ class M_komisi extends CI_Model{
 		return $this->db->get_where('komisi',$where);
 	}
 
+	function get_status($id_komisi) {
+        // Lakukan kueri database untuk mengambil status berdasarkan id_komisi
+		$this->db->select('status_komisi');
+		$this->db->where('id_komisi', $id_komisi);
+		$query = $this->db->get('komisi');
+
+		if ($query->num_rows() > 0) {
+			$row = $query->row();
+			return $row->status_komisi;
+		} else {
+			return null;
+		}
+	}
+
 	function update($where,$data){
 		$this->db->where($where);
 		$this->db->update('komisi',$data);
