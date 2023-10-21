@@ -88,13 +88,12 @@
 
                                     <a href="<?= base_url('komisi/rincian_komisi/' . $komisi->id_komisi); ?>" class="btn btn-warning btn-sm mt-1" data-target="#editModal"><i class="fas fa-list" title="Lihat Rincian"></i></a>
 
+                                    <a href="<?= base_url('komisi/edit_komisi/' . $komisi->id_komisi); ?>" class="btn btn-success btn-sm mt-1" data-target="#editModal"><i class="fas fa-edit" title="Edit Komisi"></i></a>
 
                                     <?php if ($level == 'Administrator'): ?>  
-                                        <a href="<?= base_url('komisi/edit_komisi/' . $komisi->id_komisi); ?>" class="btn btn-success btn-sm mt-1" data-target="#editModal"><i class="fas fa-edit" title="Edit Komisi"></i></a>
-
                                         <a href="<?= base_url('komisi/hapus/' . $komisi->id_komisi); ?>" onclick="javascript:return confirm('Apakah Anda yakin ingin menghapus data komisi?')" class="btn btn-danger btn-sm mt-1"><i class="fas fa-trash" title="Hapus"></i></a>
                                     <?php endif ?>
-                                    
+
                                 </td>
                             </tr>
                             <?php $no++;
