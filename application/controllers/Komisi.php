@@ -412,10 +412,15 @@ class Komisi extends CI_Controller {
 
 			$data2 = array();
 			if ($status_komisi == 'Disetujui') {
-				$data['tgl_disetujui'] = $waktu;
+				$previous_status = $this->m_komisi->get_status($id_komisi);
+
+				if ($previous_status != 'Disetujui') {
+					$data['tgl_disetujui'] = $waktu;
+				}
+
 				$data2['admin_status_komisi'] = $admin;
-			}else{
-				$data['tgl_disetujui'] = 0000-00-00;
+			} else {
+				$data['tgl_disetujui'] = '0000-00-00';
 				$data2['admin_status_komisi'] = 0;
 			}
 
