@@ -69,27 +69,39 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="alamat" class="col-form-label">Alamat</label>
-                                <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $komisi->alamat_komisi ?>">
+                                <?php if ($level == 'Administrator') {?>
+                                    <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $komisi->alamat_komisi ?>">
+                                <?php }else{ ?>
+                                    <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $komisi->alamat_komisi ?>" readonly>
+                                <?php } ?>
                             </div>
                             <div class="form-group">
                                 <label for="jt" class="col-form-label">Jenis Transaksi</label>
-                                <select class="form-control" id="jt" name="jt">
-                                    <option value="">Pilih</option>
-                                    <?php
-                                    if ($komisi->jt_komisi == "Jual") echo "<option value='Jual' selected>Jual</option>";
-                                    else echo "<option value='Jual'>Jual</option>";
+                                <?php if ($level == 'Administrator') {?>
+                                    <select class="form-control" id="jt" name="jt">
+                                        <option value="">Pilih</option>
+                                        <?php
+                                        if ($komisi->jt_komisi == "Jual") echo "<option value='Jual' selected>Jual</option>";
+                                        else echo "<option value='Jual'>Jual</option>";
 
-                                    if ($komisi->jt_komisi == "Sewa") echo "<option value='Sewa' selected>Sewa</option>";
-                                    else echo "<option value='Sewa'>Sewa</option>";
+                                        if ($komisi->jt_komisi == "Sewa") echo "<option value='Sewa' selected>Sewa</option>";
+                                        else echo "<option value='Sewa'>Sewa</option>";
 
-                                    if ($komisi->jt_komisi == "Jual/Sewa") echo "<option value='Jual/Sewa' selected>Jual/Sewa</option>";
-                                    else echo "<option value='Jual/Sewa'>Jual/Sewa</option>";
-                                    ?>
-                                </select>
+                                        if ($komisi->jt_komisi == "Jual/Sewa") echo "<option value='Jual/Sewa' selected>Jual/Sewa</option>";
+                                        else echo "<option value='Jual/Sewa'>Jual/Sewa</option>";
+                                        ?>
+                                    </select>
+                                <?php }else{ ?>
+                                    <input type="text" class="form-control" id="jt" name="jt" value="<?= $komisi->jt_komisi ?>" readonly>
+                                <?php } ?>
                             </div>
                             <div class="form-group">
                                 <label for="tgl_closing" class="col-form-label">Tanggal Closing</label>
-                                <input type="date" class="form-control" id="tgl_closing" name="tgl_closing" value="<?= $komisi->tgl_closing_komisi ?>" >
+                                <?php if ($level == 'Administrator') {?>
+                                    <input type="date" class="form-control" id="tgl_closing" name="tgl_closing" value="<?= $komisi->tgl_closing_komisi ?>" >
+                                <?php }else{ ?>
+                                    <input type="date" class="form-control" id="tgl_closing" name="tgl_closing" value="<?= $komisi->tgl_closing_komisi ?>" readonly>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -132,22 +144,30 @@
             <div class="form-group">
                 <label for="komisi" class="col-form-label">Komisi Bruto</label>
 
-                <input type="text" class="form-control" id="tampil_komisi" name="tampil_komisi" value="<?= $komisi->bruto_komisi ?>" onkeyup="formatRupiah(this, 'komisi')">
+                <?php if ($level == 'Administrator') {?>
+                    <input type="text" class="form-control" id="tampil_komisi" name="tampil_komisi" value="<?= $komisi->bruto_komisi ?>" onkeyup="formatRupiah(this, 'komisi')">
 
-                <input type="hidden" class="form-control" id="komisi" name="komisi" value="<?= $komisi->bruto_komisi ?>">
+                    <input type="hidden" class="form-control" id="komisi" name="komisi" value="<?= $komisi->bruto_komisi ?>">
+                <?php }else{ ?>
+                    <input type="text" class="form-control" id="komisi" name="komisi" value="<?= $komisi->bruto_komisi ?>" readonly>
+                <?php } ?>
             </div>
             <div class="form-group">
                 <label for="status_komisi" class="col-form-label">Status</label>
-                <select class="form-control" id="status_komisi" name="status_komisi">
-                    <option value="">Pilih Status</option>
-                    <?php
-                    if ($komisi->status_komisi == "Disetujui") echo "<option value='Disetujui' selected>Disetujui</option>";
-                    else echo "<option value='Disetujui'>Disetujui</option>";
+                <?php if ($level == 'CMO') {?>
+                    <select class="form-control" id="status_komisi" name="status_komisi">
+                        <option value="">Pilih Status</option>
+                        <?php
+                        if ($komisi->status_komisi == "Disetujui") echo "<option value='Disetujui' selected>Disetujui</option>";
+                        else echo "<option value='Disetujui'>Disetujui</option>";
 
-                    if ($komisi->status_komisi == "Belum Disetujui") echo "<option value='Belum Disetujui' selected>Belum Disetujui</option>";
-                    else echo "<option value='Belum Disetujui'>Belum Disetujui</option>";
-                    ?>
-                </select>
+                        if ($komisi->status_komisi == "Belum Disetujui") echo "<option value='Belum Disetujui' selected>Belum Disetujui</option>";
+                        else echo "<option value='Belum Disetujui'>Belum Disetujui</option>";
+                        ?>
+                    </select>
+                <?php }else{ ?>
+                    <input type="text" class="form-control" id="status_komisi" name="status_komisi" value="<?= $komisi->status_komisi ?>" readonly>
+                <?php } ?>
             </div>
         </div>
     </div>
