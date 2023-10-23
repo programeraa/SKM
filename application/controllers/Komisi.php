@@ -362,10 +362,33 @@ class Komisi extends CI_Controller {
 			$data['co_broke'] = $this->m_komisi->tampil_data_cobroke()->result();
 			$data['potongan'] = $this->m_komisi->tampil_data_potongan()->result();
 			$data['referal'] = $this->m_komisi->tampil_data_referal()->result();
+			$data['pengurangan'] = $this->m_komisi->tampil_data_pengurangan()->result();
 
 			$this->load->view('v_header', $data);
 			$this->load->view('v_rincian_komisi', $data);
 			$this->load->view('v_footer', $data);
+		}
+
+		public function tambah_pengurangan_fee() {
+			$id_komisi = $this->input->post('id_komisi');
+			$id_marketing = $this->input->post('id_marketing');
+			$ket_pengurangan = $this->input->post('keterangan_pengurangan');
+			$jumlah_pengurangan = $this->input->post('jumlah_pengurangan');
+			$status_marketing = $this->input->post('status_marketing');
+
+			$data = array(
+				'id_komisi' => $id_komisi,
+				'id_marketing' => $id_marketing,
+				'keterangan_pengurangan' => $ket_pengurangan,
+				'jumlah_pengurangan' => $jumlah_pengurangan,
+				'status_pengurangan' => $status_marketing
+			);
+
+			$this->m_komisi->simpan_pengurangan_fee($data);
+
+			echo '<script>
+			window.location="' . base_url('komisi/rincian_komisi/'.$id_komisi.'') . '"
+			</script>';
 		}
 
 		public function edit_komisi($id_komisi){
