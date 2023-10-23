@@ -54,6 +54,27 @@
     }
 </script>
 
+<script>
+	document.getElementById('toggleForm').addEventListener('click', function() {
+		var form = document.getElementById('pengurangan_listing1');
+
+		if (form.style.display === 'none') {
+			form.style.display = 'block';
+		} else {
+			form.style.display = 'none';
+		}
+	});
+
+	document.getElementById('toggleForm2').addEventListener('click', function() {
+		var form = document.getElementById('pengurangan_listing2');
+
+		if (form.style.display === 'none') {
+			form.style.display = 'block';
+		} else {
+			form.style.display = 'none';
+		}
+	});
+</script>
 
 <script src="https://cdn.datatables.net/buttons/2.3.5/js/dataTables.buttons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
