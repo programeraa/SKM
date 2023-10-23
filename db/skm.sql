@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Okt 2023 pada 10.54
+-- Waktu pembuatan: 23 Okt 2023 pada 10.57
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -75,7 +75,7 @@ CREATE TABLE `komisi` (
 --
 
 INSERT INTO `komisi` (`id_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_komisi`, `mar_listing_komisi`, `mar_listing2_komisi`, `mar_selling_komisi`, `mar_selling2_komisi`, `bruto_komisi`, `waktu_komisi`, `tgl_disetujui`, `status_komisi`) VALUES
-(283, 'Grand Sungkono Lagoon Tower Venetian Unit 3708', 'Sewa', '2023-08-08', 2, 0, 2, 0, '3800000', '2023-10-13', '2023-10-17', 'Disetujui'),
+(283, 'Grand Sungkono Lagoon Tower Venetian Unit 3708', 'Sewa', '2023-08-08', 2, 0, 2, 0, '3800000', '2023-10-13', '2023-10-21', 'Disetujui'),
 (284, 'Apartemen Grand Sungkono Lagoon Tower Venetian Unit 2801', 'Sewa', '2023-08-01', 1091, 0, 2, 0, '5000000', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
 (285, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual', '2023-06-26', 2, 0, 11, 0, '68781750', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
 (286, 'Woodland Blok WL No. 5 Citraland, Surabaya', 'Jual', '2023-08-04', 11, 0, 8642, 0, '50000000', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
@@ -151,6 +151,29 @@ INSERT INTO `pengguna` (`id_pengguna`, `nama_pengguna`, `username_pengguna`, `pa
 (4, 'Julia', 'julia', 'c2e285cb33cecdbeb83d2189e983a8c0', '', 'CMO'),
 (6, 'Fandi', 'fandi', '9bb773615bccfc87168aa059884ca038', 'image_amC.png', 'Administrator'),
 (9, 'Henny R', 'gun', '5161ebb0cce4b7987ba8b6935d60a180', '8-TKgm4cgncXgwpL4_(1).png', 'CMO');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pengurangan_fee`
+--
+
+CREATE TABLE `pengurangan_fee` (
+  `id_pengurangan` int(250) NOT NULL,
+  `id_komisi` int(250) NOT NULL,
+  `id_marketing` int(250) NOT NULL,
+  `keterangan_pengurangan` varchar(250) NOT NULL,
+  `jumlah_pengurangan` int(250) NOT NULL,
+  `status_pengurangan` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `pengurangan_fee`
+--
+
+INSERT INTO `pengurangan_fee` (`id_pengurangan`, `id_komisi`, `id_marketing`, `keterangan_pengurangan`, `jumlah_pengurangan`, `status_pengurangan`) VALUES
+(7, 285, 2, 'Banner', 10000, 'Listing'),
+(8, 285, 11, 'Kucing', 100000, 'Selling');
 
 -- --------------------------------------------------------
 
@@ -237,7 +260,7 @@ CREATE TABLE `sub_komisi` (
 --
 
 INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `npwpm_listing_komisi`, `npwpum_listing_komisi`, `npwpum_listing2_komisi`, `mm2_listing_komisi`, `npwpm2_listing_komisi`, `npwpum2_listing_komisi`, `npwpum2_listing2_komisi`, `mm_selling_komisi`, `npwpm_selling_komisi`, `npwpum_selling_komisi`, `npwpum_selling2_komisi`, `mm2_selling_komisi`, `npwpm2_selling_komisi`, `npwpum2_selling_komisi`, `npwpum2_selling2_komisi`, `admin_pengguna`, `admin_status_komisi`) VALUES
-(182, 283, 60, 1, 1, 1, 0, 0, 0, 0, 60, 1, 1, 1, 0, 0, 0, 0, 1, 1),
+(182, 283, 60, 1, 1, 1, 0, 0, 0, 0, 60, 1, 1, 1, 0, 0, 0, 0, 1, 4),
 (183, 284, 0, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 1, 0, 0, 0, 0, 1, 0),
 (184, 285, 50, 1, 1, 1, 0, 0, 0, 0, 60, 1, 1, 0, 0, 0, 0, 0, 1, 0),
 (185, 286, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
@@ -317,6 +340,13 @@ ALTER TABLE `pengguna`
   ADD PRIMARY KEY (`id_pengguna`);
 
 --
+-- Indeks untuk tabel `pengurangan_fee`
+--
+ALTER TABLE `pengurangan_fee`
+  ADD PRIMARY KEY (`id_pengurangan`),
+  ADD KEY `id_komisi` (`id_komisi`);
+
+--
 -- Indeks untuk tabel `potongan`
 --
 ALTER TABLE `potongan`
@@ -373,6 +403,12 @@ ALTER TABLE `pengguna`
   MODIFY `id_pengguna` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT untuk tabel `pengurangan_fee`
+--
+ALTER TABLE `pengurangan_fee`
+  MODIFY `id_pengurangan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT untuk tabel `potongan`
 --
 ALTER TABLE `potongan`
@@ -405,6 +441,12 @@ ALTER TABLE `sub_komisi_afw`
 --
 ALTER TABLE `co_broke`
   ADD CONSTRAINT `co_broke_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `pengurangan_fee`
+--
+ALTER TABLE `pengurangan_fee`
+  ADD CONSTRAINT `pengurangan_fee_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `potongan`
