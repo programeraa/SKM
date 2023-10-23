@@ -57,6 +57,10 @@ class M_komisi extends CI_Model{
 		return $this->db->get('referal');
 	}
 
+	function tampil_data_pengurangan(){
+		return $this->db->get('pengurangan_fee');
+	}
+
 	function tampil_data_rincian($where){
 		$data = implode($where);
 		$hasil = $this->db->query("SELECT a.id_komisi, a.alamat_komisi, a.jt_komisi, a.tgl_closing_komisi, a.bruto_komisi, a.mar_listing_komisi, a.mar_selling_komisi, a.waktu_komisi, a.status_komisi, a.tgl_disetujui,
@@ -79,7 +83,7 @@ class M_komisi extends CI_Model{
 
 			j.id_pengguna, j.nama_pengguna as admin_disetujui, j.level_pengguna as level_disetujui, j.gambar_ttd_pengguna,
 
-			k.id_afw, k.id_sub_komisi, k.m_ang, k.npwp_ang, k.npwp_up_ang, k.npwp_up2_ang, k.m_fran, k.npwp_fran, k.npwp_up_fran, k.npwp_up2_fran, k.m_win, k.npwp_win, k.npwp_up_win, k.npwp_up2_win 
+			k.id_afw, k.id_sub_komisi, k.m_ang, k.npwp_ang, k.npwp_up_ang, k.npwp_up2_ang, k.m_fran, k.npwp_fran, k.npwp_up_fran, k.npwp_up2_fran, k.m_win, k.npwp_win, k.npwp_up_win, k.npwp_up2_win
 
 			FROM komisi as a LEFT JOIN marketing as b ON a.mar_listing_komisi = b.id_mar LEFT JOIN marketing as c ON a.mar_selling_komisi = c.id_mar INNER JOIN sub_komisi as d ON a.id_komisi = d.id_komisi INNER JOIN pengguna as e ON e.id_pengguna = d.admin_pengguna
 
@@ -127,12 +131,15 @@ class M_komisi extends CI_Model{
 		$this->db->insert('sub_komisi_afw',$data6);
 	}
 
+	function simpan_pengurangan_fee($data){
+		$this->db->insert('pengurangan_fee',$data);
+	}
+
 	function edit($where){
 		return $this->db->get_where('komisi',$where);
 	}
 
 	function get_status($id_komisi) {
-        // Lakukan kueri database untuk mengambil status berdasarkan id_komisi
 		$this->db->select('status_komisi');
 		$this->db->where('id_komisi', $id_komisi);
 		$query = $this->db->get('komisi');
