@@ -480,6 +480,50 @@ class Komisi extends CI_Controller {
 
 		}
 
+		public function update_status_komisi(){
+			$status_komisi = $this->input->post('status_komisi');
+			$admin = $this->input->post('admin');
+			$id_komisi = $this->input->post('id_komisi');
+
+			date_default_timezone_set("Asia/Jakarta");
+			$waktu = date("Y-m-d H:i:s");
+
+			$data = array(
+				'status_komisi' => $status_komisi
+			);
+
+			$data2 = array();
+			if ($status_komisi == 'Disetujui') {
+				$previous_status = $this->m_komisi->get_status($id_komisi);
+
+				if ($previous_status != 'Disetujui') {
+					$data['tgl_disetujui'] = $waktu;
+				}
+
+				$data2['admin_status_komisi'] = $admin;
+			} else {
+				$data['tgl_disetujui'] = '0000-00-00';
+				$data2['admin_status_komisi'] = 0;
+			}
+
+			$where = array('id_komisi'=>$id_komisi);
+
+			if (isset($where)) {
+				$eksekusi = $this->m_komisi->update($where,$data);
+				$eksekusi2 = $this->m_komisi->update_sub_komisi($where,$data2);
+
+				echo '<script>
+				alert("Selamat! Berhasil Update Data Komisi");
+				window.location="' . base_url('komisi/rincian_komisi/'.$id_komisi.'') . '"
+				</script>';
+			}
+
+			echo '<script>
+			alert("Gagal Update Data Komisi");
+			window.location="' . base_url('komisi/rincian_komisi/'.$id_komisi.'') . '"
+			</script>';
+		}
+
 		public function hapus($id_komisi){
 			$where = array('id_komisi'=>$id_komisi);
 			if (isset($where)) {
