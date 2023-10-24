@@ -8,32 +8,29 @@
         </div>
 
         <div class="card-body">
-
-            <form method="post" action="<?= base_url('Marketing/update'); ?>">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="alamat" class="col-form-label">Alamat Closing</label>
-                            <input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo $komisi->alamat_komisi; ?>" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="jt" class="col-form-label">Jenis Transaksi</label>
-                            <input type="text" class="form-control" id="jt" name="jt" value="<?php echo $komisi->jt_komisi; ?>" readonly>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                       <div class="form-group">
-                        <label for="m_listing" class="col-form-label">Marketing Listing</label>
-                        <input type="text" class="form-control" id="m_listing" name="m_listing" value="<?php echo $komisi->nama_mar; ?>" readonly>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="alamat" class="col-form-label">Alamat Closing</label>
+                        <input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo $komisi->alamat_komisi; ?>" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="m_selling" class="col-form-label">Marketing Selling</label>
-                        <input type="text" class="form-control" id="m_selling" name="m_selling" value="<?php echo $komisi->nama_mar2; ?>" readonly>
+                        <label for="jt" class="col-form-label">Jenis Transaksi</label>
+                        <input type="text" class="form-control" id="jt" name="jt" value="<?php echo $komisi->jt_komisi; ?>" readonly>
                     </div>
                 </div>
+
+                <div class="col-md-6">
+                   <div class="form-group">
+                    <label for="m_listing" class="col-form-label">Marketing Listing</label>
+                    <input type="text" class="form-control" id="m_listing" name="m_listing" value="<?php echo $komisi->nama_mar; ?>" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="m_selling" class="col-form-label">Marketing Selling</label>
+                    <input type="text" class="form-control" id="m_selling" name="m_selling" value="<?php echo $komisi->nama_mar2; ?>" readonly>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
 
     <div class="card-header-sm bg-dark text-white">
@@ -118,36 +115,78 @@
     <?php }else{ ?>
 
         <div class="card-body p-0 pt-2">
-            <form method="post" action="">
-                <table class="tg table table-striped table-dark">
-                    <tbody>
-                      <tr>
-                        <td class="tg-0lax"><?php echo 'Fee Marketing'?></td>
-                        <td class="tg-0lax text-right"><?php echo $fmk2_listing_r; ?></td>
-                    </tr>
+            <table class="tg table table-striped table-dark">
+                <tbody>
+                  <tr>
+                    <td class="tg-0lax"><?php echo 'Fee Marketing'?></td>
+                    <td class="tg-0lax text-right"><?php echo $fmk2_listing_r; ?></td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax text-warning"><?php echo 'Dikurangi Admin Sebesar 2.5%'?></td>
+                    <td class="tg-0lax text-right"><?php echo $admin_listing_r; ?></td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax"><?php echo 'Fee Marketing Sementara'?></td>
+                    <td class="tg-0lax text-right"><?php echo $fmk3_listing_r; ?></td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$pph_listing.')'?></td>
+                    <td class="tg-0lax text-right"><?php echo $biaya_pph_l_r ?></td>
+                </tr>
+                <?php if ($jumlah_kurang_listing != 0) {?>
                     <tr>
-                        <td class="tg-0lax text-warning"><?php echo 'Dikurangi Admin Sebesar 2.5%'?></td>
-                        <td class="tg-0lax text-right"><?php echo $admin_listing_r; ?></td>
+                        <td class="tg-0lax text-warning">Biaya Pengurangan (<?= $keterangan_kurang_listing ?>)</td>
+                        <td class="tg-0lax text-right"><?php echo $jumlah_kurang_listing_r; ?></td>
                     </tr>
-                    <tr>
-                        <td class="tg-0lax"><?php echo 'Fee Marketing Sementara'?></td>
-                        <td class="tg-0lax text-right"><?php echo $fmk3_listing_r; ?></td>
-                    </tr>
-                    <tr>
-                        <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$pph_listing.')'?></td>
-                        <td class="tg-0lax text-right"><?php echo $biaya_pph_l_r ?></td>
-                    </tr>
-                    <tr>
-                        <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
-                        <td class="tg-0lax text-right text-warning"><?php echo $fmb_l_r; ?></td>
-                    </tr>
-                    <tr>
-                        <td class="tg-0lax text-right" colspan="2"><?php echo $norek_listing; ?></td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
+                <?php } ?>
+                <tr>
+                    <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
+                    <td class="tg-0lax text-right text-warning"><?php echo $fmb_l_r; ?></td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax text-right" colspan="2"><?php echo $norek_listing; ?></td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Disetujui'):?>
+                <?php if ($jumlah_kurang_listing == 0) {?>
+                    <button type="button" class="btn btn-danger mb-3" id="toggleForm">Biaya Pengurang (Bila Ada)</button>
+                <?php }else{ ?>
+
+                    <a href="<?= base_url('komisi/hapus_pengurangan_fee?id_komisi=' . $komisi->id_komisi . '&id_marketing=' . $komisi->mar_listing_komisi); ?>"  class="btn btn-primary mb-3"><i class="fas fa-trash mr-2" title="Hapus"></i>Hapus Biaya Pengurangan</a>
+
+                <?php } ?>
+            <?php endif ?>
+            <div id="pengurangan_listing1" style="display:none;">
+                <form method="post" action="<?= base_url('komisi/tambah_pengurangan_fee') ?>">
+                  <div class="form-group">
+                    <label for="keterangan_pengurangan">Keterangan Pengurangan</label>
+                    <input type="text" class="form-control" id="keterangan_pengurangan" name="keterangan_pengurangan">
+                </div>
+                <div class="form-group">
+                    <label for="jumlah_pengurangan">Jumlah</label>
+                    <input type="text" class="form-control" name="tampil_pengurangan" id="tampil_pengurangan" onkeyup="formatRupiah(this, 'jumlah_pengurangan')">
+
+                    <input type="hidden" class="form-control" id="jumlah_pengurangan" name="jumlah_pengurangan">
+                </div>
+                <div class="form-group d-xl-none">
+                    <label for="id_komisi">ID Komisi</label>
+                    <input type="text" class="form-control" id="id_komisi" name="id_komisi" value="<?= $komisi->id_komisi ?>">
+                </div>
+                <div class="form-group d-xl-none">
+                    <label for="id_marketing">ID Marketing</label>
+                    <input type="text" class="form-control" id="id_marketing" name="id_marketing" value="<?= $komisi->mar_listing_komisi ?>">
+                </div>
+                <div class="form-group d-xl-none">
+                    <label for="status_marketing">Status Marketing</label>
+                    <input type="text" class="form-control" id="status_marketing" name="status_marketing" value="Listing & Selling">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
     </div>
+</div>
 
 <?php } ?>
 
