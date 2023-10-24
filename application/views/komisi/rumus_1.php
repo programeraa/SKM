@@ -366,6 +366,28 @@ $bruto_n = stringToNumber($bruto);
 $bruto_r = numberToRupiah($bruto_n);
 
 //===================================================================== Rumus Bila Ada Pengurangan Fee
+
+foreach ($marketing as $ang) {
+    if ($ang->nama_mar == "Ang") {
+        $norek_ang = $ang->norek_mar;
+        $id_ang = $ang->id_mar;
+    }
+}
+
+foreach ($marketing as $fran) {
+    if ($fran->nama_mar == "Fran") {
+        $norek_fran = $fran->norek_mar;
+        $id_fran = $fran->id_mar;
+    }
+}
+
+foreach ($marketing as $win) {
+    if ($win->nama_mar == "Winata") {
+        $norek_win = $win->norek_mar;
+        $id_win = $win->id_mar;
+    }
+}
+
 $keterangan_kurang_listing = 0;
 $jumlah_kurang_listing = 0;
 
@@ -378,29 +400,49 @@ $jumlah_kurang_listing2 = 0;
 $keterangan_kurang_selling2 = 0;
 $jumlah_kurang_selling2 = 0;
 
+$keterangan_kurang_ang = 0;
+$jumlah_kurang_ang = 0;
+
+$keterangan_kurang_fran = 0;
+$jumlah_kurang_fran = 0;
+
+$keterangan_kurang_win = 0;
+$jumlah_kurang_win = 0;
+
 foreach ($pengurangan as $pengurangan) {
     if ($pengurangan->id_komisi == $komisi->id_komisi && $pengurangan->id_marketing == $komisi->mar_listing_komisi) {
-        $id_kurang_listing = $pengurangan->id_komisi;
         $keterangan_kurang_listing = $pengurangan->keterangan_pengurangan;
         $jumlah_kurang_listing = $pengurangan->jumlah_pengurangan;
     }
 
     if ($pengurangan->id_komisi == $komisi->id_komisi && $pengurangan->id_marketing == $komisi->mar_selling_komisi) {
-        $id_kurang_selling = $pengurangan->id_komisi;
         $keterangan_kurang_selling = $pengurangan->keterangan_pengurangan;
         $jumlah_kurang_selling = $pengurangan->jumlah_pengurangan;
     }
 
     if ($pengurangan->id_komisi == $komisi->id_komisi && $pengurangan->id_marketing == $komisi->mar_listing2_komisi) {
-        $id_kurang_listing2 = $pengurangan->id_komisi;
         $keterangan_kurang_listing2 = $pengurangan->keterangan_pengurangan;
         $jumlah_kurang_listing2 = $pengurangan->jumlah_pengurangan;
     }
 
     if ($pengurangan->id_komisi == $komisi->id_komisi && $pengurangan->id_marketing == $komisi->mar_selling2_komisi) {
-        $id_kurang_selling2 = $pengurangan->id_komisi;
         $keterangan_kurang_selling2 = $pengurangan->keterangan_pengurangan;
         $jumlah_kurang_selling2 = $pengurangan->jumlah_pengurangan;
+    }
+
+    if ($pengurangan->id_komisi == $komisi->id_komisi && $pengurangan->id_marketing == $id_ang) {
+        $keterangan_kurang_ang = $pengurangan->keterangan_pengurangan;
+        $jumlah_kurang_ang = $pengurangan->jumlah_pengurangan;
+    }
+
+    if ($pengurangan->id_komisi == $komisi->id_komisi && $pengurangan->id_marketing == $id_fran) {
+        $keterangan_kurang_fran = $pengurangan->keterangan_pengurangan;
+        $jumlah_kurang_fran = $pengurangan->jumlah_pengurangan;
+    }
+
+    if ($pengurangan->id_komisi == $komisi->id_komisi && $pengurangan->id_marketing == $id_win) {
+        $keterangan_kurang_win = $pengurangan->keterangan_pengurangan;
+        $jumlah_kurang_win = $pengurangan->jumlah_pengurangan;
     }
 }
 
@@ -415,6 +457,15 @@ $jumlah_kurang_selling_r = numberToRupiah($jumlah_kurang_selling_n);
 
 $jumlah_kurang_selling2_n = stringToNumber($jumlah_kurang_selling2);
 $jumlah_kurang_selling2_r = numberToRupiah($jumlah_kurang_selling2_n);
+
+$jumlah_kurang_ang_n = stringToNumber($jumlah_kurang_ang);
+$jumlah_kurang_ang_r = numberToRupiah($jumlah_kurang_ang_n);
+
+$jumlah_kurang_fran_n = stringToNumber($jumlah_kurang_fran);
+$jumlah_kurang_fran_r = numberToRupiah($jumlah_kurang_fran_n);
+
+$jumlah_kurang_win_n = stringToNumber($jumlah_kurang_win);
+$jumlah_kurang_win_r = numberToRupiah($jumlah_kurang_win_n);
 
 //====================================================== rincian biaya admin & pph marketing listing 1 dan 2
 //rincian biaya admin marketing listing
@@ -645,6 +696,8 @@ $fmb_s2_r = numberToRupiah($fmb_s2_n);
 
 //============================================= KASUS ANG FRAN WIN
 
+//================================== Bila Ada Pengurangan
+
 //Langkah 1 - Bagi fee marketing kotor menjadi 2 untuk Ang Fran dan Win
 $afw_1 = null;
 if (!empty($ml_afw)) {
@@ -678,11 +731,6 @@ $afw_2_n = stringToNumber($afw_2);
 $afw_2_r = numberToRupiah($afw_2_n);
 
 //================================================== Hitung ANG
-foreach ($marketing as $ang) {
-    if ($ang->nama_mar == "Ang") {
-        $norek_ang = $ang->norek_mar;
-    }
-}
 
 $l_member_ang_2 = $komisi->m_ang;
 
@@ -725,18 +773,16 @@ $biaya_pph_l_ang_n = stringToNumber($biaya_pph_l_ang);
 $biaya_pph_l_ang_r = numberToRupiah($biaya_pph_l_ang_n);
 
 //fee fix diterima marketing listing
-$fmb_l_ang = $fmk3_listing_ang - $biaya_pph_l_ang;
+$fmb_l_ang_sp = $fmk3_listing_ang - $biaya_pph_l_ang;
+
+//bila ada pengurangan
+$fmb_l_ang = $fmb_l_ang_sp - $jumlah_kurang_ang;
 
 //string to rupiah
 $fmb_l_ang_n = stringToNumber($fmb_l_ang);
 $fmb_l_ang_r = numberToRupiah($fmb_l_ang_n);
 
 //==================================================== Hitung FRAN
-foreach ($marketing as $fran) {
-    if ($fran->nama_mar == "Fran") {
-        $norek_fran = $fran->norek_mar;
-    }
-}
 
 $l_member_fran_2 = $komisi->m_fran;
 
@@ -779,7 +825,10 @@ $biaya_pph_l_fran_n = stringToNumber($biaya_pph_l_fran);
 $biaya_pph_l_fran_r = numberToRupiah($biaya_pph_l_fran_n);
 
 //fee fix diterima marketing listing
-$fmb_l_fran = $fmk3_listing_fran - $biaya_pph_l_fran;
+$fmb_l_fran_sp = $fmk3_listing_fran - $biaya_pph_l_fran;
+
+//bila ada pengurangan
+$fmb_l_fran = $fmb_l_fran_sp - $jumlah_kurang_fran;
 
 //string to rupiah
 $fmb_l_fran_n = stringToNumber($fmb_l_fran);
@@ -787,11 +836,6 @@ $fmb_l_fran_r = numberToRupiah($fmb_l_fran_n);
 
 
 //==================================================== Hitung WIN
-foreach ($marketing as $win) {
-    if ($win->nama_mar == "Winata") {
-        $norek_win = $win->norek_mar;
-    }
-}
 
 $l_member_win_2 = $komisi->m_win;
 
@@ -834,7 +878,10 @@ $biaya_pph_l_win_n = stringToNumber($biaya_pph_l_win);
 $biaya_pph_l_win_r = numberToRupiah($biaya_pph_l_win_n);
 
 //fee fix diterima marketing listing
-$fmb_l_win = $fmk3_listing_win - $biaya_pph_l_win;
+$fmb_l_win_sp = $fmk3_listing_win - $biaya_pph_l_win;
+
+//bila ada pengurangan
+$fmb_l_win = $fmb_l_win_sp - $jumlah_kurang_win;
 
 //string to rupiah
 $fmb_l_win_n = stringToNumber($fmb_l_win);
