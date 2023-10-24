@@ -124,15 +124,54 @@
             } 
             ?>
 
-            <?php if ($komisi->status_komisi == "Disetujui") {?>
+            <?php if ($komisi->status_komisi == "Disetujui" || $level == 'CMO') {?>
                 <div class="card-header-sm bg-dark text-white">
                     <h4 class="card-title p-2 m-0" style="text-align: center;">Status Komisi</h4>
                 </div>
+            <?php } ?>
 
-                <div class="card-body">
-                    <div class="card-body p-0 pt-2">
+            <?php if ($level == 'CMO') {?>
+                <div class="card-body mt-0 pb-0">
+                    <div class="card-body p-0 pt-2 pb-0">
                         <div class="card text-center w-50 mx-auto my-auto">
-                          <div class="card-header">
+                            <form method="post" action="<?= base_url('komisi/update_status_komisi'); ?>">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="flex-grow-1">
+                                        <select class="form-control" id="status_komisi" name="status_komisi">
+                                            <option value="">Pilih Status</option>
+                                            <?php
+                                            if ($komisi->status_komisi == "Disetujui") echo "<option value='Disetujui' selected>Disetujui</option>";
+                                            else echo "<option value='Disetujui'>Disetujui</option>";
+
+                                            if ($komisi->status_komisi == "Belum Disetujui") echo "<option value='Belum Disetujui' selected>Belum Disetujui</option>";
+                                            else echo "<option value='Belum Disetujui'>Belum Disetujui</option>";
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group d-xl-none">
+                                      <label class="col-sm-15 col-form-label">No Sistem</label>
+                                      <input type="text" class="form-control" id="id_komisi" name="id_komisi" value="<?php echo $komisi->id_komisi; ?>">
+                                  </div>
+                                  <div class="form-group d-xl-none">
+                                    <label for="admin" class="col-form-label">Admin</label>
+                                    <input type="text" class="form-control" id="admin" name="admin" value="<?php echo $id; ?>">
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
+        <?php if ($komisi->status_komisi == "Disetujui") {?>
+
+            <div class="card-body mt-0">
+                <div class="card-body p-0">
+                    <div class="card text-center w-50 mx-auto my-auto">
+                        <div class="card-header">
                             Surabaya, <?= date("d-m-Y", strtotime($komisi->tgl_disetujui)); ?>
                         </div>
                         <div class="card-body">
