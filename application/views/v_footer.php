@@ -102,6 +102,42 @@
 	});
 </script>
 
+<script>
+	document.getElementById('toggleForm5').addEventListener('click', function() {
+		var form = document.getElementById('pengurangan_afw1');
+
+		if (form.style.display === 'none') {
+			form.style.display = 'block';
+		} else {
+			form.style.display = 'none';
+		}
+	});
+</script>
+
+<script>
+	document.getElementById('toggleForm6').addEventListener('click', function() {
+		var form = document.getElementById('pengurangan_afw2');
+
+		if (form.style.display === 'none') {
+			form.style.display = 'block';
+		} else {
+			form.style.display = 'none';
+		}
+	});
+</script>
+
+<script>
+	document.getElementById('toggleForm7').addEventListener('click', function() {
+		var form = document.getElementById('pengurangan_afw3');
+
+		if (form.style.display === 'none') {
+			form.style.display = 'block';
+		} else {
+			form.style.display = 'none';
+		}
+	});
+</script>
+
 <script src="https://cdn.datatables.net/buttons/2.3.5/js/dataTables.buttons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
