@@ -64,9 +64,35 @@
 			form.style.display = 'none';
 		}
 	});
+</script>
 
+<script>
 	document.getElementById('toggleForm2').addEventListener('click', function() {
+		var form = document.getElementById('pengurangan_selling1');
+
+		if (form.style.display === 'none') {
+			form.style.display = 'block';
+		} else {
+			form.style.display = 'none';
+		}
+	});
+</script>
+
+<script>
+	document.getElementById('toggleForm3').addEventListener('click', function() {
 		var form = document.getElementById('pengurangan_listing2');
+
+		if (form.style.display === 'none') {
+			form.style.display = 'block';
+		} else {
+			form.style.display = 'none';
+		}
+	});
+</script>
+
+<script>
+	document.getElementById('toggleForm4').addEventListener('click', function() {
+		var form = document.getElementById('pengurangan_selling2');
 
 		if (form.style.display === 'none') {
 			form.style.display = 'block';
