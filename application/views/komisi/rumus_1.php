@@ -365,6 +365,57 @@ $fks2_r = numberToRupiah($fks2_n);
 $bruto_n = stringToNumber($bruto);
 $bruto_r = numberToRupiah($bruto_n);
 
+//===================================================================== Rumus Bila Ada Pengurangan Fee
+$keterangan_kurang_listing = 0;
+$jumlah_kurang_listing = 0;
+
+$keterangan_kurang_selling = 0;
+$jumlah_kurang_selling = 0;
+
+$keterangan_kurang_listing2 = 0;
+$jumlah_kurang_listing2 = 0;
+
+$keterangan_kurang_selling2 = 0;
+$jumlah_kurang_selling2 = 0;
+
+foreach ($pengurangan as $pengurangan) {
+    if ($pengurangan->id_komisi == $komisi->id_komisi && $pengurangan->id_marketing == $komisi->mar_listing_komisi) {
+        $id_kurang_listing = $pengurangan->id_komisi;
+        $keterangan_kurang_listing = $pengurangan->keterangan_pengurangan;
+        $jumlah_kurang_listing = $pengurangan->jumlah_pengurangan;
+    }
+
+    if ($pengurangan->id_komisi == $komisi->id_komisi && $pengurangan->id_marketing == $komisi->mar_selling_komisi) {
+        $id_kurang_selling = $pengurangan->id_komisi;
+        $keterangan_kurang_selling = $pengurangan->keterangan_pengurangan;
+        $jumlah_kurang_selling = $pengurangan->jumlah_pengurangan;
+    }
+
+    if ($pengurangan->id_komisi == $komisi->id_komisi && $pengurangan->id_marketing == $komisi->mar_listing2_komisi) {
+        $id_kurang_listing2 = $pengurangan->id_komisi;
+        $keterangan_kurang_listing2 = $pengurangan->keterangan_pengurangan;
+        $jumlah_kurang_listing2 = $pengurangan->jumlah_pengurangan;
+    }
+
+    if ($pengurangan->id_komisi == $komisi->id_komisi && $pengurangan->id_marketing == $komisi->mar_selling2_komisi) {
+        $id_kurang_selling2 = $pengurangan->id_komisi;
+        $keterangan_kurang_selling2 = $pengurangan->keterangan_pengurangan;
+        $jumlah_kurang_selling2 = $pengurangan->jumlah_pengurangan;
+    }
+}
+
+$jumlah_kurang_listing_n = stringToNumber($jumlah_kurang_listing);
+$jumlah_kurang_listing_r = numberToRupiah($jumlah_kurang_listing_n);
+
+$jumlah_kurang_listing2_n = stringToNumber($jumlah_kurang_listing2);
+$jumlah_kurang_listing2_r = numberToRupiah($jumlah_kurang_listing2_n);
+
+$jumlah_kurang_selling_n = stringToNumber($jumlah_kurang_selling);
+$jumlah_kurang_selling_r = numberToRupiah($jumlah_kurang_selling_n);
+
+$jumlah_kurang_selling2_n = stringToNumber($jumlah_kurang_selling2);
+$jumlah_kurang_selling2_r = numberToRupiah($jumlah_kurang_selling2_n);
+
 //====================================================== rincian biaya admin & pph marketing listing 1 dan 2
 //rincian biaya admin marketing listing
 
@@ -413,11 +464,16 @@ $biaya_pph_l_n = stringToNumber($biaya_pph_l);
 $biaya_pph_l_r = numberToRupiah($biaya_pph_l_n);
 
 //fee fix diterima marketing listing
-$fmb_l = $fmk3_listing - $biaya_pph_l;
+$fmb_l_sp = $fmk3_listing - $biaya_pph_l;
+
+//bila ada pengurangan fee
+$fmb_l = $fmb_l_sp - $jumlah_kurang_listing;
 
 //string to rupiah
 $fmb_l_n = stringToNumber($fmb_l);
 $fmb_l_r = numberToRupiah($fmb_l_n);
+
+//==============================================================================
 
 //==================================================
 //rincian biaya admin marketing listing ke dua
@@ -466,7 +522,10 @@ $biaya_pph_l2_n = stringToNumber($biaya_pph_l2);
 $biaya_pph_l2_r = numberToRupiah($biaya_pph_l2_n);
 
 //fee fix diterima marketing listing
-$fmb_l2 = $fmk3_listing2 - $biaya_pph_l2;
+$fmb_l2_sp = $fmk3_listing2 - $biaya_pph_l2;
+
+//bila ada pengurangan fee
+$fmb_l2 = $fmb_l2_sp - $jumlah_kurang_listing2;
 
 //string to rupiah
 $fmb_l2_n = stringToNumber($fmb_l2);
@@ -519,7 +578,10 @@ $biaya_pph_s_n = stringToNumber($biaya_pph_s);
 $biaya_pph_s_r = numberToRupiah($biaya_pph_s_n);
 
 //fee fix diterima marketing selling
-$fmb_s = $fmk3_selling - $biaya_pph_s;
+$fmb_s_sp = $fmk3_selling - $biaya_pph_s;
+
+//bila ada pengurangan fee
+$fmb_s = $fmb_s_sp - $jumlah_kurang_selling;
 
 //string to rupiah
 $fmb_s_n = stringToNumber($fmb_s);
@@ -572,37 +634,14 @@ $biaya_pph_s2_n = stringToNumber($biaya_pph_s2);
 $biaya_pph_s2_r = numberToRupiah($biaya_pph_s2_n);
 
 //fee fix diterima marketing selling
-$fmb_s2 = $fmk3_selling2 - $biaya_pph_s2;
+$fmb_s2_sp = $fmk3_selling2 - $biaya_pph_s2;
+
+//bila ada pengurangan fee
+$fmb_s2 = $fmb_s2_sp - $jumlah_kurang_selling2; 
 
 //string to rupiah
 $fmb_s2_n = stringToNumber($fmb_s2);
 $fmb_s2_r = numberToRupiah($fmb_s2_n);
-
-//============================================= Bila Ada Pengurangan Fee
-$keterangan_kurang_listing = null;
-$jumlah_kurang_listing = null;
-$keterangan_kurang_selling = null;
-$jumlah_kurang_selling = null;
-foreach ($pengurangan as $pengurangan) {
-    if ($pengurangan->id_komisi == $komisi->id_komisi && $pengurangan->id_marketing == $komisi->mar_listing_komisi) {
-        $id_kurang_listing = $pengurangan->id_komisi;
-        $keterangan_kurang_listing = $pengurangan->keterangan_pengurangan;
-        $jumlah_kurang_listing = $pengurangan->jumlah_pengurangan;
-    }
-
-    if ($pengurangan->id_komisi == $komisi->id_komisi && $pengurangan->id_marketing == $komisi->mar_selling_komisi) {
-        $id_kurang_selling = $pengurangan->id_komisi;
-        $keterangan_kurang_selling = $pengurangan->keterangan_pengurangan;
-        $jumlah_kurang_selling = $pengurangan->jumlah_pengurangan;
-    }
-}
-
-// Listing 1
-$real_fee_diterima_listing = $fmb_l - $jumlah_kurang_listing;
-
-//string to rupiah
-$real_fee_diterima_listing_n = stringToNumber($real_fee_diterima_listing);
-$real_fee_diterima_listing_r = numberToRupiah($real_fee_diterima_listing_n);
 
 //============================================= KASUS ANG FRAN WIN
 
