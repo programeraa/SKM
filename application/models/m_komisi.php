@@ -167,4 +167,9 @@ class M_komisi extends CI_Model{
 		$this->db->delete('komisi',$where);
 	}
 
+	function hapus_pengurangan_fee($where){
+		$this->db->where($where);
+		$this->db->delete('pengurangan_fee',$where);
+	}
+
 }
