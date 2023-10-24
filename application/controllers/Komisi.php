@@ -391,6 +391,19 @@ class Komisi extends CI_Controller {
 			</script>';
 		}
 
+		public function hapus_pengurangan_fee(){
+			$id_komisi = $this->input->get('id_komisi');
+			$id_marketing = $this->input->get('id_marketing');
+
+			$where = array('id_komisi'=>$id_komisi,'id_marketing'=> $id_marketing);
+			if (isset($where)) {
+				$this->m_komisi->hapus_pengurangan_fee($where);
+				echo '<script>
+				window.location="' . base_url('komisi/rincian_komisi/'.$id_komisi.'') . '"
+				</script>';
+			}
+		}
+
 		public function edit_komisi($id_komisi){
 			$level = $this->session->userdata('level');
 			if ($level == '') {
