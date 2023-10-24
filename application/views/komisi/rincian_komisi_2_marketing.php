@@ -280,13 +280,15 @@
                             <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$pph_listing.')'?></td>
                             <td class="tg-0lax text-right"><?php echo $biaya_pph_l_r ?></td>
                         </tr>
+                        <?php if ($jumlah_kurang_listing != 0) {?>
+                            <tr>
+                                <td class="tg-0lax text-warning">Biaya Pengurangan (<?= $keterangan_kurang_listing ?>)</td>
+                                <td class="tg-0lax text-right"><?php echo $jumlah_kurang_listing_r; ?></td>
+                            </tr>
+                        <?php } ?>
                         <tr>
                             <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
                             <td class="tg-0lax text-warning text-right"><?php echo $fmb_l_r; ?></td>
-                        </tr>
-                        <tr>
-                            <td class="tg-0lax text-warning">Biaya (<?= $keterangan_kurang_listing ?>)</td>
-                            <td class="tg-0lax text-right"><?php echo $real_fee_diterima_listing_r; ?></td>
                         </tr>
                         <tr>
                             <td class="tg-0lax text-right" colspan="2"><?php echo $norek_listing; ?></td>
@@ -294,7 +296,15 @@
                     </tbody>
                 </table>
                 <div>
-                    <button type="button" class="btn btn-danger mb-3" id="toggleForm">Biaya Pengurang (Bila Ada)</button>
+                    <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Disetujui'):?>
+                        <?php if ($jumlah_kurang_listing == 0) {?>
+                            <button type="button" class="btn btn-danger mb-3" id="toggleForm">Biaya Pengurang (Bila Ada)</button>
+                        <?php }else{ ?>
+
+                            <a href="<?= base_url('komisi/hapus_pengurangan_fee?id_komisi=' . $komisi->id_komisi . '&id_marketing=' . $komisi->mar_listing_komisi); ?>"  class="btn btn-primary mb-3"><i class="fas fa-trash mr-2" title="Hapus"></i>Hapus Biaya Pengurangan</a>
+
+                        <?php } ?>
+                    <?php endif ?>
                     <div id="pengurangan_listing1" style="display:none;">
                         <form method="post" action="<?= base_url('komisi/tambah_pengurangan_fee') ?>">
                           <div class="form-group">
@@ -375,6 +385,12 @@
                         <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$pph_selling.')'?></td>
                         <td class="tg-0lax text-right"><?php echo $biaya_pph_s_r ?></td>
                     </tr>
+                    <?php if ($jumlah_kurang_selling != 0) {?>
+                        <tr>
+                            <td class="tg-0lax text-warning">Biaya Pengurangan (<?= $keterangan_kurang_selling ?>)</td>
+                            <td class="tg-0lax text-right"><?php echo $jumlah_kurang_selling_r; ?></td>
+                        </tr>
+                    <?php } ?>
                     <tr>
                         <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
                         <td class="tg-0lax text-warning text-right"><?php echo $fmb_s_r; ?></td>
@@ -386,8 +402,16 @@
             </table>
 
             <div>
-                <button type="button" class="btn btn-danger mb-3" id="toggleForm2">Biaya Pengurang (Bila Ada)</button>
-                <div id="pengurangan_listing2" style="display:none;">
+                <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Disetujui') :?>
+                    <?php if ($jumlah_kurang_selling == 0) {?>
+                        <button type="button" class="btn btn-danger float-right" id="toggleForm2">Biaya Pengurang (Bila Ada)</button>
+                    <?php }else{ ?>
+
+                        <a href="<?= base_url('komisi/hapus_pengurangan_fee?id_komisi=' . $komisi->id_komisi . '&id_marketing=' . $komisi->mar_selling_komisi); ?>"  class="btn btn-primary mb-3 float-right"><i class="fas fa-trash mr-2" title="Hapus"></i>Hapus Biaya Pengurangan</a>
+
+                    <?php } ?>
+                <?php endif ?>
+                <div id="pengurangan_selling1" style="display:none;padding-top: 54px;">
                     <form method="post" action="<?= base_url('komisi/tambah_pengurangan_fee') ?>">
                       <div class="form-group">
                         <label for="keterangan_pengurangan">Keterangan Pengurangan</label>
@@ -466,6 +490,12 @@
                                 <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$pph_listing2.')'?></td>
                                 <td class="tg-0lax text-right"><?php echo $biaya_pph_l2_r ?></td>
                             </tr>
+                            <?php if ($jumlah_kurang_listing2 != 0) {?>
+                                <tr>
+                                    <td class="tg-0lax text-warning">Biaya Pengurangan (<?= $keterangan_kurang_listing2 ?>)</td>
+                                    <td class="tg-0lax text-right"><?php echo $jumlah_kurang_listing2_r; ?></td>
+                                </tr>
+                            <?php } ?>
                             <tr>
                                 <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
                                 <td class="tg-0lax text-warning text-right"><?php echo $fmb_l2_r; ?></td>
@@ -475,47 +505,129 @@
                             </tr>
                         </tbody>
                     </table>
-                <?php } ?>
+                    <div>
+                        <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Disetujui'):?>
+                            <?php if ($jumlah_kurang_listing2 == 0) {?>
+                                <button type="button" class="btn btn-danger mb-3" id="toggleForm3">Biaya Pengurang (Bila Ada)</button>
+                            <?php }else{ ?>
+
+                                <a href="<?= base_url('komisi/hapus_pengurangan_fee?id_komisi=' . $komisi->id_komisi . '&id_marketing=' . $komisi->mar_listing2_komisi); ?>"  class="btn btn-primary mb-3"><i class="fas fa-trash mr-2" title="Hapus"></i>Hapus Biaya Pengurangan</a>
+
+                            <?php } ?>
+                        <?php endif ?>
+                        <div id="pengurangan_listing2" style="display:none;">
+                            <form method="post" action="<?= base_url('komisi/tambah_pengurangan_fee') ?>">
+                              <div class="form-group">
+                                <label for="keterangan_pengurangan">Keterangan Pengurangan</label>
+                                <input type="text" class="form-control" id="keterangan_pengurangan" name="keterangan_pengurangan">
+                            </div>
+                            <div class="form-group">
+                                <label for="jumlah_pengurangan3">Jumlah</label>
+                                <input type="text" class="form-control" name="tampil_pengurangan" id="tampil_pengurangan" onkeyup="formatRupiah(this, 'jumlah_pengurangan3')">
+
+                                <input type="hidden" class="form-control" id="jumlah_pengurangan3" name="jumlah_pengurangan">
+                            </div>
+                            <div class="form-group d-xl-none">
+                                <label for="id_komisi">ID Komisi</label>
+                                <input type="text" class="form-control" id="id_komisi" name="id_komisi" value="<?= $komisi->id_komisi ?>">
+                            </div>
+                            <div class="form-group d-xl-none">
+                                <label for="id_marketing">ID Marketing</label>
+                                <input type="text" class="form-control" id="id_marketing" name="id_marketing" value="<?= $komisi->mar_listing2_komisi ?>">
+                            </div>
+                            <div class="form-group d-xl-none">
+                                <label for="status_marketing">Status Marketing</label>
+                                <input type="text" class="form-control" id="status_marketing" name="status_marketing" value="Listing 2">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
             <?php } ?>
-        </div>
-
-
-        <div class="col-md-6">
-            <?php if ($ms_2_afw == 'Ang/Fran/Win') {?>
-
-                <?php include "rincian_komisi_afw.php" ?>
-
-            <?php }else{ ?>
-                <?php if (!empty($m_selling_2)) {?>
-                 <table class="tg table table-striped table-dark">
-                    <tbody>
-                      <tr>
-                        <td class="tg-0lax"><?php echo 'Fee Marketing'?></td>
-                        <td class="tg-0lax text-right"><?php echo $fmk2_selling2_r; ?></td>
-                    </tr>
-                    <tr>
-                        <td class="tg-0lax text-warning"><?php echo 'Dikurangi Admin Sebesar 2.5%'?></td>
-                        <td class="tg-0lax text-right"><?php echo $admin_selling2_r; ?></td>
-                    </tr>
-                    <tr>
-                        <td class="tg-0lax"><?php echo 'Fee Marketing Sementara'?></td>
-                        <td class="tg-0lax text-right"><?php echo $fmk3_selling2_r; ?></td>
-                    </tr>
-                    <tr>
-                        <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$pph_selling2.')'?></td>
-                        <td class="tg-0lax text-right"><?php echo $biaya_pph_s2_r ?></td>
-                    </tr>
-                    <tr>
-                        <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
-                        <td class="tg-0lax text-warning text-right"><?php echo $fmb_s2_r; ?></td>
-                    </tr>
-                    <tr>
-                        <td class="tg-0lax text-right" colspan="2"><?php echo $norek_selling2; ?></td>
-                    </tr>
-                </tbody>
-            </table>
         <?php } ?>
-    <?php } ?>
+    </div>
+
+
+    <div class="col-md-6">
+        <?php if ($ms_2_afw == 'Ang/Fran/Win') {?>
+
+            <?php include "rincian_komisi_afw.php" ?>
+
+        <?php }else{ ?>
+            <?php if (!empty($m_selling_2)) {?>
+             <table class="tg table table-striped table-dark">
+                <tbody>
+                  <tr>
+                    <td class="tg-0lax"><?php echo 'Fee Marketing'?></td>
+                    <td class="tg-0lax text-right"><?php echo $fmk2_selling2_r; ?></td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax text-warning"><?php echo 'Dikurangi Admin Sebesar 2.5%'?></td>
+                    <td class="tg-0lax text-right"><?php echo $admin_selling2_r; ?></td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax"><?php echo 'Fee Marketing Sementara'?></td>
+                    <td class="tg-0lax text-right"><?php echo $fmk3_selling2_r; ?></td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$pph_selling2.')'?></td>
+                    <td class="tg-0lax text-right"><?php echo $biaya_pph_s2_r ?></td>
+                </tr>
+                <?php if ($jumlah_kurang_selling2 != 0) {?>
+                    <tr>
+                        <td class="tg-0lax text-warning">Biaya Pengurangan (<?= $keterangan_kurang_selling2 ?>)</td>
+                        <td class="tg-0lax text-right"><?php echo $jumlah_kurang_selling2_r; ?></td>
+                    </tr>
+                <?php } ?>
+                <tr>
+                    <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
+                    <td class="tg-0lax text-warning text-right"><?php echo $fmb_s2_r; ?></td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax text-right" colspan="2"><?php echo $norek_selling2; ?></td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Disetujui') :?>
+                <?php if ($jumlah_kurang_selling2 == 0) {?>
+                    <button type="button" class="btn btn-danger float-right" id="toggleForm4">Biaya Pengurang (Bila Ada)</button>
+                <?php }else{ ?>
+
+                    <a href="<?= base_url('komisi/hapus_pengurangan_fee?id_komisi=' . $komisi->id_komisi . '&id_marketing=' . $komisi->mar_selling2_komisi); ?>"  class="btn btn-primary mb-3 float-right"><i class="fas fa-trash mr-2" title="Hapus"></i>Hapus Biaya Pengurangan</a>
+
+                <?php } ?>
+            <?php endif ?>
+            <div id="pengurangan_selling2" style="display:none;padding-top: 54px;">
+                <form method="post" action="<?= base_url('komisi/tambah_pengurangan_fee') ?>">
+                  <div class="form-group">
+                    <label for="keterangan_pengurangan">Keterangan Pengurangan</label>
+                    <input type="text" class="form-control" id="keterangan_pengurangan" name="keterangan_pengurangan">
+                </div>
+                <div class="form-group">
+                    <label for="jumlah_pengurangan4">Jumlah</label>
+                    <input type="text" class="form-control" name="tampil_pengurangan" id="tampil_pengurangan" onkeyup="formatRupiah(this, 'jumlah_pengurangan4')">
+
+                    <input type="hidden" class="form-control" id="jumlah_pengurangan4" name="jumlah_pengurangan">
+                </div>
+                <div class="form-group d-xl-none">
+                    <label for="id_komisi">ID Komisi</label>
+                    <input type="text" class="form-control" id="id_komisi" name="id_komisi" value="<?= $komisi->id_komisi ?>">
+                </div>
+                <div class="form-group d-xl-none">
+                    <label for="id_marketing">ID Marketing</label>
+                    <input type="text" class="form-control" id="id_marketing" name="id_marketing" value="<?= $komisi->mar_selling2_komisi ?>">
+                </div>
+                <div class="form-group d-xl-none">
+                    <label for="status_marketing">Status Marketing</label>
+                    <input type="text" class="form-control" id="status_marketing" name="status_marketing" value="Selling 2">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+<?php } ?>
+<?php } ?>
 </div>
 </div>
 </div>
