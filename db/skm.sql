@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 23 Okt 2023 pada 10.57
+-- Waktu pembuatan: 24 Okt 2023 pada 10.53
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -75,9 +75,9 @@ CREATE TABLE `komisi` (
 --
 
 INSERT INTO `komisi` (`id_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_komisi`, `mar_listing_komisi`, `mar_listing2_komisi`, `mar_selling_komisi`, `mar_selling2_komisi`, `bruto_komisi`, `waktu_komisi`, `tgl_disetujui`, `status_komisi`) VALUES
-(283, 'Grand Sungkono Lagoon Tower Venetian Unit 3708', 'Sewa', '2023-08-08', 2, 0, 2, 0, '3800000', '2023-10-13', '2023-10-21', 'Disetujui'),
+(283, 'Grand Sungkono Lagoon Tower Venetian Unit 3708', 'Sewa', '2023-08-08', 2, 0, 2, 0, '3800000', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
 (284, 'Apartemen Grand Sungkono Lagoon Tower Venetian Unit 2801', 'Sewa', '2023-08-01', 1091, 0, 2, 0, '5000000', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
-(285, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual', '2023-06-26', 2, 0, 11, 0, '68781750', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
+(285, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual', '2023-06-26', 2, 0, 11, 0, '68781750', '2023-10-13', '2023-10-24', 'Disetujui'),
 (286, 'Woodland Blok WL No. 5 Citraland, Surabaya', 'Jual', '2023-08-04', 11, 0, 8642, 0, '50000000', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
 (287, 'JL. Manyar Rejo X/39, Surabaya', 'Jual', '2023-09-28', 38, 0, 4147, 0, '25000000', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
 (288, 'Raya Darmo Permai I No. 60, Surabaya', 'Sewa', '2023-08-29', 11, 0, 11, 0, '16500000', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
@@ -172,8 +172,12 @@ CREATE TABLE `pengurangan_fee` (
 --
 
 INSERT INTO `pengurangan_fee` (`id_pengurangan`, `id_komisi`, `id_marketing`, `keterangan_pengurangan`, `jumlah_pengurangan`, `status_pengurangan`) VALUES
-(7, 285, 2, 'Banner', 10000, 'Listing'),
-(8, 285, 11, 'Kucing', 100000, 'Selling');
+(16, 285, 2, 'Pengiriman Kucing', 50000, 'Listing'),
+(24, 291, 9, 'Beli Banner 3', 5000, 'Listing 2'),
+(25, 291, 11, 'Beli Banner 4', 54375, 'Selling 2'),
+(30, 290, 35, 'Pengiriman Biawak 1', 7188, 'Selling 2'),
+(31, 290, 36, 'Pengiriman Biawak 2', 97188, 'Selling 2'),
+(33, 290, 2, 'ada aja', 25000, 'Selling');
 
 -- --------------------------------------------------------
 
@@ -260,9 +264,9 @@ CREATE TABLE `sub_komisi` (
 --
 
 INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `npwpm_listing_komisi`, `npwpum_listing_komisi`, `npwpum_listing2_komisi`, `mm2_listing_komisi`, `npwpm2_listing_komisi`, `npwpum2_listing_komisi`, `npwpum2_listing2_komisi`, `mm_selling_komisi`, `npwpm_selling_komisi`, `npwpum_selling_komisi`, `npwpum_selling2_komisi`, `mm2_selling_komisi`, `npwpm2_selling_komisi`, `npwpum2_selling_komisi`, `npwpum2_selling2_komisi`, `admin_pengguna`, `admin_status_komisi`) VALUES
-(182, 283, 60, 1, 1, 1, 0, 0, 0, 0, 60, 1, 1, 1, 0, 0, 0, 0, 1, 4),
+(182, 283, 60, 1, 1, 1, 0, 0, 0, 0, 60, 1, 1, 1, 0, 0, 0, 0, 1, 0),
 (183, 284, 0, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 1, 0, 0, 0, 0, 1, 0),
-(184, 285, 50, 1, 1, 1, 0, 0, 0, 0, 60, 1, 1, 0, 0, 0, 0, 0, 1, 0),
+(184, 285, 50, 1, 1, 1, 0, 0, 0, 0, 60, 1, 1, 0, 0, 0, 0, 0, 1, 4),
 (185, 286, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
 (186, 287, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
 (187, 288, 70, 1, 1, 0, 0, 0, 0, 0, 70, 1, 1, 0, 0, 0, 0, 0, 1, 0),
@@ -406,7 +410,7 @@ ALTER TABLE `pengguna`
 -- AUTO_INCREMENT untuk tabel `pengurangan_fee`
 --
 ALTER TABLE `pengurangan_fee`
-  MODIFY `id_pengurangan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_pengurangan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT untuk tabel `potongan`
