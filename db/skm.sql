@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Okt 2023 pada 10.53
+-- Waktu pembuatan: 25 Okt 2023 pada 06.35
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -148,7 +148,7 @@ CREATE TABLE `pengguna` (
 
 INSERT INTO `pengguna` (`id_pengguna`, `nama_pengguna`, `username_pengguna`, `pass_pengguna`, `gambar_ttd_pengguna`, `level_pengguna`) VALUES
 (1, 'Rohman', 'rohman', '2397977a0e43fb1f5ee26fe993674b5b', 'ttd_ku_baru.jpg', 'Administrator'),
-(4, 'Julia', 'julia', 'c2e285cb33cecdbeb83d2189e983a8c0', '', 'CMO'),
+(4, 'Julia', 'julia', 'c2e285cb33cecdbeb83d2189e983a8c0', 'halu.jpg', 'CMO'),
 (6, 'Fandi', 'fandi', '9bb773615bccfc87168aa059884ca038', 'image_amC.png', 'Administrator'),
 (9, 'Henny R', 'gun', '5161ebb0cce4b7987ba8b6935d60a180', '8-TKgm4cgncXgwpL4_(1).png', 'CMO');
 
@@ -410,7 +410,7 @@ ALTER TABLE `pengguna`
 -- AUTO_INCREMENT untuk tabel `pengurangan_fee`
 --
 ALTER TABLE `pengurangan_fee`
-  MODIFY `id_pengurangan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_pengurangan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT untuk tabel `potongan`
