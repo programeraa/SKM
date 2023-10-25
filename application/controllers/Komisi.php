@@ -17,10 +17,10 @@ class Komisi extends CI_Controller {
 			}
 
 			$data['title'] = 'Dashboard';
-		// $data['data_pengajuan'] = $this->m_dashboard->data_pengajuan()->row_array();
-		// $data['disetujui'] = $this->m_dashboard->disetujui()->row_array();
-		// $data['ditolak'] = $this->m_dashboard->ditolak()->row_array();
-		// $data['karyawan'] = $this->m_dashboard->karyawan()->row_array();
+			$data['data_komisi'] = $this->m_dashboard->data_komisi()->row_array();
+			$data['disetujui'] = $this->m_dashboard->disetujui()->row_array();
+			$data['belum_disetujui'] = $this->m_dashboard->belum_disetujui()->row_array();
+			$data['marketing'] = $this->m_dashboard->marketing()->row_array();
 
 			$this->load->view('v_header', $data);
 			$this->load->view('v_dashboard', $data);
@@ -426,46 +426,47 @@ class Komisi extends CI_Controller {
 			$alamat = $this->input->post('alamat');
 			$jt = $this->input->post('jt');
 			$tgl_closing = $this->input->post('tgl_closing');
-			//$ml = $this->input->post('marketing_listing');
-			//$ms = $this->input->post('marketing_selling');
 			$komisi = $this->input->post('komisi');
-			$status_komisi = $this->input->post('status_komisi');
-			$admin = $this->input->post('admin');
 			$id_komisi = $this->input->post('id_komisi');
 
-			date_default_timezone_set("Asia/Jakarta");
-			$waktu = date("Y-m-d H:i:s");
+			//$ml = $this->input->post('marketing_listing');
+			//$ms = $this->input->post('marketing_selling');
+			//$status_komisi = $this->input->post('status_komisi');
+			//$admin = $this->input->post('admin');
+
+			//date_default_timezone_set("Asia/Jakarta");
+			//$waktu = date("Y-m-d H:i:s");
 
 			$data = array(
 				'alamat_komisi' => $alamat,
 				'jt_komisi' => $jt,
 				'tgl_closing_komisi' => $tgl_closing,
+				'bruto_komisi' => $komisi
+
+				//'status_komisi' => $status_komisi
 				//'mar_listing_komisi' => $ml,
 				//'mar_selling_komisi' => $ms,
-				'bruto_komisi' => $komisi,
-				'status_komisi' => $status_komisi
 			);
 
-			$data2 = array();
-			if ($status_komisi == 'Disetujui') {
-				$previous_status = $this->m_komisi->get_status($id_komisi);
+			// $data2 = array();
+			// if ($status_komisi == 'Disetujui') {
+			// 	$previous_status = $this->m_komisi->get_status($id_komisi);
 
-				if ($previous_status != 'Disetujui') {
-					$data['tgl_disetujui'] = $waktu;
-				}
+			// 	if ($previous_status != 'Disetujui') {
+			// 		$data['tgl_disetujui'] = $waktu;
+			// 	}
 
-				$data2['admin_status_komisi'] = $admin;
-			} else {
-				$data['tgl_disetujui'] = '0000-00-00';
-				$data2['admin_status_komisi'] = 0;
-			}
+			// 	$data2['admin_status_komisi'] = $admin;
+			// } else {
+			// 	$data['tgl_disetujui'] = '0000-00-00';
+			// 	$data2['admin_status_komisi'] = 0;
+			// }
 
 			$where = array('id_komisi'=>$id_komisi);
 
 			if (isset($where)) {
 				$eksekusi = $this->m_komisi->update($where,$data);
-				$eksekusi2 = $this->m_komisi->update_sub_komisi($where,$data2);
-
+				//$eksekusi2 = $this->m_komisi->update_sub_komisi($where,$data2);
 
 				echo '<script>
 				alert("Selamat! Berhasil Update Data Komisi");
