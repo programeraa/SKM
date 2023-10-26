@@ -96,7 +96,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="jabatan" class="col-form-label">Jabatan</label>
-                                <input type="text" class="form-control" id="jabatan" name="jabatan" value="<?php echo $mkt->jabatan_mar; ?>">
+                                <select class="form-control" id="jabatan" name="jabatan">
+                                    <option value="">Pilih Member</option>
+                                    <?php
+                                    if ($mkt->jabatan_mar == "me") echo "<option value='me' selected>Marketing Executive (ME)</option>";
+                                    else echo "<option value='me'>Marketing Executive (ME)</option>";
+
+                                    if ($mkt->jabatan_mar == "emd") echo "<option value='emd' selected>Executive Marketing Director (EMD)</option>";
+                                    else echo "<option value='emd'>Executive Marketing Director (EMD)</option>";
+
+                                    if ($mkt->jabatan_mar == "cmo") echo "<option value='cmo' selected>Chief Marketing Officer (CMO)</option>";
+                                    else echo "<option value='cmo'>Chief Marketing Officer (CMO)</option>";
+                                    ?>
+                                </select>
                             </div> 
                             <div class="row">
                                 <div class="col-md-6">
