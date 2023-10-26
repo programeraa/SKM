@@ -1,9 +1,17 @@
 <?php
 //=================================================== cari upline listing 1 dan 2
 //cari upline listing 1
+$up_1_listing_jabatan = 5;
 foreach ($marketing as $mkt) {
     if ($mkt->id_mar == $komisi->up_1_listing) {
         $up_1_listing = $mkt->nama_mar;
+        if ($mkt->jabatan_mar == 'me') {
+            $up_1_listing_jabatan = 3;
+        }elseif($mkt->jabatan_mar == 'emd'){
+            $up_1_listing_jabatan = 5;
+        }elseif($mkt->jabatan_mar == 'cmo'){
+            $up_1_listing_jabatan = 5;
+        }
         break;
     }else{
         $up_1_listing = '';
@@ -12,9 +20,17 @@ foreach ($marketing as $mkt) {
 
 $up_1_listing;
 
+$up_2_listing_jabatan = 5;
 foreach ($marketing as $mkt) {
     if ($mkt->id_mar == $komisi->up_2_listing) {
         $up_2_listing = $mkt->nama_mar;
+        if ($mkt->jabatan_mar == 'me') {
+            $up_2_listing_jabatan = 3;
+        }elseif($mkt->jabatan_mar == 'emd'){
+            $up_2_listing_jabatan = 5;
+        }elseif($mkt->jabatan_mar == 'cmo'){
+            $up_2_listing_jabatan = 5;
+        }
         break;
     }else{
         $up_2_listing = '';
@@ -76,7 +92,7 @@ if (!empty($up_2_listing2)) {
 //===================================================== hitung upline 1 listing 1
 //fee kotor
 
-$fuk = 5 / 100 * $fkl;
+$fuk = $up_1_listing_jabatan / 100 * $fkl;
 
 //string to rupiah
 $fuk_n = stringToNumber($fuk);
@@ -114,7 +130,7 @@ $netto_listing_1_r = numberToRupiah($netto_listing_1_n);
 //hitung upline 2 listing 1
 //fee kotor
 
-$fuk2 = 5 / 100 * $fkl;
+$fuk2 = $up_2_listing_jabatan / 100 * $fkl;
 
 //string to rupiah
 $fuk2_n = stringToNumber($fuk2);
@@ -141,7 +157,7 @@ $pajak_listing_2_n = stringToNumber($pajak_listing_2);
 $pajak_listing_2_r = numberToRupiah($pajak_listing_2_n);
 
 //netto 1
-$netto_listing_2 = $fuk - $pajak_listing_2;
+$netto_listing_2 = $fuk2 - $pajak_listing_2;
 
 //string to rupiah
 $netto_listing_2_n = stringToNumber($netto_listing_2);
