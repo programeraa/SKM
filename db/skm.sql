@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Okt 2023 pada 06.35
+-- Waktu pembuatan: 26 Okt 2023 pada 04.39
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -116,16 +116,49 @@ CREATE TABLE `marketing` (
 --
 
 INSERT INTO `marketing` (`id_mar`, `nama_mar`, `nomor_mar`, `member_mar`, `upline_emd_mar`, `upline_cmo_mar`, `npwp_mar`, `norek_mar`, `fasilitas_mar`, `jabatan_mar`, `gambar_ktp_mar`, `gambar_npwp_mar`) VALUES
-(2, 'Henny', 'AA001', 'Silver', '9', '3', '', 'BCA-6730311638 (Henny)', '', '', '', '3.jpg'),
-(3, 'Jonatan / Lydia', 'AA002', 'Silver', '', '', '', 'BCA-0100359723 (Lydia Susanto)', '', '', '', '1.jpg'),
-(7, 'Purnomo', 'AA004', 'Prime Pro', '3', '10', '', '78654 - Purnomo', '', '', '', ''),
-(9, 'Yenny', 'AA005', 'Black Jack', '3', '', '', 'BCA-89897899 - Yenny', '', '', '10.jpg', '9.jpg'),
-(10, 'Julia / Jeffy', 'AA006', 'Silver', '', '', '', '9090 - Julia Jeffy', '', '', '', 'yanes_nira_used1.png'),
-(11, 'Claudia', 'AA007', 'Prime Pro', '10', '', '', 'BCA-4700271779 (Claudia Florensia Sri P)', '', '', '', '6.jpg'),
-(35, 'Ang', 'AA0010', 'Silver', '10', '', '', 'BCA 472-018-1717 (Anggraini Angkawidjaya)', '', '', '', 'yanes_nira_used.png'),
-(36, 'Fran', 'AA0011', 'Silver', '35', '7', '', 'BCA 102-031-4776 (Fransiska)', '', '', '', 'Owen_Used.png'),
-(37, 'Winata', 'AA0012', 'Silver', '35', '', '', 'BCA 018-365-6161 (Winata Ciputra)', '', '', '', 'yanes_nira_used2.png'),
-(38, 'Ang/Fran/Win', 'AA0013', 'Silver', '', '', '', '-', '', '', '', '');
+(2, 'Henny', 'AA0005', 'Gold Express', '9', '3', '', 'BCA-6730311638 (Henny)', '', '', 'ktp.png', 'npwp.png'),
+(3, 'Jonatan / Lydia', 'AA0271', 'Silver', '', '', '', 'BCA-0100359723 (Lydia Susanto)', '', '', 'ktp1.png', 'npwp1.png'),
+(7, 'Purnomo', 'AA0445', 'Silver', '3', '', '', 'BCA-3681745040 - Purnomo', '', '', 'ktp2.png', 'npwp2.png'),
+(9, 'Yenny', 'AA0065', 'Silver', '39', '', '', 'BCA-8290541221 - Yenny', '', '', 'ktp3.png', 'npwp3.png'),
+(10, 'Julia / Jeffy', 'AA0053', 'Silver', '39', '', '', 'BCA-7880384320 - Julia/Jeffry', '', '', 'ktp4.png', 'npwp4.png'),
+(11, 'Claudia', 'AA0008', 'Prime Pro', '10', '', '', 'BCA-4700271779 (Claudia Florensia Sri P)', '', '', 'ktp6.png', 'npwp6.png'),
+(35, 'Ang', 'AA0007', 'Silver', '39', '', '', 'BCA 472-018-1717 (Anggraini Angkawidjaya)', '', '', 'ktp7.png', 'npwp7.png'),
+(36, 'Fran', 'AA0009', 'Silver', '35', '', '', 'BCA-102 031 4776 - (Fransiska)', '', '', 'ktp8.png', 'npwp8.png'),
+(37, 'Winata', 'AA0207', 'Silver', '35', '', '', 'BCA 018-365-6161 (Winata Ciputra)', '', '', 'ktp9.png', 'npwp9.png'),
+(38, 'Ang/Fran/Win', 'AA0013', 'Silver', '', '', '', '-', '', '', '', ''),
+(39, 'Gun', 'AA0001', 'Silver', '', '', '', 'BCA-4631 91 0022 - Gunawan', '', '', 'ktp5.png', 'npwp5.png'),
+(40, 'Ana', 'AA0002', 'Silver', '39', '', '', 'BCA-4632 91 0011 - Ana', '', '', 'ktp10.png', 'npwp10.png'),
+(41, 'Johan', 'AA0399', 'Silver', '39', '', '', 'Belum Ada', '', '', 'ktp11.png', 'npwp11.png'),
+(42, 'Yuhuu / Ani', 'AA0387', 'Silver', '10', '', '', 'Belum Ada', '', '', 'ktp12.png', 'npwp12.png'),
+(43, 'Handoko', 'AA0293', 'Silver', '48', '', '', 'BCA-2581421241 - Handoko Angkasastro', '', '', 'ktp13.png', 'npwp13.png'),
+(44, 'Ersiana', 'AA0447', 'Silver', '48', '', '', 'BCA-0871216711 - Ersiana', '', '', 'ktp14.png', 'npwp14.png'),
+(45, 'Albert / Monic', 'AA0148', 'Silver', '', '', '', 'BCA-5060198791 - Albert / Monic', '', '', 'ktp15.png', 'npwp15.png'),
+(46, 'Budi', 'AA0418', 'Silver', '10', '', '', 'Belum Ada', '', '', 'ktp16.png', 'npwp16.png'),
+(47, 'Ibnu Chandra / Sherla', 'AA0075', 'Silver', '', '', '', 'BCA-5085007308 - Ibnu Chandra', '', '', 'ktp17.png', 'npwp17.png'),
+(48, 'Indri', 'AA0064', 'Silver', '', '', '', 'BCA-8290693021 - Indri', '', '', 'ktp18.png', 'npwp18.png'),
+(49, 'Lily Tan', ' AA0080', 'Silver', '48', '', '', 'BCA-6720460708 - Lily Tan', '', '', 'ktp19.png', 'npwp19.png'),
+(50, 'Dyah CA', 'AA00402', 'Silver', '', '', '', 'Belum Ada', '', '', 'ktp20.png', 'npwp20.png'),
+(51, 'Indrawati Prajogo', 'AA0429', 'Silver', '48', '', '', '	BCA-6720144717 - Indrawati Prajogo', '', '', 'ktp21.png', 'npwp21.png'),
+(52, 'Mariana', 'AA0378', 'Silver', '10', '', '', 'BCA-1011397447 - Maria Yuliawati', '', '', 'ktp22.png', 'npwp22.png'),
+(53, 'Ghary / Yoan', 'AA0311', 'Silver', '', '', '', 'BCA-8220334881 - Ghary Yoan', '', '', 'ktp23.png', 'npwp23.png'),
+(54, 'Jonny Gunawan', 'AA0350', 'Silver', '', '', '', 'BCA-8220726755 - Jonny Gunawan', '', '', 'ktp24.png', 'npwp24.png'),
+(55, 'Ida / Boyong', 'AA0440', 'Silver', '', '', '', 'BCA-6720576293 - Geertruida Margaretha', '', '', 'ktp25.png', 'npwp25.png'),
+(56, 'Teryan / Bian', 'AA0446', 'Silver', '35', '', '', 'BCA-4641255437 - Teryan Bian', '', '', 'ktp26.png', 'npwp26.png'),
+(57, 'Aditya', 'AA0430', 'Silver', '54', '', '', 'BCA-6965071290 - Aditya Risqi Putra', '', '', 'ktp27.png', 'npwp27.png'),
+(58, 'Aming Go', 'AA0196', 'Silver', '', '', '', 'BCA-675 0220 353 - Aming', '', '', 'ktp28.png', 'npwp28.png'),
+(59, 'Mery', 'AA0452', 'Silver', '', '', '', 'Belum Ada', '', '', 'ktp29.png', 'npwp29.png'),
+(60, 'Inata', 'AA0436', 'Silver', '41', '', '', 'BCA-2582093009 - Inata', '', '', 'ktp30.png', 'npwp30.png'),
+(61, 'Aghata', 'AA0444', 'Silver', '60', '', '', 'BCA-6750379441 - Nathania Agatha Benita', '', '', 'ktp31.png', 'npwp31.png'),
+(62, 'Syauqi', 'AA0305', 'Silver', '65', '', '', 'BCA Syariah-0050061977 - Qomarul Fata Assyauqi', '', '', 'ktp32.png', 'npwp32.png'),
+(63, 'Deddy Tansen', 'AA0453', 'Silver', '', '', '', 'Belum Ada', '', '', 'ktp33.png', 'npwp33.png'),
+(64, 'Naning', 'AA0454', 'Silver', '', '', '', 'Belum Ada', '', '', 'ktp34.png', 'npwp34.png'),
+(65, 'Anita / Steven', 'AA0070', 'Silver', '48', '', '', 'BCA-6720334061 - Anita Steven', '', '', 'ktp35.png', 'npwp35.png'),
+(66, 'Vonny C', 'AA0337', 'Silver', '48', '', '', 'Belum Ada', '', '', 'ktp36.png', 'npwp36.png'),
+(67, 'Hokky', 'AA0210', 'Silver', '47', '', '', 'BCA-0180670904 - Hokky Gunawan', '', '', 'ktp37.png', 'npwp37.png'),
+(68, 'Tristya', 'AA0438', 'Silver', '10', '', '', 'BCA-8630299242 - Novan Hari Tristya', '', '', 'ktp38.png', 'npwp38.png'),
+(69, 'Nita', 'AA0456', 'Silver', '', '', '', 'Belum Ada', '', '', 'ktp39.png', 'npwp39.png'),
+(70, 'Owen', 'AA0419', 'Silver', '', '', '', 'Mandiri - 1410019762400 - Jordan Yuseno Putra', '', '', 'ktp40.png', 'npwp40.png'),
+(71, 'Yanes / Nira', 'AA0264', 'Silver', '', '', '', 'BCA-0885931265 - Yanes Nira', '', '', 'ktp41.png', 'npwp41.png');
 
 -- --------------------------------------------------------
 
@@ -148,9 +181,8 @@ CREATE TABLE `pengguna` (
 
 INSERT INTO `pengguna` (`id_pengguna`, `nama_pengguna`, `username_pengguna`, `pass_pengguna`, `gambar_ttd_pengguna`, `level_pengguna`) VALUES
 (1, 'Rohman', 'rohman', '2397977a0e43fb1f5ee26fe993674b5b', 'ttd_ku_baru.jpg', 'Administrator'),
-(4, 'Julia', 'julia', 'c2e285cb33cecdbeb83d2189e983a8c0', 'halu.jpg', 'CMO'),
-(6, 'Fandi', 'fandi', '9bb773615bccfc87168aa059884ca038', 'image_amC.png', 'Administrator'),
-(9, 'Henny R', 'gun', '5161ebb0cce4b7987ba8b6935d60a180', '8-TKgm4cgncXgwpL4_(1).png', 'CMO');
+(4, 'Julia', 'julia', 'c2e285cb33cecdbeb83d2189e983a8c0', 'ttd_baru.jpg', 'CMO'),
+(10, 'Risca', 'risca', 'f5787529cb944fa9600457d30438d20d', 'ttd_baru1.jpg', 'Administrator');
 
 -- --------------------------------------------------------
 
@@ -398,13 +430,13 @@ ALTER TABLE `komisi`
 -- AUTO_INCREMENT untuk tabel `marketing`
 --
 ALTER TABLE `marketing`
-  MODIFY `id_mar` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_mar` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id_pengguna` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_pengguna` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengurangan_fee`
