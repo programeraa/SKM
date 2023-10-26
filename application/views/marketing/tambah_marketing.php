@@ -71,7 +71,12 @@
                             
                             <div class="form-group">
                                 <label for="jabatan" class="col-form-label">Jabatan</label>
-                                <input type="text" class="form-control" id="jabatan" name="jabatan">
+                                <select class="form-control" id="jabatan" name="jabatan" required>
+                                    <option value="">Pilih Jabatan</option>
+                                    <option value="me">Marketing Executive (ME)</option>
+                                    <option value="emd">Executive Marketing Director (EMD)</option>
+                                    <option value="cmo">Chief Marketing Officer (CMO)</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="g_ktp" class="col-form-label">Foto KTP</label>
