@@ -431,6 +431,8 @@ class Komisi extends CI_Controller {
 			$data['potongan'] = $this->m_komisi->tampil_data_potongan()->result();
 			$data['referal'] = $this->m_komisi->tampil_data_referal()->result();
 			$data['pengurangan'] = $this->m_komisi->tampil_data_pengurangan()->result();
+			$data['sub_komisi'] = $this->m_komisi->tampil_data_sub_komisi()->result();
+			$data['sub_afw'] = $this->m_komisi->tampil_data_sub_afw()->result();
 
 			$this->load->view('v_header', $data);
 			$this->load->view('v_rincian_komisi', $data);
