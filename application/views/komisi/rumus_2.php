@@ -581,6 +581,13 @@ foreach ($marketing as $upline) {
 
 
 //====================================================================== Kasus ANG FRAN WIN
+//inisialiasi id komisi dengan id sub komisi dengan id sub afw
+    $sub_komisi_id = null;
+    foreach ($sub_komisi as $sub_komisi) {
+        if ($komisi->id_komisi == $sub_komisi->id_komisi) {
+            $sub_komisi_id = $sub_komisi->id_sub_komisi;
+        }
+    }
 
 //Cari Upline ANG
     $nama_upline1_ang = '';
@@ -624,7 +631,23 @@ foreach ($marketing as $upline) {
     }
 
     //================================================================ upline 1 ang
-    $fuk_ang = 5 / 100 * $afw_2;
+    $jabatan_upline_ang = null;
+    $jabatan_upline2_ang = null;
+
+    foreach ($sub_afw as $afw_ang) {
+        if ($afw_ang->id_sub_komisi == $sub_komisi_id) {
+            $jabatan_upline_ang = $afw_ang->jabatan_up_ang;
+            $jabatan_upline2_ang = $afw_ang->jabatan_up2_ang;
+        }
+    }
+
+    if ($jabatan_upline_ang == 0) {
+        $jup_1_ang = 5;
+    }else{
+        $jup_1_ang = $jabatan_upline_ang;
+    }
+
+    $fuk_ang = $jup_1_ang / 100 * $afw_2;
 
 //string to rupiah
     $fuk_ang_n = stringToNumber($fuk_ang);
@@ -658,7 +681,14 @@ foreach ($marketing as $upline) {
     $netto_upline_ang_r = numberToRupiah($netto_upline_ang_n);
 
 //================================================================ upline 2 ang
-    $fuk_ang2 = 5 / 100 * $afw_2;
+
+    if ($jabatan_upline2_ang == 0) {
+        $jup_2_ang = 5;
+    }else{
+        $jup_2_ang = $jabatan_upline2_ang;
+    }
+
+    $fuk_ang2 = $jup_2_ang / 100 * $afw_2;
 
 //string to rupiah
     $fuk_ang2_n = stringToNumber($fuk_ang2);
@@ -736,7 +766,24 @@ foreach ($marketing as $upline) {
     }
 
     //================================================================ upline 1 fran
-    $fuk_fran = 5 / 100 * $afw_2;
+
+    $jabatan_upline_fran = null;
+    $jabatan_upline2_fran = null;
+
+    foreach ($sub_afw as $afw_fran) {
+        if ($afw_fran->id_sub_komisi == $sub_komisi_id) {
+            $jabatan_upline_fran = $afw_fran->jabatan_up_fran;
+            $jabatan_upline2_fran = $afw_fran->jabatan_up2_fran;
+        }
+    }
+
+    if ($jabatan_upline_fran == 0) {
+        $jup_1_fran = 5;
+    }else{
+        $jup_1_fran = $jabatan_upline_fran;
+    }
+
+    $fuk_fran = $jup_1_fran / 100 * $afw_2;
 
 //string to rupiah
     $fuk_fran_n = stringToNumber($fuk_fran);
@@ -770,7 +817,14 @@ foreach ($marketing as $upline) {
     $netto_upline_fran_r = numberToRupiah($netto_upline_fran_n);
 
 //================================================================ upline 2 fran
-    $fuk_fran2 = 5 / 100 * $afw_2;
+
+    if ($jabatan_upline2_fran == 0) {
+        $jup_2_fran = 5;
+    }else{
+        $jup_2_fran = $jabatan_upline2_fran;
+    }
+
+    $fuk_fran2 = $jup_2_fran / 100 * $afw_2;
 
 //string to rupiah
     $fuk_fran2_n = stringToNumber($fuk_fran2);
@@ -848,7 +902,24 @@ foreach ($marketing as $upline) {
     }
 
     //================================================================ upline 1 win
-    $fuk_win = 5 / 100 * $afw_1;
+
+    $jabatan_upline_win = null;
+    $jabatan_upline2_win = null;
+
+    foreach ($sub_afw as $afw_win) {
+        if ($afw_win->id_sub_komisi == $sub_komisi_id) {
+            $jabatan_upline_win = $afw_win->jabatan_up_win;
+            $jabatan_upline2_win = $afw_win->jabatan_up2_win;
+        }
+    }
+
+    if ($jabatan_upline_win == 0) {
+        $jup_1_win = 5;
+    }else{
+        $jup_1_win = $jabatan_upline_win;
+    }
+
+    $fuk_win = $jup_1_win / 100 * $afw_1;
 
 //string to rupiah
     $fuk_win_n = stringToNumber($fuk_win);
@@ -882,7 +953,14 @@ foreach ($marketing as $upline) {
     $netto_upline_win_r = numberToRupiah($netto_upline_win_n);
 
 //================================================================ upline 2 win
-    $fuk_win2 = 5 / 100 * $afw_1;
+
+    if ($jabatan_upline2_win == 0) {
+        $jup_2_win = 5;
+    }else{
+        $jup_2_win = $jabatan_upline2_win;
+    }
+
+    $fuk_win2 = $jup_2_win / 100 * $afw_1;
 
 //string to rupiah
     $fuk_win2_n = stringToNumber($fuk_win2);
