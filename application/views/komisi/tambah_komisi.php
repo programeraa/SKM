@@ -99,9 +99,11 @@
                                         foreach ($marketing as $upline) {
                                             if ($upline->id_mar == $each->upline_emd_mar) {
                                                 $a = $upline->gambar_npwp_mar;
+                                                $j_upline1 = $upline->jabatan_mar;
                                                 break;
                                             }elseif($each->upline_emd_mar == null){
                                                 $a = null;
+                                                $j_upline1 = null;
                                                 break;
                                             } 
                                         }
@@ -113,13 +115,26 @@
                                             $npwpum_listing = 0;
                                         }
 
+                                        //inisialisasi jabatan upline 1 listing
+                                        if ($j_upline1 == 'me') {
+                                            $jabatan_upline1 = 3;
+                                        }elseif($j_upline1 == 'emd'){
+                                            $jabatan_upline1 = 5;
+                                        }elseif($j_upline1 == 'cmo'){
+                                            $jabatan_upline1 = 5;
+                                        }else{
+                                            $jabatan_upline1 = 5;
+                                        }
+
                                         //tampilkan upline 2 listing
                                         foreach ($marketing as $upline2) {
                                             if ($upline2->id_mar == $each->upline_cmo_mar) {
                                                 $b = $upline2->gambar_npwp_mar;
+                                                $j_upline2 = $upline2->jabatan_mar;
                                                 break;
                                             }elseif($each->upline_cmo_mar == null){
                                                 $b = null;
+                                                $j_upline2 = null;
                                                 break;
                                             }
                                         }
@@ -131,11 +146,24 @@
                                             $npwpum_listing2 = 0;
                                         }
 
+                                        //inisialisasi jabatan upline 2 listing
+                                        if ($j_upline2 == 'me') {
+                                            $jabatan_upline2 = 3;
+                                        }elseif($j_upline2 == 'emd'){
+                                            $jabatan_upline2 = 5;
+                                        }elseif($j_upline2 == 'cmo'){
+                                            $jabatan_upline2 = 5;
+                                        }else{
+                                            $jabatan_upline2 = 5;
+                                        }
+
                                         $jsArray .= "prdName['" . $each->id_mar . "'] = {
                                             member_mar:'" . addslashes($mm_listing) ."',
                                             npwp_mar:'" . addslashes($npwp_mar) ."',
                                             npwpum_listing:'" . addslashes($npwpum_listing) ."',
-                                            npwpum_listing2:'" . addslashes($npwpum_listing2) ."' };\n";
+                                            jabatan_upline1:'" . addslashes($jabatan_upline1) ."',
+                                            npwpum_listing2:'" . addslashes($npwpum_listing2) ."',
+                                            jabatan_upline2:'" . addslashes($jabatan_upline2) ."' };\n";
                                         }
                                         ?>
                                     </select>
@@ -213,9 +241,11 @@
                                             foreach ($marketing as $upline) {
                                                 if ($upline->id_mar == $each->upline_emd_mar) {
                                                     $a = $upline->gambar_npwp_mar;
+                                                    $js_upline1 = $upline->jabatan_mar;
                                                     break;
                                                 }elseif($each->upline_emd_mar == null){
                                                     $a = null;
+                                                    $js_upline1 = null;
                                                     break;
                                                 }
                                             }
@@ -228,13 +258,26 @@
                                                 $npwpum_selling = 0;
                                             }
 
+                                            //inisialisasi jabatan upline 1 selling
+                                            if ($js_upline1 == 'me') {
+                                                $jabatans_upline1 = 3;
+                                            }elseif($js_upline1 == 'emd'){
+                                                $jabatans_upline1 = 5;
+                                            }elseif($js_upline1 == 'cmo'){
+                                                $jabatans_upline1 = 5;
+                                            }else{
+                                                $jabatans_upline1 = 5;
+                                            }
+
                                             //tampilkan upline 2 selling
                                             foreach ($marketing as $upline2) {
                                                 if ($upline2->id_mar == $each->upline_cmo_mar) {
                                                     $b = $upline2->gambar_npwp_mar;
+                                                    $js_upline2 = $upline2->jabatan_mar;
                                                     break;
                                                 }elseif($each->upline_cmo_mar == null){
                                                     $b = null;
+                                                    $js_upline2 = null;
                                                     break;
                                                 }
                                             }
@@ -246,11 +289,24 @@
                                                 $npwpum_selling2 = 0;
                                             }
 
+                                            //inisialisasi jabatan upline 2 selling
+                                            if ($js_upline2 == 'me') {
+                                                $jabatans_upline2 = 3;
+                                            }elseif($js_upline2 == 'emd'){
+                                                $jabatans_upline2 = 5;
+                                            }elseif($js_upline2 == 'cmo'){
+                                                $jabatans_upline2 = 5;
+                                            }else{
+                                                $jabatans_upline2 = 5;
+                                            }
+
                                             $jsArray_s .= "prdName_s['" . $each->id_mar . "'] = {
                                                 member_mar:'" . addslashes($mm_selling) ."',
                                                 npwp_mar:'" . addslashes($npwp_mar) ."',
                                                 npwpum_selling:'" . addslashes($npwpum_selling) ."',
-                                                npwpum_selling2:'" . addslashes($npwpum_selling2) ."' };\n";
+                                                jabatans_upline1:'" . addslashes($jabatans_upline1) ."',
+                                                npwpum_selling2:'" . addslashes($npwpum_selling2) ."',
+                                                jabatans_upline2:'" . addslashes($jabatans_upline2) ."' };\n";
                                             }
                                             ?>
                                         </select>
@@ -315,8 +371,16 @@
                                             <input type="text" class="form-control" id="npwpum_listing" name="npwpum_listing[]">
                                         </div>
                                         <div class="form-group">
+                                            <label for="jabatanum_listing" class="col-form-label">JABATAN UML</label>
+                                            <input type="text" class="form-control" id="jabatanum_listing" name="jabatanum_listing[]">
+                                        </div>
+                                        <div class="form-group">
                                             <label for="npwpum_listing2" class="col-form-label">NPWP UML2</label>
                                             <input type="text" class="form-control" id="npwpum_listing2" name="npwpum_listing2[]">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="jabatanum_listing2" class="col-form-label">JABATAN UML2</label>
+                                            <input type="text" class="form-control" id="jabatanum_listing2" name="jabatanum_listing2[]">
                                         </div>
 
                                         <!--tambahan input marketing selling-->
@@ -333,8 +397,16 @@
                                             <input type="text" class="form-control" id="npwpum_selling" name="npwpum_selling[]">
                                         </div>
                                         <div class="form-group">
+                                            <label for="jabatanum_selling" class="col-form-label">JABATAN UMS</label>
+                                            <input type="text" class="form-control" id="jabatanum_selling" name="jabatanum_selling[]">
+                                        </div>
+                                        <div class="form-group">
                                             <label for="npwpum_selling2" class="col-form-label">NPWP UMS2</label>
                                             <input type="text" class="form-control" id="npwpum_selling2" name="npwpum_selling2[]">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="jabatanum_selling2" class="col-form-label">JABATAN UMS2</label>
+                                            <input type="text" class="form-control" id="jabatanum_selling2" name="jabatanum_selling2[]">
                                         </div>
                                         <div class="form-group">
                                             <label for="admin" class="col-form-label">Admin</label>
@@ -348,19 +420,25 @@
                                             <input type="text" class="form-control" id="m_ang" name="m_ang" value="<?php echo $member_ang ?>">
                                             <input type="text" class="form-control" id="npwp_ang" name="npwp_ang" value="<?php echo $npwp_ang ?>">
                                             <input type="text" class="form-control" id="npwp_up_ang" name="npwp_up_ang" value="<?php echo $npwp_up_ang ?>">
+                                            <input type="text" class="form-control" id="jabatan_up_ang" name="jabatan_up_ang" value="<?php echo $jabatan_up_ang ?>">
                                             <input type="text" class="form-control" id="npwp_up2_ang" name="npwp_up2_ang" value="<?php echo $npwp_up2_ang ?>">
+                                            <input type="text" class="form-control" id="jabatan_up2_ang" name="jabatan_up2_ang" value="<?php echo $jabatan_up2_ang ?>">
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control" id="m_fran" name="m_fran" value="<?php echo $member_fran ?>">
                                             <input type="text" class="form-control" id="npwp_fran" name="npwp_fran" value="<?php echo $npwp_fran ?>">
                                             <input type="text" class="form-control" id="npwp_up_fran" name="npwp_up_fran" value="<?php echo $npwp_up_fran ?>">
+                                            <input type="text" class="form-control" id="jabatan_up_fran" name="jabatan_up_fran" value="<?php echo $jabatan_up_fran ?>">
                                             <input type="text" class="form-control" id="npwp_up2_fran" name="npwp_up2_fran" value="<?php echo $npwp_up2_fran ?>">
+                                            <input type="text" class="form-control" id="jabatan_up2_fran" name="jabatan_up2_fran" value="<?php echo $jabatan_up2_fran ?>">
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control" id="m_win" name="m_win" value="<?php echo $member_win ?>">
                                             <input type="text" class="form-control" id="npwp_win" name="npwp_win" value="<?php echo $npwp_win ?>">
                                             <input type="text" class="form-control" id="npwp_up_win" name="npwp_up_win" value="<?php echo $npwp_up_win ?>">
+                                            <input type="text" class="form-control" id="jabatan_up_win" name="jabatan_up_win" value="<?php echo $jabatan_up_win ?>">
                                             <input type="text" class="form-control" id="npwp_up2_win" name="npwp_up2_win" value="<?php echo $npwp_up2_win ?>">
+                                            <input type="text" class="form-control" id="jabatan_up2_win" name="jabatan_up2_win" value="<?php echo $jabatan_up2_win ?>">
                                         </div>
 
 
@@ -386,20 +464,26 @@
                 var mm_listing = [];
                 var npwpm_listing = [];
                 var npwpum_listing = [];
+                var jabatan_upline1 = [];
                 var npwpum_listing2 = [];
+                var jabatan_upline2 = [];
 
                 for (var i = 0; i < selectedOptions.length; i++) {
                     var id = selectedOptions[i].value;
                     mm_listing.push(prdName[id].member_mar);
                     npwpm_listing.push(prdName[id].npwp_mar);
                     npwpum_listing.push(prdName[id].npwpum_listing);
+                    jabatan_upline1.push(prdName[id].jabatan_upline1);
                     npwpum_listing2.push(prdName[id].npwpum_listing2);
+                    jabatan_upline2.push(prdName[id].jabatan_upline2);
                 }
 
                 document.getElementById('mm_listing').value = mm_listing.join(', ');
                 document.getElementById('npwpm_listing').value = npwpm_listing.join(', ');
                 document.getElementById('npwpum_listing').value = npwpum_listing.join(', ');
+                document.getElementById('jabatanum_listing').value = jabatan_upline1.join(', ');
                 document.getElementById('npwpum_listing2').value = npwpum_listing2.join(', ');
+                document.getElementById('jabatanum_listing2').value = jabatan_upline2.join(', ');
             }
         </script>
 
@@ -412,20 +496,26 @@
                 var mm_selling = [];
                 var npwpm_selling = [];
                 var npwpum_selling = [];
+                var jabatans_upline1 = [];
                 var npwpum_selling2 = [];
+                var jabatans_upline2 = [];
 
                 for (var i = 0; i < selectedOptions.length; i++) {
                     var id = selectedOptions[i].value;
                     mm_selling.push(prdName_s[id].member_mar);
                     npwpm_selling.push(prdName_s[id].npwp_mar);
                     npwpum_selling.push(prdName_s[id].npwpum_selling);
+                    jabatans_upline1.push(prdName_s[id].jabatans_upline1);
                     npwpum_selling2.push(prdName_s[id].npwpum_selling2);
+                    jabatans_upline2.push(prdName_s[id].jabatans_upline2);
                 }
 
                 document.getElementById('mm_selling').value = mm_selling.join(', ');
                 document.getElementById('npwpm_selling').value = npwpm_selling.join(', ');
                 document.getElementById('npwpum_selling').value = npwpum_selling.join(', ');
+                document.getElementById('jabatanum_selling').value = jabatans_upline1.join(', ');
                 document.getElementById('npwpum_selling2').value = npwpum_selling2.join(', ');
+                document.getElementById('jabatanum_selling2').value = jabatans_upline2.join(', ');
             }
         </script>
 
