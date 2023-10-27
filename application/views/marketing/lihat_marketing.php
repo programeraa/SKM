@@ -64,37 +64,39 @@
                                             echo 'Marketing Executive (ME)';
                                             }elseif($jabatan == 'emd'){
                                                 echo 'Executive Marketing Director (EMD)';
-                                                }else{
+                                                }elseif($jabatan == 'cmo'){
                                                     echo 'Chief Marketing Officer (CMO)';
-                                                }?>" 
-                                                readonly>
+                                                    }else{
+                                                        echo 'Belum Ditentukan';
+                                                    }?>" 
+                                                    readonly>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="ktp" class="col-form-label">Foto KTP</label>
-                                                <?php if ($gambar_ktp == 1) { ?>
-                                                    <img style="width: 200px; height: 130px; " src="<?= base_url('assets/foto_marketing/' . $mkt->gambar_ktp_mar) ?>" alt="Marketing Image">
-                                                <?php }else{ ?>
-                                                    <img style="width: 200px; height: 130px; " src="<?= base_url('assets/foto_marketing/tidak_ada.jpg') ?>" alt="Marketing Image">
-                                                <?php } ?>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="npwp" class="col-form-label">Foto NPWP</label>
-                                                <?php if ($gambar_npwp == 1) { ?>
-                                                    <img style="width: 200px; height: 130px; " src="<?= base_url('assets/foto_marketing/' . $mkt->gambar_npwp_mar) ?>" alt="Marketing Image">
-                                                <?php }else{ ?>
-                                                    <img style="width: 200px; height: 130px; " src="<?= base_url('assets/foto_marketing/tidak_ada.jpg') ?>" alt="Marketing Image">
-                                                <?php } ?>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="ktp" class="col-form-label">Foto KTP</label>
+                                                    <?php if ($gambar_ktp == 1) { ?>
+                                                        <img style="width: 200px; height: 130px; " src="<?= base_url('assets/foto_marketing/' . $mkt->gambar_ktp_mar) ?>" alt="Marketing Image">
+                                                    <?php }else{ ?>
+                                                        <img style="width: 200px; height: 130px; " src="<?= base_url('assets/foto_marketing/tidak_ada.jpg') ?>" alt="Marketing Image">
+                                                    <?php } ?>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="npwp" class="col-form-label">Foto NPWP</label>
+                                                    <?php if ($gambar_npwp == 1) { ?>
+                                                        <img style="width: 200px; height: 130px; " src="<?= base_url('assets/foto_marketing/' . $mkt->gambar_npwp_mar) ?>" alt="Marketing Image">
+                                                    <?php }else{ ?>
+                                                        <img style="width: 200px; height: 130px; " src="<?= base_url('assets/foto_marketing/tidak_ada.jpg') ?>" alt="Marketing Image">
+                                                    <?php } ?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
