@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Okt 2023 pada 10.55
+-- Waktu pembuatan: 27 Okt 2023 pada 10.54
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -89,7 +89,10 @@ INSERT INTO `komisi` (`id_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_ko
 (294, 'Compreng, Widang, Tuban', 'Jual', '2023-10-10', 2, 3, 9138, 0, '10000000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
 (295, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-13', 11, 38, 2, 9, '52000000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
 (300, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-13', 11, 38, 2, 9, '52000000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
-(301, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-13', 11, 38, 2, 9, '52000000', '2023-10-26', '0000-00-00', 'Belum Disetujui');
+(301, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-13', 11, 38, 2, 9, '52000000', '2023-10-26', '0000-00-00', 'Belum Disetujui'),
+(302, 'Tuban 1', 'Sewa', '2023-10-13', 2, 3, 7, 9, '10000000', '2023-10-27', '0000-00-00', 'Belum Disetujui'),
+(303, 'Tuban 2', 'Sewa', '2023-10-13', 2, 3, 7, 9, '10000000', '2023-10-27', '0000-00-00', 'Belum Disetujui'),
+(305, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual/Sewa', '2023-10-12', 2, 11, 7, 38, '10000000', '2023-10-27', '0000-00-00', 'Belum Disetujui');
 
 -- --------------------------------------------------------
 
@@ -117,17 +120,17 @@ CREATE TABLE `marketing` (
 --
 
 INSERT INTO `marketing` (`id_mar`, `nama_mar`, `nomor_mar`, `member_mar`, `upline_emd_mar`, `upline_cmo_mar`, `npwp_mar`, `norek_mar`, `fasilitas_mar`, `jabatan_mar`, `gambar_ktp_mar`, `gambar_npwp_mar`) VALUES
-(2, 'Henny', 'AA0005', 'Gold Express', '9', '3', '', 'BCA-6730311638 (Henny)', '', '', 'ktp.png', 'npwp.png'),
-(3, 'Jonatan / Lydia', 'AA0271', 'Silver', '', '', '', 'BCA-0100359723 (Lydia Susanto)', '', '', 'ktp1.png', 'npwp1.png'),
-(7, 'Purnomo', 'AA0445', 'Silver', '3', '', '', 'BCA-3681745040 - Purnomo', '', '', 'ktp2.png', 'npwp2.png'),
-(9, 'Yenny', 'AA0065', 'Silver', '39', '', '', 'BCA-8290541221 - Yenny', '', '', 'ktp3.png', 'npwp3.png'),
+(2, 'Henny', 'AA0005', 'Gold Express', '9', '3', '', 'BCA-6730311638 (Henny)', '', 'me', 'ktp.png', 'npwp.png'),
+(3, 'Jonatan / Lydia', 'AA0271', 'Silver', '', '', '', 'BCA-0100359723 (Lydia Susanto)', '', 'cmo', 'ktp1.png', 'npwp1.png'),
+(7, 'Purnomo', 'AA0445', 'Silver', '3', '2', '', 'BCA-3681745040 - Purnomo', '', '', 'ktp2.png', 'npwp2.png'),
+(9, 'Yenny', 'AA0065', 'Silver', '39', '', '', 'BCA-8290541221 - Yenny', '', 'me', 'ktp3.png', 'npwp3.png'),
 (10, 'Julia / Jeffy', 'AA0053', 'Silver', '39', '', '', 'BCA-7880384320 - Julia/Jeffry', '', '', 'ktp4.png', 'npwp4.png'),
 (11, 'Claudia', 'AA0008', 'Prime Pro', '10', '', '', 'BCA-4700271779 (Claudia Florensia Sri P)', '', '', 'ktp6.png', 'npwp6.png'),
-(35, 'Ang', 'AA0007', 'Silver', '39', '', '', 'BCA 472-018-1717 (Anggraini Angkawidjaya)', '', '', 'ktp7.png', 'npwp7.png'),
+(35, 'Ang', 'AA0007', 'Silver', '10', '2', '', 'BCA 472-018-1717 (Anggraini Angkawidjaya)', '', 'me', 'ktp7.png', 'npwp7.png'),
 (36, 'Fran', 'AA0009', 'Silver', '35', '', '', 'BCA-102 031 4776 - (Fransiska)', '', '', 'ktp8.png', 'npwp8.png'),
 (37, 'Winata', 'AA0207', 'Silver', '35', '', '', 'BCA 018-365-6161 (Winata Ciputra)', '', '', 'ktp9.png', 'npwp9.png'),
 (38, 'Ang/Fran/Win', 'AA0013', 'Silver', '', '', '', '-', '', '', '', ''),
-(39, 'Gun', 'AA0001', 'Silver', '', '', '', 'BCA-4631 91 0022 - Gunawan', '', '', 'ktp5.png', 'npwp5.png'),
+(39, 'Gun', 'AA0001', 'Silver', '', '', '', 'BCA-4631 91 0022 - Gunawan', '', 'me', 'ktp5.png', 'npwp5.png'),
 (40, 'Ana', 'AA0002', 'Silver', '39', '', '', 'BCA-4632 91 0011 - Ana', '', '', 'ktp10.png', 'npwp10.png'),
 (41, 'Johan', 'AA0399', 'Silver', '39', '', '', 'Belum Ada', '', '', 'ktp11.png', 'npwp11.png'),
 (42, 'Yuhuu / Ani', 'AA0387', 'Silver', '10', '', '', 'Belum Ada', '', '', 'ktp12.png', 'npwp12.png'),
@@ -278,19 +281,27 @@ CREATE TABLE `sub_komisi` (
   `mm_listing_komisi` int(250) NOT NULL,
   `npwpm_listing_komisi` int(250) NOT NULL,
   `npwpum_listing_komisi` int(250) NOT NULL,
+  `jabatanum_listing_komisi` int(250) NOT NULL,
   `npwpum_listing2_komisi` int(250) NOT NULL,
+  `jabatanum_listing2_komisi` int(250) NOT NULL,
   `mm2_listing_komisi` int(250) NOT NULL,
   `npwpm2_listing_komisi` int(250) NOT NULL,
   `npwpum2_listing_komisi` int(250) NOT NULL,
+  `jabatanum2_listing_komisi` int(250) NOT NULL,
   `npwpum2_listing2_komisi` int(250) NOT NULL,
+  `jabatanum2_listing2_komisi` int(250) NOT NULL,
   `mm_selling_komisi` int(250) NOT NULL,
   `npwpm_selling_komisi` int(250) NOT NULL,
   `npwpum_selling_komisi` int(250) NOT NULL,
+  `jabatanum_selling_komisi` int(250) NOT NULL,
   `npwpum_selling2_komisi` int(250) NOT NULL,
+  `jabatanum_selling2_komisi` int(250) NOT NULL,
   `mm2_selling_komisi` int(250) NOT NULL,
   `npwpm2_selling_komisi` int(250) NOT NULL,
   `npwpum2_selling_komisi` int(250) NOT NULL,
+  `jabatanum2_selling_komisi` int(250) NOT NULL,
   `npwpum2_selling2_komisi` int(250) NOT NULL,
+  `jabatanum2_selling2_komisi` int(250) NOT NULL,
   `admin_pengguna` int(250) NOT NULL,
   `admin_status_komisi` int(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -299,22 +310,25 @@ CREATE TABLE `sub_komisi` (
 -- Dumping data untuk tabel `sub_komisi`
 --
 
-INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `npwpm_listing_komisi`, `npwpum_listing_komisi`, `npwpum_listing2_komisi`, `mm2_listing_komisi`, `npwpm2_listing_komisi`, `npwpum2_listing_komisi`, `npwpum2_listing2_komisi`, `mm_selling_komisi`, `npwpm_selling_komisi`, `npwpum_selling_komisi`, `npwpum_selling2_komisi`, `mm2_selling_komisi`, `npwpm2_selling_komisi`, `npwpum2_selling_komisi`, `npwpum2_selling2_komisi`, `admin_pengguna`, `admin_status_komisi`) VALUES
-(182, 283, 60, 1, 1, 1, 0, 0, 0, 0, 60, 1, 1, 1, 0, 0, 0, 0, 1, 0),
-(183, 284, 0, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 1, 0, 0, 0, 0, 1, 0),
-(184, 285, 50, 1, 1, 1, 0, 0, 0, 0, 60, 1, 1, 0, 0, 0, 0, 0, 1, 4),
-(185, 286, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
-(186, 287, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
-(187, 288, 70, 1, 1, 0, 0, 0, 0, 0, 70, 1, 1, 0, 0, 0, 0, 0, 1, 0),
-(188, 289, 70, 0, 1, 1, 50, 1, 0, 0, 70, 1, 1, 0, 0, 0, 0, 0, 1, 0),
-(189, 290, 0, 0, 0, 0, 0, 0, 0, 0, 50, 1, 1, 1, 50, 0, 0, 0, 1, 0),
-(190, 291, 50, 1, 0, 0, 80, 1, 1, 0, 50, 1, 0, 0, 70, 1, 1, 0, 1, 0),
-(191, 292, 50, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 1, 0),
-(192, 293, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 1, 0),
-(193, 294, 50, 1, 1, 1, 50, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
-(194, 295, 70, 1, 1, 0, 50, 0, 0, 0, 50, 1, 1, 1, 80, 1, 1, 0, 1, 0),
-(199, 300, 70, 1, 1, 0, 50, 0, 0, 0, 50, 1, 1, 1, 80, 1, 1, 0, 1, 0),
-(200, 301, 70, 1, 1, 0, 50, 0, 0, 0, 60, 1, 1, 1, 50, 1, 1, 0, 1, 0);
+INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `npwpm_listing_komisi`, `npwpum_listing_komisi`, `jabatanum_listing_komisi`, `npwpum_listing2_komisi`, `jabatanum_listing2_komisi`, `mm2_listing_komisi`, `npwpm2_listing_komisi`, `npwpum2_listing_komisi`, `jabatanum2_listing_komisi`, `npwpum2_listing2_komisi`, `jabatanum2_listing2_komisi`, `mm_selling_komisi`, `npwpm_selling_komisi`, `npwpum_selling_komisi`, `jabatanum_selling_komisi`, `npwpum_selling2_komisi`, `jabatanum_selling2_komisi`, `mm2_selling_komisi`, `npwpm2_selling_komisi`, `npwpum2_selling_komisi`, `jabatanum2_selling_komisi`, `npwpum2_selling2_komisi`, `jabatanum2_selling2_komisi`, `admin_pengguna`, `admin_status_komisi`) VALUES
+(182, 283, 60, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+(183, 284, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+(184, 285, 50, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4),
+(185, 286, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+(186, 287, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+(187, 288, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+(188, 289, 70, 0, 1, 0, 1, 0, 50, 1, 0, 0, 0, 0, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+(189, 290, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 1, 1, 0, 1, 0, 50, 0, 0, 0, 0, 0, 1, 0),
+(190, 291, 50, 1, 0, 0, 0, 0, 80, 1, 1, 0, 0, 0, 50, 1, 0, 0, 0, 0, 70, 1, 1, 0, 0, 0, 1, 0),
+(191, 292, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+(192, 293, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+(193, 294, 50, 1, 1, 0, 1, 0, 50, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+(194, 295, 70, 1, 1, 0, 0, 0, 50, 0, 0, 0, 0, 0, 50, 1, 1, 0, 1, 0, 80, 1, 1, 0, 0, 0, 1, 0),
+(199, 300, 70, 1, 1, 0, 0, 0, 50, 0, 0, 0, 0, 0, 50, 1, 1, 0, 1, 0, 80, 1, 1, 0, 0, 0, 1, 0),
+(200, 301, 70, 1, 1, 0, 0, 0, 50, 0, 0, 0, 0, 0, 60, 1, 1, 0, 1, 0, 50, 1, 1, 0, 0, 0, 1, 0),
+(201, 302, 60, 1, 1, 3, 1, 5, 50, 1, 0, 5, 0, 5, 50, 1, 1, 5, 1, 3, 50, 1, 1, 5, 0, 5, 1, 0),
+(202, 303, 60, 1, 1, 3, 1, 5, 50, 1, 0, 5, 0, 5, 50, 1, 1, 5, 1, 3, 50, 1, 1, 3, 0, 5, 1, 0),
+(204, 305, 60, 1, 1, 3, 1, 5, 70, 1, 1, 5, 0, 5, 50, 1, 1, 5, 1, 3, 50, 0, 0, 5, 0, 5, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -328,27 +342,34 @@ CREATE TABLE `sub_komisi_afw` (
   `m_ang` int(250) NOT NULL,
   `npwp_ang` int(250) NOT NULL,
   `npwp_up_ang` int(250) NOT NULL,
+  `jabatan_up_ang` int(250) NOT NULL,
   `npwp_up2_ang` int(250) NOT NULL,
+  `jabatan_up2_ang` int(250) NOT NULL,
   `m_fran` int(250) NOT NULL,
   `npwp_fran` int(250) NOT NULL,
   `npwp_up_fran` int(250) NOT NULL,
+  `jabatan_up_fran` int(250) NOT NULL,
   `npwp_up2_fran` int(250) NOT NULL,
+  `jabatan_up2_fran` int(250) NOT NULL,
   `m_win` int(250) NOT NULL,
   `npwp_win` int(250) NOT NULL,
   `npwp_up_win` int(250) NOT NULL,
-  `npwp_up2_win` int(250) NOT NULL
+  `jabatan_up_win` int(250) NOT NULL,
+  `npwp_up2_win` int(250) NOT NULL,
+  `jabatan_up2_win` int(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `sub_komisi_afw`
 --
 
-INSERT INTO `sub_komisi_afw` (`id_afw`, `id_sub_komisi`, `m_ang`, `npwp_ang`, `npwp_up_ang`, `npwp_up2_ang`, `m_fran`, `npwp_fran`, `npwp_up_fran`, `npwp_up2_fran`, `m_win`, `npwp_win`, `npwp_up_win`, `npwp_up2_win`) VALUES
-(6, 186, 50, 1, 1, 0, 60, 1, 1, 0, 60, 1, 1, 0),
-(7, 191, 50, 1, 1, 0, 50, 1, 1, 0, 50, 1, 1, 0),
-(8, 192, 50, 1, 1, 0, 50, 1, 1, 0, 50, 1, 1, 0),
-(9, 199, 50, 1, 1, 0, 50, 1, 1, 0, 50, 1, 1, 0),
-(10, 200, 50, 1, 1, 0, 50, 1, 1, 0, 50, 1, 1, 0);
+INSERT INTO `sub_komisi_afw` (`id_afw`, `id_sub_komisi`, `m_ang`, `npwp_ang`, `npwp_up_ang`, `jabatan_up_ang`, `npwp_up2_ang`, `jabatan_up2_ang`, `m_fran`, `npwp_fran`, `npwp_up_fran`, `jabatan_up_fran`, `npwp_up2_fran`, `jabatan_up2_fran`, `m_win`, `npwp_win`, `npwp_up_win`, `jabatan_up_win`, `npwp_up2_win`, `jabatan_up2_win`) VALUES
+(6, 186, 50, 1, 1, 0, 0, 0, 60, 1, 1, 0, 0, 0, 60, 1, 1, 0, 0, 0),
+(7, 191, 50, 1, 1, 0, 0, 0, 50, 1, 1, 0, 0, 0, 50, 1, 1, 0, 0, 0),
+(8, 192, 50, 1, 1, 0, 0, 0, 50, 1, 1, 0, 0, 0, 50, 1, 1, 0, 0, 0),
+(9, 199, 50, 1, 1, 0, 0, 0, 50, 1, 1, 0, 0, 0, 50, 1, 1, 0, 0, 0),
+(10, 200, 50, 1, 1, 0, 0, 0, 50, 1, 1, 0, 0, 0, 50, 1, 1, 0, 0, 0),
+(12, 204, 50, 1, 1, 5, 1, 3, 50, 1, 1, 3, 0, 5, 50, 1, 1, 3, 0, 5);
 
 --
 -- Indexes for dumped tables
@@ -430,7 +451,7 @@ ALTER TABLE `co_broke`
 -- AUTO_INCREMENT untuk tabel `komisi`
 --
 ALTER TABLE `komisi`
-  MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=302;
+  MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=306;
 
 --
 -- AUTO_INCREMENT untuk tabel `marketing`
@@ -466,13 +487,13 @@ ALTER TABLE `referal`
 -- AUTO_INCREMENT untuk tabel `sub_komisi`
 --
 ALTER TABLE `sub_komisi`
-  MODIFY `id_sub_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
+  MODIFY `id_sub_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
 
 --
 -- AUTO_INCREMENT untuk tabel `sub_komisi_afw`
 --
 ALTER TABLE `sub_komisi_afw`
-  MODIFY `id_afw` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_afw` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
