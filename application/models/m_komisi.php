@@ -71,7 +71,7 @@ class M_komisi extends CI_Model{
 
 			c.npwp_mar as npwp_selling, c.upline_emd_mar as up_1_selling, c.upline_cmo_mar as up_2_selling, c.nama_mar as nama_mar2, c.norek_mar as norek_selling,
 
-			d.id_sub_komisi, d.id_komisi, d.mm_listing_komisi, d.npwpm_listing_komisi, d.npwpum_listing_komisi, d.npwpum_listing2_komisi, d.mm_selling_komisi, d.npwpm_selling_komisi, d.npwpum_selling_komisi, d.npwpum_selling2_komisi, d.admin_pengguna, d.admin_status_komisi,
+			d.id_sub_komisi, d.id_komisi, d.mm_listing_komisi, d.npwpm_listing_komisi, d.npwpum_listing_komisi, d.npwpum_listing2_komisi, d.mm_selling_komisi, d.npwpm_selling_komisi, d.npwpum_selling_komisi, d.npwpum_selling2_komisi, d.admin_pengguna, d.admin_status_komisi, d.jabatanum_listing_komisi, d.jabatanum_listing2_komisi, d.jabatanum2_listing_komisi, d.jabatanum2_listing2_komisi, d.jabatanum_selling_komisi, d.jabatanum_selling2_komisi, d.jabatanum2_selling_komisi, d.jabatanum2_selling2_komisi,
 
 			d.mm2_listing_komisi, d.npwpm2_listing_komisi, d.npwpum2_listing_komisi, d.npwpum2_listing2_komisi, d.mm2_selling_komisi, d.npwpm2_selling_komisi, d.npwpum2_selling_komisi, d.npwpum2_selling2_komisi,
 
