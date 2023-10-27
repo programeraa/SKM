@@ -61,6 +61,14 @@ class M_komisi extends CI_Model{
 		return $this->db->get('pengurangan_fee');
 	}
 
+	function tampil_data_sub_komisi(){
+		return $this->db->get('sub_komisi');
+	}
+
+	function tampil_data_sub_afw(){
+		return $this->db->get('sub_komisi_afw');
+	}
+
 	function tampil_data_rincian($where){
 		$data = implode($where);
 		$hasil = $this->db->query("SELECT a.id_komisi, a.alamat_komisi, a.jt_komisi, a.tgl_closing_komisi, a.bruto_komisi, a.mar_listing_komisi, a.mar_selling_komisi, a.waktu_komisi, a.status_komisi, a.tgl_disetujui,
