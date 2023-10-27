@@ -1,17 +1,9 @@
 <?php
 //=================================================== cari upline listing 1 dan 2
 //cari upline listing 1
-$up_1_listing_jabatan = 5;
 foreach ($marketing as $mkt) {
     if ($mkt->id_mar == $komisi->up_1_listing) {
         $up_1_listing = $mkt->nama_mar;
-        if ($mkt->jabatan_mar == 'me') {
-            $up_1_listing_jabatan = 3;
-        }elseif($mkt->jabatan_mar == 'emd'){
-            $up_1_listing_jabatan = 5;
-        }elseif($mkt->jabatan_mar == 'cmo'){
-            $up_1_listing_jabatan = 5;
-        }
         break;
     }else{
         $up_1_listing = '';
@@ -20,17 +12,9 @@ foreach ($marketing as $mkt) {
 
 $up_1_listing;
 
-$up_2_listing_jabatan = 5;
 foreach ($marketing as $mkt) {
     if ($mkt->id_mar == $komisi->up_2_listing) {
         $up_2_listing = $mkt->nama_mar;
-        if ($mkt->jabatan_mar == 'me') {
-            $up_2_listing_jabatan = 3;
-        }elseif($mkt->jabatan_mar == 'emd'){
-            $up_2_listing_jabatan = 5;
-        }elseif($mkt->jabatan_mar == 'cmo'){
-            $up_2_listing_jabatan = 5;
-        }
         break;
     }else{
         $up_2_listing = '';
@@ -91,8 +75,15 @@ if (!empty($up_2_listing2)) {
 
 //===================================================== hitung upline 1 listing 1
 //fee kotor
+$jabatan_upline_1l = $komisi->jabatanum_listing_komisi;
 
-$fuk = $up_1_listing_jabatan / 100 * $fkl;
+if ($jabatan_upline_1l == 0) {
+    $jup_l1 = 5;
+}else{
+    $jup_l1 = $jabatan_upline_1l;
+}
+
+$fuk = $jup_l1 / 100 * $fkl;
 
 //string to rupiah
 $fuk_n = stringToNumber($fuk);
@@ -130,7 +121,15 @@ $netto_listing_1_r = numberToRupiah($netto_listing_1_n);
 //hitung upline 2 listing 1
 //fee kotor
 
-$fuk2 = $up_2_listing_jabatan / 100 * $fkl;
+$jabatan_upline_2l = $komisi->jabatanum_listing2_komisi;
+
+if ($jabatan_upline_2l == 0) {
+    $jup_l2 = 5;
+}else{
+    $jup_l2 = $jabatan_upline_2l;
+}
+
+$fuk2 = $jup_l2 / 100 * $fkl;
 
 //string to rupiah
 $fuk2_n = stringToNumber($fuk2);
@@ -167,7 +166,15 @@ $netto_listing_2_r = numberToRupiah($netto_listing_2_n);
 //hitung upline 1 listing 2 
 //fee kotor
 
-$fuk3 = 5 / 100 * $fkl2;
+$jabatan_upline_1l_2 = $komisi->jabatanum2_listing_komisi;
+
+if ($jabatan_upline_1l_2 == 0) {
+    $jup_l2_1 = 5;
+}else{
+    $jup_l2_1 = $jabatan_upline_1l_2;
+}
+
+$fuk3 = $jup_l2_1 / 100 * $fkl2;
 
 //string to rupiah
 $fuk3_n = stringToNumber($fuk3);
@@ -205,7 +212,15 @@ $netto1_listing_2_r = numberToRupiah($netto1_listing_2_n);
 //hitung upline 2 listing 2
 //fee kotor
 
-$fuk4 = 5 / 100 * $fkl2;
+$jabatan_upline_2l_2 = $komisi->jabatanum2_listing2_komisi;
+
+if ($jabatan_upline_2l_2 == 0) {
+    $jup_l2_2 = 5;
+}else{
+    $jup_l2_2 = $jabatan_upline_2l_2;
+}
+
+$fuk4 = $jup_l2_2 / 100 * $fkl2;
 
 //string to rupiah
 $fuk4_n = stringToNumber($fuk4);
@@ -315,7 +330,15 @@ if (!empty($up_2_selling2)) {
 //========================================================= hitung upline 1 selling 1
 //fee kotor
 
-$fuk_s = 5 / 100 * $fks;
+$jabatan_upline_1s = $komisi->jabatanum_selling_komisi;
+
+if ($jabatan_upline_1s == 0) {
+    $jup_s1 = 5;
+}else{
+    $jup_s1 = $jabatan_upline_1s;
+}
+
+$fuk_s = $jup_s1 / 100 * $fks;
 
 //string to rupiah
 $fuk_s_n = stringToNumber($fuk_s);
@@ -353,7 +376,15 @@ $netto_selling_1_r = numberToRupiah($netto_selling_1_n);
 //hitung upline 2 selling 1
 //fee kotor
 
-$fuk2_s = 5 / 100 * $fks;
+$jabatan_upline_2s = $komisi->jabatanum_selling2_komisi;
+
+if ($jabatan_upline_2s == 0) {
+    $jup_s2 = 5;
+}else{
+    $jup_s2 = $jabatan_upline_2s;
+}
+
+$fuk2_s = $jup_s2 / 100 * $fks;
 
 //string to rupiah
 $fuk2_s_n = stringToNumber($fuk2_s);
@@ -391,7 +422,15 @@ $netto_selling_2_r = numberToRupiah($netto_selling_2_n);
 //hitung upline 1 selling 2
 //fee kotor
 
-$fuk3_s = 5 / 100 * $fks2;
+$jabatan_upline_1s_2 = $komisi->jabatanum2_selling_komisi;
+
+if ($jabatan_upline_1s_2 == 0) {
+    $jup_s2_1 = 5;
+}else{
+    $jup_s2_1 = $jabatan_upline_1s_2;
+}
+
+$fuk3_s = $jup_s2_1 / 100 * $fks2;
 
 //string to rupiah
 $fuk3_s_n = stringToNumber($fuk3_s);
@@ -429,7 +468,15 @@ $netto1_selling_2_r = numberToRupiah($netto1_selling_2_n);
 //hitung upline 2 selling 2
 //fee kotor
 
-$fuk4_s = 5 / 100 * $fks2;
+$jabatan_upline_2s_2 = $komisi->jabatanum2_selling2_komisi;
+
+if ($jabatan_upline_2s_2 == 0) {
+    $jup_s2_2 = 5;
+}else{
+    $jup_s2_2 = $jabatan_upline_2s_2;
+}
+
+$fuk4_s = $jup_s2_2 / 100 * $fks2;
 
 //string to rupiah
 $fuk4_s_n = stringToNumber($fuk4_s);
