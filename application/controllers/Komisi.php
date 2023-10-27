@@ -59,11 +59,16 @@ class Komisi extends CI_Controller {
 			$npwpum_listing = $this->input->post('npwpum_listing');
 			$npwpum_listing2 = $this->input->post('npwpum_listing2');
 
+			$jabatan_upline1 = $this->input->post('jabatanum_listing');
+			$jabatan_upline2 = $this->input->post('jabatanum_listing2');
+
 		//tambahan m selling
 			$mm_selling = $this->input->post('mm_selling');
 			$npwpm_selling = $this->input->post('npwpm_selling');
 			$npwpum_selling = $this->input->post('npwpum_selling');
+			$jabatans_upline1 = $this->input->post('jabatanum_selling');
 			$npwpum_selling2 = $this->input->post('npwpum_selling2');
+			$jabatans_upline2 = $this->input->post('jabatanum_selling2');
 
 			date_default_timezone_set("Asia/Jakarta");
 			$waktu = date("Y-m-d H:i:s");
@@ -176,20 +181,32 @@ class Komisi extends CI_Controller {
 				$new_npwpum_listing_awal = $mlb[0] = explode(', ', $npwpum_listing[0]); 
 				$new_npwpum_listing2_awal = $mlb[0] = explode(', ', $npwpum_listing2[0]); 
 
+				$new_jabatannum_listing_awal = $mlb[0] = explode(', ', $jabatan_upline1[0]); 
+				$new_jabatannum_listing2_awal = $mlb[0] = explode(', ', $jabatan_upline2[0]); 
+
 				$mbl_1 = $new_mm_listing_awal[0]; 
 				$mbl_2 = $new_npwpm_listing_awal[0]; 
 				$mbl_3 = $new_npwpum_listing_awal[0]; 
 				$mbl_4 = $new_npwpum_listing2_awal[0]; 
 
+				$mbl_5 = $new_jabatannum_listing_awal[0]; 
+				$mbl_6 = $new_jabatannum_listing2_awal[0]; 
+
 				$new_mm_listing = $mbl_1;
 				$new_npwpm_listing = $mbl_2;
 				$new_npwpum_listing = $mbl_3;
 				$new_npwpum_listing2 = $mbl_4;
+
+				$new_jabatanum_listing = $mbl_5;
+				$new_jabatanum_listing2 = $mbl_6;
 			}else{
 				$new_mm_listing = '';
 				$new_npwpm_listing = '';
 				$new_npwpum_listing = '';
 				$new_npwpum_listing2 = '';
+
+				$new_jabatanum_listing = '';
+				$new_jabatanum_listing2 = '';
 			}
 
 			if (!empty($mm_listing_baru[1])) {
@@ -198,20 +215,32 @@ class Komisi extends CI_Controller {
 				$new_npwpum2_listing_awal = $mlb2[1] = explode(', ', $npwpum_listing[0]);
 				$new_npwpum2_listing2_awal = $mlb2[1] = explode(', ', $npwpum_listing2[0]);
 
+				$new_jabatanum2_listing_awal = $mlb2[1] = explode(', ', $jabatan_upline1[0]);
+				$new_jabatanum2_listing2_awal = $mlb2[1] = explode(', ', $jabatan_upline2[0]);
+
 				$mbl2_1 = $new_mm2_listing_awal[1]; 
 				$mbl2_2 = $new_npwpm2_listing_awal[1]; 
 				$mbl2_3 = $new_npwpum2_listing_awal[1]; 
 				$mbl2_4 = $new_npwpum2_listing2_awal[1];
 
+				$mbl2_5 = $new_jabatanum2_listing_awal[1];
+				$mbl2_6 = $new_jabatanum2_listing2_awal[1];
+
 				$new_mm2_listing = $mbl2_1;
 				$new_npwpm2_listing = $mbl2_2;
 				$new_npwpum2_listing = $mbl2_3;
 				$new_npwpum2_listing2 = $mbl2_4; 
+
+				$new_jabatanum2_listing = $mbl2_5;
+				$new_jabatanum2_listing2 = $mbl2_6; 
 			}else{
 				$new_mm2_listing = '';
 				$new_npwpm2_listing = '';
 				$new_npwpum2_listing = '';
 				$new_npwpum2_listing2 = '';
+
+				$new_jabatanum2_listing = '';
+				$new_jabatanum2_listing2 = ''; 
 			}
 
 			if (!empty($mm_selling_baru[0])) {
@@ -220,42 +249,66 @@ class Komisi extends CI_Controller {
 				$new_npwpum_selling_awal = $msb[0] = explode(', ', $npwpum_selling[0]); 
 				$new_npwpum_selling2_awal = $msb[0] = explode(', ', $npwpum_selling2[0]); 
 
+				$new_jabatannum_selling_awal = $msb[0] = explode(', ', $jabatans_upline1[0]); 
+				$new_jabatannum_selling2_awal = $msb[0] = explode(', ', $jabatans_upline2[0]); 
+
 				$msb_1 = $new_mm_selling_awal[0]; 
 				$msb_2 = $new_npwpm_selling_awal[0]; 
 				$msb_3 = $new_npwpum_selling_awal[0]; 
 				$msb_4 = $new_npwpum_selling2_awal[0]; 
 
+				$msb_5 = $new_jabatannum_selling_awal[0]; 
+				$msb_6 = $new_jabatannum_selling2_awal[0];
+
 				$new_mm_selling = $msb_1;
 				$new_npwpm_selling = $msb_2;
 				$new_npwpum_selling = $msb_3;
 				$new_npwpum_selling2 = $msb_4;
+
+				$new_jabatanum_selling = $msb_5;
+				$new_jabatanum_selling2 = $msb_6;
 			}else{
 				$new_mm_selling = '';
 				$new_npwpm_selling = '';
 				$new_npwpum_selling = '';
 				$new_npwpum_selling2 = '';
+
+				$new_jabatanum_selling = '';
+				$new_jabatanum_selling2 = '';
 			}
 
 			if (!empty($mm_selling_baru[1])) {
 				$new_mm2_selling_awal = $msb2[1] = explode(', ', $mm_selling[0]); 
 				$new_npwpm2_selling_awal = $msb2[1] = explode(', ', $npwpm_selling[0]); 
 				$new_npwpum2_selling_awal = $msb2[1] = explode(', ', $npwpum_selling[0]); 
-				$new_npwpum2_selling2_awal = $msb2[1] = explode(', ', $npwpum_selling2[0]); 
+				$new_npwpum2_selling2_awal = $msb2[1] = explode(', ', $npwpum_selling2[0]);
+
+				$new_jabatannum2_selling_awal = $msb2[1] = explode(', ', $jabatans_upline1[0]); 
+				$new_jabatannum2_selling2_awal = $msb2[1] = explode(', ', $jabatans_upline2[0]);  
 
 				$msb_1 = $new_mm2_selling_awal[1]; 
 				$msb_2 = $new_npwpm2_selling_awal[1]; 
 				$msb_3 = $new_npwpum2_selling_awal[1]; 
 				$msb_4 = $new_npwpum2_selling2_awal[1]; 
 
+				$msb_5 = $new_jabatannum2_selling_awal[1]; 
+				$msb_6 = $new_jabatannum2_selling2_awal[1]; 
+
 				$new_mm2_selling = $msb_1;
 				$new_npwpm2_selling = $msb_2;
 				$new_npwpum2_selling = $msb_3;
 				$new_npwpum2_selling2 = $msb_4;
+
+				$new_jabatanum2_selling = $msb_5;
+				$new_jabatanum2_selling2 = $msb_6;
 			}else{
 				$new_mm2_selling = '';
 				$new_npwpm2_selling = '';
 				$new_npwpum2_selling = '';
 				$new_npwpum2_selling2 = '';
+
+				$new_jabatanum2_selling = '';
+				$new_jabatanum2_selling2 = '';
 			}
 
 			$data2 = array(
@@ -263,22 +316,30 @@ class Komisi extends CI_Controller {
 				'mm_listing_komisi' => $new_mm_listing,
 				'npwpm_listing_komisi' => $new_npwpm_listing,
 				'npwpum_listing_komisi' => $new_npwpum_listing,
+				'jabatanum_listing_komisi' => $new_jabatanum_listing,
 				'npwpum_listing2_komisi' => $new_npwpum_listing2,
+				'jabatanum_listing2_komisi' => $new_jabatanum_listing2,
 
 				'mm2_listing_komisi' => $new_mm2_listing,
 				'npwpm2_listing_komisi' => $new_npwpm2_listing,
 				'npwpum2_listing_komisi' => $new_npwpum2_listing,
+				'jabatanum2_listing_komisi' => $new_jabatanum2_listing,
 				'npwpum2_listing2_komisi' => $new_npwpum2_listing2,
+				'jabatanum2_listing2_komisi' => $new_jabatanum2_listing2,
 
 				'mm_selling_komisi' => $new_mm_selling,
 				'npwpm_selling_komisi' => $new_npwpm_selling,
 				'npwpum_selling_komisi' => $new_npwpum_selling,
+				'jabatanum_selling_komisi' => $new_jabatanum_selling,
 				'npwpum_selling2_komisi' => $new_npwpum_selling2,
+				'jabatanum_selling2_komisi' => $new_jabatanum_selling2,
 
 				'mm2_selling_komisi' => $new_mm2_selling,
 				'npwpm2_selling_komisi' => $new_npwpm2_selling,
 				'npwpum2_selling_komisi' => $new_npwpum2_selling,
+				'jabatanum2_selling_komisi' => $new_jabatanum2_selling,
 				'npwpum2_selling2_komisi' => $new_npwpum2_selling2,
+				'jabatanum2_selling2_komisi' => $new_jabatanum2_selling2,
 				'admin_pengguna' => $admin
 			);
 
@@ -323,17 +384,23 @@ class Komisi extends CI_Controller {
 				'm_ang' => $this->input->post('m_ang'),
 				'npwp_ang' => $this->input->post('npwp_ang'),
 				'npwp_up_ang' => $this->input->post('npwp_up_ang'),
+				'jabatan_up_ang' => $this->input->post('jabatan_up_ang'),
 				'npwp_up2_ang' => $this->input->post('npwp_up2_ang'),
+				'jabatan_up2_ang' => $this->input->post('jabatan_up2_ang'),
 
 				'm_fran' => $this->input->post('m_fran'),
 				'npwp_fran' => $this->input->post('npwp_fran'),
 				'npwp_up_fran' => $this->input->post('npwp_up_fran'),
+				'jabatan_up_fran' => $this->input->post('jabatan_up_fran'),
 				'npwp_up2_fran' => $this->input->post('npwp_up2_fran'),
+				'jabatan_up2_fran' => $this->input->post('jabatan_up2_fran'),
 
 				'm_win' => $this->input->post('m_win'),
 				'npwp_win' => $this->input->post('npwp_win'),
 				'npwp_up_win' => $this->input->post('npwp_up_win'),
-				'npwp_up2_win' => $this->input->post('npwp_up2_win')
+				'jabatan_up_win' => $this->input->post('jabatan_up_win'),
+				'npwp_up2_win' => $this->input->post('npwp_up2_win'),
+				'jabatan_up2_win' => $this->input->post('jabatan_up2_win')
 			);
 
 			if ($ml_baru == 38 || $ms_baru == 38 || $ml_new == 38 || $ms_new == 38) {
