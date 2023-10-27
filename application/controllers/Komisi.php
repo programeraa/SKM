@@ -66,8 +66,9 @@ class Komisi extends CI_Controller {
 			$mm_selling = $this->input->post('mm_selling');
 			$npwpm_selling = $this->input->post('npwpm_selling');
 			$npwpum_selling = $this->input->post('npwpum_selling');
-			$jabatans_upline1 = $this->input->post('jabatanum_selling');
 			$npwpum_selling2 = $this->input->post('npwpum_selling2');
+			
+			$jabatans_upline1 = $this->input->post('jabatanum_selling');
 			$jabatans_upline2 = $this->input->post('jabatanum_selling2');
 
 			date_default_timezone_set("Asia/Jakarta");
