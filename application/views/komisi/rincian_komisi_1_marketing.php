@@ -234,7 +234,7 @@
                                 <tbody>
                                   <tr>
                                     <td class="tg-0lax"><?php echo 'Fee Upline'?></td>
-                                    <td class="tg-0lax text-right"><?php echo $fkl_r; ?> * <?= $up_1_listing_jabatan ?>%</td>
+                                    <td class="tg-0lax text-right"><?php echo $fkl_r; ?> * <?= $jup_l1 ?>%</td>
                                 </tr>
                                 <tr>
                                     <td class="tg-0lax text-warning"></td>
@@ -270,7 +270,7 @@
                             <tbody>
                               <tr>
                                 <td class="tg-0lax"><?php echo 'Fee Upline'?></td>
-                                <td class="tg-0lax text-right"><?php echo $fkl_r; ?> * <?= $up_2_listing_jabatan ?>%</td>
+                                <td class="tg-0lax text-right"><?php echo $fkl_r; ?> * <?= $jup_l2 ?>%</td>
                             </tr>
                             <tr>
                                 <td class="tg-0lax text-warning"></td>
