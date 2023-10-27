@@ -695,7 +695,7 @@
                         <tbody>
                           <tr>
                             <td class="tg-0lax"><?php echo 'Fee Upline'?></td>
-                            <td class="tg-0lax text-right"><?php echo $fkl_r; ?> * 5%</td>
+                            <td class="tg-0lax text-right"><?php echo $fkl_r; ?> * <?= $jup_l1 ?>%</td>
                         </tr>
                         <tr>
                             <td class="tg-0lax text-warning"></td>
@@ -737,7 +737,7 @@
                     <tbody>
                       <tr>
                         <td class="tg-0lax"><?php echo 'Fee Upline'?></td>
-                        <td class="tg-0lax text-right"><?php echo $fks_r; ?> * 5%</td>
+                        <td class="tg-0lax text-right"><?php echo $fks_r; ?> * <?= $jup_s1 ?>%</td>
                     </tr>
                     <tr>
                         <td class="tg-0lax text-warning"></td>
@@ -798,7 +798,7 @@
                     <tbody>
                       <tr>
                         <td class="tg-0lax"><?php echo 'Fee Upline'?></td>
-                        <td class="tg-0lax text-right"><?php echo $fkl_r; ?> * 5%</td>
+                        <td class="tg-0lax text-right"><?php echo $fkl_r; ?> * <?= $jup_l2 ?>%</td>
                     </tr>
                     <tr>
                         <td class="tg-0lax text-warning"></td>
@@ -834,7 +834,7 @@
                 <tbody>
                   <tr>
                     <td class="tg-0lax"><?php echo 'Fee Upline'?></td>
-                    <td class="tg-0lax text-right"><?php echo $fks_r; ?> * 5%</td>
+                    <td class="tg-0lax text-right"><?php echo $fks_r; ?> * <?= $jup_s2 ?>%</td>
                 </tr>
                 <tr>
                     <td class="tg-0lax text-warning"></td>
@@ -929,7 +929,7 @@
                             <tbody>
                               <tr>
                                 <td class="tg-0lax"><?php echo 'Fee Upline'?></td>
-                                <td class="tg-0lax text-right"><?php echo $fkl2_r; ?> * 5%</td>
+                                <td class="tg-0lax text-right"><?php echo $fkl2_r; ?> * <?= $jup_l2_1 ?>%</td>
                             </tr>
                             <tr>
                                 <td class="tg-0lax text-warning"></td>
@@ -971,7 +971,7 @@
                         <tbody>
                           <tr>
                             <td class="tg-0lax"><?php echo 'Fee Upline'?></td>
-                            <td class="tg-0lax text-right"><?php echo $fks2_r; ?> * 5%</td>
+                            <td class="tg-0lax text-right"><?php echo $fks2_r; ?> * <?= $jup_s2_1 ?>%</td>
                         </tr>
                         <tr>
                             <td class="tg-0lax text-warning"></td>
@@ -1032,7 +1032,7 @@
                     <tbody>
                       <tr>
                         <td class="tg-0lax"><?php echo 'Fee Upline'?></td>
-                        <td class="tg-0lax text-right"><?php echo $fkl2_r; ?> * 5%</td>
+                        <td class="tg-0lax text-right"><?php echo $fkl2_r; ?> * <?= $jup_l2_2 ?>%</td>
                     </tr>
                     <tr>
                         <td class="tg-0lax text-warning"></td>
@@ -1068,7 +1068,7 @@
                 <tbody>
                   <tr>
                     <td class="tg-0lax"><?php echo 'Fee Upline'?></td>
-                    <td class="tg-0lax text-right"><?php echo $fks2_r; ?> * 5%</td>
+                    <td class="tg-0lax text-right"><?php echo $fks2_r; ?> * <?= $jup_s2_2 ?>%</td>
                 </tr>
                 <tr>
                     <td class="tg-0lax text-warning"></td>
