@@ -97,7 +97,7 @@
                             <div class="form-group">
                                 <label for="jabatan" class="col-form-label">Jabatan</label>
                                 <select class="form-control" id="jabatan" name="jabatan">
-                                    <option value="">Pilih Member</option>
+                                    <option value="">Pilih Jabatan</option>
                                     <?php
                                     if ($mkt->jabatan_mar == "me") echo "<option value='me' selected>Marketing Executive (ME)</option>";
                                     else echo "<option value='me'>Marketing Executive (ME)</option>";
