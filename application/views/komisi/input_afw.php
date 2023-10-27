@@ -2,6 +2,9 @@
 $npwp_up_ang = 0;
 $npwp_up2_ang = 0;
 
+$jabatan_up_ang = 5;
+$jabatan_up2_ang = 5;
+
 foreach ($marketing as $ang) {
     if ($ang->nama_mar == "Ang") {
 
@@ -33,6 +36,14 @@ foreach ($marketing as $ang) {
            if (!empty($ang_2->gambar_npwp_mar)) {
                $npwp_up_ang = 1;
            }
+
+           if ($ang_2->jabatan_mar == 'me') {
+               $jabatan_up_ang = 3;
+           }elseif ($ang_2->jabatan_mar == 'emd') {
+               $jabatan_up_ang = 5;
+           }elseif ($ang_2->jabatan_mar == 'cmo') {
+               $jabatan_up_ang = 5;
+           }
        }
    }
 
@@ -41,6 +52,14 @@ foreach ($marketing as $ang) {
            if (!empty($ang_3->gambar_npwp_mar)) {
                $npwp_up2_ang = 1;
            }
+
+           if ($ang_3->jabatan_mar == 'me') {
+               $jabatan_up2_ang = 3;
+           }elseif ($ang_3->jabatan_mar == 'emd') {
+               $jabatan_up2_ang = 5;
+           }elseif ($ang_3->jabatan_mar == 'cmo') {
+               $jabatan_up2_ang = 5;
+           }
        }
    }
 }
@@ -48,6 +67,9 @@ foreach ($marketing as $ang) {
 
 $npwp_up_fran = 0;
 $npwp_up2_fran = 0;
+
+$jabatan_up_fran = 5;
+$jabatan_up2_fran = 5;
 
 foreach ($marketing as $fran) {
     if ($fran->nama_mar == "Fran") {
@@ -80,6 +102,14 @@ foreach ($marketing as $fran) {
            if (!empty($fran_2->gambar_npwp_mar)) {
                $npwp_up_fran = 1;
            }
+
+           if ($fran_2->jabatan_mar == 'me') {
+               $jabatan_up_fran = 3;
+           }elseif ($fran_2->jabatan_mar == 'emd') {
+               $jabatan_up_fran = 5;
+           }elseif ($fran_2->jabatan_mar == 'cmo') {
+               $jabatan_up_fran = 5;
+           }
        }
    }
 
@@ -88,12 +118,23 @@ foreach ($marketing as $fran) {
            if (!empty($fran_3->gambar_npwp_mar)) {
                $npwp_up2_fran = 1;
            }
+
+           if ($fran_3->jabatan_mar == 'me') {
+               $jabatan_up2_fran = 3;
+           }elseif ($fran_3->jabatan_mar == 'emd') {
+               $jabatan_up2_fran = 5;
+           }elseif ($fran_3->jabatan_mar == 'cmo') {
+               $jabatan_up2_fran = 5;
+           }
        }
    }
 }
 
 $npwp_up_win = 0;
 $npwp_up2_win = 0;
+
+$jabatan_up_win = 5;
+$jabatan_up2_win = 5;
 
 foreach ($marketing as $win) {
     if ($win->nama_mar == "Winata") {
@@ -126,6 +167,14 @@ foreach ($marketing as $win) {
            if (!empty($win_2->gambar_npwp_mar)) {
                $npwp_up_win = 1;
            }
+
+           if ($win_2->jabatan_mar == 'me') {
+               $jabatan_up_win = 3;
+           }elseif ($win_2->jabatan_mar == 'emd') {
+               $jabatan_up_win = 5;
+           }elseif ($win_2->jabatan_mar == 'cmo') {
+               $jabatan_up_win = 5;
+           }
        }
    }
 
@@ -133,6 +182,14 @@ foreach ($marketing as $win) {
        if ($win_3->id_mar == $up2_win ) {
            if (!empty($win_3->gambar_npwp_mar)) {
                $npwp_up2_win = 1;
+           }
+
+           if ($win_3->jabatan_mar == 'me') {
+               $jabatan_up2_win = 3;
+           }elseif ($win_3->jabatan_mar == 'emd') {
+               $jabatan_up2_win = 5;
+           }elseif ($win_3->jabatan_mar == 'cmo') {
+               $jabatan_up2_win = 5;
            }
        }
    }
