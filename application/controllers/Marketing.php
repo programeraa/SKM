@@ -4,6 +4,7 @@ class Marketing extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('m_marketing');
+		$this->load->model('m_pengaturan');
 	}
 
 	public function index()
@@ -16,6 +17,7 @@ class Marketing extends CI_Controller {
 
 		$data['title'] = "Data Marketing";
 		$data['marketing'] = $this->m_marketing->tampil_data()->result();
+		$data['jabatan'] = $this->m_pengaturan->tampil_data_jabatan()->result();
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_marketing', $data);
@@ -28,10 +30,12 @@ class Marketing extends CI_Controller {
 		$member = $this->input->post('member');
 		$emd = $this->input->post('emd');
 		$cmo = $this->input->post('cmo');
-		//$npwp = $this->input->post('npwp');
 		$norek = $this->input->post('norek');
 		$fasilitas = $this->input->post('fasilitas');
-		$jabatan = $this->input->post('jabatan');
+		$jabatan = explode(",", $this->input->post('jabatan'));
+
+		$jabatan_nilai = trim($jabatan[0]);
+		$jabatan_nama = trim($jabatan[1]);
 
 		$config['upload_path'] = './assets/foto_marketing/';
 		$config['allowed_types'] = 'jpg|jpeg|png|gif';
@@ -75,10 +79,10 @@ class Marketing extends CI_Controller {
     			'member_mar' => $member,
     			'upline_emd_mar' => $emd,
     			'upline_cmo_mar' => $cmo,
-    			//'npwp_mar' => $npwp,
     			'norek_mar' => $norek,
     			'fasilitas_mar' => $fasilitas,
-    			'jabatan_mar' => $jabatan,
+    			'jabatan_mar' => $jabatan_nama,
+    			'nilai_jabatan_mar' => $jabatan_nilai
     		);
 
         // Hanya jika gambar KTP diunggah, simpan nama file gambar KTP
@@ -115,14 +119,15 @@ class Marketing extends CI_Controller {
 
     public function edit($id){
     	$level = $this->session->userdata('level');
-		if ($level == '') {
-			$this->session->set_flashdata('gagal','Anda Belum Login');
-			redirect(base_url('login'));
-		}
+    	if ($level == '') {
+    		$this->session->set_flashdata('gagal','Anda Belum Login');
+    		redirect(base_url('login'));
+    	}
 
     	$where = array('id_mar'=>$id);
     	$data['marketing'] = $this->m_marketing->edit($where)->result();
     	$data['marketing_all'] = $this->m_marketing->tampil_data()->result();
+    	$data['jabatan'] = $this->m_pengaturan->tampil_data_jabatan()->result();
     	$data['title'] = 'Edit Marketing';
 
     	$this->load->view('v_header', $data);
@@ -184,10 +189,12 @@ class Marketing extends CI_Controller {
     	$member = $this->input->post('member');
     	$emd = $this->input->post('emd');
     	$cmo = $this->input->post('cmo');
-    	$npwp = $this->input->post('npwp');
     	$norek = $this->input->post('norek');
     	$fasilitas = $this->input->post('fasilitas');
-    	$jabatan = $this->input->post('jabatan');
+    	$jabatan = explode(",", $this->input->post('jabatan'));
+
+    	$jabatan_nilai = trim($jabatan[0]);
+    	$jabatan_nama = trim($jabatan[1]);
 
     	$upload_ktp_success = false;
     	$upload_npwp_success = false;
@@ -232,10 +239,10 @@ class Marketing extends CI_Controller {
 	    	'member_mar' => $member,
 	    	'upline_emd_mar' => $emd,
 	    	'upline_cmo_mar' => $cmo,
-	    	'npwp_mar' => $npwp,
 	    	'norek_mar' => $norek,
 	    	'fasilitas_mar' => $fasilitas,
-	    	'jabatan_mar' => $jabatan
+	    	'jabatan_mar' => $jabatan_nama,
+	    	'nilai_jabatan_mar' => $jabatan_nilai
 	    );
 
 	    // Hanya jika gambar KTP diunggah, simpan nama file gambar KTP
