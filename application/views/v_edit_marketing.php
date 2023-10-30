@@ -82,10 +82,6 @@
                         </div>
 
                         <div class="col-md-6">
-                            <!-- <div class="form-group">
-                                <label for="npwp" class="col-form-label">NPWP</label>
-                                <input type="text" class="form-control" id="npwp" name="npwp" value="<?php echo $mkt->npwp_mar; ?>">
-                            </div> -->
                             <div class="form-group">
                                 <label for="norek" class="col-form-label">No. Rekening</label>
                                 <input type="text" class="form-control" id="norek" name="norek" value="<?php echo $mkt->norek_mar; ?>">
@@ -98,16 +94,13 @@
                                 <label for="jabatan" class="col-form-label">Jabatan</label>
                                 <select class="form-control" id="jabatan" name="jabatan">
                                     <option value="">Pilih Jabatan</option>
-                                    <?php
-                                    if ($mkt->jabatan_mar == "me") echo "<option value='me' selected>Marketing Executive (ME)</option>";
-                                    else echo "<option value='me'>Marketing Executive (ME)</option>";
-
-                                    if ($mkt->jabatan_mar == "emd") echo "<option value='emd' selected>Executive Marketing Director (EMD)</option>";
-                                    else echo "<option value='emd'>Executive Marketing Director (EMD)</option>";
-
-                                    if ($mkt->jabatan_mar == "cmo") echo "<option value='cmo' selected>Chief Marketing Officer (CMO)</option>";
-                                    else echo "<option value='cmo'>Chief Marketing Officer (CMO)</option>";
-                                    ?>
+                                    <?php 
+                                    foreach($jabatan as $jabatan){ ?>
+                                        <option value="<?php echo $jabatan->nilai_jabatan; ?>,<?php echo $jabatan->nama_jabatan; ?>"
+                                            <?= $mkt->jabatan_mar==$jabatan->nama_jabatan && $mkt->nilai_jabatan_mar==$jabatan->nilai_jabatan ? "selected" : null ?>> 
+                                            <?php echo $jabatan->nama_jabatan; ?> (<?php echo $jabatan->nilai_jabatan; ?>)
+                                        </option>;
+                                    <?php } ?>
                                 </select>
                             </div> 
                             <div class="row">
@@ -147,10 +140,10 @@
                                 </div>
                             </div>
                             
-                        <input type="hidden" value="<?= $mkt->id_mar; ?>" name="id_mar">
-                        <div class="text-right">
-                            <button class="btn btn-success">Update</button>
-                        </div>
+                            <input type="hidden" value="<?= $mkt->id_mar; ?>" name="id_mar">
+                            <div class="text-right">
+                                <button class="btn btn-success">Update</button>
+                            </div>
                         </div>
                     </form>
 
