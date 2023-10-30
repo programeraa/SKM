@@ -99,7 +99,7 @@
                                         foreach ($marketing as $upline) {
                                             if ($upline->id_mar == $each->upline_emd_mar) {
                                                 $a = $upline->gambar_npwp_mar;
-                                                $j_upline1 = $upline->jabatan_mar;
+                                                $j_upline1 = $upline->nilai_jabatan_mar;
                                                 break;
                                             }elseif($each->upline_emd_mar == null){
                                                 $a = null;
@@ -116,21 +116,17 @@
                                         }
 
                                         //inisialisasi jabatan upline 1 listing
-                                        if ($j_upline1 == 'me') {
-                                            $jabatan_upline1 = 3;
-                                        }elseif($j_upline1 == 'emd'){
-                                            $jabatan_upline1 = 5;
-                                        }elseif($j_upline1 == 'cmo'){
+                                        if ($j_upline1 == 0) {
                                             $jabatan_upline1 = 5;
                                         }else{
-                                            $jabatan_upline1 = 5;
+                                            $jabatan_upline1 = $j_upline1;
                                         }
 
                                         //tampilkan upline 2 listing
                                         foreach ($marketing as $upline2) {
                                             if ($upline2->id_mar == $each->upline_cmo_mar) {
                                                 $b = $upline2->gambar_npwp_mar;
-                                                $j_upline2 = $upline2->jabatan_mar;
+                                                $j_upline2 = $upline2->nilai_jabatan_mar;
                                                 break;
                                             }elseif($each->upline_cmo_mar == null){
                                                 $b = null;
@@ -147,14 +143,10 @@
                                         }
 
                                         //inisialisasi jabatan upline 2 listing
-                                        if ($j_upline2 == 'me') {
-                                            $jabatan_upline2 = 3;
-                                        }elseif($j_upline2 == 'emd'){
-                                            $jabatan_upline2 = 5;
-                                        }elseif($j_upline2 == 'cmo'){
+                                        if ($j_upline2 == 0) {
                                             $jabatan_upline2 = 5;
                                         }else{
-                                            $jabatan_upline2 = 5;
+                                            $jabatan_upline2 = $j_upline2;
                                         }
 
                                         $jsArray .= "prdName['" . $each->id_mar . "'] = {
@@ -241,7 +233,7 @@
                                             foreach ($marketing as $upline) {
                                                 if ($upline->id_mar == $each->upline_emd_mar) {
                                                     $a = $upline->gambar_npwp_mar;
-                                                    $js_upline1 = $upline->jabatan_mar;
+                                                    $js_upline1 = $upline->nilai_jabatan_mar;
                                                     break;
                                                 }elseif($each->upline_emd_mar == null){
                                                     $a = null;
@@ -259,21 +251,17 @@
                                             }
 
                                             //inisialisasi jabatan upline 1 selling
-                                            if ($js_upline1 == 'me') {
-                                                $jabatans_upline1 = 3;
-                                            }elseif($js_upline1 == 'emd'){
-                                                $jabatans_upline1 = 5;
-                                            }elseif($js_upline1 == 'cmo'){
+                                            if ($js_upline1 == 0) {
                                                 $jabatans_upline1 = 5;
                                             }else{
-                                                $jabatans_upline1 = 5;
+                                                $jabatans_upline1 = $js_upline1;
                                             }
 
                                             //tampilkan upline 2 selling
                                             foreach ($marketing as $upline2) {
                                                 if ($upline2->id_mar == $each->upline_cmo_mar) {
                                                     $b = $upline2->gambar_npwp_mar;
-                                                    $js_upline2 = $upline2->jabatan_mar;
+                                                    $js_upline2 = $upline2->nilai_jabatan_mar;
                                                     break;
                                                 }elseif($each->upline_cmo_mar == null){
                                                     $b = null;
@@ -290,14 +278,10 @@
                                             }
 
                                             //inisialisasi jabatan upline 2 selling
-                                            if ($js_upline2 == 'me') {
-                                                $jabatans_upline2 = 3;
-                                            }elseif($js_upline2 == 'emd'){
-                                                $jabatans_upline2 = 5;
-                                            }elseif($js_upline2 == 'cmo'){
+                                            if ($js_upline2 == 0) {
                                                 $jabatans_upline2 = 5;
                                             }else{
-                                                $jabatans_upline2 = 5;
+                                                $jabatans_upline2 = $js_upline2;
                                             }
 
                                             $jsArray_s .= "prdName_s['" . $each->id_mar . "'] = {
@@ -356,7 +340,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="d-xl-none">
+                                    <div class="">
                                         <!--tambahan input marketing listing-->
                                         <div class="form-group">
                                             <label for="mm_listing" class="col-form-label">Member ML</label>
