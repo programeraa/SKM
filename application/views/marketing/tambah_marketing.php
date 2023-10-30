@@ -1,6 +1,6 @@
  <!--   Modal Tambah Data-->
  <div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Tambah Data Marketing</h5>
@@ -73,9 +73,15 @@
                                 <label for="jabatan" class="col-form-label">Jabatan</label>
                                 <select class="form-control" id="jabatan" name="jabatan" required>
                                     <option value="">Pilih Jabatan</option>
-                                    <option value="me">Marketing Executive (ME)</option>
+                                    <!-- <option value="me">Marketing Executive (ME)</option>
                                     <option value="emd">Executive Marketing Director (EMD)</option>
-                                    <option value="cmo">Chief Marketing Officer (CMO)</option>
+                                    <option value="cmo">Chief Marketing Officer (CMO)</option> -->
+                                    <?php 
+                                    foreach($jabatan as $jabatan){ ?>
+                                        <option value="<?php echo $jabatan->nilai_jabatan; ?>,<?php echo $jabatan->nama_jabatan; ?>">
+                                            <?php echo $jabatan->nama_jabatan; ?> (<?php echo $jabatan->nilai_jabatan; ?>)
+                                        </option>;
+                                    <?php } ?>
                                 </select>
                             </div>
                             <div class="form-group">
