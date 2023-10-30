@@ -34,8 +34,13 @@ class Marketing extends CI_Controller {
 		$fasilitas = $this->input->post('fasilitas');
 		$jabatan = explode(",", $this->input->post('jabatan'));
 
-		$jabatan_nilai = trim($jabatan[0]);
-		$jabatan_nama = trim($jabatan[1]);
+		if ($jabatan[0] == '') {
+    		$jabatan_nilai = 0;
+    		$jabatan_nama = 'Belum Ditentukan';
+    	}else{
+    		$jabatan_nilai = trim($jabatan[0]);
+    		$jabatan_nama = trim($jabatan[1]);
+    	}
 
 		$config['upload_path'] = './assets/foto_marketing/';
 		$config['allowed_types'] = 'jpg|jpeg|png|gif';
@@ -193,8 +198,13 @@ class Marketing extends CI_Controller {
     	$fasilitas = $this->input->post('fasilitas');
     	$jabatan = explode(",", $this->input->post('jabatan'));
 
-    	$jabatan_nilai = trim($jabatan[0]);
-    	$jabatan_nama = trim($jabatan[1]);
+    	if ($jabatan[0] == '') {
+    		$jabatan_nilai = 0;
+    		$jabatan_nama = 'Belum Ditentukan';
+    	}else{
+    		$jabatan_nilai = trim($jabatan[0]);
+    		$jabatan_nama = trim($jabatan[1]);
+    	}
 
     	$upload_ktp_success = false;
     	$upload_npwp_success = false;
