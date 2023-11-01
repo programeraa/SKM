@@ -340,7 +340,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="">
+                                    <div class="d-xl-none">
                                         <!--tambahan input marketing listing-->
                                         <div class="form-group">
                                             <label for="mm_listing" class="col-form-label">Member ML</label>
