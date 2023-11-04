@@ -140,11 +140,11 @@
                                         <select class="form-control" id="status_komisi" name="status_komisi">
                                             <option value="">Pilih Status</option>
                                             <?php
-                                            if ($komisi->status_komisi == "Disetujui") echo "<option value='Disetujui' selected>Disetujui</option>";
-                                            else echo "<option value='Disetujui'>Disetujui</option>";
+                                            if ($komisi->status_komisi == "Approve") echo "<option value='Approve' selected>Approve</option>";
+                                            else echo "<option value='Approve'>Approve</option>";
 
-                                            if ($komisi->status_komisi == "Belum Disetujui") echo "<option value='Belum Disetujui' selected>Belum Disetujui</option>";
-                                            else echo "<option value='Belum Disetujui'>Belum Disetujui</option>";
+                                            if ($komisi->status_komisi == "Proses Approve") echo "<option value='Proses Approve' selected>Proses Approve</option>";
+                                            else echo "<option value='Proses Approve'>Proses Approve</option>";
                                             ?>
                                         </select>
                                     </div>
@@ -166,7 +166,7 @@
             </div>
         <?php } ?>
 
-        <?php if ($komisi->status_komisi == "Disetujui") {?>
+        <?php if ($komisi->status_komisi == "Approve") {?>
 
             <div class="card-body mt-0">
                 <div class="card-body p-0">
