@@ -1,5 +1,5 @@
 <div class="card">
-    <?php if ($komisi->status_komisi == "Disetujui") { ?>
+    <?php if ($komisi->status_komisi == "Approve") { ?>
         <div class="card-header bg-success text-white">
         <?php }else{ ?>
             <div class="card-header bg-danger text-white">
@@ -149,7 +149,7 @@
             </tbody>
         </table>
         <div>
-            <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Disetujui'):?>
+            <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Approve'):?>
                 <?php if ($jumlah_kurang_listing == 0) {?>
                     <button type="button" class="btn btn-danger mb-3" id="toggleForm">Biaya Pengurang (Bila Ada)</button>
                 <?php }else{ ?>
