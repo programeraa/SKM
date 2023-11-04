@@ -1,3 +1,5 @@
+
+
 <?php 
 
 class M_dashboard extends CI_Model{
@@ -13,12 +15,12 @@ class M_dashboard extends CI_Model{
 	}
 
 	function disetujui(){
-		$hasil = $this->db->query("SELECT COUNT(id_komisi) as disetujui FROM komisi WHERE status_komisi = 'Disetujui' ");
+		$hasil = $this->db->query("SELECT COUNT(id_komisi) as disetujui FROM komisi WHERE status_komisi = 'Approve' ");
 		return $hasil;
 	}
 
 	function belum_disetujui(){
-		$hasil = $this->db->query("SELECT COUNT(id_komisi) as belum_disetujui FROM komisi WHERE status_komisi = 'Belum Disetujui' ");
+		$hasil = $this->db->query("SELECT COUNT(id_komisi) as belum_disetujui FROM komisi WHERE status_komisi = 'Proses Approve' ");
 		return $hasil;
 	}
 
