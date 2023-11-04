@@ -74,12 +74,23 @@
                                 <td><?= $selling_1 ?> <?= $selling2_baru?></td>
                                 <td><?= $bruto_r ?></td>
                                 <td>
-                                    <?php 
-                                    if ($komisi->status_komisi=='Belum Disetujui') {
-                                        echo "<span class='badge badge-warning p-2'>Belum Disetujui</span>";
-                                    }else{
-                                        echo "<span class='badge badge-success p-2'>Disetujui</span>";
-                                    }?>
+                                    <div>
+                                        <?php 
+                                        if ($komisi->status_komisi=='Proses Approve') {
+                                            echo "<span class='badge badge-warning p-2'>Proses Approve</span>";
+                                        }else{
+                                            echo "<span class='badge badge-success p-2'>Approve</span>";
+                                        }?>
+                                    </div>
+
+                                    <div class="mt-2">
+                                        <?php 
+                                        if ($komisi->status_transfer=='Proses Transfer') {
+                                            echo "<span class='badge badge-secondary p-2'>Proses Transfer</span>";
+                                        }else{
+                                            echo "<span class='badge badge-success p-2'>Transfer</span>";
+                                        }?>
+                                    </div>
                                 </td>
                                 <td>
                                     <a href="#" data-toggle="modal" data-target="#lihat_komisi<?php echo $komisi->id_komisi; ?>" class="btn btn-primary btn-sm mt-1"><i class="fas fa-eye" title="Detail"></i></a>
@@ -88,7 +99,7 @@
 
                                     <a href="<?= base_url('komisi/rincian_komisi/' . $komisi->id_komisi); ?>" class="btn btn-warning btn-sm mt-1" data-target="#editModal"><i class="fas fa-list" title="Lihat Rincian"></i></a>
 
-                                    <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Disetujui'): ?>  
+                                    <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Approve'): ?>  
                                         <a href="<?= base_url('komisi/edit_komisi/' . $komisi->id_komisi); ?>" class="btn btn-success btn-sm mt-1" data-target="#editModal"><i class="fas fa-edit" title="Edit Komisi"></i></a>
 
                                         <a href="<?= base_url('komisi/hapus/' . $komisi->id_komisi); ?>" onclick="javascript:return confirm('Apakah Anda yakin ingin menghapus data komisi?')" class="btn btn-danger btn-sm mt-1"><i class="fas fa-trash" title="Hapus"></i></a>
