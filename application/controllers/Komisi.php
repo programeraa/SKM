@@ -166,7 +166,7 @@ class Komisi extends CI_Controller {
 				'mar_selling2_komisi' => $ms_new,
 				'bruto_komisi' => $komisi,
 				'waktu_komisi' => $waktu,
-				'status_komisi' => 'Belum Disetujui'
+				'status_komisi' => 'Proses Approve'
 			);
 
 			$this->m_komisi->simpan($data);
@@ -564,10 +564,10 @@ class Komisi extends CI_Controller {
 			);
 
 			$data2 = array();
-			if ($status_komisi == 'Disetujui') {
+			if ($status_komisi == 'Approve') {
 				$previous_status = $this->m_komisi->get_status($id_komisi);
 
-				if ($previous_status != 'Disetujui') {
+				if ($previous_status != 'Approve') {
 					$data['tgl_disetujui'] = $waktu;
 				}
 
