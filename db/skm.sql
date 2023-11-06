@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Okt 2023 pada 09.00
+-- Waktu pembuatan: 06 Nov 2023 pada 10.13
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -88,32 +88,35 @@ CREATE TABLE `komisi` (
   `bruto_komisi` varchar(250) NOT NULL,
   `waktu_komisi` date NOT NULL,
   `tgl_disetujui` date NOT NULL,
-  `status_komisi` varchar(250) NOT NULL
+  `status_komisi` varchar(250) NOT NULL,
+  `status_transfer` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `komisi`
 --
 
-INSERT INTO `komisi` (`id_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_komisi`, `mar_listing_komisi`, `mar_listing2_komisi`, `mar_selling_komisi`, `mar_selling2_komisi`, `bruto_komisi`, `waktu_komisi`, `tgl_disetujui`, `status_komisi`) VALUES
-(283, 'Grand Sungkono Lagoon Tower Venetian Unit 3708', 'Sewa', '2023-08-08', 2, 0, 2, 0, '3800000', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
-(284, 'Apartemen Grand Sungkono Lagoon Tower Venetian Unit 2801', 'Sewa', '2023-08-01', 1091, 0, 2, 0, '5000000', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
-(285, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual', '2023-06-26', 2, 0, 11, 0, '68781750', '2023-10-13', '2023-10-24', 'Disetujui'),
-(286, 'Woodland Blok WL No. 5 Citraland, Surabaya', 'Jual', '2023-08-04', 11, 0, 8642, 0, '50000000', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
-(287, 'JL. Manyar Rejo X/39, Surabaya', 'Jual', '2023-09-28', 38, 0, 4147, 0, '25000000', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
-(288, 'Raya Darmo Permai I No. 60, Surabaya', 'Sewa', '2023-08-29', 11, 0, 11, 0, '16500000', '2023-10-13', '0000-00-00', 'Belum Disetujui'),
-(289, ' Jl. Raya Dukuh Kupang 39A, Surabaya ', 'Sewa', '2023-08-12', 7, 10, 11, 0, '12050000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
-(290, 'Jl. Darmo Indah Selatan KK 50, Surabaya', 'Jual/Sewa', '2023-10-16', 6118, 0, 2, 38, '25000000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
-(291, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-12', 3, 9, 10, 11, '50000000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
-(292, 'Jl. Dukuh Kupang XXIII, No 2, Surabaya', 'Jual', '2023-10-12', 38, 0, 38, 0, '10000000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
-(293, 'Desa Compreng, Widang, Tuban', 'Jual', '2023-10-14', 8731, 0, 38, 0, '12000000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
-(294, 'Compreng, Widang, Tuban', 'Jual', '2023-10-10', 2, 3, 9138, 0, '10000000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
-(295, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-13', 11, 38, 2, 9, '52000000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
-(300, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-13', 11, 38, 2, 9, '52000000', '2023-10-16', '0000-00-00', 'Belum Disetujui'),
-(301, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-13', 11, 38, 2, 9, '52000000', '2023-10-26', '0000-00-00', 'Belum Disetujui'),
-(302, 'Tuban 1', 'Sewa', '2023-10-13', 2, 3, 7, 9, '10000000', '2023-10-27', '0000-00-00', 'Belum Disetujui'),
-(303, 'Tuban 2', 'Sewa', '2023-10-13', 2, 3, 7, 9, '10000000', '2023-10-27', '0000-00-00', 'Belum Disetujui'),
-(305, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual/Sewa', '2023-10-12', 2, 11, 7, 38, '10000000', '2023-10-27', '0000-00-00', 'Belum Disetujui');
+INSERT INTO `komisi` (`id_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_komisi`, `mar_listing_komisi`, `mar_listing2_komisi`, `mar_selling_komisi`, `mar_selling2_komisi`, `bruto_komisi`, `waktu_komisi`, `tgl_disetujui`, `status_komisi`, `status_transfer`) VALUES
+(283, 'Grand Sungkono Lagoon Tower Venetian Unit 3708', 'Sewa', '2023-08-08', 2, 0, 2, 0, '3800000', '2023-10-13', '0000-00-00', 'Proses Approve', 'Transfer'),
+(284, 'Apartemen Grand Sungkono Lagoon Tower Venetian Unit 2801', 'Sewa', '2023-08-01', 1091, 0, 2, 0, '5000000', '2023-10-13', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
+(285, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual', '2023-06-26', 2, 0, 11, 0, '68781750', '2023-10-13', '2023-10-24', 'Approve', 'Proses Transfer'),
+(286, 'Woodland Blok WL No. 5 Citraland, Surabaya', 'Jual', '2023-08-04', 11, 0, 8642, 0, '50000000', '2023-10-13', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
+(287, 'JL. Manyar Rejo X/39, Surabaya', 'Jual', '2023-09-28', 38, 0, 4147, 0, '25000000', '2023-10-13', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
+(288, 'Raya Darmo Permai I No. 60, Surabaya', 'Sewa', '2023-08-29', 11, 0, 11, 0, '16500000', '2023-10-13', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
+(289, ' Jl. Raya Dukuh Kupang 39A, Surabaya ', 'Sewa', '2023-08-12', 7, 10, 11, 0, '12050000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
+(290, 'Jl. Darmo Indah Selatan KK 50, Surabaya', 'Jual/Sewa', '2023-10-16', 6118, 0, 2, 38, '25000000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
+(291, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-12', 3, 9, 10, 11, '50000000', '2023-10-16', '2023-11-04', 'Approve', 'Proses Transfer'),
+(292, 'Jl. Dukuh Kupang XXIII, No 2, Surabaya', 'Jual', '2023-10-12', 38, 0, 38, 0, '10000000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
+(293, 'Desa Compreng, Widang, Tuban', 'Jual', '2023-10-14', 8731, 0, 38, 0, '12000000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
+(294, 'Compreng, Widang, Tuban', 'Jual', '2023-10-10', 2, 3, 9138, 0, '10000000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
+(295, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-13', 11, 38, 2, 9, '52000000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
+(300, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-13', 11, 38, 2, 9, '52000000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
+(301, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-13', 11, 38, 2, 9, '52000000', '2023-10-26', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
+(302, 'Tuban 1', 'Sewa', '2023-10-13', 2, 3, 7, 9, '10000000', '2023-10-27', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
+(303, 'Tuban 2', 'Sewa', '2023-10-13', 2, 3, 7, 9, '10000000', '2023-10-27', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
+(305, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual/Sewa', '2023-10-12', 0, 11, 7, 38, '10000000', '2023-10-27', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
+(306, ' Jl. Dr. Sutomo No. 41, Surabaya', 'Jual', '2023-11-01', 2, 0, 2, 0, '10000000', '2023-11-01', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
+(307, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual', '2023-11-03', 2, 0, 2, 0, '51000000', '2023-11-06', '0000-00-00', 'Proses Approve', '');
 
 -- --------------------------------------------------------
 
@@ -142,7 +145,7 @@ CREATE TABLE `marketing` (
 
 INSERT INTO `marketing` (`id_mar`, `nama_mar`, `nomor_mar`, `member_mar`, `upline_emd_mar`, `upline_cmo_mar`, `norek_mar`, `fasilitas_mar`, `jabatan_mar`, `nilai_jabatan_mar`, `gambar_ktp_mar`, `gambar_npwp_mar`) VALUES
 (2, 'Henny', 'AA0005', 'Gold Express', '9', '3', 'BCA-6730311638 (Henny)', '', 'Executive Marketing Director (EMD)', 5, 'ktp.png', 'npwp.png'),
-(3, 'Jonatan / Lydia', 'AA0271', 'Silver', '', '', 'BCA-0100359723 (Lydia Susanto)', '', 'Belum Ditentukan', 0, 'ktp1.png', 'npwp1.png'),
+(3, 'Jonatan / Lydia', 'AA0271', 'Silver', '', '', 'BCA-0100359723 (Lydia Susanto)', '', 'Chief Marketing Officer (CMO)', 5, 'ktp1.png', 'npwp1.png'),
 (7, 'Purnomo', 'AA0445', 'Silver', '3', '2', 'BCA-3681745040 - Purnomo', '', 'Marketing Executive (ME)', 3, 'ktp2.png', 'npwp2.png'),
 (9, 'Yenny', 'AA0065', 'Silver', '39', '', 'BCA-8290541221 - Yenny', '', 'Marketing Executive (ME)', 3, 'ktp3.png', 'npwp3.png'),
 (10, 'Julia / Jeffy', 'AA0053', 'Silver', '39', '', 'BCA-7880384320 - Julia/Jeffry', '', 'Chief Marketing Officer (CMO)', 5, 'ktp4.png', 'npwp4.png'),
@@ -340,7 +343,7 @@ INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `np
 (187, 288, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
 (188, 289, 70, 0, 1, 0, 1, 0, 50, 1, 0, 0, 0, 0, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
 (189, 290, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 1, 1, 0, 1, 0, 50, 0, 0, 0, 0, 0, 1, 0),
-(190, 291, 50, 1, 0, 0, 0, 0, 80, 1, 1, 0, 0, 0, 50, 1, 0, 0, 0, 0, 70, 1, 1, 0, 0, 0, 1, 0),
+(190, 291, 50, 1, 0, 0, 0, 0, 80, 1, 1, 0, 0, 0, 50, 1, 0, 0, 0, 0, 70, 1, 1, 0, 0, 0, 1, 4),
 (191, 292, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
 (192, 293, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
 (193, 294, 50, 1, 1, 0, 1, 0, 50, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
@@ -349,7 +352,9 @@ INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `np
 (200, 301, 70, 1, 1, 0, 0, 0, 50, 0, 0, 0, 0, 0, 60, 1, 1, 0, 1, 0, 50, 1, 1, 0, 0, 0, 1, 0),
 (201, 302, 60, 1, 1, 3, 1, 5, 50, 1, 0, 5, 0, 5, 50, 1, 1, 5, 1, 3, 50, 1, 1, 5, 0, 5, 1, 0),
 (202, 303, 60, 1, 1, 3, 1, 5, 50, 1, 0, 5, 0, 5, 50, 1, 1, 5, 1, 3, 50, 1, 1, 3, 0, 5, 1, 0),
-(204, 305, 60, 1, 1, 3, 1, 5, 70, 1, 1, 5, 0, 5, 50, 1, 1, 5, 1, 3, 50, 0, 0, 5, 0, 5, 1, 0);
+(204, 305, 60, 1, 1, 3, 1, 5, 70, 1, 1, 5, 0, 5, 50, 1, 1, 5, 1, 3, 50, 0, 0, 5, 0, 5, 1, 0),
+(205, 306, 60, 1, 1, 3, 1, 5, 0, 0, 0, 0, 0, 0, 60, 1, 1, 3, 1, 5, 0, 0, 0, 0, 0, 0, 10, 0),
+(206, 307, 60, 1, 1, 3, 1, 5, 0, 0, 0, 0, 0, 0, 60, 1, 1, 3, 1, 5, 0, 0, 0, 0, 0, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -484,7 +489,7 @@ ALTER TABLE `jabatan_pengaturan`
 -- AUTO_INCREMENT untuk tabel `komisi`
 --
 ALTER TABLE `komisi`
-  MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=306;
+  MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=308;
 
 --
 -- AUTO_INCREMENT untuk tabel `marketing`
@@ -520,7 +525,7 @@ ALTER TABLE `referal`
 -- AUTO_INCREMENT untuk tabel `sub_komisi`
 --
 ALTER TABLE `sub_komisi`
-  MODIFY `id_sub_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
+  MODIFY `id_sub_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
 
 --
 -- AUTO_INCREMENT untuk tabel `sub_komisi_afw`
