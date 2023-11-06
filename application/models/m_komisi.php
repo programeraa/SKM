@@ -71,7 +71,7 @@ class M_komisi extends CI_Model{
 
 	function tampil_data_rincian($where){
 		$data = implode($where);
-		$hasil = $this->db->query("SELECT a.id_komisi, a.alamat_komisi, a.jt_komisi, a.tgl_closing_komisi, a.bruto_komisi, a.mar_listing_komisi, a.mar_selling_komisi, a.waktu_komisi, a.status_komisi, a.tgl_disetujui,
+		$hasil = $this->db->query("SELECT a.id_komisi, a.alamat_komisi, a.jt_komisi, a.tgl_closing_komisi, a.bruto_komisi, a.mar_listing_komisi, a.mar_selling_komisi, a.waktu_komisi, a.status_komisi, a.tgl_disetujui, a.status_transfer,
 
 			a.mar_listing2_komisi, a.mar_selling2_komisi, 
 
