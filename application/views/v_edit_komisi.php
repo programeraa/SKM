@@ -105,9 +105,11 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="marketing_listing" class="col-form-label">Marketing Listing</label>
-                                <input type="text" class="form-control" id="marketing_listing" name="marketing_listing" value="<?= $listing_1 ?> <?= $listing2_baru ?>" readonly>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="marketing_listing" class="col-form-label">Marketing Listing</label>
+                                        <input type="text" class="form-control" id="marketing_listing" name="marketing_listing" value="<?= $listing_1 ?> <?= $listing2_baru ?>" readonly>
                                 <!-- <select class="form-control select2bs4" id="marketing_listing" name="marketing_listing">
                                     <option value="">Pilih Nama</option>
                                     <?php 
@@ -120,6 +122,9 @@
                                 ?>
                             </select> -->
                         </div>
+                    </div>
+
+                    <div class="col-md-6">
 
                         <div class="form-group">
                             <label for="marketing_selling" class="col-form-label">Marketing Selling</label>
@@ -136,33 +141,53 @@
                             ?>
                         </select> -->
                     </div>
-
-                    <div class="form-group">
-                        <label for="komisi" class="col-form-label">Komisi Bruto</label>
-
-                        <?php if ($level == 'Administrator') {?>
-                            <input type="text" class="form-control" id="tampil_komisi" name="tampil_komisi" value="<?= $komisi->bruto_komisi ?>" onkeyup="formatRupiah(this, 'komisi')">
-
-                            <input type="hidden" class="form-control" id="komisi" name="komisi" value="<?= $komisi->bruto_komisi ?>">
-                        <?php }else{ ?>
-                            <input type="text" class="form-control" id="komisi" name="komisi" value="<?= $komisi->bruto_komisi ?>" readonly>
-                        <?php } ?>
-                    </div>
                 </div>
             </div>
 
-            <div class="form-group d-xl-none">
-              <label class="col-sm-15 col-form-label">No Sistem</label>
-              <input type="text" class="form-control" id="id_komisi" name="id_komisi" value="<?php echo $komisi->id_komisi; ?>">
-          </div>
-          <div class="form-group d-xl-none">
-            <label for="admin" class="col-form-label">Admin</label>
-            <input type="text" class="form-control" id="admin" name="admin" value="<?php echo $id; ?>">
+            <div class="form-group">
+                <label for="komisi" class="col-form-label">Komisi Bruto</label>
+
+                <?php if ($level == 'Administrator') {?>
+                    <input type="text" class="form-control" id="tampil_komisi" name="tampil_komisi" value="<?= $komisi->bruto_komisi ?>" onkeyup="formatRupiah(this, 'komisi')">
+
+                    <input type="hidden" class="form-control" id="komisi" name="komisi" value="<?= $komisi->bruto_komisi ?>">
+                <?php }else{ ?>
+                    <input type="text" class="form-control" id="komisi" name="komisi" value="<?= $komisi->bruto_komisi ?>" readonly>
+                <?php } ?>
+            </div>
+
+            <div class="form-group">
+                <label for="st" class="col-form-label">Status Transfer</label>
+                <?php if ($level == 'Administrator') {?>
+                    <select class="form-control" id="st" name="st">
+                        <!-- <option value="Proses Transfer">Pilih Status Transfer</option> -->
+                        <?php
+                        if ($komisi->status_transfer == "Proses Transfer") echo "<option value='Proses Transfer' selected>Proses Transfer</option>";
+                        else echo "<option value='Proses Transfer'>Proses Transfer</option>";
+
+                        if ($komisi->status_transfer == "Transfer") echo "<option value='Transfer' selected>Transfer</option>";
+                        else echo "<option value='Transfer'>Transfer</option>";
+                        ?>
+                    </select>
+                <?php }else{ ?>
+                    <input type="text" class="form-control" id="st" name="st" value="<?= $komisi->status_transfer ?>" readonly>
+                <?php } ?>
+            </div>
         </div>
-        <div class="text-right">
-            <button class="btn btn-success">Update</button>
-        </div>
-    </form>
+    </div>
+
+    <div class="form-group d-xl-none">
+      <label class="col-sm-15 col-form-label">No Sistem</label>
+      <input type="text" class="form-control" id="id_komisi" name="id_komisi" value="<?php echo $komisi->id_komisi; ?>">
+  </div>
+  <div class="form-group d-xl-none">
+    <label for="admin" class="col-form-label">Admin</label>
+    <input type="text" class="form-control" id="admin" name="admin" value="<?php echo $id; ?>">
+</div>
+<div class="text-right">
+    <button class="btn btn-success">Update</button>
+</div>
+</form>
 
 <?php } ?>
 </div>
