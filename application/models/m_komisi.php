@@ -69,6 +69,45 @@ class M_komisi extends CI_Model{
 		return $this->db->get('sub_komisi_afw');
 	}
 
+	function getDataByDateRange($dari, $ke, $j_tanggal) {
+		$this->db->distinct();
+		$this->db->select('a.id_komisi, a.alamat_komisi, a.jt_komisi, a.tgl_closing_komisi, a.bruto_komisi, a.mar_listing_komisi, a.mar_selling_komisi, a.waktu_komisi, a.status_komisi, a.tgl_disetujui, a.status_transfer,
+			a.mar_listing2_komisi, a.mar_selling2_komisi');
+
+		$this->db->select('b.id_mar, b.nama_mar, b.member_mar as member_listing, c.id_mar, c.member_mar as member_selling, b.upline_emd_mar as up_1_listing, b.upline_cmo_mar as up_2_listing, b.norek_mar as norek_listing,
+			c.upline_emd_mar as up_1_selling, c.upline_cmo_mar as up_2_selling, c.nama_mar as nama_mar2, c.norek_mar as norek_selling');
+
+		$this->db->select('d.id_sub_komisi, d.id_komisi, d.mm_listing_komisi, d.npwpm_listing_komisi, d.npwpum_listing_komisi, d.npwpum_listing2_komisi, d.mm_selling_komisi, d.npwpm_selling_komisi, d.npwpum_selling_komisi, d.npwpum_selling2_komisi, d.admin_pengguna, d.admin_status_komisi,
+			d.mm2_listing_komisi, d.npwpm2_listing_komisi, d.npwpum2_listing_komisi, d.npwpum2_listing2_komisi, d.mm2_selling_komisi, d.npwpm2_selling_komisi, d.npwpum2_selling_komisi, d.npwpum2_selling2_komisi');
+
+		$this->db->select('e.id_pengguna, e.nama_pengguna, e.level_pengguna');
+
+		$this->db->select('h.nama_mar as listing_2, h.norek_mar as norek_listing2, h.upline_emd_mar as up_1_listing2, h.upline_cmo_mar as up_2_listing2');
+
+		$this->db->select('i.nama_mar as selling_2, i.norek_mar as norek_selling2, i.upline_emd_mar as up_1_selling2, i.upline_cmo_mar as up_2_selling2');
+
+		$this->db->select('j.id_pengguna, j.nama_pengguna as admin_disetujui, j.level_pengguna as level_disetujui, j.gambar_ttd_pengguna');
+
+		$this->db->select('k.id_afw, k.id_sub_komisi, k.m_ang, k.npwp_ang, k.npwp_up_ang, k.npwp_up2_ang, k.m_fran, k.npwp_fran, k.npwp_up_fran, k.npwp_up2_fran, k.m_win, k.npwp_win, k.npwp_up_win, k.npwp_up2_win');
+
+		$this->db->from('komisi as a');
+		$this->db->join('marketing as b', 'a.mar_listing_komisi = b.id_mar', 'left');
+		$this->db->join('marketing as c', 'a.mar_selling_komisi = c.id_mar', 'left');
+		$this->db->join('sub_komisi as d', 'a.id_komisi = d.id_komisi');
+		$this->db->join('pengguna as e', 'e.id_pengguna = d.admin_pengguna');
+		$this->db->join('marketing as h', 'h.id_mar = a.mar_listing2_komisi', 'left');
+		$this->db->join('marketing as i', 'i.id_mar = a.mar_selling2_komisi', 'left');
+		$this->db->join('pengguna as j', 'j.id_pengguna = d.admin_status_komisi', 'left');
+		$this->db->join('sub_komisi_afw as k', 'k.id_sub_komisi = d.id_sub_komisi', 'left');
+		$this->db->order_by('a.id_komisi', 'ASC');
+
+		$this->db->where('a.'.$j_tanggal.'>=', $dari);
+		$this->db->where('a.'.$j_tanggal.'<=', $ke);
+		$query = $this->db->get('komisi');
+
+		return $query->result();
+	}
+
 	function tampil_data_rincian($where){
 		$data = implode($where);
 		$hasil = $this->db->query("SELECT a.id_komisi, a.alamat_komisi, a.jt_komisi, a.tgl_closing_komisi, a.bruto_komisi, a.mar_listing_komisi, a.mar_selling_komisi, a.waktu_komisi, a.status_komisi, a.tgl_disetujui, a.status_transfer,
