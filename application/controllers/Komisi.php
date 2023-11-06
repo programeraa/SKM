@@ -166,7 +166,8 @@ class Komisi extends CI_Controller {
 				'mar_selling2_komisi' => $ms_new,
 				'bruto_komisi' => $komisi,
 				'waktu_komisi' => $waktu,
-				'status_komisi' => 'Proses Approve'
+				'status_komisi' => 'Proses Approve',
+				'status_transfer' => 'Proses Transfer'
 			);
 
 			$this->m_komisi->simpan($data);
