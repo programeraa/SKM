@@ -9,6 +9,21 @@ class Laporan extends CI_Controller {
 		$this->load->model('m_pengguna');
 	}
 
+	public function filterData() {
+		$dari = $this->input->get('dari');
+		$ke = $this->input->get('ke');
+		$j_tanggal = $this->input->get('j_tanggal');
+
+		$data['title'] = 'Laporan Status Approve';
+		$data['komisi'] = $this->m_komisi->getDataByDateRange($dari, $ke, $j_tanggal);
+		$data['marketing'] = $this->m_komisi->tampil_data_marketing()->result();
+		$data['co_broke'] = $this->m_komisi->tampil_data_cobroke()->result();
+
+		$this->load->view('v_header', $data);
+		$this->load->view('laporan/v_status_approve', $data);
+		$this->load->view('v_footer', $data);
+	}
+
 	public function status_approve()
 	{
 		$level = $this->session->userdata('level');
