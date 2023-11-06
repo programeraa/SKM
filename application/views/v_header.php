@@ -38,12 +38,32 @@
         <!-- Popper.js -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
-    </head>
+        <style>
+            .table-responsive {
+                overflow-x: auto;
+            }
 
-    <body>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <div class="container d-flex justify-content-between">
-                <a class="navbar-brand" href="">A&A INDONESIA</a>
-                <a class="navbar-brand mr-0" href="<?= base_url('Komisi');?>"><?= $nama ?> - <?= $level; ?></a>
-            </div>
-        </nav>
+            .table-right {
+                padding-right: 50px; /* Sesuaikan ukuran padding sesuai kebutuhan */
+            }
+
+            .table {
+              border-radius: 0.2rem;
+              width: 100%;
+              padding-bottom: 1rem;
+              margin-bottom: 0;
+          }
+          .table td {
+              white-space: nowrap;
+          }
+      </style>
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container d-flex justify-content-between">
+            <a class="navbar-brand" href="">A&A INDONESIA</a>
+            <a class="navbar-brand mr-0" href="<?= base_url('Komisi');?>"><?= $nama ?> - <?= $level; ?></a>
+        </div>
+    </nav>
