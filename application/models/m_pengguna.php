@@ -6,6 +6,11 @@ class M_pengguna extends CI_Model{
 		return $this->db->get('pengguna');
 	}
 
+    function tampil_data_admin(){
+        $this->db->where('level_pengguna', 'Administrator');
+        return $this->db->get('pengguna');
+    }
+
     function simpan($data){
     	$this->db->insert('pengguna',$data);
     }
