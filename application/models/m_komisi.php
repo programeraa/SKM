@@ -209,9 +209,9 @@ class M_komisi extends CI_Model{
 		$this->db->update('komisi',$data);
 	}
 
-	function update_sub_komisi($where,$data2){
+	function update_sub_komisi($where,$dataX){
 		$this->db->where($where);
-		$this->db->update('sub_komisi',$data2);
+		$this->db->update('sub_komisi',$dataX);
 	}
 
 	function hapus($where){
