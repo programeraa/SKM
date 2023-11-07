@@ -156,6 +156,39 @@
                                     <label for="admin" class="col-form-label">Admin</label>
                                     <input type="text" class="form-control" id="admin" name="admin" value="<?php echo $id; ?>">
                                 </div>
+
+                                <div class="form-group d-xl-none">
+                                    <input type="text" name="id_marketing1" value="<?= $komisi->mar_listing_komisi ?>">
+                                    <input type="text" name="id_marketing2" value="<?= $komisi->mar_selling_komisi ?>">
+                                    <input type="text" name="id_marketing3" value="<?= $komisi->mar_listing2_komisi ?>">
+                                    <input type="text" name="id_marketing4" value="<?= $komisi->mar_selling2_komisi ?>">
+
+                                    <input type="text" name="fee_kantor1" value="<?= $fkl ?>">
+                                    <input type="text" name="fee_kantor2" value="<?= $fks ?>">
+                                    <input type="text" name="fee_kantor3" value="<?= $fkl2 ?>">
+                                    <input type="text" name="fee_kantor4" value="<?= $fks2 ?>">
+
+                                    <input type="text" name="fee_marketing1" value="<?= $fmk2_listing ?>">
+                                    <input type="text" name="fee_marketing2" value="<?= $fmk2_selling ?>">
+                                    <input type="text" name="fee_marketing3" value="<?= $fmk2_listing2 ?>">
+                                    <input type="text" name="fee_marketing4" value="<?= $fmk2_selling2 ?>">
+
+                                    <input type="text" name="ptn_admin1" value="<?= $admin_listing ?>">
+                                    <input type="text" name="ptn_admin2" value="<?= $admin_selling ?>">
+                                    <input type="text" name="ptn_admin3" value="<?= $admin_listing2 ?>">
+                                    <input type="text" name="ptn_admin4" value="<?= $admin_selling2 ?>">
+
+                                    <input type="text" name="ptn_pph1" value="<?= $biaya_pph_l ?>">
+                                    <input type="text" name="ptn_pph2" value="<?= $biaya_pph_s ?>">
+                                    <input type="text" name="ptn_pph3" value="<?= $biaya_pph_l2 ?>">
+                                    <input type="text" name="ptn_pph4" value="<?= $biaya_pph_s2 ?>">
+
+                                    <input type="text" name="netto_marketing1" value="<?= $fmb_l ?>">
+                                    <input type="text" name="netto_marketing2" value="<?= $fmb_s ?>">
+                                    <input type="text" name="netto_marketing3" value="<?= $fmb_l2 ?>">
+                                    <input type="text" name="netto_marketing4" value="<?= $fmb_s2 ?>">
+                                </div>
+
                                 <div class="flex-shrink-0">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
