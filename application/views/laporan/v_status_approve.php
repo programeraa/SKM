@@ -37,7 +37,7 @@
 
         <div class="card-body">
             <div class="pb-3 d-sm-flex justify-content-start">
-              <form method="get" action="<?= base_url('laporan/filterData'); ?>">
+              <form method="get" action="<?= base_url('laporan/filterDataStatusApprove'); ?>">
                 <div class="row g-3 align-items-center justify-content-end">
                   <div class="col-auto">
                     <label class="col-form-label">Periode</label>
@@ -89,6 +89,8 @@
                     $bruto_r = numberToRupiah($bruto);
 
                     $tgl_closing = date("d-m-Y", strtotime($komisi->tgl_closing_komisi));
+                    $tgl_input = date("d-m-Y", strtotime($komisi->waktu_komisi));
+                    $tgl_approve = date("d-m-Y", strtotime($komisi->tgl_disetujui));
 
                             //setting apakah listing 1 a&a atau cobroke
                     $listing_1 = $komisi->nama_mar;
@@ -137,13 +139,13 @@
                             }?>
                         </td>
                         <td>
-                            <?= $komisi->waktu_komisi; ?>
+                            <?= $tgl_input; ?>
                         </td>
                         <td>
                             <?php if ($komisi->tgl_disetujui == 0000-00-00){
                                 echo "Belum Approve";
                             }else{
-                                echo $komisi->tgl_disetujui;
+                                echo $tgl_approve;
                             }
                             ?>
                         </td>
