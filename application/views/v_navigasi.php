@@ -28,6 +28,7 @@
         Laporan
     </button>
     <div class="dropdown-menu">
+        <a class="dropdown-item" href="<?= base_url('Laporan/omzet_vision');?>">Omzet A&A Vision</a>
         <a class="dropdown-item" href="<?= base_url('Laporan/status_approve');?>">Status Approve</a>
         <a class="dropdown-item" href="<?= base_url('Laporan/status_transaksi');?>">Status Transfer</a>
         <a class="dropdown-item" href="<?= base_url('Laporan/admin_komisi');?>">Admin Komisi</a>
