@@ -69,7 +69,7 @@ class M_komisi extends CI_Model{
 		return $this->db->get('sub_komisi_afw');
 	}
 
-	function getDataByDateRange($dari, $ke, $j_tanggal) {
+	function getDataByDateRange($dari, $ke, $j_tanggal, $admin_komisi) {
 		$this->db->distinct();
 		$this->db->select('a.id_komisi, a.alamat_komisi, a.jt_komisi, a.tgl_closing_komisi, a.bruto_komisi, a.mar_listing_komisi, a.mar_selling_komisi, a.waktu_komisi, a.status_komisi, a.tgl_disetujui, a.status_transfer,
 			a.mar_listing2_komisi, a.mar_selling2_komisi');
@@ -101,8 +101,13 @@ class M_komisi extends CI_Model{
 		$this->db->join('sub_komisi_afw as k', 'k.id_sub_komisi = d.id_sub_komisi', 'left');
 		$this->db->order_by('a.id_komisi', 'ASC');
 
-		$this->db->where('a.'.$j_tanggal.'>=', $dari);
-		$this->db->where('a.'.$j_tanggal.'<=', $ke);
+		if (!empty($dari) && !empty($ke) && !empty($j_tanggal)) {
+			$this->db->where('a.'.$j_tanggal.'>=', $dari);
+			$this->db->where('a.'.$j_tanggal.'<=', $ke);
+		}
+		if (!empty($admin_komisi)) {
+			$this->db->where('e.id_pengguna', $admin_komisi);
+		}
 		$query = $this->db->get('komisi');
 
 		return $query->result();
