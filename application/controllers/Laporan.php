@@ -7,6 +7,26 @@ class Laporan extends CI_Controller {
 		$this->load->model('m_dashboard');
 		$this->load->model('m_marketing');
 		$this->load->model('m_pengguna');
+		$this->load->model('m_laporan');
+	}
+
+	public function omzet_vision()
+	{
+		$level = $this->session->userdata('level');
+		if ($level == '') {
+			$this->session->set_flashdata('gagal','Anda Belum Login');
+			redirect(base_url('login'));
+		}
+
+		$data['title'] = 'Laporan Omzet Vision';
+		$data['komisi'] = $this->m_komisi->tampil_data()->result();
+		$data['marketing'] = $this->m_komisi->tampil_data_marketing()->result();
+		$data['omzet_vision'] = $this->m_laporan->tampil_data_omzet_vision()->result();
+		$data['co_broke'] = $this->m_komisi->tampil_data_cobroke()->result();
+
+		$this->load->view('v_header', $data);
+		$this->load->view('laporan/v_omzet_vision', $data);
+		$this->load->view('v_footer', $data);
 	}
 
 	public function status_approve()
