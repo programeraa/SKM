@@ -6,30 +6,13 @@
     <div class="card">
         <div class="card-header bg-dark text-white">
             <?php 
-            if(isset($_GET['dari']) && isset($_GET['ke']) || isset($_GET['admin_komisi'])){
+            if(isset($_GET['dari']) && isset($_GET['ke'])){
                 $b = $_GET['dari'];
                 $t = $_GET['ke'];
-
-                if ($_GET['j_tanggal'] == 'tgl_closing_komisi') {
-                    $j = 'Tgl Closing';
-                }elseif($_GET['j_tanggal'] == 'waktu_komisi'){
-                    $j = 'Tgl Input';
-                }else{
-                    $j = 'Tgl Approve';
-                }
-
-                $admin = null;
-                foreach ($pengguna as $user) {
-                    if ($_GET['admin_komisi'] == $user->id_pengguna) {
-                        $admin = $user->nama_pengguna;
-                    }
-                }
                 
             }else{
                 $b = null;
                 $t = null;
-                $j = null;
-                $admin = null;
             }
             ?>
 
@@ -39,14 +22,14 @@
                 <h4 class="card-title" style="text-align: center;">Laporan Omzet Vision</h4>
                 <h5><?php echo '<div class="justify-content-center">
                 <div class="col-auto text-center">
-                <strong><span class= text-warning>'.$j.' Periode '.$b.' sampai '.$t.'</span></strong> 
+                <strong><span class= text-warning>Periode '.$b.' sampai '.$t.'</span></strong> 
                 </div>
             </div>'; }?></h5> 
         </div>
 
         <div class="card-body">
             <div class="pb-3 d-sm-flex justify-content-start">
-                <form method="get" action="<?= base_url('laporan/filterDataAdminKomisi'); ?>">
+                <form method="get" action="<?= base_url('laporan/filterDataOmzetVision'); ?>">
                     <div class="row g-3 align-items-center justify-content-end">
                       <div class="col-auto">
                         <label class="col-form-label">Periode</label>
@@ -59,24 +42,6 @@
                     </div>
                     <div class="col-auto p-0">
                         <input type="date" class="form-control" name="ke">
-                    </div>
-                    <div class="col-auto pr-0">
-                        <select class="form-control" id="j_tanggal" name="j_tanggal">
-                            <option value="tgl_closing_komisi">Tanggal Closing</option>
-                            <option value="waktu_komisi">Tanggal Input</option>
-                            <option value="tgl_disetujui">Tanggal Disetujui</option>
-                        </select>
-                    </div>
-                    <div class="col-auto pr-0">
-                        <select class="form-control" id="admin_komisi" name="admin_komisi">
-                            <option value="">Pilih Admin Komisi</option>
-                            <?php 
-                            foreach($pengguna as $each){ ?>
-                                <option value="<?php echo $each->id_pengguna; ?>">
-                                    <?php echo $each->nama_pengguna; ?> 
-                                </option>;
-                            <?php } ?>
-                        </select>
                     </div>
                     <div class="col-auto">
                         <button class="btn btn-primary" type="submit">Tampilkan</button>
