@@ -2,8 +2,26 @@
 
 class M_laporan extends CI_Model{
 
+    function tampil_data_omzet(){
+        $this->db->select('*');
+        $this->db->from('omzet');
+        $this->db->join('komisi','komisi.id_komisi = omzet.id_komisi','inner');
+        $this->db->join('omzet_aavision','omzet.id_omzet = omzet_aavision.id_omzet','inner');
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     function tampil_data_omzet_vision(){
         return $this->db->get('omzet_aavision');
+    }
+
+    function simpan_omzet($data_omzet){
+        $this->db->insert('omzet',$data_omzet);
+    }
+
+    function get_last_inserted_id_data_omzet() {
+        return $this->db->insert_id();
     }
 
     function simpan1($data1){
