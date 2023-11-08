@@ -183,10 +183,10 @@
                                     <input type="text" name="ptn_pph3" value="<?= $biaya_pph_l2 ?>">
                                     <input type="text" name="ptn_pph4" value="<?= $biaya_pph_s2 ?>">
 
-                                    <input type="text" name="netto_marketing1" value="<?= $fmb_l ?>">
-                                    <input type="text" name="netto_marketing2" value="<?= $fmb_s ?>">
-                                    <input type="text" name="netto_marketing3" value="<?= $fmb_l2 ?>">
-                                    <input type="text" name="netto_marketing4" value="<?= $fmb_s2 ?>">
+                                    <input type="text" name="netto_marketing1" value="<?= $fmb_l_sp ?>">
+                                    <input type="text" name="netto_marketing2" value="<?= $fmb_s_sp ?>">
+                                    <input type="text" name="netto_marketing3" value="<?= $fmb_l2_sp ?>">
+                                    <input type="text" name="netto_marketing4" value="<?= $fmb_s2_sp ?>">
                                 </div>
 
                                 <div class="flex-shrink-0">
