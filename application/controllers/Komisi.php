@@ -622,6 +622,9 @@ class Komisi extends CI_Controller {
 			if ($previous_status != 'Approve') {
 				$this->m_laporan->simpan_omzet($data_omzet);
 			}
+		}elseif($this->m_komisi->get_status($id_komisi) == 'Approve' && $status_komisi == 'Proses Approve') {
+			$where = array('id_komisi'=>$id_komisi);
+			$this->m_laporan->hapus_omzet($where);
 		}
 
 		$id_omzet_baru = $this->m_laporan->get_last_inserted_id_data_omzet();
