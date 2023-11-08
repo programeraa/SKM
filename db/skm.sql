@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Nov 2023 pada 10.04
+-- Waktu pembuatan: 08 Nov 2023 pada 10.08
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -105,7 +105,7 @@ INSERT INTO `komisi` (`id_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_ko
 (288, 'Raya Darmo Permai I No. 60, Surabaya', 'Sewa', '2023-08-29', 11, 0, 11, 0, '16500000', '2023-10-13', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
 (289, ' Jl. Raya Dukuh Kupang 39A, Surabaya ', 'Sewa', '2023-08-12', 7, 10, 11, 0, '12050000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
 (290, 'Jl. Darmo Indah Selatan KK 50, Surabaya', 'Jual/Sewa', '2023-10-16', 6118, 0, 2, 38, '25000000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
-(291, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-12', 3, 9, 10, 11, '50000000', '2023-10-16', '2023-11-07', 'Approve', 'Proses Transfer'),
+(291, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-12', 3, 9, 10, 11, '50000000', '2023-10-16', '2023-11-08', 'Approve', 'Proses Transfer'),
 (292, 'Jl. Dukuh Kupang XXIII, No 2, Surabaya', 'Jual', '2023-10-12', 38, 0, 38, 0, '10000000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
 (293, 'Desa Compreng, Widang, Tuban', 'Jual', '2023-10-14', 8731, 0, 38, 0, '12000000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
 (294, 'Compreng, Widang, Tuban', 'Jual', '2023-10-10', 2, 3, 9138, 0, '10000000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
@@ -192,12 +192,30 @@ INSERT INTO `marketing` (`id_mar`, `nama_mar`, `nomor_mar`, `member_mar`, `uplin
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `omzet`
+--
+
+CREATE TABLE `omzet` (
+  `id_omzet` int(250) NOT NULL,
+  `id_komisi` int(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `omzet`
+--
+
+INSERT INTO `omzet` (`id_omzet`, `id_komisi`) VALUES
+(8, 291);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `omzet_aavision`
 --
 
 CREATE TABLE `omzet_aavision` (
   `id_omzetvision` int(250) NOT NULL,
-  `id_komisi` int(250) NOT NULL,
+  `id_omzet` int(250) NOT NULL,
   `id_marketing` int(250) NOT NULL,
   `fee_kantor` int(250) NOT NULL,
   `fee_marketing` int(250) NOT NULL,
@@ -210,11 +228,11 @@ CREATE TABLE `omzet_aavision` (
 -- Dumping data untuk tabel `omzet_aavision`
 --
 
-INSERT INTO `omzet_aavision` (`id_omzetvision`, `id_komisi`, `id_marketing`, `fee_kantor`, `fee_marketing`, `ptn_admin`, `ptn_pph`, `netto_marketing`) VALUES
-(9, 291, 3, 5000000, 5000000, 0, 125000, 4875000),
-(10, 291, 10, 5000000, 5000000, 0, 125000, 4875000),
-(11, 291, 9, 2000000, 8000000, 200000, 195000, 7605000),
-(12, 291, 11, 3000000, 7000000, 175000, 170625, 6654375);
+INSERT INTO `omzet_aavision` (`id_omzetvision`, `id_omzet`, `id_marketing`, `fee_kantor`, `fee_marketing`, `ptn_admin`, `ptn_pph`, `netto_marketing`) VALUES
+(45, 8, 3, 5000000, 5000000, 0, 125000, 4875000),
+(46, 8, 10, 5000000, 5000000, 0, 125000, 4875000),
+(47, 8, 9, 2000000, 8000000, 200000, 195000, 7605000),
+(48, 8, 11, 3000000, 7000000, 175000, 170625, 6654375);
 
 -- --------------------------------------------------------
 
@@ -432,11 +450,18 @@ ALTER TABLE `marketing`
   ADD PRIMARY KEY (`id_mar`);
 
 --
+-- Indeks untuk tabel `omzet`
+--
+ALTER TABLE `omzet`
+  ADD PRIMARY KEY (`id_omzet`),
+  ADD KEY `id_komisi` (`id_komisi`);
+
+--
 -- Indeks untuk tabel `omzet_aavision`
 --
 ALTER TABLE `omzet_aavision`
   ADD PRIMARY KEY (`id_omzetvision`),
-  ADD KEY `id_komisi` (`id_komisi`);
+  ADD KEY `id_omzet` (`id_omzet`);
 
 --
 -- Indeks untuk tabel `pengguna`
@@ -508,10 +533,16 @@ ALTER TABLE `marketing`
   MODIFY `id_mar` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
+-- AUTO_INCREMENT untuk tabel `omzet`
+--
+ALTER TABLE `omzet`
+  MODIFY `id_omzet` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT untuk tabel `omzet_aavision`
 --
 ALTER TABLE `omzet_aavision`
-  MODIFY `id_omzetvision` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_omzetvision` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengguna`
@@ -560,10 +591,16 @@ ALTER TABLE `co_broke`
   ADD CONSTRAINT `co_broke_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Ketidakleluasaan untuk tabel `omzet`
+--
+ALTER TABLE `omzet`
+  ADD CONSTRAINT `omzet_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Ketidakleluasaan untuk tabel `omzet_aavision`
 --
 ALTER TABLE `omzet_aavision`
-  ADD CONSTRAINT `omzet_aavision_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `omzet_aavision_ibfk_1` FOREIGN KEY (`id_omzet`) REFERENCES `omzet` (`id_omzet`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `pengurangan_fee`
