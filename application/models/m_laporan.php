@@ -12,6 +12,20 @@ class M_laporan extends CI_Model{
         return $query->result();
     }
 
+    function getDataByDateRange_omzet($dari, $ke){
+        $this->db->select('*');
+        $this->db->from('omzet');
+        $this->db->join('komisi','komisi.id_komisi = omzet.id_komisi','inner');
+        $this->db->join('omzet_aavision','omzet.id_omzet = omzet_aavision.id_omzet','inner');
+
+        $this->db->where('tgl_closing_komisi >=', $dari);
+        $this->db->where('tgl_closing_komisi <=', $ke);
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
     function tampil_data_omzet_vision(){
         return $this->db->get('omzet_aavision');
     }
@@ -22,6 +36,11 @@ class M_laporan extends CI_Model{
 
     function get_last_inserted_id_data_omzet() {
         return $this->db->insert_id();
+    }
+
+    function hapus_omzet($where){
+        $this->db->where($where);
+        $this->db->delete('omzet',$where);
     }
 
     function simpan1($data1){
