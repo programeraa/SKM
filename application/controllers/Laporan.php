@@ -30,6 +30,22 @@ class Laporan extends CI_Controller {
 		$this->load->view('v_footer', $data);
 	}
 
+	public function filterDataOmzetVision() {
+		$dari = $this->input->get('dari');
+		$ke = $this->input->get('ke');
+
+		$data['title'] = 'Laporan Omzet Vision';
+		$data['komisi'] = $this->m_komisi->tampil_data()->result();
+		$data['marketing'] = $this->m_komisi->tampil_data_marketing()->result();
+		$data['omzet'] = $this->m_laporan->getDataByDateRange_omzet($dari, $ke);
+		$data['co_broke'] = $this->m_komisi->tampil_data_cobroke()->result();
+		$data['omzet_vision'] = $this->m_laporan->tampil_data_omzet_vision()->result();
+
+		$this->load->view('v_header', $data);
+		$this->load->view('laporan/v_omzet_vision', $data);
+		$this->load->view('v_footer', $data);
+	}
+
 	public function status_approve()
 	{
 		$level = $this->session->userdata('level');
