@@ -612,8 +612,22 @@ class Komisi extends CI_Controller {
 			$dataX['admin_status_komisi'] = 0;
 		}
 
+		$data_omzet = array(
+			'id_komisi' => $id_komisi
+		);
+
+		if ($status_komisi == 'Approve') {
+			$previous_status = $this->m_komisi->get_status($id_komisi);
+
+			if ($previous_status != 'Approve') {
+				$this->m_laporan->simpan_omzet($data_omzet);
+			}
+		}
+
+		$id_omzet_baru = $this->m_laporan->get_last_inserted_id_data_omzet();
+
 		$data1 = array(
-			'id_komisi' => $id_komisi,
+			'id_omzet' => $id_omzet_baru,
 			'id_marketing' => $id_mar1,
 			'fee_kantor' => $fee_kantor1,
 			'fee_marketing' => $fee_mar1,
@@ -623,7 +637,7 @@ class Komisi extends CI_Controller {
 		);
 
 		$data2 = array(
-			'id_komisi' => $id_komisi,
+			'id_omzet' => $id_omzet_baru,
 			'id_marketing' => $id_mar2,
 			'fee_kantor' => $fee_kantor2,
 			'fee_marketing' => $fee_mar2,
@@ -633,7 +647,7 @@ class Komisi extends CI_Controller {
 		);
 
 		$data3 = array(
-			'id_komisi' => $id_komisi,
+			'id_omzet' => $id_omzet_baru,
 			'id_marketing' => $id_mar3,
 			'fee_kantor' => $fee_kantor3,
 			'fee_marketing' => $fee_mar3,
@@ -643,7 +657,7 @@ class Komisi extends CI_Controller {
 		);
 
 		$data4 = array(
-			'id_komisi' => $id_komisi,
+			'id_omzet' => $id_omzet_baru,
 			'id_marketing' => $id_mar4,
 			'fee_kantor' => $fee_kantor4,
 			'fee_marketing' => $fee_mar4,
