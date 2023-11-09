@@ -51,7 +51,7 @@
         </div>
         <div class="table-responsive">
             <table id="myTable" class="table table-bordered table-striped">
-                <thead>
+                <!-- <thead>
                     <tr>
                         <th rowspan="2">No</th>
                         <th rowspan="2">ID Komisi</th>
@@ -72,10 +72,62 @@
                         <th>A&A Vision</th>
                         <th>Marketing</th>
                     </tr>
+                </thead> -->
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>ID Komisi</th>
+                        <th>Tanggal Closing</th>
+                        <th>ID Marketing</th>
+                        <th>Marketing</th>
+                        <th>Alamat Properti</th>
+                        <th>Jenis</th>
+                        <th colspan="2" class="text-center">Fee Bruto</th>
+                        <th colspan="2" class="text-center">Potongan</th>
+                        <th colspan="2" class="text-center">Netto</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>A&A Vision</th>
+                        <th>Marketing</th>
+                        <th>ADM</th>
+                        <th>PPH 21</th>
+                        <th>A&A Vision</th>
+                        <th>Marketing</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <?php $no = 1; 
+                    $sum_bruto_aavision = 0;
+                    $sum_bruto_marketing = 0;
+                    $sum_ptn_adm = 0;
+                    $sum_ptn_pajak = 0;
+                    $sum_total_fee_vision = 0;
+                    $sum_bersih_marketing = 0;
+
+                    $bruto_aa_vision_r = null;
+                    $bruto_marketing_r = null;
+                    $sum_ptn_admin_r = null;
+                    $sum_ptn_pph_r = null;
+                    $sum_total_fee_vision_r = null;
+                    $sum_netto_marketing_r = null;
+
+                    $id_komisi_values = []; 
+
                     foreach ($omzet as $vision) {
+                        $cell_content = '';
+
+                        if (!in_array($vision->id_komisi, $id_komisi_values)) {
+                            $cell_content = $vision->id_komisi;
+                            $id_komisi_values[] = $vision->id_komisi; 
+                        }
+
                         $fee_kantor = stringToNumber($vision->fee_kantor);
                         $fee_kantor_r = numberToRupiah($fee_kantor);
 
@@ -91,10 +143,40 @@
                         $netto_marketing = stringToNumber($vision->netto_marketing);
                         $netto_marketing_r = numberToRupiah($netto_marketing);
 
-                        $total_fee_vsn = $vision->fee_kantor + $vision->ptn_admin;
+                        //$total_fee_vsn = $vision->fee_kantor + $vision->ptn_admin;
 
-                        $total_fee_vision = stringToNumber($total_fee_vsn);
+                        $total_fee_vision = stringToNumber($vision->netto_vision);
                         $total_fee_vision_r = numberToRupiah($total_fee_vision);
+
+                        $sum_bruto_aavision += $vision->fee_kantor;
+
+                        $bruto_aa_vision = stringToNumber($sum_bruto_aavision);
+                        $bruto_aa_vision_r = numberToRupiah($bruto_aa_vision);
+
+                        $sum_bruto_marketing += $vision->fee_marketing;
+
+                        $bruto_marketing = stringToNumber($sum_bruto_marketing);
+                        $bruto_marketing_r = numberToRupiah($bruto_marketing);
+
+                        $sum_ptn_adm += $vision->ptn_admin;
+
+                        $sum_ptn_admin = stringToNumber($sum_ptn_adm);
+                        $sum_ptn_admin_r = numberToRupiah($sum_ptn_admin);
+
+                        $sum_ptn_pajak += $vision->ptn_pph;
+
+                        $sum_ptn_pph = stringToNumber($sum_ptn_pajak);
+                        $sum_ptn_pph_r = numberToRupiah($sum_ptn_pph);
+
+                        $sum_total_fee_vision += $vision->netto_vision;
+
+                        $sum_total_fee_vision = stringToNumber($sum_total_fee_vision);
+                        $sum_total_fee_vision_r = numberToRupiah($sum_total_fee_vision);
+
+                        $sum_bersih_marketing += $vision->netto_marketing;
+
+                        $sum_netto_marketing = stringToNumber($sum_bersih_marketing);
+                        $sum_netto_marketing_r = numberToRupiah($sum_netto_marketing);
 
                         $nama_mar = null;
                         $id_mar = null;
@@ -109,7 +191,7 @@
                         ?>
                         <tr>
                             <td><?= $no; ?></td>
-                            <td><?= $vision->id_komisi; ?></td>
+                            <td><?= $cell_content ?></td>
                             <td><?= $tgl_closing; ?></td>
                             <td><?= $id_mar ?></td>
                             <td><?= $nama_mar ?></td>
@@ -125,6 +207,23 @@
                         <?php $no++;
                     } ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Total</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th><?= $bruto_aa_vision_r ?></th>
+                        <th><?= $bruto_marketing_r ?></th>
+                        <th><?= $sum_ptn_admin_r ?></th>
+                        <th><?= $sum_ptn_pph_r ?></th>
+                        <th><?= $sum_total_fee_vision_r ?></th>
+                        <th><?= $sum_netto_marketing_r ?></th>
+                    </tr>
+                </tfoot>
             </table>
 <!-- 
             <table id="myTable" class="table table-bordered table-striped">
