@@ -22,7 +22,6 @@ class Laporan extends CI_Controller {
 		$data['komisi'] = $this->m_komisi->tampil_data()->result();
 		$data['marketing'] = $this->m_komisi->tampil_data_marketing()->result();
 		$data['omzet'] = $this->m_laporan->tampil_data_omzet();
-		$data['co_broke'] = $this->m_komisi->tampil_data_cobroke()->result();
 		$data['omzet_vision'] = $this->m_laporan->tampil_data_omzet_vision()->result();
 
 		$this->load->view('v_header', $data);
