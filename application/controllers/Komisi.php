@@ -591,6 +591,27 @@ class Komisi extends CI_Controller {
 		$netto_mar3 = $this->input->post('netto_marketing3');
 		$netto_mar4 = $this->input->post('netto_marketing4');
 
+		$id_ang = $this->input->post('id_ang');
+		$fee_kantor_ang = $this->input->post('fee_kantor_afw');
+		$fee_ang = $this->input->post('fee_ang');
+		$admin_ang = $this->input->post('admin_ang');
+		$pph_ang = $this->input->post('pph_ang');
+		$netto_ang = $this->input->post('netto_ang');
+
+		$id_fran = $this->input->post('id_fran');
+		$fee_kantor_fran = 0;
+		$fee_fran = $this->input->post('fee_fran');
+		$admin_fran = $this->input->post('admin_fran');
+		$pph_fran = $this->input->post('pph_fran');
+		$netto_fran = $this->input->post('netto_fran');
+
+		$id_win = $this->input->post('id_win');
+		$fee_kantor_win = 0;
+		$fee_win = $this->input->post('fee_win');
+		$admin_win = $this->input->post('admin_win');
+		$pph_win = $this->input->post('pph_win');
+		$netto_win = $this->input->post('netto_win');
+
 		date_default_timezone_set("Asia/Jakarta");
 		$waktu = date("Y-m-d H:i:s");
 
@@ -636,6 +657,7 @@ class Komisi extends CI_Controller {
 			'fee_marketing' => $fee_mar1,
 			'ptn_admin' => $ptn_admin1,
 			'ptn_pph' => $ptn_pph1,
+			'netto_vision' => $fee_kantor1 + $ptn_admin1,
 			'netto_marketing' => $netto_mar1
 		);
 
@@ -646,6 +668,7 @@ class Komisi extends CI_Controller {
 			'fee_marketing' => $fee_mar2,
 			'ptn_admin' => $ptn_admin2,
 			'ptn_pph' => $ptn_pph2,
+			'netto_vision' => $fee_kantor2 + $ptn_admin2,
 			'netto_marketing' => $netto_mar2
 		);
 
@@ -656,6 +679,7 @@ class Komisi extends CI_Controller {
 			'fee_marketing' => $fee_mar3,
 			'ptn_admin' => $ptn_admin3,
 			'ptn_pph' => $ptn_pph3,
+			'netto_vision' => $fee_kantor3 + $ptn_admin3,
 			'netto_marketing' => $netto_mar3
 		);
 
@@ -666,27 +690,76 @@ class Komisi extends CI_Controller {
 			'fee_marketing' => $fee_mar4,
 			'ptn_admin' => $ptn_admin4,
 			'ptn_pph' => $ptn_pph4,
+			'netto_vision' => $fee_kantor4 + $ptn_admin4,
 			'netto_marketing' => $netto_mar4
 		);
+
+		$data_ang = array(
+			'id_omzet' => $id_omzet_baru,
+			'id_marketing' => $id_ang,
+			'fee_kantor' => $fee_kantor_ang,
+			'fee_marketing' => $fee_ang,
+			'ptn_admin' => $admin_ang,
+			'ptn_pph' => $pph_ang,
+			'netto_vision' => $fee_kantor_ang + $admin_ang,
+			'netto_marketing' => $netto_ang
+		);
+
+		$data_fran = array(
+			'id_omzet' => $id_omzet_baru,
+			'id_marketing' => $id_fran,
+			'fee_kantor' => $fee_kantor_fran,
+			'fee_marketing' => $fee_fran,
+			'ptn_admin' => $admin_fran,
+			'ptn_pph' => $pph_fran,
+			'netto_vision' => $fee_kantor_fran + $admin_fran,
+			'netto_marketing' => $netto_fran
+		);
+
+		$data_win = array(
+			'id_omzet' => $id_omzet_baru,
+			'id_marketing' => $id_win,
+			'fee_kantor' => $fee_kantor_win,
+			'fee_marketing' => $fee_win,
+			'ptn_admin' => $admin_win,
+			'ptn_pph' => $pph_win,
+			'netto_vision' => $fee_kantor_win + $admin_win,
+			'netto_marketing' => $netto_win
+		);
+
+		// var_dump($ptn_admin1);
+		// die();
 
 		if ($status_komisi == 'Approve') {
 			$previous_status = $this->m_komisi->get_status($id_komisi);
 
 			if ($previous_status != 'Approve') {
-				if ($id_mar1 != 0) {
+				if (!empty($id_mar1) && $id_mar1 != 0 && $id_mar1 != $id_mar2 && $id_mar1 != 38) {
 					$this->m_laporan->simpan1($data1);
 				}
 
-				if ($id_mar2 != 0) {
+				if (!empty($id_mar2) && $id_mar2 != 0 && $id_mar2 != 38) {
 					$this->m_laporan->simpan2($data2);
 				}
 
-				if ($id_mar3 != 0) {
+				if (!empty($id_mar3) && $id_mar3 != 0 && $id_mar3 != 38) {
 					$this->m_laporan->simpan3($data3);
 				}
 
-				if ($id_mar4 != 0) {
+				if (!empty($id_mar4) && $id_mar4 != 0 && $id_mar4 != 38) {
 					$this->m_laporan->simpan4($data4);
+				}
+
+				if ($id_ang != 0) {
+					$this->m_laporan->simpan_ang($data_ang);
+				}
+
+				if ($id_fran != 0) {
+					$this->m_laporan->simpan_fran($data_fran);
+				}
+
+				if ($id_win != 0) {
+					$this->m_laporan->simpan_win($data_win);
 				}
 			}
 		}
