@@ -38,12 +38,40 @@
         <!-- Popper.js -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
-    </head>
+        <style type="text/css">
+            .table th:first-child,
+            .table td:first-child {
+              position: sticky;
+              left: 0;
+              background-color: #f8f9fa;
+          }
+          .myTable {
+              max-width: 600px;
+              margin: 0 auto;
+          }
+          #myTable th, td {
+              white-space: nowrap;
+          }
 
-    <body>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <div class="container d-flex justify-content-between">
-                <a class="navbar-brand" href="">A&A INDONESIA</a>
-                <a class="navbar-brand mr-0" href="<?= base_url('Komisi');?>"><?= $nama ?> - <?= $level; ?></a>
-            </div>
-        </nav>
+          table.dataTable thead .sorting:after,
+          table.dataTable thead .sorting:before,
+          table.dataTable thead .sorting_asc:after,
+          table.dataTable thead .sorting_asc:before,
+          table.dataTable thead .sorting_asc_disabled:after,
+          table.dataTable thead .sorting_asc_disabled:before,
+          table.dataTable thead .sorting_desc:after,
+          table.dataTable thead .sorting_desc:before,
+          table.dataTable thead .sorting_desc_disabled:after,
+          table.dataTable thead .sorting_desc_disabled:before {
+           bottom: .5em;
+       }
+   </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container d-flex justify-content-between">
+            <a class="navbar-brand" href="">A&A INDONESIA</a>
+            <a class="navbar-brand mr-0" href="<?= base_url('Komisi');?>"><?= $nama ?> - <?= $level; ?></a>
+        </div>
+    </nav>
