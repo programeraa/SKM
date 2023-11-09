@@ -130,6 +130,8 @@
                 </div>
             <?php } ?>
 
+
+
             <?php if ($level == 'CMO') {?>
                 <div class="card-body mt-0 pb-0">
                     <div class="card-body p-0 pt-2 pb-0">
@@ -158,10 +160,73 @@
                                 </div>
 
                                 <div class="form-group d-xl-none">
-                                    <input type="text" name="id_marketing1" value="<?= $komisi->mar_listing_komisi ?>">
-                                    <input type="text" name="id_marketing2" value="<?= $komisi->mar_selling_komisi ?>">
+                                    <?php if (empty($j_cobroke)) {?>
+                                        <input type="text" name="id_marketing1" value="<?= $komisi->mar_listing_komisi ?>">
+                                    <?php } ?>
+                                    <?php if (empty($s_cobroke)) {?>
+                                        <input type="text" name="id_marketing2" value="<?= $komisi->mar_selling_komisi ?>">
+                                    <?php } ?>
                                     <input type="text" name="id_marketing3" value="<?= $komisi->mar_listing2_komisi ?>">
                                     <input type="text" name="id_marketing4" value="<?= $komisi->mar_selling2_komisi ?>">
+
+
+                                    <?php 
+                                    
+                                    if ($komisi->mar_listing_komisi == 38 || $komisi->mar_listing2_komisi == 38 || $komisi->mar_selling_komisi == 38 || $komisi->mar_selling2_komisi == 38) {
+
+                                        $id_ang = null;
+                                        $id_fran = null;
+                                        $id_win = null;
+
+                                        foreach ($marketing as $afw) {
+                                            if ($afw->nama_mar == 'Ang') {
+                                                $id_ang = $afw->id_mar;
+                                            }
+
+                                            if ($afw->nama_mar == 'Fran') {
+                                                $id_fran = $afw->id_mar;
+                                            }
+
+                                            if ($afw->nama_mar == 'Winata') {
+                                                $id_win = $afw->id_mar;
+                                            }
+                                        } 
+
+                                        if ($komisi->nama_mar == 'Ang/Fran/Win') {
+                                            $fee_kantor_afw = $fmk2_listing;
+                                        }elseif ($komisi->nama_mar2 == 'Ang/Fran/Win') {
+                                            $fee_kantor_afw = $fmk2_selling;
+                                        }elseif ($komisi->$komisi->listing_2 == 'Ang/Fran/Win') {
+                                            $fee_kantor_afw = $fmk2_listing2;
+                                        }elseif ($komisi->$komisi->selling_2 == 'Ang/Fran/Win') {
+                                            $fee_kantor_afw = $fmk2_selling2;
+                                        }else{
+                                            $fee_kantor_afw = 0;
+                                        }
+                                    } 
+                                    ?>
+
+                                    <?php if ($komisi->mar_listing_komisi == 38 || $komisi->mar_listing2_komisi == 38 || $komisi->mar_selling_komisi == 38 || $komisi->mar_selling2_komisi == 38) { ?>
+                                        <input type="text" name="id_ang" value="<?= $id_ang ?>">
+                                        <input type="text" name="fee_kantor_afw" value="<?= $fee_kantor_afw ?>">
+                                        <input type="text" name="fee_ang" value="<?= $afw_2 ?>">
+                                        <input type="text" name="admin_ang" value="<?= $admin_listing_ang_n ?>">
+                                        <input type="text" name="pph_ang" value="<?= $biaya_pph_l_ang ?>">
+                                        <input type="text" name="netto_ang" value="<?= $fmb_l_ang_sp ?>">
+
+                                        <input type="text" name="id_fran" value="<?= $id_fran ?>">
+                                        <input type="text" name="fee_fran" value="<?= $afw_2 ?>">
+                                        <input type="text" name="admin_fran" value="<?= $admin_listing_fran_n ?>">
+                                        <input type="text" name="pph_fran" value="<?= $biaya_pph_l_fran ?>">
+                                        <input type="text" name="netto_fran" value="<?= $fmb_l_fran_sp ?>">
+
+                                        <input type="text" name="id_win" value="<?= $id_win ?>">
+                                        <input type="text" name="fee_win" value="<?= $afw_2 ?>">
+                                        <input type="text" name="admin_win" value="<?= $admin_listing_win_n ?>">
+                                        <input type="text" name="pph_win" value="<?= $biaya_pph_l_win ?>">
+                                        <input type="text" name="netto_win" value="<?= $fmb_l_win_sp ?>">
+                                    <?php } ?>
+
 
                                     <input type="text" name="fee_kantor1" value="<?= $fkl ?>">
                                     <input type="text" name="fee_kantor2" value="<?= $fks ?>">
