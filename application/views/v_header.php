@@ -39,12 +39,12 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
         <style type="text/css">
-            .table th:first-child,
+            /*.table th:first-child,
             .table td:first-child {
               position: sticky;
               left: 0;
               background-color: #f8f9fa;
-          }
+          }*/
           .myTable {
               max-width: 600px;
               margin: 0 auto;
