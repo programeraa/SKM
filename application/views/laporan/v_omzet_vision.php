@@ -51,7 +51,7 @@
         </div>
         <div class="table-responsive">
             <table id="myTable" class="table table-bordered table-striped">
-                <!-- <thead>
+                <thead>
                     <tr>
                         <th rowspan="2">No</th>
                         <th rowspan="2">ID Komisi</th>
@@ -63,6 +63,7 @@
                         <th colspan="2" class="text-center">Fee Bruto</th>
                         <th colspan="2" class="text-center">Potongan</th>
                         <th colspan="2" class="text-center">Netto</th>
+                        <th rowspan="2">Rincian Komisi</th>
                     </tr>
                     <tr>
                         <th>A&A Vision</th>
@@ -72,8 +73,8 @@
                         <th>A&A Vision</th>
                         <th>Marketing</th>
                     </tr>
-                </thead> -->
-                <thead>
+                </thead>
+                <!-- <thead>
                     <tr>
                         <th>No</th>
                         <th>ID Komisi</th>
@@ -101,7 +102,7 @@
                         <th>A&A Vision</th>
                         <th>Marketing</th>
                     </tr>
-                </thead>
+                </thead> -->
                 <tbody>
                     <?php $no = 1; 
                     $sum_bruto_aavision = 0;
@@ -203,6 +204,11 @@
                             <td><?= $ptn_pph_r ?></td>
                             <td><?= $total_fee_vision_r ?></td>
                             <td><?= $netto_marketing_r ?></td>
+                            <td>
+                                <?php if ($cell_content != '') {?>
+                                    <a href="<?= base_url('komisi/rincian_komisi/' . $cell_content.'?from=omzet_vision'); ?>" class="btn btn-warning btn-sm mt-1" data-target="#editModal"><i class="fas fa-list" title="Lihat Rincian"></i></a>
+                                <?php } ?>
+                            </td>
                         </tr>
                         <?php $no++;
                     } ?>
@@ -222,6 +228,7 @@
                         <th><?= $sum_ptn_pph_r ?></th>
                         <th><?= $sum_total_fee_vision_r ?></th>
                         <th><?= $sum_netto_marketing_r ?></th>
+                        <th></th>
                     </tr>
                 </tfoot>
             </table>
