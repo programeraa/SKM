@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 09 Nov 2023 pada 10.09
+-- Waktu pembuatan: 10 Nov 2023 pada 10.06
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `skm`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `bank_titipan_a`
+--
+
+CREATE TABLE `bank_titipan_a` (
+  `id_bta` int(250) NOT NULL,
+  `kode_perkiraan` int(250) NOT NULL,
+  `nama_properti` varchar(250) NOT NULL,
+  `status_properti` varchar(250) NOT NULL,
+  `id_marketing` int(250) NOT NULL,
+  `tgl_input` varchar(250) NOT NULL,
+  `nilai_nominal` varchar(250) NOT NULL,
+  `keterangan` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `bank_titipan_a`
+--
+
+INSERT INTO `bank_titipan_a` (`id_bta`, `kode_perkiraan`, `nama_properti`, `status_properti`, `id_marketing`, `tgl_input`, `nilai_nominal`, `keterangan`) VALUES
+(4, 12, 'Northwest Boulevard', 'Jual', 3, '2023-11-30', '50000000', 'Uang UTJ');
 
 -- --------------------------------------------------------
 
@@ -104,7 +128,7 @@ INSERT INTO `komisi` (`id_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_ko
 (287, 'JL. Manyar Rejo X/39, Surabaya', 'Jual', '2023-09-28', 38, 0, 4147, 0, '25000000', '2023-10-13', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
 (288, 'Raya Darmo Permai I No. 60, Surabaya', 'Sewa', '2023-08-29', 11, 0, 11, 0, '16500000', '2023-10-13', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
 (289, ' Jl. Raya Dukuh Kupang 39A, Surabaya ', 'Sewa', '2023-08-12', 7, 10, 11, 0, '12050000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
-(290, 'Jl. Darmo Indah Selatan KK 50, Surabaya', 'Jual/Sewa', '2023-10-16', 6118, 0, 2, 38, '25000000', '2023-10-16', '2023-11-09', 'Approve', 'Proses Transfer'),
+(290, 'Jl. Darmo Indah Selatan KK 50, Surabaya', 'Jual/Sewa', '2023-10-16', 6118, 0, 2, 38, '25000000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
 (291, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-12', 3, 9, 10, 11, '50000000', '2023-10-16', '2023-11-09', 'Approve', 'Proses Transfer'),
 (292, 'Jl. Dukuh Kupang XXIII, No 2, Surabaya', 'Jual', '2023-10-12', 38, 0, 38, 0, '10000000', '2023-10-16', '2023-11-09', 'Approve', 'Proses Transfer'),
 (293, 'Desa Compreng, Widang, Tuban', 'Jual', '2023-10-14', 8731, 0, 38, 0, '12000000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
@@ -117,6 +141,29 @@ INSERT INTO `komisi` (`id_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_ko
 (305, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual/Sewa', '2023-10-12', 0, 11, 7, 38, '10000000', '2023-10-27', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
 (306, ' Jl. Dr. Sutomo No. 41, Surabaya', 'Jual', '2023-11-01', 2, 0, 2, 0, '10000000', '2023-11-01', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
 (307, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual', '2023-11-03', 2, 0, 2, 0, '51000000', '2023-11-06', '0000-00-00', 'Proses Approve', '');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kredit_bank_titipan_a`
+--
+
+CREATE TABLE `kredit_bank_titipan_a` (
+  `id_kredit` int(250) NOT NULL,
+  `id_bta` int(250) NOT NULL,
+  `tgl_input_kredit` date NOT NULL,
+  `keterangan_kredit` varchar(250) NOT NULL,
+  `nominal_kredit` int(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `kredit_bank_titipan_a`
+--
+
+INSERT INTO `kredit_bank_titipan_a` (`id_kredit`, `id_bta`, `tgl_input_kredit`, `keterangan_kredit`, `nominal_kredit`) VALUES
+(3, 4, '2023-11-10', 'Pengiriman Kucing', 120000),
+(5, 4, '2023-11-10', 'Pengiriman Kura-Kura', 100000),
+(6, 4, '2023-11-10', 'Pengiriman Jerapah', 50000);
 
 -- --------------------------------------------------------
 
@@ -208,7 +255,6 @@ INSERT INTO `omzet` (`id_omzet`, `id_komisi`) VALUES
 (34, 283),
 (32, 284),
 (29, 286),
-(36, 290),
 (30, 291),
 (31, 291),
 (33, 291),
@@ -244,11 +290,7 @@ INSERT INTO `omzet_aavision` (`id_omzetvision`, `id_omzet`, `id_marketing`, `fee
 (132, 34, 2, 1520000, 2280000, 57000, 55575, 1577000, 2167425),
 (133, 35, 35, 5000000, 1250000, 0, 31250, 5000000, 1218750),
 (134, 35, 36, 0, 1250000, 0, 31250, 0, 1218750),
-(135, 35, 37, 0, 1250000, 0, 62500, 0, 2437500),
-(136, 36, 2, 2875000, 2875000, 0, 71875, 2875000, 2803125),
-(137, 36, 35, 0, 718750, 0, 21563, 0, 697188),
-(138, 36, 36, 0, 718750, 0, 21563, 0, 697188),
-(139, 36, 37, 0, 718750, 0, 43125, 0, 1394375);
+(135, 35, 37, 0, 1250000, 0, 62500, 0, 2437500);
 
 -- --------------------------------------------------------
 
@@ -379,7 +421,7 @@ INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `np
 (186, 287, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
 (187, 288, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
 (188, 289, 70, 0, 1, 0, 1, 0, 50, 1, 0, 0, 0, 0, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
-(189, 290, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 1, 1, 0, 1, 0, 50, 0, 0, 0, 0, 0, 1, 4),
+(189, 290, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 1, 1, 0, 1, 0, 50, 0, 0, 0, 0, 0, 1, 0),
 (190, 291, 50, 1, 0, 0, 0, 0, 80, 1, 1, 0, 0, 0, 50, 1, 0, 0, 0, 0, 70, 1, 1, 0, 0, 0, 1, 4),
 (191, 292, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4),
 (192, 293, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
@@ -439,6 +481,12 @@ INSERT INTO `sub_komisi_afw` (`id_afw`, `id_sub_komisi`, `m_ang`, `npwp_ang`, `n
 --
 
 --
+-- Indeks untuk tabel `bank_titipan_a`
+--
+ALTER TABLE `bank_titipan_a`
+  ADD PRIMARY KEY (`id_bta`);
+
+--
 -- Indeks untuk tabel `co_broke`
 --
 ALTER TABLE `co_broke`
@@ -458,6 +506,13 @@ ALTER TABLE `komisi`
   ADD PRIMARY KEY (`id_komisi`),
   ADD KEY `mar_listing_komisi` (`mar_listing_komisi`),
   ADD KEY `mar_selling_komisi` (`mar_selling_komisi`);
+
+--
+-- Indeks untuk tabel `kredit_bank_titipan_a`
+--
+ALTER TABLE `kredit_bank_titipan_a`
+  ADD PRIMARY KEY (`id_kredit`),
+  ADD KEY `id_bta` (`id_bta`);
 
 --
 -- Indeks untuk tabel `marketing`
@@ -525,6 +580,12 @@ ALTER TABLE `sub_komisi_afw`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `bank_titipan_a`
+--
+ALTER TABLE `bank_titipan_a`
+  MODIFY `id_bta` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT untuk tabel `co_broke`
 --
 ALTER TABLE `co_broke`
@@ -541,6 +602,12 @@ ALTER TABLE `jabatan_pengaturan`
 --
 ALTER TABLE `komisi`
   MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=308;
+
+--
+-- AUTO_INCREMENT untuk tabel `kredit_bank_titipan_a`
+--
+ALTER TABLE `kredit_bank_titipan_a`
+  MODIFY `id_kredit` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `marketing`
@@ -605,6 +672,12 @@ ALTER TABLE `sub_komisi_afw`
 --
 ALTER TABLE `co_broke`
   ADD CONSTRAINT `co_broke_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `kredit_bank_titipan_a`
+--
+ALTER TABLE `kredit_bank_titipan_a`
+  ADD CONSTRAINT `kredit_bank_titipan_a_ibfk_1` FOREIGN KEY (`id_bta`) REFERENCES `bank_titipan_a` (`id_bta`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `omzet`
