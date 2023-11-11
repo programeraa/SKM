@@ -69,6 +69,25 @@ class BankTitipan extends CI_Controller {
 		$this->load->view('v_footer', $data);
 	}
 
+	public function rincian($id){
+		$level = $this->session->userdata('level');
+		if ($level == '') {
+			$this->session->set_flashdata('gagal','Anda Belum Login');
+			redirect(base_url('login'));
+		}
+
+		$where = array('id_bta'=>$id);
+		$where_2 = array('id_bta'=>$id);
+		$data['title'] = "Rincian Bank Titipan";
+		$data['marketing'] = $this->m_marketing->tampil_data()->result();
+		$data['bank_titipan'] = $this->m_banktitipan->tampil_data($where);
+		$data['kredit_bt'] = $this->m_banktitipan->tampil_data_kredit($where_2)->result();
+
+		$this->load->view('v_header', $data);
+		$this->load->view('bank_titipan/rincian_bt', $data);
+		$this->load->view('v_footer', $data);
+	}
+
 	public function edit_kredit(){
 		$tgl_kredit = $this->input->post('tgl_kredit');
 		$keterangan_kredit = $this->input->post('keterangan_kredit');
@@ -79,25 +98,22 @@ class BankTitipan extends CI_Controller {
 		$data = array(
 			'tgl_input_kredit' => $tgl_kredit,
 			'keterangan_kredit' => $keterangan_kredit,
-			'nominal-kredit' => $nominal_kredit
+			'nominal_kredit' => $nominal_kredit
 		);
 
 		// var_dump($data);
 		// die();
 		$where = array('id_kredit'=>$id_kredit);
-
-
-
 		if (isset($where)) {
 			$eksekusi = $this->m_banktitipan->update_kredit($where,$data);
 			echo '<script>
 			alert("Selamat! Berhasil Update Data Kredit BankTitipan");
-			window.location="' . base_url('BankTitipan/edit'.$id_bta) . '"
+			window.location="' . base_url('BankTitipan/edit/'.$id_bta) . '"
 			</script>';
 		}
 		echo '<script>
 		alert("Gagal Update Data Kredit BankTitipan");
-		window.location="' . base_url('BankTitipan/edit'.$id_bta) . '"
+		window.location="' . base_url('BankTitipan/edit/'.$id_bta) . '"
 		</script>';
 	}
 
@@ -141,6 +157,11 @@ class BankTitipan extends CI_Controller {
 			$eksekusi = $this->m_banktitipan->update($where,$data);
 			if (!empty($kredit)) {
 				$this->m_banktitipan->simpan_kredit($data_kredit);
+
+				echo '<script>
+				alert("Selamat! Berhasil Update Data BankTitipan");
+				window.location="' . base_url('BankTitipan/edit/'.$id) . '"
+				</script>';
 			}
 			echo '<script>
 			alert("Selamat! Berhasil Update Data BankTitipan");
