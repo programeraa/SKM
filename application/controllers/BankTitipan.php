@@ -69,6 +69,38 @@ class BankTitipan extends CI_Controller {
 		$this->load->view('v_footer', $data);
 	}
 
+	public function edit_kredit(){
+		$tgl_kredit = $this->input->post('tgl_kredit');
+		$keterangan_kredit = $this->input->post('keterangan_kredit');
+		$nominal_kredit = $this->input->post('nominal_kredit');
+		$id_kredit = $this->input->post('id_kredit');
+		$id_bta = $this->input->post('id_bta');
+
+		$data = array(
+			'tgl_input_kredit' => $tgl_kredit,
+			'keterangan_kredit' => $keterangan_kredit,
+			'nominal-kredit' => $nominal_kredit
+		);
+
+		// var_dump($data);
+		// die();
+		$where = array('id_kredit'=>$id_kredit);
+
+
+
+		if (isset($where)) {
+			$eksekusi = $this->m_banktitipan->update_kredit($where,$data);
+			echo '<script>
+			alert("Selamat! Berhasil Update Data Kredit BankTitipan");
+			window.location="' . base_url('BankTitipan/edit'.$id_bta) . '"
+			</script>';
+		}
+		echo '<script>
+		alert("Gagal Update Data Kredit BankTitipan");
+		window.location="' . base_url('BankTitipan/edit'.$id_bta) . '"
+		</script>';
+	}
+
 	public function update(){
 		$kode_perkiraan = $this->input->post('kode_perkiraan');
 		$nama_properti = $this->input->post('nama_properti');
@@ -131,8 +163,26 @@ class BankTitipan extends CI_Controller {
 			</script>';
 		} else {
 			echo '<script>
-			alert("Gagal Menghapus !, ID Pengguna ' . $id_bta . ' Tidak ditemukan");
+			alert("Gagal Menghapus !, ID Bank Titipan ' . $id_bta . ' Tidak ditemukan");
 			window.location="' . base_url('BankTitipan') . '"
+			</script>';
+		}
+	}
+
+	public function hapus_kredit_bt($id_kredit){
+		$id_bta = $this->input->get('id_bta');
+
+		$where = array('id_kredit'=>$id_kredit);
+		if (isset($where)) {
+			$this->m_banktitipan->hapus_kredit_bt($where);
+			echo '<script>
+			alert("Selamat! Data berhasil terhapus.");
+			window.location="' . base_url('BankTitipan/edit/'.$id_bta) . '"
+			</script>';
+		} else {
+			echo '<script>
+			alert("Gagal Menghapus !, ID Kredit Bank Titipan ' . $id_kredit . ' Tidak ditemukan");
+			window.location="' . base_url('BankTitipan/edit/'.$id_bta) . '"
 			</script>';
 		}
 	}
