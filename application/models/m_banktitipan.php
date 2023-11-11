@@ -32,9 +32,19 @@ class M_banktitipan extends CI_Model{
     	$this->db->update('bank_titipan_a',$data);
     }
 
+    function update_kredit($where,$data){
+        $this->db->where($where);
+        $this->db->update('kredit_bank_titipan_a',$data);
+    }
+
     function hapus($where){
     	$this->db->where($where);
     	$this->db->delete('bank_titipan_a',$where);
+    }
+
+    function hapus_kredit_bt($where){
+        $this->db->where($where);
+        $this->db->delete('kredit_bank_titipan_a',$where);
     }
 
 }
