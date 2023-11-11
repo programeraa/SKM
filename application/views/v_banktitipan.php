@@ -50,7 +50,7 @@
                                         <td><?= $nominal_r ?></td>
                                         <td><?= $bt->keterangan ?></td>
                                         <td>
-                                            <a href="#" data-toggle="modal" data-target="#lihat_bt2<?php echo $bt->id_bta; ?>" class="btn btn-primary"><i class="fas fa-eye" title="Lihat"></i></a>
+                                            <a href="<?= base_url('BankTitipan/rincian/' . $bt->id_bta); ?>"data-target="#editModal" class="btn btn-primary"><i class="fas fa-list" title="Rincian"></i></a>
 
                                             <?php include "bank_titipan/lihat_bt.php" ?>
 
