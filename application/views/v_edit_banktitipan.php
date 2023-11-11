@@ -7,7 +7,7 @@
 
     <div class="card">
         <div class="card-header bg-dark text-white">
-            <h4 class="card-title">Edit Data Marketing</h4>
+            <h4 class="card-title">Edit Data Bank Fee</h4>
         </div>
         <div class="card-body">
             <?php 
@@ -87,54 +87,55 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="table-responsive mt-3">
-                        <table id="myTable" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Tanggal Input</th>
-                                    <th>Keterangan</th>
-                                    <th>Nominal Kredit</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $no = 1; 
-                                foreach ($kredit_bt as $kredit) {
-                                    $nominal_baru = stringToNumber($kredit->nominal_kredit);
-                                    $nominal_baru_r = numberToRupiah($nominal_baru);
-
-                                    $tgl_input = date("d-m-Y", strtotime($kredit->tgl_input_kredit));
-
-                                    ?>
-                                    <tr>
-                                        <td><?= $no ?></td>
-                                        <td><?= $tgl_input ?></td>
-                                        <td><?= $kredit->keterangan_kredit ?></td>
-                                        <td><?= $nominal_baru_r ?></td>
-                                        <td>
-                                          <a href="#" data-toggle="modal" data-target="#edit_kredit<?php echo $kredit->id_kredit; ?>" class="btn btn-success"><i class="fas fa-edit" title="Edit"></i></a>
-
-                                          <?php include "bank_titipan/edit_kredit_bt.php" ?>
-
-                                          <a href="<?= base_url('BankTitipan/hapus_kredit_bt/' . $kredit->id_kredit . '?' . 'id_bta=' . $bt->id_bta); ?>" onclick="javascript:return confirm('Apakah Anda yakin ingin menghapus data bank titipan?')" class="btn btn-danger"><i class="fas fa-trash" title="Hapus"></i></a>
-
-                                      </td>
-                                  </tr>
-                                  <?php $no++;
-                              } ?>
-                          </tbody>
-                      </table>
-                  </div>
-
-                  <input type="hidden" value="<?= $bt->id_bta ?>" name="id_bta">
-                  <div class="text-right mt-3">
-                    <button class="btn btn-success">Update</button>
+                    <input type="hidden" value="<?= $bt->id_bta ?>" name="id_bta">
+                    <div class="text-right mt-3">
+                        <button class="btn btn-success">Update</button>
+                    </div>
                 </div>
-            </div>
-        </form>
-    <?php } ?>
-</div>
+            </form>
+
+            <div class="card-body pt-0">
+                <div class="table-responsive mt-0">
+                    <table id="myTable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Tanggal Input</th>
+                                <th>Keterangan</th>
+                                <th>Nominal Kredit</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $no = 1; 
+                            foreach ($kredit_bt as $kredit) {
+                                $nominal_baru = stringToNumber($kredit->nominal_kredit);
+                                $nominal_baru_r = numberToRupiah($nominal_baru);
+
+                                $tgl_input = date("d-m-Y", strtotime($kredit->tgl_input_kredit));
+
+                                ?>
+                                <tr>
+                                    <td><?= $no ?></td>
+                                    <td><?= $tgl_input ?></td>
+                                    <td><?= $kredit->keterangan_kredit ?></td>
+                                    <td><?= $nominal_baru_r ?></td>
+                                    <td>
+                                      <a href="#" data-toggle="modal" data-target="#edit_kredit<?php echo $kredit->id_kredit; ?>" class="btn btn-success"><i class="fas fa-edit" title="Edit"></i></a>
+
+                                      <?php include "bank_titipan/edit_kredit_bt.php" ?>
+
+                                      <a href="<?= base_url('BankTitipan/hapus_kredit_bt/' . $kredit->id_kredit . '?' . 'id_bta=' . $bt->id_bta); ?>" onclick="javascript:return confirm('Apakah Anda yakin ingin menghapus data bank titipan?')" class="btn btn-danger"><i class="fas fa-trash" title="Hapus"></i></a>
+
+                                  </td>
+                              </tr>
+                              <?php $no++;
+                          } ?>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      <?php } ?>
+  </div>
 </div>
 </div>
