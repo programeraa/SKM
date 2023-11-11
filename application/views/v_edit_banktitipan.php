@@ -114,22 +114,27 @@
                                         <td><?= $kredit->keterangan_kredit ?></td>
                                         <td><?= $nominal_baru_r ?></td>
                                         <td>
-                                          
-                                        </td>
-                                    </tr>
-                                    <?php $no++;
-                                } ?>
-                            </tbody>
-                        </table>
-                    </div>
+                                          <a href="#" data-toggle="modal" data-target="#edit_kredit<?php echo $kredit->id_kredit; ?>" class="btn btn-success"><i class="fas fa-edit" title="Edit"></i></a>
 
-                    <input type="hidden" value="<?= $bt->id_bta ?>" name="id_bta">
-                    <div class="text-right mt-3">
-                        <button class="btn btn-success">Update</button>
-                    </div>
+                                          <?php include "bank_titipan/edit_kredit_bt.php" ?>
+
+                                          <a href="<?= base_url('BankTitipan/hapus_kredit_bt/' . $kredit->id_kredit . '?' . 'id_bta=' . $bt->id_bta); ?>" onclick="javascript:return confirm('Apakah Anda yakin ingin menghapus data bank titipan?')" class="btn btn-danger"><i class="fas fa-trash" title="Hapus"></i></a>
+
+                                      </td>
+                                  </tr>
+                                  <?php $no++;
+                              } ?>
+                          </tbody>
+                      </table>
+                  </div>
+
+                  <input type="hidden" value="<?= $bt->id_bta ?>" name="id_bta">
+                  <div class="text-right mt-3">
+                    <button class="btn btn-success">Update</button>
                 </div>
-            </form>
-        <?php } ?>
-    </div>
+            </div>
+        </form>
+    <?php } ?>
+</div>
 </div>
 </div>
