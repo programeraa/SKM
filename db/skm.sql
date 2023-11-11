@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Nov 2023 pada 10.06
+-- Waktu pembuatan: 11 Nov 2023 pada 07.54
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -43,7 +43,7 @@ CREATE TABLE `bank_titipan_a` (
 --
 
 INSERT INTO `bank_titipan_a` (`id_bta`, `kode_perkiraan`, `nama_properti`, `status_properti`, `id_marketing`, `tgl_input`, `nilai_nominal`, `keterangan`) VALUES
-(4, 12, 'Northwest Boulevard', 'Jual', 3, '2023-11-30', '50000000', 'Uang UTJ');
+(4, 1, 'Northwest Boulevard', 'Jual/Sewa', 3, '2023-11-30', '50000000', 'Uang UTJ');
 
 -- --------------------------------------------------------
 
@@ -161,9 +161,9 @@ CREATE TABLE `kredit_bank_titipan_a` (
 --
 
 INSERT INTO `kredit_bank_titipan_a` (`id_kredit`, `id_bta`, `tgl_input_kredit`, `keterangan_kredit`, `nominal_kredit`) VALUES
-(3, 4, '2023-11-10', 'Pengiriman Kucing', 120000),
-(5, 4, '2023-11-10', 'Pengiriman Kura-Kura', 100000),
-(6, 4, '2023-11-10', 'Pengiriman Jerapah', 50000);
+(7, 4, '2023-11-11', 'Pengiriman Kucing', 10000),
+(9, 4, '2023-11-11', 'Pengiriman Kura-Kura', 120000),
+(11, 4, '2023-11-11', 'Pengiriman Jerapah Merah', 50000);
 
 -- --------------------------------------------------------
 
@@ -607,7 +607,7 @@ ALTER TABLE `komisi`
 -- AUTO_INCREMENT untuk tabel `kredit_bank_titipan_a`
 --
 ALTER TABLE `kredit_bank_titipan_a`
-  MODIFY `id_kredit` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_kredit` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `marketing`
