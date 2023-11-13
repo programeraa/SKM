@@ -67,9 +67,12 @@ class Laporan extends CI_Controller {
 		$dari = $this->input->get('dari');
 		$ke = $this->input->get('ke');
 		$j_tanggal = $this->input->get('j_tanggal');
+		$admin_komisi = '';
+		$transfer = '';
+		$status = $this->input->get('status');
 
 		$data['title'] = 'Laporan Status Approve';
-		$data['komisi'] = $this->m_komisi->getDataByDateRange($dari, $ke, $j_tanggal);
+		$data['komisi'] = $this->m_komisi->getDataByDateRange($dari, $ke, $j_tanggal, $admin_komisi, $status, $transfer);
 		$data['marketing'] = $this->m_komisi->tampil_data_marketing()->result();
 		$data['co_broke'] = $this->m_komisi->tampil_data_cobroke()->result();
 
@@ -99,10 +102,13 @@ class Laporan extends CI_Controller {
 	public function filterDataStatusTransfer() {
 		$dari = $this->input->get('dari');
 		$ke = $this->input->get('ke');
+		$admin_komisi = '';
+		$status = '';
+		$transfer = $this->input->get('transfer');
 		$j_tanggal = $this->input->get('j_tanggal');
 
 		$data['title'] = 'Laporan Status Transfer';
-		$data['komisi'] = $this->m_komisi->getDataByDateRange($dari, $ke, $j_tanggal);
+		$data['komisi'] = $this->m_komisi->getDataByDateRange($dari, $ke, $j_tanggal, $admin_komisi, $status, $transfer);
 		$data['marketing'] = $this->m_komisi->tampil_data_marketing()->result();
 		$data['co_broke'] = $this->m_komisi->tampil_data_cobroke()->result();
 
@@ -135,9 +141,11 @@ class Laporan extends CI_Controller {
 		$ke = $this->input->get('ke');
 		$j_tanggal = $this->input->get('j_tanggal');
 		$admin_komisi = $this->input->get('admin_komisi');
+		$status = '';
+		$transfer = '';
 
 		$data['title'] = 'Laporan Admin Komisi';
-		$data['komisi'] = $this->m_komisi->getDataByDateRange($dari, $ke, $j_tanggal, $admin_komisi);
+		$data['komisi'] = $this->m_komisi->getDataByDateRange($dari, $ke, $j_tanggal, $admin_komisi, $status, $transfer);
 		$data['marketing'] = $this->m_komisi->tampil_data_marketing()->result();
 		$data['co_broke'] = $this->m_komisi->tampil_data_cobroke()->result();
 		$data['pengguna'] = $this->m_pengguna->tampil_data_admin()->result();
