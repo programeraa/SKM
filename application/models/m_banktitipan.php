@@ -11,8 +11,24 @@ class M_banktitipan extends CI_Model{
         return $query->result();
     }
 
+    function getDataByDateRange_Jurnal($dari, $ke){
+        $this->db->select('*');
+        $this->db->from('bank_titipan_a');
+        $this->db->join('marketing','marketing.id_mar = bank_titipan_a.id_marketing','inner');
+
+        $this->db->where('tgl_input >=', $dari);
+        $this->db->where('tgl_input <=', $ke);
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     function tampil_data_kredit($where_2){
         return $this->db->get_where('kredit_bank_titipan_a',$where_2);
+    }
+
+    function tampil_kredit_jl(){
+        return $this->db->get('kredit_bank_titipan_a');
     }
 
     function simpan($data){
@@ -21,6 +37,16 @@ class M_banktitipan extends CI_Model{
 
     function simpan_kredit($data_kredit){
         $this->db->insert('kredit_bank_titipan_a',$data_kredit);
+    }
+
+    function rincian_bt($where){
+        $this->db->select('*');
+        $this->db->from('bank_titipan_a');
+        $this->db->join('marketing','marketing.id_mar = bank_titipan_a.id_marketing','inner');
+        $this->db->where($where);
+
+        $query = $this->db->get();
+        return $query->result();
     }
 
     function edit($where){
