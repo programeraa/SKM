@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Nov 2023 pada 07.54
+-- Waktu pembuatan: 13 Nov 2023 pada 09.47
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -35,6 +35,7 @@ CREATE TABLE `bank_titipan_a` (
   `id_marketing` int(250) NOT NULL,
   `tgl_input` varchar(250) NOT NULL,
   `nilai_nominal` varchar(250) NOT NULL,
+  `jenis` varchar(250) NOT NULL,
   `keterangan` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -42,8 +43,12 @@ CREATE TABLE `bank_titipan_a` (
 -- Dumping data untuk tabel `bank_titipan_a`
 --
 
-INSERT INTO `bank_titipan_a` (`id_bta`, `kode_perkiraan`, `nama_properti`, `status_properti`, `id_marketing`, `tgl_input`, `nilai_nominal`, `keterangan`) VALUES
-(4, 1, 'Northwest Boulevard', 'Jual/Sewa', 3, '2023-11-30', '50000000', 'Uang UTJ');
+INSERT INTO `bank_titipan_a` (`id_bta`, `kode_perkiraan`, `nama_properti`, `status_properti`, `id_marketing`, `tgl_input`, `nilai_nominal`, `jenis`, `keterangan`) VALUES
+(4, 1, 'Northwest Boulevard', 'Jual/Sewa', 2, '2023-11-30', '50000000', 'Debit', 'Uang UTJ'),
+(5, 2, 'Dukuh Kupang XXIII', 'Sewa', 3, '2023-11-15', '20000000', 'Debit', 'UTJ Tahap Pertama'),
+(6, 45, 'Surabaya, Indonesia', 'Sewa', 10, '2023-11-08', '10000000', 'Kredit', 'UTJ Terus-Terusan'),
+(7, 23, 'Bukit Palma', 'Sewa', 11, '2023-11-15', '10000000', 'Debit', 'UTJ Tahap Pertama'),
+(8, 23, 'Pengiriman Barang', '', 3, '2023-11-15', '5000000', 'Kredit', 'Pengiriman 2 Pak');
 
 -- --------------------------------------------------------
 
@@ -162,8 +167,9 @@ CREATE TABLE `kredit_bank_titipan_a` (
 
 INSERT INTO `kredit_bank_titipan_a` (`id_kredit`, `id_bta`, `tgl_input_kredit`, `keterangan_kredit`, `nominal_kredit`) VALUES
 (7, 4, '2023-11-11', 'Pengiriman Kucing', 10000),
-(9, 4, '2023-11-11', 'Pengiriman Kura-Kura', 120000),
-(11, 4, '2023-11-11', 'Pengiriman Jerapah Merah', 50000);
+(12, 5, '2023-11-13', 'Berkas Ini Itu', 12000),
+(13, 4, '2023-11-13', 'Pengiriman Jerapah', 50000),
+(14, 4, '2023-11-13', 'Pengiriman Kura-Kura', 120000);
 
 -- --------------------------------------------------------
 
@@ -583,7 +589,7 @@ ALTER TABLE `sub_komisi_afw`
 -- AUTO_INCREMENT untuk tabel `bank_titipan_a`
 --
 ALTER TABLE `bank_titipan_a`
-  MODIFY `id_bta` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_bta` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `co_broke`
@@ -607,7 +613,7 @@ ALTER TABLE `komisi`
 -- AUTO_INCREMENT untuk tabel `kredit_bank_titipan_a`
 --
 ALTER TABLE `kredit_bank_titipan_a`
-  MODIFY `id_kredit` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_kredit` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `marketing`
