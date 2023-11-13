@@ -14,22 +14,79 @@ class BankTitipan extends CI_Controller {
 			redirect(base_url('login'));
 		}
 
-		$data['title'] = "Data Bank Titipan";
+		$data['title'] = "DBT - Jurnal Umum";
 		$data['marketing'] = $this->m_marketing->tampil_data()->result();
 		$data['bank_titipan'] = $this->m_banktitipan->tampil_data();
+		$data['kredit_jl'] = $this->m_banktitipan->tampil_kredit_jl()->result();
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_banktitipan', $data);
 		$this->load->view('v_footer', $data);
 	}
 
-	public function tambah(){
+	public function filterDataJurnalUmum(){
+		$level = $this->session->userdata('level');
+		if ($level == '') {
+			$this->session->set_flashdata('gagal','Anda Belum Login');
+			redirect(base_url('login'));
+		}
+
+		$dari = $this->input->get('dari');
+		$ke = $this->input->get('ke');
+
+		$data['title'] = "DBT - Jurnal Umum";
+		$data['marketing'] = $this->m_marketing->tampil_data()->result();
+		$data['bank_titipan'] = $this->m_banktitipan->getDataByDateRange_Jurnal($dari, $ke);
+		$data['kredit_jl'] = $this->m_banktitipan->tampil_kredit_jl()->result();
+
+		$this->load->view('v_header', $data);
+		$this->load->view('v_banktitipan', $data);
+		$this->load->view('v_footer', $data);
+	}
+
+	public function jurnal_ledger(){
+		$level = $this->session->userdata('level');
+		if ($level == '') {
+			$this->session->set_flashdata('gagal','Anda Belum Login');
+			redirect(base_url('login'));
+		}
+
+		$data['title'] = "DBT - Jurnal Ledger";
+		$data['marketing'] = $this->m_marketing->tampil_data()->result();
+		$data['bank_titipan'] = $this->m_banktitipan->tampil_data();
+
+		$this->load->view('v_header', $data);
+		$this->load->view('bank_titipan/jurnal_ledger', $data);
+		$this->load->view('v_footer', $data);
+	}
+
+	public function filterDataJurnalLedger(){
+		$level = $this->session->userdata('level');
+		if ($level == '') {
+			$this->session->set_flashdata('gagal','Anda Belum Login');
+			redirect(base_url('login'));
+		}
+
+		$dari = $this->input->get('dari');
+		$ke = $this->input->get('ke');
+
+		$data['title'] = "DBT - Jurnal Ledger";
+		$data['marketing'] = $this->m_marketing->tampil_data()->result();
+		$data['bank_titipan'] = $this->m_banktitipan->getDataByDateRange_Jurnal($dari, $ke);
+
+		$this->load->view('v_header', $data);
+		$this->load->view('bank_titipan/jurnal_ledger', $data);
+		$this->load->view('v_footer', $data);
+	}
+
+	public function tambah_ledger(){
 		$kode_perkiraan = $this->input->post('kode_perkiraan');
 		$nama_properti = $this->input->post('nama_properti');
 		$jt = $this->input->post('jt');
 		$tgl_input = $this->input->post('tgl_input');
 		$nama_marketing = $this->input->post('nama_marketing');
 		$nominal = $this->input->post('nominal');
+		$jenis = $this->input->post('jenis_lg');
 		$keterangan = $this->input->post('keterangan');
 
 		$data = array(
@@ -39,6 +96,7 @@ class BankTitipan extends CI_Controller {
 			'id_marketing' => $nama_marketing,
 			'tgl_input' => $tgl_input,
 			'nilai_nominal' => $nominal,
+			'jenis' => $jenis,
 			'keterangan' => $keterangan
 		);
 
@@ -46,11 +104,11 @@ class BankTitipan extends CI_Controller {
 
 		echo '<script>
 		alert("Selamat! Berhasil Menambah Data Bank Titipan");
-		window.location="' . base_url('BankTitipan') . '"
+		window.location="' . base_url('BankTitipan/jurnal_ledger') . '"
 		</script>';
 	}
 
-	public function edit($id){
+	public function edit_ledger($id){
 		$level = $this->session->userdata('level');
 		if ($level == '') {
 			$this->session->set_flashdata('gagal','Anda Belum Login');
@@ -59,17 +117,17 @@ class BankTitipan extends CI_Controller {
 
 		$where = array('id_bta'=>$id);
 		$where_2 = array('id_bta'=>$id);
-		$data['title'] = "Edit Bank Titipan";
+		$data['title'] = "DBT - Edit Jurnal Ledger";
 		$data['marketing'] = $this->m_marketing->tampil_data()->result();
-		$data['bank_titipan'] = $this->m_banktitipan->tampil_data($where);
+		$data['bank_titipan'] = $this->m_banktitipan->rincian_bt($where);
 		$data['kredit_bt'] = $this->m_banktitipan->tampil_data_kredit($where_2)->result();
 
 		$this->load->view('v_header', $data);
-		$this->load->view('v_edit_banktitipan', $data);
+		$this->load->view('bank_titipan/edit_jl', $data);
 		$this->load->view('v_footer', $data);
 	}
 
-	public function rincian($id){
+	public function rincian_ledger($id){
 		$level = $this->session->userdata('level');
 		if ($level == '') {
 			$this->session->set_flashdata('gagal','Anda Belum Login');
@@ -78,13 +136,13 @@ class BankTitipan extends CI_Controller {
 
 		$where = array('id_bta'=>$id);
 		$where_2 = array('id_bta'=>$id);
-		$data['title'] = "Rincian Bank Titipan";
+		$data['title'] = "DBT - Rincian Jurnal Ledger";
 		$data['marketing'] = $this->m_marketing->tampil_data()->result();
-		$data['bank_titipan'] = $this->m_banktitipan->tampil_data($where);
+		$data['bank_titipan'] = $this->m_banktitipan->rincian_bt($where);
 		$data['kredit_bt'] = $this->m_banktitipan->tampil_data_kredit($where_2)->result();
 
 		$this->load->view('v_header', $data);
-		$this->load->view('bank_titipan/rincian_bt', $data);
+		$this->load->view('bank_titipan/rincian_jl', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -101,29 +159,28 @@ class BankTitipan extends CI_Controller {
 			'nominal_kredit' => $nominal_kredit
 		);
 
-		// var_dump($data);
-		// die();
 		$where = array('id_kredit'=>$id_kredit);
 		if (isset($where)) {
 			$eksekusi = $this->m_banktitipan->update_kredit($where,$data);
 			echo '<script>
 			alert("Selamat! Berhasil Update Data Kredit BankTitipan");
-			window.location="' . base_url('BankTitipan/edit/'.$id_bta) . '"
+			window.location="' . base_url('BankTitipan/edit_ledger/'.$id_bta) . '"
 			</script>';
 		}
 		echo '<script>
 		alert("Gagal Update Data Kredit BankTitipan");
-		window.location="' . base_url('BankTitipan/edit/'.$id_bta) . '"
+		window.location="' . base_url('BankTitipan/edit_ledger/'.$id_bta) . '"
 		</script>';
 	}
 
-	public function update(){
+	public function update_ledger(){
 		$kode_perkiraan = $this->input->post('kode_perkiraan');
 		$nama_properti = $this->input->post('nama_properti');
 		$jt = $this->input->post('jt');
 		$tgl_input = $this->input->post('tgl_input');
 		$nama_marketing = $this->input->post('nama_marketing');
 		$nominal = $this->input->post('nominal');
+		$jenis = $this->input->post('jenis_lg');
 		$keterangan = $this->input->post('keterangan');
 		$id = $this->input->post('id_bta');
 
@@ -140,6 +197,7 @@ class BankTitipan extends CI_Controller {
 			'id_marketing' => $nama_marketing,
 			'tgl_input' => $tgl_input,
 			'nilai_nominal' => $nominal,
+			'jenis' => $jenis,
 			'keterangan' => $keterangan
 		);
 
@@ -160,32 +218,32 @@ class BankTitipan extends CI_Controller {
 
 				echo '<script>
 				alert("Selamat! Berhasil Update Data BankTitipan");
-				window.location="' . base_url('BankTitipan/edit/'.$id) . '"
+				window.location="' . base_url('BankTitipan/edit_ledger/'.$id) . '"
 				</script>';
 			}
 			echo '<script>
 			alert("Selamat! Berhasil Update Data BankTitipan");
-			window.location="' . base_url('BankTitipan') . '"
+			window.location="' . base_url('BankTitipan/jurnal_ledger') . '"
 			</script>';
 		}
 		echo '<script>
 		alert("Gagal Update Data BankTitipan");
-		window.location="' . base_url('BankTitipan') . '"
+		window.location="' . base_url('BankTitipan/jurnal_ledger') . '"
 		</script>';
 	}
 
-	public function hapus($id_bta){
+	public function hapus_ledger($id_bta){
 		$where = array('id_bta'=>$id_bta);
 		if (isset($where)) {
 			$this->m_banktitipan->hapus($where);
 			echo '<script>
 			alert("Selamat! Data berhasil terhapus.");
-			window.location="' . base_url('BankTitipan') . '"
+			window.location="' . base_url('BankTitipan/jurnal_ledger') . '"
 			</script>';
 		} else {
 			echo '<script>
 			alert("Gagal Menghapus !, ID Bank Titipan ' . $id_bta . ' Tidak ditemukan");
-			window.location="' . base_url('BankTitipan') . '"
+			window.location="' . base_url('BankTitipan/jurnal_ledger') . '"
 			</script>';
 		}
 	}
@@ -198,12 +256,12 @@ class BankTitipan extends CI_Controller {
 			$this->m_banktitipan->hapus_kredit_bt($where);
 			echo '<script>
 			alert("Selamat! Data berhasil terhapus.");
-			window.location="' . base_url('BankTitipan/edit/'.$id_bta) . '"
+			window.location="' . base_url('BankTitipan/edit_ledger/'.$id_bta) . '"
 			</script>';
 		} else {
 			echo '<script>
 			alert("Gagal Menghapus !, ID Kredit Bank Titipan ' . $id_kredit . ' Tidak ditemukan");
-			window.location="' . base_url('BankTitipan/edit/'.$id_bta) . '"
+			window.location="' . base_url('BankTitipan/edit_ledger/'.$id_bta) . '"
 			</script>';
 		}
 	}
