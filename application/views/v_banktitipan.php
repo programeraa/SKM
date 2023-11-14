@@ -112,13 +112,21 @@
 
                         $tgl_input = date("d-m-Y", strtotime($bt->tgl_input));
 
+                        $nama_mar = null;
+                        foreach ($marketing as $mar) {
+                            if ($mar->id_mar == $bt->id_marketing) {
+                                 $nama_mar = $mar->nama_mar;
+                                 break;
+                            }
+                        }
+
                         ?>
                         <tr>
                             <td><?= $no ?></td>
                             <td><?= $bt->kode_perkiraan ?></td>
                             <td><?= $bt->nama_properti ?></td>
                             <td><?= $bt->status_properti ?></td>
-                            <td><?= $bt->nama_mar ?></td>
+                            <td><?= $nama_mar ?></td>
                             <td><?= $tgl_input ?></td>
                             <td></td>
                             <td>
