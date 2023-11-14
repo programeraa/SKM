@@ -5,7 +5,7 @@ class M_banktitipan extends CI_Model{
 	function tampil_data(){
         $this->db->select('*');
         $this->db->from('bank_titipan_a');
-        $this->db->join('marketing','marketing.id_mar = bank_titipan_a.id_marketing','inner');
+        //$this->db->join('marketing','marketing.id_mar = bank_titipan_a.id_marketing','inner');
 
         $query = $this->db->get();
         return $query->result();
@@ -14,7 +14,7 @@ class M_banktitipan extends CI_Model{
     function getDataByDateRange_Jurnal($dari, $ke){
         $this->db->select('*');
         $this->db->from('bank_titipan_a');
-        $this->db->join('marketing','marketing.id_mar = bank_titipan_a.id_marketing','inner');
+        //$this->db->join('marketing','marketing.id_mar = bank_titipan_a.id_marketing','inner');
 
         $this->db->where('tgl_input >=', $dari);
         $this->db->where('tgl_input <=', $ke);
@@ -42,7 +42,7 @@ class M_banktitipan extends CI_Model{
     function rincian_bt($where){
         $this->db->select('*');
         $this->db->from('bank_titipan_a');
-        $this->db->join('marketing','marketing.id_mar = bank_titipan_a.id_marketing','inner');
+        //$this->db->join('marketing','marketing.id_mar = bank_titipan_a.id_marketing','inner');
         $this->db->where($where);
 
         $query = $this->db->get();
