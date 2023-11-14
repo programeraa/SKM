@@ -78,35 +78,39 @@
 
                         $tgl_input = date("d-m-Y", strtotime($bt->tgl_input));
 
-                        ?>
-                        <tr>
-                            <td><?= $no ?></td>
-                            <td><?= $bt->kode_perkiraan ?></td>
-                            <td><?= $bt->nama_properti ?></td>
-                            <td><?= $bt->status_properti ?></td>
-                            <td><?= $bt->nama_mar ?></td>
-                            <td><?= $tgl_input ?></td>
-                            <td><?= $nominal_r ?></td>
-                            <td><?= $bt->jenis ?></td>
-                            <td><?= $bt->keterangan ?></td>
-                            <td>
-                                <a href="<?= base_url('BankTitipan/rincian_ledger/' . $bt->id_bta); ?>"data-target="#editModal" class="btn btn-primary"><i class="fas fa-list" title="Rincian"></i></a>
+                        $nama_mar = null;
+                        foreach ($marketing as $mar) {
+                            if ($mar->id_mar == $bt->id_marketing) {
+                               $nama_mar = $mar->nama_mar;
+                               break;
+                           }
+                       }
+                       ?>
+                       <tr>
+                        <td><?= $no ?></td>
+                        <td><?= $bt->kode_perkiraan ?></td>
+                        <td><?= $bt->nama_properti ?></td>
+                        <td><?= $bt->status_properti ?></td>
+                        <td><?= $nama_mar ?></td>
+                        <td><?= $tgl_input ?></td>
+                        <td><?= $nominal_r ?></td>
+                        <td><?= $bt->jenis ?></td>
+                        <td><?= $bt->keterangan ?></td>
+                        <td>
+                            <a href="<?= base_url('BankTitipan/rincian_ledger/' . $bt->id_bta); ?>"data-target="#editModal" class="btn btn-primary"><i class="fas fa-list" title="Rincian"></i></a>
 
-                                <?php include "lihat_jl.php" ?>
+                            <a href="<?= base_url('BankTitipan/edit_ledger/' . $bt->id_bta); ?>" class="btn btn-success" data-target="#editModal"><i class="fas fa-edit" title="Edit"></i></a>
 
-
-                                <a href="<?= base_url('BankTitipan/edit_ledger/' . $bt->id_bta); ?>" class="btn btn-success" data-target="#editModal"><i class="fas fa-edit" title="Edit"></i></a>
-
-                                <a href="<?= base_url('BankTitipan/hapus_ledger/' . $bt->id_bta); ?>" onclick="javascript:return confirm('Apakah Anda yakin ingin menghapus data bank titipan?')" class="btn btn-danger"><i class="fas fa-trash" title="Hapus"></i></a>
-                            </td>
-                        </tr>
-                        <?php $no++;
-                    } ?>
-                </tbody>
-                <tfoot></tfoot>
-            </table>
-        </div>
+                            <a href="<?= base_url('BankTitipan/hapus_ledger/' . $bt->id_bta); ?>" onclick="javascript:return confirm('Apakah Anda yakin ingin menghapus data bank titipan?')" class="btn btn-danger"><i class="fas fa-trash" title="Hapus"></i></a>
+                        </td>
+                    </tr>
+                    <?php $no++;
+                } ?>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
     </div>
+</div>
 </div>
 </div>
 </div>
