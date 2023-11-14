@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Nov 2023 pada 09.47
+-- Waktu pembuatan: 14 Nov 2023 pada 09.55
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -44,11 +44,11 @@ CREATE TABLE `bank_titipan_a` (
 --
 
 INSERT INTO `bank_titipan_a` (`id_bta`, `kode_perkiraan`, `nama_properti`, `status_properti`, `id_marketing`, `tgl_input`, `nilai_nominal`, `jenis`, `keterangan`) VALUES
-(4, 1, 'Northwest Boulevard', 'Jual/Sewa', 2, '2023-11-30', '50000000', 'Debit', 'Uang UTJ'),
+(4, 1, 'Northwest Boulevard', 'Jual/Sewa', 2, '2023-10-12', '50000000', 'Debit', 'Uang UTJ'),
 (5, 2, 'Dukuh Kupang XXIII', 'Sewa', 3, '2023-11-15', '20000000', 'Debit', 'UTJ Tahap Pertama'),
 (6, 45, 'Surabaya, Indonesia', 'Sewa', 10, '2023-11-08', '10000000', 'Kredit', 'UTJ Terus-Terusan'),
 (7, 23, 'Bukit Palma', 'Sewa', 11, '2023-11-15', '10000000', 'Debit', 'UTJ Tahap Pertama'),
-(8, 23, 'Pengiriman Barang', '', 3, '2023-11-15', '5000000', 'Kredit', 'Pengiriman 2 Pak');
+(8, 23, 'Pengiriman Barang', '', 0, '2023-11-15', '5000000', 'Kredit', 'Pengiriman 2 Pak');
 
 -- --------------------------------------------------------
 
@@ -128,7 +128,7 @@ CREATE TABLE `komisi` (
 INSERT INTO `komisi` (`id_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_komisi`, `mar_listing_komisi`, `mar_listing2_komisi`, `mar_selling_komisi`, `mar_selling2_komisi`, `bruto_komisi`, `waktu_komisi`, `tgl_disetujui`, `status_komisi`, `status_transfer`) VALUES
 (283, 'Grand Sungkono Lagoon Tower Venetian Unit 3708', 'Sewa', '2023-08-08', 2, 0, 2, 0, '3800000', '2023-10-13', '2023-11-09', 'Approve', 'Transfer'),
 (284, 'Apartemen Grand Sungkono Lagoon Tower Venetian Unit 2801', 'Sewa', '2023-08-01', 1091, 0, 2, 0, '5000000', '2023-10-13', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
-(285, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual', '2023-06-26', 2, 0, 11, 0, '68781750', '2023-10-13', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
+(285, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual', '2023-06-26', 2, 0, 11, 0, '68781750', '2023-10-13', '2023-11-14', 'Approve', 'Proses Transfer'),
 (286, 'Woodland Blok WL No. 5 Citraland, Surabaya', 'Jual', '2023-08-04', 11, 0, 8642, 0, '50000000', '2023-10-13', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
 (287, 'JL. Manyar Rejo X/39, Surabaya', 'Jual', '2023-09-28', 38, 0, 4147, 0, '25000000', '2023-10-13', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
 (288, 'Raya Darmo Permai I No. 60, Surabaya', 'Sewa', '2023-08-29', 11, 0, 11, 0, '16500000', '2023-10-13', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
@@ -260,6 +260,8 @@ CREATE TABLE `omzet` (
 INSERT INTO `omzet` (`id_omzet`, `id_komisi`) VALUES
 (34, 283),
 (32, 284),
+(38, 285),
+(39, 285),
 (29, 286),
 (30, 291),
 (31, 291),
@@ -280,6 +282,7 @@ CREATE TABLE `omzet_aavision` (
   `fee_marketing` int(250) NOT NULL,
   `ptn_admin` int(250) NOT NULL,
   `ptn_pph` int(250) NOT NULL,
+  `ptn_pribadi` int(250) NOT NULL,
   `netto_vision` int(250) NOT NULL,
   `netto_marketing` int(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -288,15 +291,17 @@ CREATE TABLE `omzet_aavision` (
 -- Dumping data untuk tabel `omzet_aavision`
 --
 
-INSERT INTO `omzet_aavision` (`id_omzetvision`, `id_omzet`, `id_marketing`, `fee_kantor`, `fee_marketing`, `ptn_admin`, `ptn_pph`, `netto_vision`, `netto_marketing`) VALUES
-(128, 33, 3, 5000000, 5000000, 0, 125000, 5000000, 4875000),
-(129, 33, 10, 5000000, 5000000, 0, 125000, 5000000, 4875000),
-(130, 33, 9, 2000000, 8000000, 200000, 195000, 2200000, 7605000),
-(131, 33, 11, 3000000, 7000000, 175000, 170625, 3175000, 6654375),
-(132, 34, 2, 1520000, 2280000, 57000, 55575, 1577000, 2167425),
-(133, 35, 35, 5000000, 1250000, 0, 31250, 5000000, 1218750),
-(134, 35, 36, 0, 1250000, 0, 31250, 0, 1218750),
-(135, 35, 37, 0, 1250000, 0, 62500, 0, 2437500);
+INSERT INTO `omzet_aavision` (`id_omzetvision`, `id_omzet`, `id_marketing`, `fee_kantor`, `fee_marketing`, `ptn_admin`, `ptn_pph`, `ptn_pribadi`, `netto_vision`, `netto_marketing`) VALUES
+(128, 33, 3, 5000000, 5000000, 0, 125000, 0, 5000000, 4875000),
+(129, 33, 10, 5000000, 5000000, 0, 125000, 0, 5000000, 4875000),
+(130, 33, 9, 2000000, 8000000, 200000, 195000, 0, 2200000, 7605000),
+(131, 33, 11, 3000000, 7000000, 175000, 170625, 0, 3175000, 6654375),
+(132, 34, 2, 1520000, 2280000, 57000, 55575, 0, 1577000, 2167425),
+(133, 35, 35, 5000000, 1250000, 0, 31250, 0, 5000000, 1218750),
+(134, 35, 36, 0, 1250000, 0, 31250, 0, 0, 1218750),
+(135, 35, 37, 0, 1250000, 0, 62500, 0, 0, 2437500),
+(142, 39, 2, 17195438, 17195438, 0, 429886, 25000, 17195438, 16740552),
+(143, 39, 11, 13756350, 20634525, 515863, 502967, 50000, 14272213, 19565695);
 
 -- --------------------------------------------------------
 
@@ -336,6 +341,14 @@ CREATE TABLE `pengurangan_fee` (
   `jumlah_pengurangan` int(250) NOT NULL,
   `status_pengurangan` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `pengurangan_fee`
+--
+
+INSERT INTO `pengurangan_fee` (`id_pengurangan`, `id_komisi`, `id_marketing`, `keterangan_pengurangan`, `jumlah_pengurangan`, `status_pengurangan`) VALUES
+(36, 285, 2, 'Pengiriman Kucing', 25000, 'Listing'),
+(38, 285, 11, 'Beli Banner 3', 50000, 'Selling');
 
 -- --------------------------------------------------------
 
@@ -422,7 +435,7 @@ CREATE TABLE `sub_komisi` (
 INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `npwpm_listing_komisi`, `npwpum_listing_komisi`, `jabatanum_listing_komisi`, `npwpum_listing2_komisi`, `jabatanum_listing2_komisi`, `mm2_listing_komisi`, `npwpm2_listing_komisi`, `npwpum2_listing_komisi`, `jabatanum2_listing_komisi`, `npwpum2_listing2_komisi`, `jabatanum2_listing2_komisi`, `mm_selling_komisi`, `npwpm_selling_komisi`, `npwpum_selling_komisi`, `jabatanum_selling_komisi`, `npwpum_selling2_komisi`, `jabatanum_selling2_komisi`, `mm2_selling_komisi`, `npwpm2_selling_komisi`, `npwpum2_selling_komisi`, `jabatanum2_selling_komisi`, `npwpum2_selling2_komisi`, `jabatanum2_selling2_komisi`, `admin_pengguna`, `admin_status_komisi`) VALUES
 (182, 283, 60, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 4),
 (183, 284, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0),
-(184, 285, 50, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+(184, 285, 50, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4),
 (185, 286, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
 (186, 287, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
 (187, 288, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
@@ -481,6 +494,26 @@ INSERT INTO `sub_komisi_afw` (`id_afw`, `id_sub_komisi`, `m_ang`, `npwp_ang`, `n
 (9, 199, 50, 1, 1, 0, 0, 0, 50, 1, 1, 0, 0, 0, 50, 1, 1, 0, 0, 0),
 (10, 200, 50, 1, 1, 0, 0, 0, 50, 1, 1, 0, 0, 0, 50, 1, 1, 0, 0, 0),
 (12, 204, 50, 1, 1, 5, 1, 3, 50, 1, 1, 3, 0, 5, 50, 1, 1, 3, 0, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tutup_jurnal`
+--
+
+CREATE TABLE `tutup_jurnal` (
+  `id_jurnal` int(250) NOT NULL,
+  `tgl_jurnal` date NOT NULL,
+  `bulan_jurnal` varchar(250) NOT NULL,
+  `saldo_akhir` int(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tutup_jurnal`
+--
+
+INSERT INTO `tutup_jurnal` (`id_jurnal`, `tgl_jurnal`, `bulan_jurnal`, `saldo_akhir`) VALUES
+(1, '2023-11-14', 'October', 94808000);
 
 --
 -- Indexes for dumped tables
@@ -582,6 +615,12 @@ ALTER TABLE `sub_komisi_afw`
   ADD KEY `id_sub_komisi` (`id_sub_komisi`);
 
 --
+-- Indeks untuk tabel `tutup_jurnal`
+--
+ALTER TABLE `tutup_jurnal`
+  ADD PRIMARY KEY (`id_jurnal`);
+
+--
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
@@ -625,13 +664,13 @@ ALTER TABLE `marketing`
 -- AUTO_INCREMENT untuk tabel `omzet`
 --
 ALTER TABLE `omzet`
-  MODIFY `id_omzet` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_omzet` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT untuk tabel `omzet_aavision`
 --
 ALTER TABLE `omzet_aavision`
-  MODIFY `id_omzetvision` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
+  MODIFY `id_omzetvision` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengguna`
@@ -643,7 +682,7 @@ ALTER TABLE `pengguna`
 -- AUTO_INCREMENT untuk tabel `pengurangan_fee`
 --
 ALTER TABLE `pengurangan_fee`
-  MODIFY `id_pengurangan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id_pengurangan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT untuk tabel `potongan`
@@ -668,6 +707,12 @@ ALTER TABLE `sub_komisi`
 --
 ALTER TABLE `sub_komisi_afw`
   MODIFY `id_afw` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT untuk tabel `tutup_jurnal`
+--
+ALTER TABLE `tutup_jurnal`
+  MODIFY `id_jurnal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
