@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Nov 2023 pada 09.55
+-- Waktu pembuatan: 15 Nov 2023 pada 10.02
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -48,7 +48,8 @@ INSERT INTO `bank_titipan_a` (`id_bta`, `kode_perkiraan`, `nama_properti`, `stat
 (5, 2, 'Dukuh Kupang XXIII', 'Sewa', 3, '2023-11-15', '20000000', 'Debit', 'UTJ Tahap Pertama'),
 (6, 45, 'Surabaya, Indonesia', 'Sewa', 10, '2023-11-08', '10000000', 'Kredit', 'UTJ Terus-Terusan'),
 (7, 23, 'Bukit Palma', 'Sewa', 11, '2023-11-15', '10000000', 'Debit', 'UTJ Tahap Pertama'),
-(8, 23, 'Pengiriman Barang', '', 0, '2023-11-15', '5000000', 'Kredit', 'Pengiriman 2 Pak');
+(8, 23, 'Pengiriman Barang', '', 0, '2023-11-15', '5000000', 'Kredit', 'Pengiriman 2 Pak'),
+(9, 454, 'Citraland, Surabaya', 'Jual', 11, '2023-10-13', '10000000', 'Debit', 'Uang UTJ A');
 
 -- --------------------------------------------------------
 
@@ -169,7 +170,9 @@ INSERT INTO `kredit_bank_titipan_a` (`id_kredit`, `id_bta`, `tgl_input_kredit`, 
 (7, 4, '2023-11-11', 'Pengiriman Kucing', 10000),
 (12, 5, '2023-11-13', 'Berkas Ini Itu', 12000),
 (13, 4, '2023-11-13', 'Pengiriman Jerapah', 50000),
-(14, 4, '2023-11-13', 'Pengiriman Kura-Kura', 120000);
+(14, 4, '2023-11-13', 'Pengiriman Kura-Kura', 120000),
+(18, 8, '2023-11-15', 'Pengiriman Jerapah', 50000),
+(20, 6, '2023-11-15', 'Pengiriman Kura-Kura', 50000);
 
 -- --------------------------------------------------------
 
@@ -513,7 +516,8 @@ CREATE TABLE `tutup_jurnal` (
 --
 
 INSERT INTO `tutup_jurnal` (`id_jurnal`, `tgl_jurnal`, `bulan_jurnal`, `saldo_akhir`) VALUES
-(1, '2023-11-14', 'October', 94808000);
+(1, '2023-10-14', 'October', 94808000),
+(2, '2023-11-14', 'November', 94808000);
 
 --
 -- Indexes for dumped tables
@@ -628,7 +632,7 @@ ALTER TABLE `tutup_jurnal`
 -- AUTO_INCREMENT untuk tabel `bank_titipan_a`
 --
 ALTER TABLE `bank_titipan_a`
-  MODIFY `id_bta` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_bta` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `co_broke`
@@ -652,7 +656,7 @@ ALTER TABLE `komisi`
 -- AUTO_INCREMENT untuk tabel `kredit_bank_titipan_a`
 --
 ALTER TABLE `kredit_bank_titipan_a`
-  MODIFY `id_kredit` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_kredit` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `marketing`
@@ -712,7 +716,7 @@ ALTER TABLE `sub_komisi_afw`
 -- AUTO_INCREMENT untuk tabel `tutup_jurnal`
 --
 ALTER TABLE `tutup_jurnal`
-  MODIFY `id_jurnal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_jurnal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
