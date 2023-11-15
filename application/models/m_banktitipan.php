@@ -6,6 +6,7 @@ class M_banktitipan extends CI_Model{
         $this->db->select('*');
         $this->db->from('bank_titipan_a');
         //$this->db->join('marketing','marketing.id_mar = bank_titipan_a.id_marketing','inner');
+        $this->db->order_by('tgl_input', 'ASC');
 
         $query = $this->db->get();
         return $query->result();
