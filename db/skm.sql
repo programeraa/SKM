@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 15 Nov 2023 pada 10.02
+-- Waktu pembuatan: 16 Nov 2023 pada 10.01
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -49,7 +49,8 @@ INSERT INTO `bank_titipan_a` (`id_bta`, `kode_perkiraan`, `nama_properti`, `stat
 (6, 45, 'Surabaya, Indonesia', 'Sewa', 10, '2023-11-08', '10000000', 'Kredit', 'UTJ Terus-Terusan'),
 (7, 23, 'Bukit Palma', 'Sewa', 11, '2023-11-15', '10000000', 'Debit', 'UTJ Tahap Pertama'),
 (8, 23, 'Pengiriman Barang', '', 0, '2023-11-15', '5000000', 'Kredit', 'Pengiriman 2 Pak'),
-(9, 454, 'Citraland, Surabaya', 'Jual', 11, '2023-10-13', '10000000', 'Debit', 'Uang UTJ A');
+(9, 454, 'Citraland, Surabaya', 'Jual', 11, '2023-10-13', '10000000', 'Debit', 'Uang UTJ A'),
+(10, 12, 'Northwest Boulevard3', 'Sewa', 38, '2023-09-13', '2000000', 'Debit', 'Uang UTJ Ayo');
 
 -- --------------------------------------------------------
 
@@ -507,6 +508,7 @@ INSERT INTO `sub_komisi_afw` (`id_afw`, `id_sub_komisi`, `m_ang`, `npwp_ang`, `n
 CREATE TABLE `tutup_jurnal` (
   `id_jurnal` int(250) NOT NULL,
   `tgl_jurnal` date NOT NULL,
+  `tgl_asli_input` date NOT NULL,
   `bulan_jurnal` varchar(250) NOT NULL,
   `saldo_akhir` int(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -515,9 +517,10 @@ CREATE TABLE `tutup_jurnal` (
 -- Dumping data untuk tabel `tutup_jurnal`
 --
 
-INSERT INTO `tutup_jurnal` (`id_jurnal`, `tgl_jurnal`, `bulan_jurnal`, `saldo_akhir`) VALUES
-(1, '2023-10-14', 'October', 94808000),
-(2, '2023-11-14', 'November', 94808000);
+INSERT INTO `tutup_jurnal` (`id_jurnal`, `tgl_jurnal`, `tgl_asli_input`, `bulan_jurnal`, `saldo_akhir`) VALUES
+(27, '2023-09-28', '2023-11-16', 'September', 2000000),
+(28, '2023-10-28', '2023-11-16', 'October', 61820000),
+(29, '2023-11-28', '2023-11-16', 'November', 150652000);
 
 --
 -- Indexes for dumped tables
@@ -632,7 +635,7 @@ ALTER TABLE `tutup_jurnal`
 -- AUTO_INCREMENT untuk tabel `bank_titipan_a`
 --
 ALTER TABLE `bank_titipan_a`
-  MODIFY `id_bta` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_bta` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `co_broke`
@@ -716,7 +719,7 @@ ALTER TABLE `sub_komisi_afw`
 -- AUTO_INCREMENT untuk tabel `tutup_jurnal`
 --
 ALTER TABLE `tutup_jurnal`
-  MODIFY `id_jurnal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_jurnal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
