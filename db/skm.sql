@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Nov 2023 pada 09.06
+-- Waktu pembuatan: 21 Nov 2023 pada 09.58
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -100,6 +100,51 @@ INSERT INTO `jabatan_pengaturan` (`id_jabatan`, `nama_jabatan`, `nilai_jabatan`)
 (2, 'Marketing Executive (ME)', 3),
 (3, 'Executive Marketing Director (EMD)', 5),
 (4, 'Chief Marketing Officer (CMO)', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `jurnal_bttb`
+--
+
+CREATE TABLE `jurnal_bttb` (
+  `id_bttb` int(250) NOT NULL,
+  `tgl_input` date NOT NULL,
+  `kode_perkiraan` varchar(250) NOT NULL,
+  `keterangan` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `jurnal_bttb`
+--
+
+INSERT INTO `jurnal_bttb` (`id_bttb`, `tgl_input`, `kode_perkiraan`, `keterangan`) VALUES
+(1, '2023-11-21', 'BT001', 'Bank Titipan '),
+(3, '2023-11-21', 'TB001', 'Northwest Boulevard 45');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `jurnal_umum`
+--
+
+CREATE TABLE `jurnal_umum` (
+  `id_jurnal` int(250) NOT NULL,
+  `tgl_input_asli_jurnal` date NOT NULL,
+  `tgl_input_jurnal` date NOT NULL,
+  `id_bttb` int(250) NOT NULL,
+  `keterangan_jurnal` varchar(250) NOT NULL,
+  `jenis_jurnal` varchar(250) NOT NULL,
+  `nominal_jurnal` int(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `jurnal_umum`
+--
+
+INSERT INTO `jurnal_umum` (`id_jurnal`, `tgl_input_asli_jurnal`, `tgl_input_jurnal`, `id_bttb`, `keterangan_jurnal`, `jenis_jurnal`, `nominal_jurnal`) VALUES
+(5, '2023-11-21', '2023-11-21', 1, 'Uang UTJ Tahap Pertama', 'Debit', 50000000),
+(7, '2023-11-21', '2023-11-21', 3, 'Bayar PPH', 'Kredit', 50000000);
 
 -- --------------------------------------------------------
 
@@ -585,6 +630,19 @@ ALTER TABLE `jabatan_pengaturan`
   ADD PRIMARY KEY (`id_jabatan`);
 
 --
+-- Indeks untuk tabel `jurnal_bttb`
+--
+ALTER TABLE `jurnal_bttb`
+  ADD PRIMARY KEY (`id_bttb`);
+
+--
+-- Indeks untuk tabel `jurnal_umum`
+--
+ALTER TABLE `jurnal_umum`
+  ADD PRIMARY KEY (`id_jurnal`),
+  ADD KEY `id_bttb` (`id_bttb`);
+
+--
 -- Indeks untuk tabel `komisi`
 --
 ALTER TABLE `komisi`
@@ -703,6 +761,18 @@ ALTER TABLE `jabatan_pengaturan`
   MODIFY `id_jabatan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT untuk tabel `jurnal_bttb`
+--
+ALTER TABLE `jurnal_bttb`
+  MODIFY `id_bttb` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `jurnal_umum`
+--
+ALTER TABLE `jurnal_umum`
+  MODIFY `id_jurnal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT untuk tabel `komisi`
 --
 ALTER TABLE `komisi`
@@ -795,6 +865,12 @@ ALTER TABLE `tutup_jurnal`
 --
 ALTER TABLE `co_broke`
   ADD CONSTRAINT `co_broke_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `jurnal_umum`
+--
+ALTER TABLE `jurnal_umum`
+  ADD CONSTRAINT `jurnal_umum_ibfk_1` FOREIGN KEY (`id_bttb`) REFERENCES `jurnal_bttb` (`id_bttb`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `kredit_bank_titipan_a`
