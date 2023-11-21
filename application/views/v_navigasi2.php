@@ -10,36 +10,11 @@
             Data Master
         </button>
         <div class="dropdown-menu">
-            <a class="dropdown-item" href="<?= base_url('BankTitipan');?>">Jurnal Umum</a>
-            <a class="dropdown-item" href="<?= base_url('BankTitipan/jurnal_ledger');?>">Jurnal Ledger</a>
-            <!-- <?php if ($level == 'Administrator'): ?> 
-                <a class="dropdown-item" href="<?= base_url('Pengguna');?>">Data Pengguna</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="<?= base_url('Pengaturan');?>">Pengaturan</a>
-            <?php endif ?> -->
+            <!-- <a class="dropdown-item" href="<?= base_url('BankTitipan');?>">Jurnal Umum</a>
+            <a class="dropdown-item" href="<?= base_url('BankTitipan/jurnal_ledger');?>">Jurnal Ledger</a> -->
         </div>
     </div>
 </div>
 
-    <!-- <div class="text-right ml-2">
-     <div class="btn-group">
-      <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Laporan
-    </button>
-    <div class="dropdown-menu">
-        <a class="dropdown-item" href="<?= base_url('Laporan/omzet_vision');?>">Omzet A&A Vision</a>
-        <a class="dropdown-item" href="<?= base_url('Laporan/status_approve');?>">Status Approve</a>
-        <a class="dropdown-item" href="<?= base_url('Laporan/status_transaksi');?>">Status Transfer</a>
-        <a class="dropdown-item" href="<?= base_url('Laporan/admin_komisi');?>">Admin Komisi</a>
-    </div>
 </div>
-</div> -->
-
-</div>
-
-<!-- <?php if ($level == 'Administrator'): ?> 
-    <div class="text-right">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" >Tambah Data</button>
-    </div>
-<?php endif ?> -->
 
