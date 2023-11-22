@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 21 Nov 2023 pada 09.58
+-- Waktu pembuatan: 22 Nov 2023 pada 10.02
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -120,7 +120,8 @@ CREATE TABLE `jurnal_bttb` (
 
 INSERT INTO `jurnal_bttb` (`id_bttb`, `tgl_input`, `kode_perkiraan`, `keterangan`) VALUES
 (1, '2023-11-21', 'BT001', 'Bank Titipan '),
-(3, '2023-11-21', 'TB001', 'Northwest Boulevard 45');
+(3, '2023-11-21', 'TB001', 'Northwest Boulevard 45'),
+(5, '2023-11-22', 'TB002', 'Bukit Palma 25');
 
 -- --------------------------------------------------------
 
@@ -144,7 +145,12 @@ CREATE TABLE `jurnal_umum` (
 
 INSERT INTO `jurnal_umum` (`id_jurnal`, `tgl_input_asli_jurnal`, `tgl_input_jurnal`, `id_bttb`, `keterangan_jurnal`, `jenis_jurnal`, `nominal_jurnal`) VALUES
 (5, '2023-11-21', '2023-11-21', 1, 'Uang UTJ Tahap Pertama', 'Debit', 50000000),
-(7, '2023-11-21', '2023-11-21', 3, 'Bayar PPH', 'Kredit', 50000000);
+(7, '2023-11-21', '2023-11-21', 3, 'Bayar PPH', 'Kredit', 50000000),
+(13, '2023-11-22', '2023-11-22', 1, 'Bank Titipan ', 'Debit', 20000000),
+(14, '2023-11-22', '2023-11-22', 5, 'Bayar PPH', 'Kredit', 15000000),
+(15, '2023-11-22', '2023-11-22', 5, 'Bayar Sisa PPH', 'Kredit', 5000000),
+(16, '2023-11-22', '2023-11-23', 5, 'Bayar PPH', 'Kredit', 5000000),
+(18, '2023-11-22', '2023-11-22', 3, 'Bayar PPH', 'Debit', 5000000);
 
 -- --------------------------------------------------------
 
@@ -764,13 +770,13 @@ ALTER TABLE `jabatan_pengaturan`
 -- AUTO_INCREMENT untuk tabel `jurnal_bttb`
 --
 ALTER TABLE `jurnal_bttb`
-  MODIFY `id_bttb` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_bttb` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `jurnal_umum`
 --
 ALTER TABLE `jurnal_umum`
-  MODIFY `id_jurnal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_jurnal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `komisi`
