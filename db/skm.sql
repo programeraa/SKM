@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 23 Nov 2023 pada 10.00
+-- Waktu pembuatan: 24 Nov 2023 pada 10.04
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -178,14 +178,14 @@ CREATE TABLE `komisi` (
 --
 
 INSERT INTO `komisi` (`id_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_komisi`, `mar_listing_komisi`, `mar_listing2_komisi`, `mar_selling_komisi`, `mar_selling2_komisi`, `bruto_komisi`, `waktu_komisi`, `tgl_disetujui`, `status_komisi`, `status_transfer`) VALUES
-(283, 'Grand Sungkono Lagoon Tower Venetian Unit 3708', 'Sewa', '2023-08-08', 2, 0, 2, 0, '3800000', '2023-10-13', '2023-11-23', 'Approve', 'Transfer'),
+(283, 'Grand Sungkono Lagoon Tower Venetian Unit 3708', 'Sewa', '2023-08-08', 2, 0, 2, 0, '3800000', '2023-10-13', '0000-00-00', 'Proses Approve', 'Transfer'),
 (284, 'Apartemen Grand Sungkono Lagoon Tower Venetian Unit 2801', 'Sewa', '2023-08-01', 1091, 0, 2, 0, '5000000', '2023-10-13', '2023-11-17', 'Proses Approve', 'Proses Transfer'),
 (285, 'Emerald Mansion TN4 No. 6, Citraland ', 'Jual', '2023-06-26', 2, 0, 11, 0, '68781750', '2023-10-13', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
 (286, 'Woodland Blok WL No. 5 Citraland, Surabaya', 'Jual', '2023-08-04', 11, 0, 8642, 0, '50000000', '2023-10-13', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
 (287, 'JL. Manyar Rejo X/39, Surabaya', 'Jual', '2023-09-28', 38, 0, 4147, 0, '25000000', '2023-10-13', '2023-11-17', 'Proses Approve', 'Proses Transfer'),
 (288, 'Raya Darmo Permai I No. 60, Surabaya', 'Sewa', '2023-08-29', 11, 0, 11, 0, '16500000', '2023-10-13', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
 (289, ' Jl. Raya Dukuh Kupang 39A, Surabaya ', 'Sewa', '2023-08-12', 7, 10, 11, 0, '12050000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
-(290, 'Jl. Darmo Indah Selatan KK 50, Surabaya', 'Jual/Sewa', '2023-10-16', 6118, 0, 2, 38, '25000000', '2023-10-16', '2023-11-17', 'Proses Approve', 'Proses Transfer'),
+(290, 'Jl. Darmo Indah Selatan KK 50, Surabaya', 'Jual/Sewa', '2023-10-16', 6118, 0, 2, 38, '25000000', '2023-10-16', '2023-11-24', 'Approve', 'Proses Transfer'),
 (291, 'Northwest Boulevard Blok NV 10 No 2, Citraland - Surabaya', 'Jual', '2023-10-12', 3, 9, 10, 11, '50000000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
 (292, 'Jl. Dukuh Kupang XXIII, No 2, Surabaya', 'Jual', '2023-10-12', 38, 0, 38, 0, '10000000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
 (293, 'Desa Compreng, Widang, Tuban', 'Jual', '2023-10-14', 8731, 0, 38, 0, '12000000', '2023-10-16', '0000-00-00', 'Proses Approve', 'Proses Transfer'),
@@ -312,7 +312,7 @@ CREATE TABLE `master_pph` (
 --
 
 INSERT INTO `master_pph` (`id_pph`, `id_komisi`) VALUES
-(51, 283);
+(73, 290);
 
 -- --------------------------------------------------------
 
@@ -336,9 +336,16 @@ CREATE TABLE `master_pph_aavision` (
 --
 
 INSERT INTO `master_pph_aavision` (`id_pph_aavision`, `id_pph`, `id_marketing`, `status_marketing`, `fee_setelah_adm`, `fgs`, `ptn_pph`, `total_pph`) VALUES
-(213, 51, 2, 'Listing/Selling', 2223000, 0, 55575, 55575),
-(214, 51, 9, 'Upline', 0, 76000, 1900, 1900),
-(215, 51, 3, 'Upline', 0, 76000, 1900, 1900);
+(315, 73, 2, 'Listing/Selling', 2875000, 0, 71875, 71875),
+(316, 73, 35, 'Listing/Selling', 718750, 0, 21563, 21563),
+(317, 73, 36, 'Listing/Selling', 718750, 0, 21563, 21563),
+(318, 73, 37, 'Listing/Selling', 1437500, 0, 43125, 43125),
+(319, 73, 9, 'Upline', 0, 143750, 3594, 3594),
+(320, 73, 3, 'Upline', 0, 143750, 3594, 3594),
+(321, 73, 10, 'Upline', 0, 35938, 1078, 1078),
+(322, 73, 2, 'Upline', 0, 35938, 1078, 1078),
+(323, 73, 35, 'Upline', 0, 35938, 1078, 1078),
+(324, 73, 35, 'Upline', 0, 71875, 2156, 2156);
 
 -- --------------------------------------------------------
 
@@ -352,6 +359,13 @@ CREATE TABLE `master_pph_cobroke` (
   `fee_cobroke` int(250) NOT NULL,
   `pph_cobroke` int(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `master_pph_cobroke`
+--
+
+INSERT INTO `master_pph_cobroke` (`id_pph_cobroke`, `id_pph`, `fee_cobroke`, `pph_cobroke`) VALUES
+(20, 73, 12500000, 312500);
 
 -- --------------------------------------------------------
 
@@ -369,7 +383,7 @@ CREATE TABLE `omzet` (
 --
 
 INSERT INTO `omzet` (`id_omzet`, `id_komisi`) VALUES
-(104, 283);
+(126, 290);
 
 -- --------------------------------------------------------
 
@@ -395,7 +409,10 @@ CREATE TABLE `omzet_aavision` (
 --
 
 INSERT INTO `omzet_aavision` (`id_omzetvision`, `id_omzet`, `id_marketing`, `fee_kantor`, `fee_marketing`, `ptn_admin`, `ptn_pph`, `ptn_pribadi`, `netto_vision`, `netto_marketing`) VALUES
-(205, 104, 2, 1520000, 2280000, 57000, 55575, 0, 1577000, 2167425);
+(255, 126, 2, 2875000, 2875000, 0, 71875, 0, 2875000, 2803125),
+(256, 126, 35, 2875000, 718750, 0, 21563, 0, 2875000, 697188),
+(257, 126, 36, 0, 718750, 0, 21563, 0, 0, 697188),
+(258, 126, 37, 0, 1437500, 0, 43125, 0, 0, 1394375);
 
 -- --------------------------------------------------------
 
@@ -442,7 +459,10 @@ CREATE TABLE `pengurangan_fee` (
 
 INSERT INTO `pengurangan_fee` (`id_pengurangan`, `id_komisi`, `id_marketing`, `keterangan_pengurangan`, `jumlah_pengurangan`, `status_pengurangan`) VALUES
 (36, 285, 2, 'Pengiriman Kucing', 25000, 'Listing'),
-(38, 285, 11, 'Beli Banner 3', 50000, 'Selling');
+(38, 285, 11, 'Beli Banner 3', 50000, 'Selling'),
+(39, 292, 35, 'Pengiriman Biawak', 18750, 'Listing'),
+(40, 292, 36, 'Pengiriman Kucing', 18750, 'Listing'),
+(41, 292, 37, 'Beli Banner 3', 437500, 'Listing');
 
 -- --------------------------------------------------------
 
@@ -527,7 +547,7 @@ CREATE TABLE `sub_komisi` (
 --
 
 INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `npwpm_listing_komisi`, `npwpum_listing_komisi`, `jabatanum_listing_komisi`, `npwpum_listing2_komisi`, `jabatanum_listing2_komisi`, `mm2_listing_komisi`, `npwpm2_listing_komisi`, `npwpum2_listing_komisi`, `jabatanum2_listing_komisi`, `npwpum2_listing2_komisi`, `jabatanum2_listing2_komisi`, `mm_selling_komisi`, `npwpm_selling_komisi`, `npwpum_selling_komisi`, `jabatanum_selling_komisi`, `npwpum_selling2_komisi`, `jabatanum_selling2_komisi`, `mm2_selling_komisi`, `npwpm2_selling_komisi`, `npwpum2_selling_komisi`, `jabatanum2_selling_komisi`, `npwpum2_selling2_komisi`, `jabatanum2_selling2_komisi`, `admin_pengguna`, `admin_status_komisi`) VALUES
-(182, 283, 60, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 4),
+(182, 283, 60, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0),
 (183, 284, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 4),
 (184, 285, 50, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 60, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
 (185, 286, 70, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
@@ -807,31 +827,31 @@ ALTER TABLE `marketing`
 -- AUTO_INCREMENT untuk tabel `master_pph`
 --
 ALTER TABLE `master_pph`
-  MODIFY `id_pph` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id_pph` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT untuk tabel `master_pph_aavision`
 --
 ALTER TABLE `master_pph_aavision`
-  MODIFY `id_pph_aavision` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
+  MODIFY `id_pph_aavision` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=325;
 
 --
 -- AUTO_INCREMENT untuk tabel `master_pph_cobroke`
 --
 ALTER TABLE `master_pph_cobroke`
-  MODIFY `id_pph_cobroke` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_pph_cobroke` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `omzet`
 --
 ALTER TABLE `omzet`
-  MODIFY `id_omzet` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `id_omzet` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT untuk tabel `omzet_aavision`
 --
 ALTER TABLE `omzet_aavision`
-  MODIFY `id_omzetvision` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=206;
+  MODIFY `id_omzetvision` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=259;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengguna`
@@ -843,7 +863,7 @@ ALTER TABLE `pengguna`
 -- AUTO_INCREMENT untuk tabel `pengurangan_fee`
 --
 ALTER TABLE `pengurangan_fee`
-  MODIFY `id_pengurangan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_pengurangan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT untuk tabel `potongan`
