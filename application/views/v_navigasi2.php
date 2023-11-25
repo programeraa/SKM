@@ -16,7 +16,7 @@
 
                 <div class="text-right ml-2">
                     <a href="<?= base_url('Jurnal/bttb');?>">
-                        <button type="button" class="btn btn-secondary" data-whatever="@getbootstrap" >Master BT / TB</button></a>
+                        <button type="button" class="btn btn-secondary" data-whatever="@getbootstrap" >Master Akun</button></a>
                     </div>
 
 
