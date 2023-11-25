@@ -10,6 +10,7 @@
         <div class="card-header bg-dark text-white">
             <?php 
             $k = null;
+            $n = null;
             if(isset($_GET['dari']) && isset($_GET['ke']) || isset($_GET['kode_per']) || isset($_GET['j_kode'])){
                 $b = $_GET['dari'];
                 $t = $_GET['ke'];
@@ -18,6 +19,7 @@
                 foreach ($jurnal_bttb as $each) {
                     if ($each->id_bttb == $_GET['kode_per'] ) {
                         $k = $each->kode_perkiraan;
+                        $n = $each->nomor_perkiraan;
                     }
                 }
             }else{
@@ -48,7 +50,7 @@
 
                   if ($j_kode != null && $k != null) {
                       echo '<div class="col-auto text-center">
-                      <strong><span class="text-warning">Jenis Kode Perkiraan ('.$j_kode.') - Kode Perkiraan ('.$k.')</span></strong> 
+                      <strong><span class="text-warning">Jenis Kode Perkiraan ('.$j_kode.') - Kode Perkiraan ('.$k.$n.')</span></strong> 
                       </div>
                       </div>'; 
                   }elseif($j_kode != null && $k == null){
@@ -58,7 +60,7 @@
                     </div>'; 
                 }elseif($j_kode == null && $k != null){
                     echo '<div class="col-auto text-center">
-                    <strong><span class="text-warning">Kode Perkiraan ('.$k.')</span></strong> 
+                    <strong><span class="text-warning">Kode Perkiraan ('.$k.$n.')</span></strong> 
                     </div>
                     </div>'; 
                 }
@@ -88,7 +90,7 @@
       </div>'; 
   }else{
     echo '<div class="col-auto text-center">
-    <strong><span class="text-warning">Kode Perkiraan ('.$k.')</span></strong> 
+    <strong><span class="text-warning">Kode Perkiraan ('.$k.$n.')</span></strong> 
     </div>
     </div>';
 }
@@ -126,7 +128,7 @@
                     <?php 
                     foreach($jurnal_bttb as $each){ ?>
                         <option value="<?php echo $each->id_bttb; ?>">
-                            <?= $each->kode_perkiraan; ?> - <?= $each->keterangan; ?> 
+                            <?= $each->kode_perkiraan; ?><?= $each->nomor_perkiraan; ?> - <?= $each->keterangan; ?> 
                         </option>;
                     <?php } ?>
                 </select>
@@ -203,9 +205,9 @@
                     <td>
                         <?php 
                         if (strpos($jurnal->kode_perkiraan, 'BT') !== false) {
-                            echo "<span class='badge badge-primary p-2'>".$jurnal->kode_perkiraan." - ".$jurnal->keterangan."</span>";
+                            echo "<span class='badge badge-primary p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>";
                         }else{
-                            echo "<span class='badge badge-success p-2'>".$jurnal->kode_perkiraan." - ".$jurnal->keterangan."</span>";
+                            echo "<span class='badge badge-success p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>";
 
                             $kode_bt = '';
 
