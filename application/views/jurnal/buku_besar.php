@@ -122,7 +122,7 @@
             </div>
             <div class="col-auto pr-0">
                 <select class="form-control select2bs4" id="kode_per" name="kode_per">
-                    <option value="">Pilih Kode Perkiraan</option>
+                    <option value="">Kode Perkiraan</option>
                     <?php 
                     foreach($jurnal_bttb as $each){ ?>
                         <option value="<?php echo $each->id_bttb; ?>">
@@ -133,7 +133,7 @@
             </div>
             <div class="col-auto pr-0">
                 <select class="form-control" id="j_kode" name="j_kode">
-                    <option value="">Pilih Jenis Kode Perkiraan</option>
+                    <option value="">Jenis Kode Perkiraan</option>
                     <option value="BT">BT</option>
                     <option value="TB">TB</option>
                 </select>
