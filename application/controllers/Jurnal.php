@@ -221,6 +221,7 @@ class Jurnal extends CI_Controller {
 
 	public function tambah_bttb(){
 		$kode_perkiraan = $this->input->post('kode_perkiraan');
+		$nomor_perkiraan = $this->input->post('nomor_perkiraan');
 		$keterangan = $this->input->post('keterangan');
 
 		date_default_timezone_set("Asia/Jakarta");
@@ -228,6 +229,7 @@ class Jurnal extends CI_Controller {
 
 		$data = array(
 			'kode_perkiraan' => $kode_perkiraan,
+			'nomor_perkiraan' => $nomor_perkiraan,
 			'keterangan' => $keterangan,
 			'tgl_input' => $waktu
 		);
@@ -235,18 +237,20 @@ class Jurnal extends CI_Controller {
 		$this->m_jurnal->simpan_bttb($data);
 
 		echo '<script>
-		alert("Selamat! Berhasil Menambah Data BT atau TB");
+		alert("Selamat! Berhasil Menambah Data Master");
 		window.location="' . base_url('Jurnal/bttb') . '"
 		</script>';
 	}
 
 	public function update_bttb(){
 		$kode_perkiraan = $this->input->post('kode_perkiraan');
+		$nomor_perkiraan = $this->input->post('nomor_perkiraan');
 		$keterangan = $this->input->post('keterangan');
 		$id = $this->input->post('id_bttb');
 
 		$data = array(
 			'kode_perkiraan' => $kode_perkiraan,
+			'nomor_perkiraan' => $nomor_perkiraan,
 			'keterangan' => $keterangan
 		);
 
@@ -255,12 +259,12 @@ class Jurnal extends CI_Controller {
 		if (isset($where)) {
 			$this->m_jurnal->update_bttb($where,$data);
 			echo '<script>
-			alert("Selamat! Berhasil Update Data BT / TB");
+			alert("Selamat! Berhasil Update Data Master");
 			window.location="' . base_url('jurnal/bttb') . '"
 			</script>';
 		}
 		echo '<script>
-		alert("Gagal Update Data BT / TB");
+		alert("Gagal Update Data Master");
 		window.location="' . base_url('jurnal/bttb') . '"
 		</script>';
 	}
@@ -275,7 +279,7 @@ class Jurnal extends CI_Controller {
 			</script>';
 		} else {
 			echo '<script>
-			alert("Gagal Menghapus !, ID Pengaturan ' . $id_bttb . ' Tidak ditemukan");
+			alert("Gagal Menghapus !, ID Master ' . $id_bttb . ' Tidak ditemukan");
 			window.location="' . base_url('jurnal/bttb') . '"
 			</script>';
 		}
