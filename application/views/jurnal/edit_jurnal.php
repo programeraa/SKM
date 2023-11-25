@@ -28,7 +28,7 @@
                             foreach($jurnal_bttb as $each){ ?>
                                 <option value="<?php echo $each->id_bttb; ?>"
                                     <?=$jurnal->id_bttb==$each->id_bttb ? "selected" : null ?>>
-                                    <?= $each->kode_perkiraan; ?> - <?= $each->keterangan; ?> 
+                                    <?= $each->kode_perkiraan; ?><?= $each->nomor_perkiraan ?> - <?= $each->keterangan; ?> 
                                 </option>
                             <?php } ?>
                         </select>
