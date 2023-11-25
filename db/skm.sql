@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Nov 2023 pada 10.04
+-- Waktu pembuatan: 25 Nov 2023 pada 07.50
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -111,6 +111,7 @@ CREATE TABLE `jurnal_bttb` (
   `id_bttb` int(250) NOT NULL,
   `tgl_input` date NOT NULL,
   `kode_perkiraan` varchar(250) NOT NULL,
+  `nomor_perkiraan` varchar(250) NOT NULL,
   `keterangan` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -118,10 +119,11 @@ CREATE TABLE `jurnal_bttb` (
 -- Dumping data untuk tabel `jurnal_bttb`
 --
 
-INSERT INTO `jurnal_bttb` (`id_bttb`, `tgl_input`, `kode_perkiraan`, `keterangan`) VALUES
-(1, '2023-11-21', 'BT001', 'Bank Titipan '),
-(3, '2023-11-21', 'TB001', 'Northwest Boulevard 45'),
-(5, '2023-11-22', 'TB002', 'Bukit Palma 25');
+INSERT INTO `jurnal_bttb` (`id_bttb`, `tgl_input`, `kode_perkiraan`, `nomor_perkiraan`, `keterangan`) VALUES
+(1, '2023-11-21', 'BT', '001', 'Bank Titipan '),
+(3, '2023-11-21', 'TB', '001', 'Northwest Boulevard 45'),
+(5, '2023-11-22', 'TB', '002', 'Bukit Palma 25'),
+(6, '2023-11-25', 'KAI', '001', 'Kereta Api');
 
 -- --------------------------------------------------------
 
@@ -797,7 +799,7 @@ ALTER TABLE `jabatan_pengaturan`
 -- AUTO_INCREMENT untuk tabel `jurnal_bttb`
 --
 ALTER TABLE `jurnal_bttb`
-  MODIFY `id_bttb` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_bttb` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `jurnal_umum`
