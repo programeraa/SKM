@@ -134,9 +134,9 @@
                     <td>
                         <?php 
                         if (strpos($jurnal->kode_perkiraan, 'BT') !== false) {
-                            echo "<span class='badge badge-primary p-2'>".$jurnal->kode_perkiraan." - ".$jurnal->keterangan."</span>";
+                            echo "<span class='badge badge-primary p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>";
                         }else{
-                            echo "<span class='badge badge-success p-2'>".$jurnal->kode_perkiraan." - ".$jurnal->keterangan."</span>"; 
+                            echo "<span class='badge badge-success p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>"; 
 
                             // if (!isset($editLinkDisplayed[$jurnal->tgl_input_jurnal])) {
                             //     echo '<a href="' . base_url('jurnal/filterJurnal/?kode=' . $jurnal->kode_perkiraan . '&tgl=' . $jurnal->tgl_input_jurnal.'&ket=' . $jurnal->keterangan) . '" class="btn btn-warning btn-sm ml-2" data-target="#editModal"><i class="fas fa-list" title="Rincian Jurnal"></i></a>';
