@@ -24,7 +24,7 @@
                 $j_kode = null;
             }
             ?>
-            <h4 class="card-title" style="text-align: center;">Master BT Atau TB</h4>
+            <h4 class="card-title" style="text-align: center;">Master Akun</h4>
             <?php if ($b != null && $j_kode != null){ ?>
                 <h5><?php echo '<div class="justify-content-center">
                 <div class="col-auto text-center">
@@ -99,9 +99,9 @@
                     <td>
                         <?php 
                         if (strpos($jurnal->kode_perkiraan, 'BT') !== false) {
-                            echo "<span class='badge badge-primary p-2'>".$jurnal->kode_perkiraan."</span>";
+                            echo "<span class='badge badge-primary p-2'>".$jurnal->kode_perkiraan.'-'.$jurnal->nomor_perkiraan."</span>";
                         }else{
-                            echo "<span class='badge badge-success p-2'>".$jurnal->kode_perkiraan."</span>";
+                            echo "<span class='badge badge-success p-2'>".$jurnal->kode_perkiraan.'-'.$jurnal->nomor_perkiraan."</span>";
                         }?>
                     </td>
                     <td><?= $jurnal->keterangan ?></td>
