@@ -200,9 +200,9 @@
                                                 $fee_kantor_afw = $fmk2_listing;
                                             }elseif ($komisi->nama_mar2 == 'Ang/Fran/Win') {
                                                 $fee_kantor_afw = $fmk2_selling;
-                                            }elseif ($komisi->$komisi->listing_2 == 'Ang/Fran/Win') {
+                                            }elseif ($komisi->listing_2 == 'Ang/Fran/Win') {
                                                 $fee_kantor_afw = $fmk2_listing2;
-                                            }elseif ($komisi->$komisi->selling_2 == 'Ang/Fran/Win') {
+                                            }elseif ($komisi->selling_2 == 'Ang/Fran/Win') {
                                                 $fee_kantor_afw = $fmk2_selling2;
                                             }else{
                                                 $fee_kantor_afw = 0;
