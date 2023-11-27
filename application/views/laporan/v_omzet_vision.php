@@ -61,8 +61,8 @@
                         <th rowspan="2">Alamat Properti</th>
                         <th rowspan="2">Jenis</th>
                         <th colspan="2" class="text-center">Fee Bruto</th>
-                        <th colspan="2" class="text-center">Potongan</th>
-                        <th colspan="3" class="text-center">Netto</th>
+                        <th colspan="3" class="text-center">Potongan</th>
+                        <th colspan="2" class="text-center">Netto</th>
                         <th rowspan="2">Rincian Komisi</th>
                     </tr>
                     <tr>
@@ -70,8 +70,8 @@
                         <th>Marketing</th>
                         <th>ADM</th>
                         <th>PPH 21</th>
+                        <th>Pribadi</th>
                         <th>A&A Vision</th>
-                        <th>Potongan Marketing</th>
                         <th>Marketing</th>
                     </tr>
                 </thead>
@@ -213,8 +213,8 @@
                             <td><?= $fee_marketing_r ?></td>
                             <td><?= $ptn_admin_r ?></td>
                             <td><?= $ptn_pph_r ?></td>
-                            <td><?= $total_fee_vision_r ?></td>
                             <td><?= $ptn_pribadi_r?></td>
+                            <td><?= $total_fee_vision_r ?></td>
                             <td><?= $netto_marketing_r ?></td>
                             <td>
                                 <?php if ($cell_content != '') {?>
