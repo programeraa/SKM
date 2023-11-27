@@ -15,7 +15,7 @@
             }
             ?>
 
-            <h4 class="card-title" style="text-align: center;">Laporan PPH 21 Cobroke</h4>
+            <h4 class="card-title" style="text-align: center;">Laporan PPH 21 Marketing</h4>
             <?php if ($b != null) {?>
                 <h5><?php echo '<div class="justify-content-center">
                 <div class="col-auto text-center">
