@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Nov 2023 pada 09.55
+-- Waktu pembuatan: 01 Des 2023 pada 10.00
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.3.33
 
@@ -133,8 +133,8 @@ INSERT INTO `jurnal_bttb` (`id_bttb`, `tgl_input`, `kode_perkiraan`, `nomor_perk
 
 CREATE TABLE `jurnal_umum` (
   `id_jurnal` int(250) NOT NULL,
-  `tgl_input_asli_jurnal` date NOT NULL,
-  `tgl_input_jurnal` date NOT NULL,
+  `tgl_input_asli_jurnal` datetime NOT NULL,
+  `tgl_input_jurnal` datetime NOT NULL,
   `id_bttb` int(250) NOT NULL,
   `keterangan_jurnal` varchar(250) NOT NULL,
   `jenis_jurnal` varchar(250) NOT NULL,
@@ -146,12 +146,14 @@ CREATE TABLE `jurnal_umum` (
 --
 
 INSERT INTO `jurnal_umum` (`id_jurnal`, `tgl_input_asli_jurnal`, `tgl_input_jurnal`, `id_bttb`, `keterangan_jurnal`, `jenis_jurnal`, `nominal_jurnal`) VALUES
-(5, '2023-11-21', '2023-11-21', 1, 'Uang UTJ Tahap Pertama', 'Debit', 50000000),
-(7, '2023-11-21', '2023-11-21', 3, 'Bayar PPH', 'Kredit', 50000000),
-(13, '2023-11-22', '2023-11-22', 1, 'Bank Titipan ', 'Debit', 20000000),
-(14, '2023-11-22', '2023-11-22', 5, 'Bayar PPH', 'Kredit', 15000000),
-(15, '2023-11-22', '2023-11-22', 5, 'Bayar Sisa PPH', 'Kredit', 5000000),
-(16, '2023-11-22', '2023-11-23', 5, 'Bayar PPH', 'Kredit', 5000000);
+(5, '2023-11-21 00:00:00', '2023-11-21 00:00:00', 1, 'Uang UTJ Tahap Pertama', 'Debit', 50000000),
+(7, '2023-11-21 00:00:00', '2023-11-21 00:00:00', 3, 'Bayar PPH', 'Kredit', 50000000),
+(13, '2023-11-22 00:00:00', '2023-11-22 00:00:00', 1, 'Bank Titipan ', 'Debit', 20000000),
+(14, '2023-11-22 00:00:00', '2023-11-22 00:00:00', 5, 'Bayar PPH', 'Kredit', 15000000),
+(15, '2023-11-22 00:00:00', '2023-11-22 00:00:00', 5, 'Bayar Sisa PPH', 'Kredit', 5000000),
+(16, '2023-11-22 00:00:00', '2023-11-23 00:00:00', 5, 'Bayar PPH', 'Kredit', 5000000),
+(32, '2023-12-01 00:00:00', '2023-11-28 00:00:00', 1, 'Bayar PPH', 'Debit', 50000000),
+(42, '2023-12-01 00:00:00', '2023-12-01 00:00:00', 0, 'Saldo Awal Desember', 'Debit', 45000000);
 
 -- --------------------------------------------------------
 
@@ -622,6 +624,8 @@ CREATE TABLE `tutup_jurnal` (
   `tgl_jurnal` date NOT NULL,
   `tgl_asli_input` date NOT NULL,
   `bulan_jurnal` varchar(250) NOT NULL,
+  `total_saldo` int(250) NOT NULL,
+  `total_kredit` int(250) NOT NULL,
   `saldo_akhir` int(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -629,10 +633,8 @@ CREATE TABLE `tutup_jurnal` (
 -- Dumping data untuk tabel `tutup_jurnal`
 --
 
-INSERT INTO `tutup_jurnal` (`id_jurnal`, `tgl_jurnal`, `tgl_asli_input`, `bulan_jurnal`, `saldo_akhir`) VALUES
-(27, '2023-09-28', '2023-11-16', 'September', 2000000),
-(28, '2023-10-28', '2023-11-16', 'October', 61820000),
-(29, '2023-11-28', '2023-11-16', 'November', 150652000);
+INSERT INTO `tutup_jurnal` (`id_jurnal`, `tgl_jurnal`, `tgl_asli_input`, `bulan_jurnal`, `total_saldo`, `total_kredit`, `saldo_akhir`) VALUES
+(59, '2023-11-28', '2023-12-01', 'November', 120000000, 75000000, 45000000);
 
 --
 -- Indexes for dumped tables
@@ -805,7 +807,7 @@ ALTER TABLE `jurnal_bttb`
 -- AUTO_INCREMENT untuk tabel `jurnal_umum`
 --
 ALTER TABLE `jurnal_umum`
-  MODIFY `id_jurnal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_jurnal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT untuk tabel `komisi`
@@ -895,7 +897,7 @@ ALTER TABLE `sub_komisi_afw`
 -- AUTO_INCREMENT untuk tabel `tutup_jurnal`
 --
 ALTER TABLE `tutup_jurnal`
-  MODIFY `id_jurnal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_jurnal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -906,12 +908,6 @@ ALTER TABLE `tutup_jurnal`
 --
 ALTER TABLE `co_broke`
   ADD CONSTRAINT `co_broke_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `jurnal_umum`
---
-ALTER TABLE `jurnal_umum`
-  ADD CONSTRAINT `jurnal_umum_ibfk_1` FOREIGN KEY (`id_bttb`) REFERENCES `jurnal_bttb` (`id_bttb`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `kredit_bank_titipan_a`
