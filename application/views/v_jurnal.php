@@ -14,23 +14,48 @@
     <div class="card">
         <div class="card-header bg-dark text-white">
             <?php 
+            $monthTranslations = array(
+                'January' => 'Januari',
+                'February' => 'Februari',
+                'March' => 'Maret',
+                'April' => 'April',
+                'May' => 'Mei',
+                'June' => 'Juni',
+                'July' => 'Juli',
+                'August' => 'Agustus',
+                'September' => 'September',
+                'October' => 'Oktober',
+                'November' => 'November',
+                'December' => 'Desember'
+            );
+
             $k = null;
-            $tahun_bulan = null;
 
             date_default_timezone_set("Asia/Jakarta");
             $waktu = date("Y-m-d H:i:s");
+
+            $tahun_bulan = date("Y-m", strtotime($waktu));
+
+            $bulan_inggris = date("F", strtotime($waktu));
+            $bulan_filter = isset($monthTranslations[$bulan_inggris]) ? $monthTranslations[$bulan_inggris] : $bulan_inggris;
+
+
 
             $nama_bulan = date("F", strtotime($waktu));
 
             if(isset($_GET['dari']) && isset($_GET['ke'])){
                 $b = $_GET['dari'];
                 $t = $_GET['ke'];
-                $bulan_filter = date("F", strtotime($b));
+
+                $bulan_inggris = date("F", strtotime($b));
+                $bulan_filter = isset($monthTranslations[$bulan_inggris]) ? $monthTranslations[$bulan_inggris] : $bulan_inggris;
+
                 $tahun_bulan = date("Y-m", strtotime($b));
             }else{
                 $b = null;
                 $t = null;
             }
+
             ?>
             <h4 class="card-title" style="text-align: center;">Jurnal Umum</h4>
             <?php if ($b != null){ ?>
@@ -145,8 +170,8 @@
                     <td>
                         <?php
                         if ($jurnal->kode_perkiraan == '') {
-                           echo '';
-                       }elseif (strpos($jurnal->kode_perkiraan, 'BT') !== false) {
+                         echo '';
+                     }elseif (strpos($jurnal->kode_perkiraan, 'BT') !== false) {
                         echo "<span class='badge badge-primary p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>";
                     }else{
                         echo "<span class='badge badge-success p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>"; 
@@ -165,11 +190,11 @@
                     if (strpos($jurnal->keterangan_jurnal, 'Saldo Awal') !== false) {
                         echo "<span class='badge badge-success p-2'>" . $jurnal->keterangan_jurnal . "</span>";
                     }else{
-                       echo $jurnal->keterangan_jurnal;
-                   }
-                   ?>
-               </td>
-               <td>
+                     echo $jurnal->keterangan_jurnal;
+                 }
+                 ?>
+             </td>
+             <td>
                 <?php
                 if ($jurnal->jenis_jurnal == 'Debit') {
                     echo numberToRupiah($jurnal->nominal_jurnal);
@@ -189,7 +214,7 @@
             </td>
             <td>
                 <?php
-                if ($saldo_akhir != 0 && $jurnal->jenis_jurnal == 'Kredit' && strpos($jurnal->keterangan_jurnal, 'Saldo Awal') !== false) {
+                if (strpos($jurnal->keterangan_jurnal, 'Saldo Awal') !== false) {
                     echo "<span class='badge badge-success p-2'>" . numberToRupiah($saldo_akhir) . "</span>";
                 } elseif ($saldo_akhir != 0 && $jurnal->jenis_jurnal == 'Kredit') {
                     echo "<span class='badge badge-danger p-2'>" . numberToRupiah($saldo_akhir) . "</span>";
@@ -233,34 +258,90 @@ $waktu = date("m-Y");
 
 $bulan_sekarang = date("F", strtotime($waktu_awal));
 
+$waktu_terbaru = DateTime::createFromFormat('F', $bulan_sekarang);
+$waktu_terbaru->modify('+1 month');
+$bulan_berikutnya = $waktu_terbaru->format('F');
+
+$bulan_indonesia = isset($monthTranslations[$bulan_sekarang]) ? $monthTranslations[$bulan_sekarang] : $bulan_sekarang;
+
+$bulan_indonesia_berikutnya = isset($monthTranslations[$bulan_berikutnya]) ? $monthTranslations[$bulan_berikutnya] : $bulan_berikutnya;
+
+$monthTranslations = array(
+    'Januari' => 'January',
+    'Februari' => 'February',
+    'Maret' => 'March',
+    'April' => 'April',
+    'Mei' => 'May',
+    'Juni' => 'June',
+    'Juli' => 'July',
+    'Agustus' => 'August',
+    'September' => 'September',
+    'Oktober' => 'October',
+    'November' => 'November',
+    'Desember' => 'December'
+);
+
 foreach ($tutup_jurnal as $t_jurnal) {
     $tgl_jurnalku = date("m-Y", strtotime($t_jurnal->tgl_jurnal));
     $tgl_asli_input = date("d-m-Y", strtotime($t_jurnal->tgl_asli_input));
+    $bulan_jurnal = $t_jurnal->bulan_jurnal;
+
+    $kj = '';
+
+    foreach ($jurnal_umum as $j_umum) {
+        $tgl_input_asli_jurnal = $j_umum->tgl_input_asli_jurnal;
+        $kode_bttb = $j_umum->id_bttb;
+
+        if (strpos($j_umum->keterangan_jurnal, 'Saldo Awal') !== false) {
+            $kj = $j_umum->keterangan_jurnal;
+        }
+    }
 
     if (isset($_GET['dari']) && isset($_GET['ke'])) {
         $tgl_dari = date("m-Y", strtotime($_GET['dari']));
         $tgl_ke = date("m-Y", strtotime($_GET['ke']));
 
         if ($tgl_jurnalku == $tgl_dari || $tgl_jurnalku == $tgl_ke) {
+            $bulan_jurnal_lama = $t_jurnal->bulan_jurnal;
+
+            $bulan_jurnal = isset($monthTranslations[$bulan_jurnal_lama]) ? $monthTranslations[$bulan_jurnal_lama] : $bulan_jurnal_lama;
+
             $hapus_jurnal = true; 
             $id_jurnalku = $t_jurnal->id_jurnal;
+            break;
         }
     }
+    // else{
+    //     if ($kj == 'Saldo Awal '.$bulan_indonesia_berikutnya) {
+    //         $bulan_jurnal = $bulan_indonesia;
+    //         $hapus_jurnal = true; 
+    //         $id_jurnalku = $t_jurnal->id_jurnal;
+    //         break;
+    //     }
+    // }
 }
 
 ?>
+
 <?php if ($hapus_jurnal) { ?>
     <div class="text-right mt-3">
-        <a href="<?= base_url('Jurnal/hapus_tutup_jurnal?id_jurnal=' . $id_jurnalku.'&tgl='.$tgl_asli_input); ?>" onclick="javascript:return confirm('Apakah Anda yakin ingin hapus jurnal bulan (<?= $bulan_filter ?>) ?')" class="btn btn-danger mt-1">
+        <a href="<?= base_url('Jurnal/hapus_tutup_jurnal?id_jurnal=' . $id_jurnalku.'&bulan='.$bulan_jurnal.'&tgl='.$tgl_asli_input); ?>" onclick="javascript:return confirm('Apakah Anda yakin ingin hapus jurnal bulan (<?= $bulan_filter ?>) ?')" class="btn btn-danger mt-1">
             <i class="fas fa-trash" title="Hapus Jurnal"></i>  Hapus Jurnal (<?= $bulan_filter ?>)
         </a>
     </div>
 <?php }else{ 
-    $bulanku = (isset($_GET['dari']) && isset($_GET['ke']) && $_GET['dari'] !== '' && $_GET['ke'] !== '') ? $bulan_filter : $bulan_sekarang; ?>
+    if (isset($_GET['dari']) && isset($_GET['ke']) && $_GET['dari'] !== '' && $_GET['ke'] !== '') {
+        $bulanku = $bulan_inggris;
+        $tampil_bulanku = $bulan_filter;
+    }else{
+        $bulanku = $bulan_sekarang;
+        $tampil_bulanku = $bulan_indonesia;
+    } 
+    ?>
     <div class="text-right mt-3">
         <a href="<?= base_url('Jurnal/tutup_jurnal?tsa=' . $saldo_akhir.'&ts='.$total_saldo.'&tk='.$total_kredit.'&dari='.$b. '&ke='.$t.'&bulan='.$bulanku.'&bulan_tahun='.$tahun_bulan); ?>"
-            onclick="javascript:return confirm('Apakah Anda yakin ingin tutup jurnal bulan (<?= $bulanku ?>) ?')" class="btn btn-primary mt-1">
-            Tutup Jurnal (<?= $bulanku ?>)
+            onclick="javascript:return confirm('Apakah Anda yakin ingin tutup jurnal bulan (<?= $tampil_bulanku ?>) ?')" class="btn btn-primary mt-1">
+            Tutup Jurnal (<?= $tampil_bulanku ?>)
         </a>
     </div>
 <?php } ?>
