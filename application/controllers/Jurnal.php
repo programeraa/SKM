@@ -156,36 +156,23 @@ class Jurnal extends CI_Controller {
 		$dari = date("m-Y", strtotime($this->input->get('dari')));
 		$ke = date("m-Y", strtotime($this->input->get('ke')));
 
-		$dari_2 = date("Y", strtotime($dari));
-		$ke_2 = date("Y", strtotime($ke));
+		$dari_2 = date("Y", strtotime($this->input->get('dari')));
+		$ke_2 = date("Y", strtotime($this->input->get('ke')));
 
 		date_default_timezone_set("Asia/Jakarta");
 		$waktu = date("Y-m-d");
 		$waktuku = date("m-Y");
 
-		if ($dari_2 >= '2000' || $ke_2 >= '2000') {
-			$bulanku = $waktuku;
+		// if ($dari_2 >= '2000' || $ke_2 >= '2000') {
+		// 	$bulanku = $waktuku;
+		// }else{
+		// 	$bulanku = $ke;
+		// }
+
+		if (date("Y", strtotime($dari_2)) != '1970'  && date("Y", strtotime($ke_2)) != '1970') {
+			$tanggal_jurnal = date('Y-m-d', strtotime('28-' . $ke));
 		}else{
-			$bulanku = $ke;
-		}
-
-		$tanggal_jurnal = date('Y-m-d', strtotime('28-' . $bulanku));
-
-		$data = array(
-			'tgl_jurnal' => $tanggal_jurnal,
-			'tgl_asli_input' => $waktu,
-			'bulan_jurnal' => $bulan,
-			'total_saldo' => $total_saldo,
-			'total_kredit' => $total_kredit,
-			'saldo_akhir' => $saldo_akhir
-		);
-
-		if ($saldo_akhir < 0) {
-			$jenis_jurnal = "Kredit";
-			$saldo_akhir_baru = abs($saldo_akhir);
-		} else {
-			$jenis_jurnal = "Debit";
-			$saldo_akhir_baru = $saldo_akhir;
+			$tanggal_jurnal = date('Y-m-d', strtotime('28-' . $waktuku));
 		}
 
 		$monthTranslations = array(
@@ -203,11 +190,31 @@ class Jurnal extends CI_Controller {
 			'December' => 'Desember'
 		);
 
+		$bulan_fix = DateTime::createFromFormat('F', $bulan);
+		$englishMonth = $bulan_fix->format('F');
+		$bulan_clear = isset($monthTranslations[$englishMonth]) ? $monthTranslations[$englishMonth] : $englishMonth;
+
+		$data = array(
+			'tgl_jurnal' => $tanggal_jurnal,
+			'tgl_asli_input' => $waktu,
+			'bulan_jurnal' => $bulan_clear,
+			'total_saldo' => $total_saldo,
+			'total_kredit' => $total_kredit,
+			'saldo_akhir' => $saldo_akhir
+		);
+
+		if ($saldo_akhir < 0) {
+			$jenis_jurnal = "Kredit";
+			$saldo_akhir_baru = abs($saldo_akhir);
+		} else {
+			$jenis_jurnal = "Debit";
+			$saldo_akhir_baru = $saldo_akhir;
+		}
+
 		$waktu_terbaru = DateTime::createFromFormat('F', $bulan);
 		$waktu_terbaru->modify('+1 month');
 		$englishMonth = $waktu_terbaru->format('F');
 		$bulan_plus_1 = isset($monthTranslations[$englishMonth]) ? $monthTranslations[$englishMonth] : $englishMonth;
-
 
 		// Konversi string tahun dan bulan menjadi objek DateTime
 		$dateTime = DateTime::createFromFormat('Y-m', $tahun_bulan);
@@ -239,15 +246,54 @@ class Jurnal extends CI_Controller {
 	public function hapus_tutup_jurnal(){
 		$id_jurnal = $this->input->get('id_jurnal');
 		$tgl_asli_input = $this->input->get('tgl');
+		$bulan_jurnal = $this->input->get('bulan');
+
+		$monthTranslations = array(
+			'January' => 'Januari',
+			'February' => 'Februari',
+			'March' => 'Maret',
+			'April' => 'April',
+			'May' => 'Mei',
+			'June' => 'Juni',
+			'July' => 'Juli',
+			'August' => 'Agustus',
+			'September' => 'September',
+			'October' => 'Oktober',
+			'November' => 'November',
+			'December' => 'Desember'
+		);
+
+		$bulan_baru = $monthTranslations[$bulan_jurnal];
 
 		$datetime = DateTime::createFromFormat('d-m-Y', $tgl_asli_input);
 		$tanggal_hasil = $datetime->format('Y-m-d');
+
+		$waktu_terbaru = new DateTime($tanggal_hasil);
+		$waktu_terbaru->modify('+1 month');
+		$bulan_baru = $waktu_terbaru->format('F');
+
+		$monthTranslations = array(
+			'January' => 'Januari',
+			'February' => 'Februari',
+			'March' => 'Maret',
+			'April' => 'April',
+			'May' => 'Mei',
+			'June' => 'Juni',
+			'July' => 'Juli',
+			'August' => 'Agustus',
+			'September' => 'September',
+			'October' => 'Oktober',
+			'November' => 'November',
+			'December' => 'Desember'
+		);
+
+		$bulan_baru_fix = isset($monthTranslations[$bulan_baru]) ? $monthTranslations[$bulan_baru] : $bulan_baru;
 
 		$where = array('id_jurnal'=>$id_jurnal);
 		$where2 = array(
 			'tgl_input_asli_jurnal' => $tanggal_hasil,
 			'id_bttb' => 0,
-			'keterangan_jurnal LIKE' => '%Saldo Awal%'
+			'keterangan_jurnal' => 'Saldo Awal '.$bulan_baru_fix
 		);
 
 		if (isset($where)) {
@@ -264,6 +310,7 @@ class Jurnal extends CI_Controller {
 			</script>';
 		}
 	}
+
 
 	public function buku_besar(){
 		$level = $this->session->userdata('level');
