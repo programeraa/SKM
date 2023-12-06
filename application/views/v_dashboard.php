@@ -6,7 +6,7 @@
             </div>
             <div class="text-rightl ml-2">
                 <a href="<?= base_url('Jurnal');?>">
-                    <button type="button" class="btn btn-primary" data-whatever="@getbootstrap" >Accurate</button></a>
+                    <button type="button" class="btn btn-primary" data-whatever="@getbootstrap" >Akuntansi</button></a>
                 </div>
             </div>
             <div class="card">
