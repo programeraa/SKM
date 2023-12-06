@@ -117,22 +117,22 @@
                 <th>Tgl Input</th>
                 <th>Kode Perkiraan</th>
                 <th>Keterangan</th>
-                <th>Saldo</th>
+                <th>Debit</th>
                 <th>Kredit</th>
-                <th>Saldo Akhir</th>
+                <!-- <th>Saldo Akhir</th> -->
             </tr>
         </thead>
         <tbody>
             <?php 
             $no = 1;
-            $saldo_akhir = 0;
+            //$saldo_akhir = 0;
             $sum_saldo = 0;
             $sum_kredit = 0;
-            $sum_saldo_akhir = 0;
+            //$sum_saldo_akhir = 0;
 
             $total_saldo = 0;
             $total_kredit = 0;
-            $total_saldo_akhir = 0;
+            //$total_saldo_akhir = 0;
 
             $tanggal_jurnal = []; 
 
@@ -148,14 +148,14 @@
                 $tgl_input_jurnal = ($cell_content !== '') ? date("d-m-Y", strtotime($cell_content)) : '';
 
                 if ($jurnal->jenis_jurnal == 'Debit') {
-                    $saldo_akhir += $jurnal->nominal_jurnal;
+                    //$saldo_akhir += $jurnal->nominal_jurnal;
                     $total_saldo = $sum_saldo += $jurnal->nominal_jurnal;
                 } else {
-                    $saldo_akhir -= $jurnal->nominal_jurnal;
+                    //$saldo_akhir -= $jurnal->nominal_jurnal;
                     $total_kredit = $sum_kredit += $jurnal->nominal_jurnal;
                 }
 
-                $total_saldo_akhir = $sum_saldo_akhir += $saldo_akhir;
+                // $total_saldo_akhir = $sum_saldo_akhir += $saldo_akhir;
 
                 ?>
                 <tr>
@@ -171,8 +171,8 @@
                         <td>
                             <?php
                             if ($jurnal->kode_perkiraan == '') {
-                             echo '';
-                         }elseif (strpos($jurnal->kode_perkiraan, 'BT') !== false) {
+                               echo '';
+                           }elseif (strpos($jurnal->kode_perkiraan, 'BT') !== false) {
                             echo "<span class='badge badge-primary p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>";
                         }else{
                             echo "<span class='badge badge-success p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>"; 
@@ -191,11 +191,11 @@
                         if (strpos($jurnal->keterangan_jurnal, 'Saldo Awal') !== false) {
                             echo "<span class='badge badge-success p-2'>" . $jurnal->keterangan_jurnal . "</span>";
                         }else{
-                         echo $jurnal->keterangan_jurnal;
-                     }
-                     ?>
-                 </td>
-                 <td>
+                           echo $jurnal->keterangan_jurnal;
+                       }
+                       ?>
+                   </td>
+                   <td>
                     <?php
                     if ($jurnal->jenis_jurnal == 'Debit') {
                         echo numberToRupiah($jurnal->nominal_jurnal);
@@ -213,7 +213,7 @@
                     }
                     ?> 
                 </td>
-                <td>
+                <!-- <td>
                     <?php
                     if (strpos($jurnal->keterangan_jurnal, 'Saldo Awal') !== false) {
                         echo "<span class='badge badge-success p-2'>" . numberToRupiah($saldo_akhir) . "</span>";
@@ -224,7 +224,7 @@
                     }
                     ?>
 
-                </td>
+                </td> -->
 
             </tr>
             <?php $no++;
@@ -238,14 +238,14 @@
             <th></th>
             <th><?= numberToRupiah($total_saldo) ?></th>
             <th><?= numberToRupiah($total_kredit) ?></th>
-                <th><!-- <?php
+                <!-- <th><?php
                 if ($saldo_akhir != 0) {
                     echo "<span class='badge badge-danger p-2'>" . numberToRupiah($saldo_akhir) . "</span>";
                 } else {
                     echo numberToRupiah($saldo_akhir);
                 }
-            ?> -->
-        </th>
+            ?>
+        </th> -->
     </tr>
 </tfoot>
 </table>
@@ -302,6 +302,15 @@ foreach ($tutup_jurnal as $t_jurnal) {
         $tgl_dari = date("m-Y", strtotime($_GET['dari']));
         $tgl_ke = date("m-Y", strtotime($_GET['ke']));
 
+        $t_nominal = 0;
+
+        foreach ($jurnal_umum_2 as $j_umum2) {
+            if ($tgl_dari == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && $tgl_ke == date("m-Y", strtotime($j_umum2->tgl_input_jurnal))   ) {
+                $t_nominal = $j_umum2->nominal_jurnal;
+                break;
+            }
+        }
+
         if ($tgl_jurnalku == $tgl_dari || $tgl_jurnalku == $tgl_ke) {
             $bulan_jurnal_lama = $t_jurnal->bulan_jurnal;
 
@@ -340,7 +349,7 @@ foreach ($tutup_jurnal as $t_jurnal) {
     } 
     ?>
     <div class="text-right mt-3">
-        <a href="<?= base_url('Jurnal/tutup_jurnal?tsa=' . $saldo_akhir.'&ts='.$total_saldo.'&tk='.$total_kredit.'&dari='.$b. '&ke='.$t.'&bulan='.$bulanku.'&bulan_tahun='.$tahun_bulan); ?>"
+        <a href="<?= base_url('Jurnal/tutup_jurnal?tsa=0'.'&sas='.$t_nominal.'&ts='.$total_saldo.'&tk='.$total_kredit.'&dari='.$b. '&ke='.$t.'&bulan='.$bulanku.'&bulan_tahun='.$tahun_bulan); ?>"
             onclick="javascript:return confirm('Apakah Anda yakin ingin tutup jurnal bulan (<?= $tampil_bulanku ?>) ?')" class="btn btn-primary mt-1">
             Tutup Jurnal (<?= $tampil_bulanku ?>)
         </a>
