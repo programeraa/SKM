@@ -55,6 +55,7 @@ class M_jurnal extends CI_Model{
             $this->db->group_end();
         }
 
+        $this->db->where("NOT (keterangan_jurnal LIKE '%Saldo Awal%')", null, false);
 
         $query = $this->db->get();
         return $query->result();
