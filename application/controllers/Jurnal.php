@@ -150,6 +150,7 @@ class Jurnal extends CI_Controller {
 
 	public function tutup_jurnal(){
 		$saldo_akhir = $this->input->get('tsa');
+		$saldo_awal_sebelumnya = $this->input->get('sas');
 		$total_saldo = $this->input->get('ts');
 		$total_kredit = $this->input->get('tk');
 
@@ -205,12 +206,12 @@ class Jurnal extends CI_Controller {
 			'saldo_akhir' => $saldo_akhir
 		);
 
-		if ($saldo_akhir < 0) {
+		if ($total_kredit < 0) {
 			$jenis_jurnal = "Kredit";
-			$saldo_akhir_baru = abs($saldo_akhir);
+			$saldo_akhir_baru = abs($total_kredit + $saldo_awal_sebelumnya);
 		} else {
-			$jenis_jurnal = "Debit";
-			$saldo_akhir_baru = $saldo_akhir;
+			$jenis_jurnal = "Kredit";
+			$saldo_akhir_baru = $total_kredit + $saldo_awal_sebelumnya;
 		}
 
 		$waktu_terbaru = DateTime::createFromFormat('F', $bulan);
