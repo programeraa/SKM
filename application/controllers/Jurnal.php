@@ -207,10 +207,10 @@ class Jurnal extends CI_Controller {
 		);
 
 		if ($total_kredit < 0) {
-			$jenis_jurnal = "Kredit";
+			$jenis_jurnal = '';
 			$saldo_akhir_baru = abs($total_kredit + $saldo_awal_sebelumnya);
 		} else {
-			$jenis_jurnal = "Kredit";
+			$jenis_jurnal = '';
 			$saldo_akhir_baru = $total_kredit + $saldo_awal_sebelumnya;
 		}
 
@@ -229,9 +229,6 @@ class Jurnal extends CI_Controller {
 		$tahun_bulan_berikutnya = $dateTime->format('Y-m');
 
 		$is_data_exist = $this->m_jurnal->cek_data_jurnal_umum($tahun_bulan_berikutnya, $bulan_plus_1);
-
-		// var_dump($is_data_exist);
-		// die();
 
 		$data2 = array(
 			'tgl_input_asli_jurnal' => $waktu,
@@ -346,7 +343,7 @@ class Jurnal extends CI_Controller {
 		}
 
 		$data['title'] = "Buku Besar";
-		$data['jurnal_umum'] = $this->m_jurnal->tampil_data_jurnal();
+		$data['jurnal_umum'] = $this->m_jurnal->tampil_data_jurnal_BB();
 		$data['jurnal_bttb'] = $this->m_jurnal->tampil_data_bttb()->result();
 
 		$this->load->view('v_header', $data);
@@ -371,7 +368,7 @@ class Jurnal extends CI_Controller {
 		$bt = $this->input->get('bt');
 
 		$data['title'] = "Buku Besar";
-		$data['jurnal_umum'] = $this->m_jurnal->filter_jurnal($dari, $ke, $j_kode, $kode_per, $kode, $tgl, $bt);
+		$data['jurnal_umum'] = $this->m_jurnal->filter_jurnal_buku_besar($dari, $ke, $j_kode, $kode_per, $kode, $tgl, $bt);
 		$data['jurnal_bttb'] = $this->m_jurnal->tampil_data_bttb()->result();
 
 		$this->load->view('v_header', $data);
