@@ -122,7 +122,7 @@
             <div class="col-auto p-0">
                 <input type="date" class="form-control" name="ke">
             </div>
-            <div class="col-auto pr-0">
+            <div class="col-auto pr-0" style="width: 335px;">
                 <select class="form-control select2bs4" id="kode_per" name="kode_per">
                     <option value="">Kode Perkiraan</option>
                     <?php 
@@ -160,7 +160,7 @@
                 <th>Tgl Input</th>
                 <th>Kode Perkiraan</th>
                 <th>Keterangan</th>
-                <th>Saldo</th>
+                <th>Debit</th>
                 <th>Kredit</th>
                 <th>Saldo Akhir</th>
             </tr>
@@ -179,6 +179,8 @@
 
             $tanggal_jurnal = []; 
 
+            $warna = '';
+
             foreach ($jurnal_umum as $jurnal) { 
 
                 $cell_content = '';
@@ -190,12 +192,34 @@
 
                 $tgl_input_jurnal = ($cell_content !== '') ? date("d-m-Y", strtotime($cell_content)) : '';
 
-                if ($jurnal->jenis_jurnal == 'Debit') {
-                    $saldo_akhir += $jurnal->nominal_jurnal;
-                    $total_saldo = $sum_saldo += $jurnal->nominal_jurnal;
-                } else {
-                    $saldo_akhir -= $jurnal->nominal_jurnal;
-                    $total_kredit = $sum_kredit += $jurnal->nominal_jurnal;
+                if(isset($_GET['dari']) && isset($_GET['ke']) || isset($_GET['j_kode'])){
+                    if (strpos($jurnal->keterangan_jurnal, 'Saldo Awal') !== false) {
+                        $saldo_akhir += $jurnal->nominal_jurnal;
+                    }
+
+                    if (strpos($jurnal->keterangan_jurnal, 'Koreksi Saldo') !== false) {
+                        $saldo_akhir += $jurnal->nominal_jurnal;
+                    }
+
+                    if ($_GET['j_kode'] == 'UTJ') {
+                        if ($jurnal->jenis_jurnal == 'Debit') {
+                            $saldo_akhir -= $jurnal->nominal_jurnal;
+                            $total_saldo = $sum_saldo += $jurnal->nominal_jurnal;
+                        } elseif ($jurnal->jenis_jurnal == 'Kredit') {
+                            $saldo_akhir += $jurnal->nominal_jurnal;
+                            $total_kredit = $sum_kredit += $jurnal->nominal_jurnal;
+                        }
+
+                        $warna = 'Tidak Merah';
+                    }
+                }else{
+                    if ($jurnal->jenis_jurnal == 'Debit') {
+                        $saldo_akhir += $jurnal->nominal_jurnal;
+                        $total_saldo = $sum_saldo += $jurnal->nominal_jurnal;
+                    } elseif ($jurnal->jenis_jurnal == 'Kredit') {
+                        $saldo_akhir -= $jurnal->nominal_jurnal;
+                        $total_kredit = $sum_kredit += $jurnal->nominal_jurnal;
+                    }
                 }
 
                 $total_saldo_akhir = $sum_saldo_akhir += $saldo_akhir;
@@ -210,10 +234,12 @@
                     <td><?= $tgl_input_jurnal ?></td>
                     <td>
                         <?php 
-                        if (strpos($jurnal->kode_perkiraan, 'BT') !== false) {
-                            echo "<span class='badge badge-primary p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>";
-                        }else{
-                            echo "<span class='badge badge-success p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>";
+                        if ($jurnal->kode_perkiraan == '') {
+                           echo '';
+                       }elseif (strpos($jurnal->kode_perkiraan, 'BT') !== false) {
+                        echo "<span class='badge badge-primary p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>";
+                    }else{
+                        echo "<span class='badge badge-success p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>";
 
                             // $kode_bt = '';
 
@@ -229,49 +255,62 @@
                             //     $editLinkDisplayed[$jurnal->tgl_input_jurnal . $jurnal->kode_perkiraan] = true;
                             // }
 
-                        }?>
-                    </td>
-                    <td><?= $jurnal->keterangan_jurnal ?></td>
-                    <td>
-                        <?php
-                        if ($jurnal->jenis_jurnal == 'Debit') {
-                            echo numberToRupiah($jurnal->nominal_jurnal);
-                        }else{
-                            echo '';
-                        }
-                        ?> 
-                    </td>
-                    <td>
-                        <?php
-                        if ($jurnal->jenis_jurnal == 'Kredit') {
-                            echo numberToRupiah($jurnal->nominal_jurnal);
-                        }else{
-                            echo '';
-                        }
-                        ?> 
-                    </td>
-                    <td>
-                        <?php
-                        if ($saldo_akhir != 0 && $jurnal->jenis_jurnal == 'Kredit') {
-                            echo "<span class='badge badge-danger p-2'>" . numberToRupiah($saldo_akhir) . "</span>";
-                        } else {
-                            echo numberToRupiah($saldo_akhir);
-                        }
-                        ?>
-                    </td>
+                    }?>
+                </td>
+                <td>
+                    <?php
+                    if (strpos($jurnal->keterangan_jurnal, 'Saldo Awal') !== false) {
+                        echo "<span class='badge badge-success p-2'>" . $jurnal->keterangan_jurnal . "</span>";
+                    }else{
+                       echo $jurnal->keterangan_jurnal;
+                   }
+                   ?>
+               </td>
+               <td>
+                <?php
+                if ($jurnal->jenis_jurnal == 'Debit') {
+                    echo numberToRupiah($jurnal->nominal_jurnal);
+                }else{
+                    echo '';
+                }
+                ?> 
+            </td>
+            <td>
+                <?php
+                if ($jurnal->jenis_jurnal == 'Kredit') {
+                    echo numberToRupiah($jurnal->nominal_jurnal);
+                }else{
+                    echo '';
+                }
+                ?> 
+            </td>
+            <td>
+                <?php
+                if ($warna == 'Tidak Merah') {
+                    echo numberToRupiah($saldo_akhir);
+                }
+                elseif ($saldo_akhir != 0 && $jurnal->jenis_jurnal == 'Kredit') {
+                    echo "<span class='badge badge-danger p-2'>" . numberToRupiah($saldo_akhir) . "</span>";
+                } elseif ($jurnal->jenis_jurnal == 'Debit') {
+                    echo numberToRupiah($saldo_akhir);
+                } else{
+                    echo numberToRupiah($jurnal->nominal_jurnal);
+                }
+                ?>
+            </td>
 
-                </tr>
-                <?php $no++;
-            } ?>
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>Total</th>
-                <th style="display: none;"></th>
-                <th></th>
-                <th></th>
-                <th><?= numberToRupiah($total_saldo) ?></th>
-                <th><?= numberToRupiah($total_kredit) ?></th>
+        </tr>
+        <?php $no++;
+    } ?>
+</tbody>
+<tfoot>
+    <tr>
+        <th>Total</th>
+        <th style="display: none;"></th>
+        <th></th>
+        <th></th>
+        <th><?= numberToRupiah($total_saldo) ?></th>
+        <th><?= numberToRupiah($total_kredit) ?></th>
                 <th><!-- <?php
                 if ($saldo_akhir != 0) {
                     echo "<span class='badge badge-danger p-2'>" . numberToRupiah($saldo_akhir) . "</span>";
