@@ -282,6 +282,8 @@ $monthTranslations = array(
     'Desember' => 'December'
 );
 
+$t_nominal = 0;
+
 foreach ($tutup_jurnal as $t_jurnal) {
     $tgl_jurnalku = date("m-Y", strtotime($t_jurnal->tgl_jurnal));
     $tgl_asli_input = date("d-m-Y", strtotime($t_jurnal->tgl_asli_input));
@@ -301,8 +303,6 @@ foreach ($tutup_jurnal as $t_jurnal) {
     if (isset($_GET['dari']) && isset($_GET['ke'])) {
         $tgl_dari = date("m-Y", strtotime($_GET['dari']));
         $tgl_ke = date("m-Y", strtotime($_GET['ke']));
-
-        $t_nominal = 0;
 
         foreach ($jurnal_umum_2 as $j_umum2) {
             if ($tgl_dari == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && $tgl_ke == date("m-Y", strtotime($j_umum2->tgl_input_jurnal))   ) {
