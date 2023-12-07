@@ -12,6 +12,10 @@ class M_jurnal extends CI_Model{
         //$this->db->order_by("CASE WHEN keterangan_jurnal LIKE '%Saldo Awal%' THEN 1 ELSE 2 END", 'ASC');
         $this->db->order_by('tgl_input_jurnal', 'ASC');
 
+        $this->db->where("NOT (keterangan_jurnal LIKE '%Saldo Awal%')", null, false);
+
+        $this->db->where("NOT (keterangan_jurnal LIKE '%Koreksi Saldo%')", null, false);
+
         $query = $this->db->get();
         return $query->result();
     }
@@ -21,6 +25,19 @@ class M_jurnal extends CI_Model{
         $this->db->select('*');
         $this->db->from('jurnal_umum');
         $this->db->join('jurnal_bttb','jurnal_umum.id_bttb = jurnal_bttb.id_bttb','left');
+        $this->db->order_by('tgl_input_jurnal', 'ASC');
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function tampil_data_jurnal_BB(){
+        $bulan_tahun_sekarang = date('Y-m');
+
+        $this->db->select('*');
+        $this->db->from('jurnal_umum');
+        $this->db->join('jurnal_bttb','jurnal_umum.id_bttb = jurnal_bttb.id_bttb','left');
+        $this->db->where("DATE_FORMAT(tgl_input_jurnal, '%Y-%m') = '$bulan_tahun_sekarang'");
         $this->db->order_by('tgl_input_jurnal', 'ASC');
 
         $query = $this->db->get();
@@ -57,9 +74,48 @@ class M_jurnal extends CI_Model{
 
         $this->db->where("NOT (keterangan_jurnal LIKE '%Saldo Awal%')", null, false);
 
+        $this->db->where("NOT (keterangan_jurnal LIKE '%Koreksi Saldo%')", null, false);
+
         $query = $this->db->get();
         return $query->result();
     }
+
+    function filter_jurnal_buku_besar($dari, $ke, $j_kode, $kode_per, $kode, $tgl, $bt){
+        $this->db->select('*');
+        $this->db->from('jurnal_umum');
+        $this->db->join('jurnal_bttb','jurnal_umum.id_bttb = jurnal_bttb.id_bttb','left');
+        $this->db->order_by('tgl_input_jurnal ASC, id_jurnal ASC');
+
+        if (!empty($dari) && !empty($ke)) {
+            $this->db->where('tgl_input_jurnal >=', $dari);
+            $this->db->where('tgl_input_jurnal <=', $ke);
+        }
+
+        if (!empty($j_kode)) {
+            $this->db->group_start();
+            $this->db->like('jurnal_bttb.kode_perkiraan', $j_kode);
+            $this->db->or_like('keterangan_jurnal', 'Saldo Awal');
+            $this->db->or_like('keterangan_jurnal', 'Koreksi Saldo');
+            $this->db->group_end();
+        }
+
+        if (!empty($kode_per)) {
+            $this->db->like('jurnal_umum.id_bttb', $kode_per);
+        }
+
+        if (!empty($kode) && !empty($tgl)) {
+            $this->db->where('tgl_input_jurnal >=', $tgl);
+            $this->db->where('tgl_input_jurnal <=', $tgl);
+            $this->db->group_start();
+            $this->db->like('kode_perkiraan', $kode);
+            $this->db->or_like('kode_perkiraan', $bt);
+            $this->db->group_end();
+        }
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 
     function simpan_jurnal($data){
         $this->db->insert('jurnal_umum',$data);
