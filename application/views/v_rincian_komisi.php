@@ -183,15 +183,15 @@
                                             $id_win = null;
 
                                             foreach ($marketing as $afw) {
-                                                if ($afw->nama_mar == 'Ang') {
+                                                if ($afw->nama_mar == 'Ang' && $afw->nomor_mar == "AA0007") {
                                                     $id_ang = $afw->id_mar;
                                                 }
 
-                                                if ($afw->nama_mar == 'Fran') {
+                                                if ($afw->nama_mar == 'Fran' && $afw->nomor_mar == "AA0009") {
                                                     $id_fran = $afw->id_mar;
                                                 }
 
-                                                if ($afw->nama_mar == 'Winata') {
+                                                if ($afw->nama_mar == 'Winata' && $afw->nomor_mar == "AA0207") {
                                                     $id_win = $afw->id_mar;
                                                 }
                                             } 
@@ -364,33 +364,33 @@
                                         <input type="text" name="pph_cobroke1" value="<?= $pph_cobroke_listing ?>">
                                     <?php } ?>
 
-                                    <!-- upline marketing listing 1-->
+                                    <!-- upline marketing listing 1
                                     <input type="text" name="bruto_up1_listing_1" value="<?= $fuk ?>">
                                     <input type="text" name="pph_up1_listing_1" value="<?= $pajak_listing_1_n ?>">
 
                                     <input type="text" name="bruto_up2_listing_1" value="<?= $fuk2 ?>">
                                     <input type="text" name="pph_up2_listing_1" value="<?= $pajak_listing_2_n ?>">
 
-                                    <!-- upline marketing listing 2-->
+                                    upline marketing listing 2
                                     <input type="text" name="bruto_up1_listing_2" value="<?= $fuk3 ?>">
                                     <input type="text" name="pph_up1_listing_2" value="<?= $pajak1_listing_2_n ?>">
 
                                     <input type="text" name="bruto_up2_listing_2" value="<?= $fuk4 ?>">
                                     <input type="text" name="pph_up2_listing_2" value="<?= $pajak2_listing_2_n ?>">
 
-                                    <!-- upline marketing selling 1-->
+                                    upline marketing selling 1
                                     <input type="text" name="bruto_up1_selling_1" value="<?= $fuk_s ?>">
                                     <input type="text" name="pph_up1_selling_1" value="<?= $pajak_selling_1_n ?>">
 
                                     <input type="text" name="bruto_up2_selling_1" value="<?= $fuk2_s ?>">
                                     <input type="text" name="pph_up2_selling_1" value="<?= $pajak_selling_2_n ?>">
 
-                                    <!-- upline marketing selling 2-->
+                                    upline marketing selling 2
                                     <input type="text" name="bruto_up1_selling_2" value="<?= $fuk3_s ?>">
                                     <input type="text" name="pph_up1_selling_2" value="<?= $pajak1_selling_2_n ?>">
 
                                     <input type="text" name="bruto_up2_selling_2" value="<?= $fuk4_s ?>">
-                                    <input type="text" name="pph_up2_selling_2" value="<?= $pajak2_selling_2_n ?>">
+                                    <input type="text" name="pph_up2_selling_2" value="<?= $pajak2_selling_2_n ?>"-->
                                 </div>
 
                                 <div class="flex-shrink-0">
