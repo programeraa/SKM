@@ -44,7 +44,7 @@
 
                                 $afw = false;
 
-                                if ($mkt->nama_mar == 'Ang' || $mkt->nama_mar == 'Fran' || $mkt->nama_mar == 'Winata' || $mkt->nama_mar == 'Ang/Fran/Win') {
+                                if (($mkt->nama_mar == 'Ang' && $mkt->nomor_mar == 'AA0007') || ($mkt->nama_mar == 'Fran' && $mkt->nomor_mar == 'AA0009') || ($mkt->nama_mar == 'Winata' && $mkt->nomor_mar == 'AA0207') || $mkt->nama_mar == 'Ang/Fran/Win') {
                                     $afw = true;
                                 }
 
