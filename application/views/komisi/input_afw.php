@@ -6,7 +6,7 @@ $jabatan_up_ang = 5;
 $jabatan_up2_ang = 5;
 
 foreach ($marketing as $ang) {
-    if ($ang->nama_mar == "Ang") {
+    if ($ang->nama_mar == "Ang" && $ang->nomor_mar == "AA0007") {
 
         if ($ang->member_mar == 'Silver') {
             $member_ang = 50;
@@ -72,7 +72,7 @@ $jabatan_up_fran = 5;
 $jabatan_up2_fran = 5;
 
 foreach ($marketing as $fran) {
-    if ($fran->nama_mar == "Fran") {
+    if ($fran->nama_mar == "Fran" && $fran->nomor_mar == "AA0009") {
 
         if ($fran->member_mar == 'Silver') {
             $member_fran = 50;
@@ -137,7 +137,7 @@ $jabatan_up_win = 5;
 $jabatan_up2_win = 5;
 
 foreach ($marketing as $win) {
-    if ($win->nama_mar == "Winata") {
+    if ($win->nama_mar == "Winata" && $win->nomor_mar == "AA0207") {
 
         if ($win->member_mar == 'Silver') {
             $member_win = 50;
