@@ -625,7 +625,7 @@ foreach ($marketing as $upline) {
     $norek_upline2_ang = '';
 
     foreach ($marketing as $ang) { 
-        if ($ang->nama_mar == "Ang") {
+        if ($ang->nama_mar == "Ang" && $ang->nomor_mar == "AA0007") {
             foreach ($marketing as $ang_2) {
                 if ($ang_2->id_mar == $ang->upline_emd_mar) {
                     $id_upline1_ang = $ang_2->id_mar;
@@ -764,7 +764,7 @@ foreach ($marketing as $upline) {
     $norek_upline2_fran = '';
 
     foreach ($marketing as $fran) { 
-        if ($fran->nama_mar == "Fran") {
+        if ($fran->nama_mar == "Fran" && $fran->nomor_mar == "AA0009") {
             foreach ($marketing as $fran_2) {
                 if ($fran_2->id_mar == $fran->upline_emd_mar) {
                     $id_upline1_fran = $fran_2->id_mar;
@@ -904,7 +904,7 @@ foreach ($marketing as $upline) {
     $norek_upline2_win = '';
 
     foreach ($marketing as $win) { 
-        if ($win->nama_mar == "Winata") {
+        if ($win->nama_mar == "Winata" && $win->nomor_mar == "AA0207") {
             foreach ($marketing as $win_2) {
                 if ($win_2->id_mar == $win->upline_emd_mar) {
                     $id_upline1_win = $win_2->id_mar;
