@@ -238,8 +238,8 @@
                         <th><?= $bruto_marketing_r ?></th>
                         <th><?= $sum_ptn_admin_r ?></th>
                         <th><?= $sum_ptn_pph_r ?></th>
-                        <th><?= $sum_total_fee_vision_r ?></th>
                         <th><?= $sum_ptn_prib_r ?></th>
+                        <th><?= $sum_total_fee_vision_r ?></th>
                         <th><?= $sum_netto_marketing_r ?></th>
                         <th></th>
                     </tr>
