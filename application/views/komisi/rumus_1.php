@@ -368,21 +368,21 @@ $bruto_r = numberToRupiah($bruto_n);
 //===================================================================== Rumus Bila Ada Pengurangan Fee
 
 foreach ($marketing as $ang) {
-    if ($ang->nama_mar == "Ang") {
+    if ($ang->nama_mar == "Ang" && $ang->nomor_mar == "AA0007") {
         $norek_ang = $ang->norek_mar;
         $id_ang = $ang->id_mar;
     }
 }
 
 foreach ($marketing as $fran) {
-    if ($fran->nama_mar == "Fran") {
+    if ($fran->nama_mar == "Fran" && $fran->nomor_mar == "AA0009") {
         $norek_fran = $fran->norek_mar;
         $id_fran = $fran->id_mar;
     }
 }
 
 foreach ($marketing as $win) {
-    if ($win->nama_mar == "Winata") {
+    if ($win->nama_mar == "Winata" && $win->nomor_mar == "AA0207") {
         $norek_win = $win->norek_mar;
         $id_win = $win->id_mar;
     }
