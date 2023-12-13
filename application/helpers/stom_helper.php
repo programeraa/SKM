@@ -28,3 +28,12 @@ if (!function_exists('numberToRupiah')) {
     }
 }
 
+if (!function_exists('numberToRupiah2')) {
+    function numberToRupiah2($numericValue) {
+        // Menggunakan number_format untuk mengubah angka menjadi format uang Rupiah
+        $formattedRupiah = number_format($numericValue, 2, ',', '.');
+
+        return $formattedRupiah;
+    }
+}
+
