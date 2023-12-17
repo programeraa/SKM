@@ -414,24 +414,38 @@ class Komisi extends CI_Controller {
 		if (!empty($referal || $j_referal)) {
 			$this->m_komisi->simpan_referal($data5);
 		}
+        
+        if ($jenis_hitungan == 'Secondary') {
+			$m_ang = $this->input->post('m_ang');
+            $m_fran = $this->input->post('m_fran');
+            $m_win = $this->input->post('m_win');
+		}elseif($jenis_hitungan == 'KPR'){
+			$m_ang = $this->input->post('m_ang_kpr');
+            $m_fran = $this->input->post('m_fran_kpr');
+            $m_win = $this->input->post('m_win_kpr');
+		}else{
+			$m_ang = $this->input->post('m_ang');
+            $m_fran = $this->input->post('m_fran');
+            $m_win = $this->input->post('m_win');
+		}
 
 		$data6 = array(
 			'id_sub_komisi' => $id_sub_komisi_baru,
-			'm_ang' => $this->input->post('m_ang'),
+			'm_ang' => $m_ang,
 			'npwp_ang' => $this->input->post('npwp_ang'),
 			'npwp_up_ang' => $this->input->post('npwp_up_ang'),
 			'jabatan_up_ang' => $this->input->post('jabatan_up_ang'),
 			'npwp_up2_ang' => $this->input->post('npwp_up2_ang'),
 			'jabatan_up2_ang' => $this->input->post('jabatan_up2_ang'),
 
-			'm_fran' => $this->input->post('m_fran'),
+			'm_fran' => $m_fran,
 			'npwp_fran' => $this->input->post('npwp_fran'),
 			'npwp_up_fran' => $this->input->post('npwp_up_fran'),
 			'jabatan_up_fran' => $this->input->post('jabatan_up_fran'),
 			'npwp_up2_fran' => $this->input->post('npwp_up2_fran'),
 			'jabatan_up2_fran' => $this->input->post('jabatan_up2_fran'),
 
-			'm_win' => $this->input->post('m_win'),
+			'm_win' => $m_win,
 			'npwp_win' => $this->input->post('npwp_win'),
 			'npwp_up_win' => $this->input->post('npwp_up_win'),
 			'jabatan_up_win' => $this->input->post('jabatan_up_win'),
