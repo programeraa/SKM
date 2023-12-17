@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 17, 2023 at 03:06 PM
+-- Generation Time: Dec 17, 2023 at 05:53 PM
 -- Server version: 10.6.16-MariaDB-cll-lve
 -- PHP Version: 8.1.25
 
@@ -73,8 +73,7 @@ CREATE TABLE `co_broke` (
 --
 
 INSERT INTO `co_broke` (`id_cobroke`, `id_komisi`, `id_komisi_unik`, `nama_cobroke`, `status_cobroke`, `jenis_cobroke`, `persen_komisi_cobroke`) VALUES
-(85, 303, 1693, 'MERLEN', 'Selling', '2', 50),
-(100, 327, 8124, 'Tomi Brighton Jemursari', 'Selling', '2.5', 50);
+(85, 303, 1693, 'MERLEN', 'Selling', '2', 50);
 
 -- --------------------------------------------------------
 
@@ -483,12 +482,31 @@ INSERT INTO `jurnal_umum` (`id_jurnal`, `tgl_input_asli_jurnal`, `tgl_input_jurn
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `kantor_pengaturan`
+--
+
+CREATE TABLE `kantor_pengaturan` (
+  `id_kantor` int(250) NOT NULL,
+  `kantor` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `kantor_pengaturan`
+--
+
+INSERT INTO `kantor_pengaturan` (`id_kantor`, `kantor`) VALUES
+(1, 'Pusat'),
+(2, 'Vision');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `komisi`
 --
 
 CREATE TABLE `komisi` (
   `id_komisi` int(12) NOT NULL,
-  `kantor_komisi` varchar(250) NOT NULL,
+  `kantor_komisi` int(250) NOT NULL,
   `nomor_kantor_komisi` int(250) NOT NULL,
   `jenis_hitungan_komisi` varchar(250) NOT NULL,
   `alamat_komisi` varchar(250) NOT NULL,
@@ -511,13 +529,12 @@ CREATE TABLE `komisi` (
 --
 
 INSERT INTO `komisi` (`id_komisi`, `kantor_komisi`, `nomor_kantor_komisi`, `jenis_hitungan_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_komisi`, `mar_listing_komisi`, `mar_listing2_komisi`, `mar_selling_komisi`, `mar_selling2_komisi`, `bruto_komisi`, `waktu_komisi`, `tgl_disetujui`, `status_komisi`, `status_transfer`, `keterangan_komisi`) VALUES
-(302, 'VISION', 1, 'Secondary', 'APARTEMEN PURIMAS TOWER A UNIT 1528', 'Jual', '2023-09-29', 3, 0, 3, 0, '6500000', '2023-11-02', '2023-12-08', 'Approve', '', ''),
-(303, 'VISION', 2, 'Secondary', 'EASTWOOD BLOK EW5/12 CITRALAND, SURABAYA', 'Jual', '2023-10-02', 11, 0, 1693, 0, '43312500', '2023-11-02', '2023-12-08', 'Approve', '', ''),
-(304, 'VISION', 3, 'Secondary', 'DUKUH KUPANG BARAT 107A, SURABAYA', 'Sewa', '2023-08-15', 53, 0, 53, 0, '1500000', '2023-11-02', '2023-12-08', 'Approve', '', ''),
-(305, 'VISION', 4, 'Secondary', 'DUKUH KUPANG BARAT 107A, SURABAYA', 'Sewa', '2023-08-15', 53, 0, 53, 0, '1500000', '2023-11-02', '2023-12-08', 'Approve', '', ''),
-(321, 'VISION', 5, 'Secondary', 'Jl. Kedinding tengah jaya 2 timur A/2-4 Surabaya', 'Sewa', '2023-06-12', 38, 0, 11, 0, '7250000', '2023-12-13', '0000-00-00', 'Proses Approve', 'Proses Transfer', ''),
-(323, 'VISION', 6, 'Secondary', 'Surya Inti Permata 1 Blok C 06 Hr. Muhammad Surabaya', 'Sewa', '2023-09-12', 49, 0, 49, 0, '20000000', '2023-12-13', '0000-00-00', 'Proses Approve', 'Proses Transfer', 'FEE cobroke yang dihitung punya bu Lily Tan saja'),
-(327, 'PUSAT', 1, 'KPR', 'Dukuh Kupang XXIII', 'Jual/Sewa', '2023-12-17', 38, 0, 8124, 0, '50000000', '2023-12-17', '0000-00-00', 'Proses Approve', 'Proses Transfer', 'Ini Hanya Testing');
+(302, 2, 1, 'Secondary', 'APARTEMEN PURIMAS TOWER A UNIT 1528', 'Jual', '2023-09-29', 3, 0, 3, 0, '6500000', '2023-11-02', '2023-12-08', 'Approve', '', ''),
+(303, 2, 2, 'Secondary', 'EASTWOOD BLOK EW5/12 CITRALAND, SURABAYA', 'Jual', '2023-10-02', 11, 0, 1693, 0, '43312500', '2023-11-02', '2023-12-08', 'Approve', '', ''),
+(304, 2, 3, 'Secondary', 'DUKUH KUPANG BARAT 107A, SURABAYA', 'Sewa', '2023-08-15', 53, 0, 53, 0, '1500000', '2023-11-02', '2023-12-08', 'Approve', '', ''),
+(305, 2, 4, 'Secondary', 'DUKUH KUPANG BARAT 107A, SURABAYA', 'Sewa', '2023-08-15', 53, 0, 53, 0, '1500000', '2023-11-02', '2023-12-08', 'Approve', '', ''),
+(321, 2, 5, 'Secondary', 'Jl. Kedinding tengah jaya 2 timur A/2-4 Surabaya', 'Sewa', '2023-06-12', 38, 0, 11, 0, '7250000', '2023-12-13', '0000-00-00', 'Proses Approve', 'Proses Transfer', ''),
+(323, 2, 6, 'Secondary', 'Surya Inti Permata 1 Blok C 06 Hr. Muhammad Surabaya', 'Sewa', '2023-09-12', 49, 0, 49, 0, '20000000', '2023-12-13', '0000-00-00', 'Proses Approve', 'Proses Transfer', 'FEE cobroke yang dihitung punya bu Lily Tan saja');
 
 -- --------------------------------------------------------
 
@@ -578,8 +595,8 @@ INSERT INTO `marketing` (`id_mar`, `nama_mar`, `nomor_mar`, `member_mar`, `uplin
 (10, 'Julia / Jeffy', 'AA0053', 1, '39', '', 'BCA-7880384320 - Julia/Jeffry', '', 'Chief Marketing Officer (CMO)', 5, 'ktp4.png', 'npwp4.png'),
 (11, 'Claudia', 'AA0008', 3, '10', '', 'BCA-4700271779 (Claudia Florensia Sri P)', '', 'Executive Marketing Director (EMD)', 5, 'ktp6.png', 'npwp6.png'),
 (35, 'Ang', 'AA0007', 1, '10', '', 'BCA 472-018-1717 (Anggraini Angkawidjaya)', '', 'Marketing Executive (ME)', 3, 'ktp7.png', 'npwp7.png'),
-(36, 'Fran', 'AA0009', 3, '35', '', 'BCA-102 031 4776 - (Fransiska)', '', 'Marketing Executive (ME)', 3, 'ktp8.png', 'npwp8.png'),
-(37, 'Winata', 'AA0207', 4, '35', '', 'BCA 018-365-6161 (Winata Ciputra)', '', 'Marketing Executive (ME)', 3, 'ktp9.png', 'npwp9.png'),
+(36, 'Fran', 'AA0009', 1, '35', '', 'BCA-102 031 4776 - (Fransiska)', '', 'Marketing Executive (ME)', 3, 'ktp8.png', 'npwp8.png'),
+(37, 'Winata', 'AA0207', 1, '35', '', 'BCA 018-365-6161 (Winata Ciputra)', '', 'Marketing Executive (ME)', 3, 'ktp9.png', 'npwp9.png'),
 (38, 'Ang/Fran/Win', 'AA0013', 1, '', '', '-', '', 'Marketing Executive (ME)', 3, '', ''),
 (39, 'Gun', 'AA0001', 1, '', '', 'BCA-4631 91 0022 - Gunawan', '', 'Marketing Executive (ME)', 3, 'ktp5.png', 'npwp5.png'),
 (40, 'Ana', 'AA0002', 1, '39', '', 'BCA-4632 91 0011 - Ana', '', 'Marketing Executive (ME)', 3, 'ktp10.png', 'npwp10.png'),
@@ -809,13 +826,6 @@ CREATE TABLE `potongan` (
   `jumlah_potongan` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `potongan`
---
-
-INSERT INTO `potongan` (`id_potongan`, `id_komisi`, `keterangan_potongan`, `jumlah_potongan`) VALUES
-(67, 327, 'Biaya Spanduk Baru', '2500000');
-
 -- --------------------------------------------------------
 
 --
@@ -828,13 +838,6 @@ CREATE TABLE `referal` (
   `keterangan_referal` varchar(250) NOT NULL,
   `jumlah_referal` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `referal`
---
-
-INSERT INTO `referal` (`id_referal`, `id_komisi`, `keterangan_referal`, `jumlah_referal`) VALUES
-(47, 327, 'Fandi', '2500000');
 
 -- --------------------------------------------------------
 
@@ -883,8 +886,7 @@ INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `np
 (203, 304, 50, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 4),
 (204, 305, 50, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 4),
 (220, 321, 50, 0, 0, 5, 0, 5, 0, 0, 0, 0, 0, 0, 70, 1, 1, 5, 0, 5, 0, 0, 0, 0, 0, 0, 10, 0),
-(222, 323, 60, 1, 1, 5, 1, 5, 0, 0, 0, 0, 0, 0, 60, 1, 1, 5, 1, 5, 0, 0, 0, 0, 0, 0, 10, 0),
-(226, 327, 50, 0, 0, 5, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0);
+(222, 323, 60, 1, 1, 5, 1, 5, 0, 0, 0, 0, 0, 0, 60, 1, 1, 5, 1, 5, 0, 0, 0, 0, 0, 0, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -920,8 +922,7 @@ CREATE TABLE `sub_komisi_afw` (
 --
 
 INSERT INTO `sub_komisi_afw` (`id_afw`, `id_sub_komisi`, `m_ang`, `npwp_ang`, `npwp_up_ang`, `jabatan_up_ang`, `npwp_up2_ang`, `jabatan_up2_ang`, `m_fran`, `npwp_fran`, `npwp_up_fran`, `jabatan_up_fran`, `npwp_up2_fran`, `jabatan_up2_fran`, `m_win`, `npwp_win`, `npwp_up_win`, `jabatan_up_win`, `npwp_up2_win`, `jabatan_up2_win`) VALUES
-(13, 220, 50, 1, 1, 5, 0, 5, 50, 1, 1, 5, 0, 5, 50, 1, 1, 5, 0, 5),
-(17, 226, 50, 1, 1, 5, 0, 5, 60, 1, 1, 3, 0, 5, 60, 1, 1, 3, 0, 5);
+(13, 220, 50, 1, 1, 5, 0, 5, 50, 1, 1, 5, 0, 5, 50, 1, 1, 5, 0, 5);
 
 -- --------------------------------------------------------
 
@@ -1003,6 +1004,12 @@ ALTER TABLE `jurnal_bttb`
 ALTER TABLE `jurnal_umum`
   ADD PRIMARY KEY (`id_jurnal`),
   ADD KEY `id_bttb` (`id_bttb`);
+
+--
+-- Indexes for table `kantor_pengaturan`
+--
+ALTER TABLE `kantor_pengaturan`
+  ADD PRIMARY KEY (`id_kantor`);
 
 --
 -- Indexes for table `komisi`
