@@ -445,7 +445,7 @@ class Jurnal extends CI_Controller {
 		}
 
 		$data['title'] = "Master Akun";
-		$data['jurnal_umum'] = $this->m_jurnal->tampil_data_jurnal();
+		$data['jurnal_umum'] = $this->m_jurnal->tampil_data_jurnal_2();
 		$data['jurnal_bttb'] = $this->m_jurnal->tampil_data_bttb()->result();
 		$data['jurnal_bttb2'] = $this->m_jurnal->tampil_data_bttb()->result();
 
