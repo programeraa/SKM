@@ -676,6 +676,32 @@
 <?php } ?>
 </div>
 </div>
+
+<?php if (!empty($referal_keterangan)) {?>
+        <div class="card-header-sm text-dark">
+            <h4 class="card-title p-2 m-0" style="text-align: center;">Rincian Komisi Referal <?php echo $referal_keterangan; ?></h4>
+        </div>
+
+        <div class="card-body p-0 pt-2">
+            <table class="tg table table-striped table-dark">
+                <tbody>
+                  <tr>
+                    <td class="tg-0lax"><?php echo 'Fee Referal'?></td>
+                    <td class="tg-0lax text-right"><?php echo numberToRupiah($referal_jumlah); ?></td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$pph_referal.'% - '.$keterangan_pph.')'?></td>
+                    <td class="tg-0lax text-right"><?php echo numberToRupiah($total_pph_ref) ?></td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
+                    <td class="tg-0lax text-right text-warning"><?php echo numberToRupiah($fee_asli_referal); ?></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<?php } ?>
+
 </div>
 <?php } ?>
 </div>
