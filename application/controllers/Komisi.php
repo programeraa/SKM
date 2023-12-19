@@ -146,6 +146,7 @@ class Komisi extends CI_Controller {
 
 		//referal
 		$referal = $this->input->post('referal');
+		$pph_referal = $this->input->post('pph_referal');
 		$j_referal = $this->input->post('j_referal');
 
 		// Menentukan biji (seed)
@@ -409,6 +410,7 @@ class Komisi extends CI_Controller {
 		$data5 = array(
 			'id_komisi' => $id_komisi_baru,
 			'keterangan_referal' => $referal,
+			'pph_referal' => $pph_referal,
 			'jumlah_referal' => $j_referal
 		);
 
