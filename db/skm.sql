@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Des 2023 pada 10.05
--- Versi server: 10.4.22-MariaDB
--- Versi PHP: 7.3.33
+-- Generation Time: Dec 19, 2023 at 09:50 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `bank_titipan_a`
+-- Table structure for table `bank_titipan_a`
 --
 
 CREATE TABLE `bank_titipan_a` (
@@ -40,7 +40,7 @@ CREATE TABLE `bank_titipan_a` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `bank_titipan_a`
+-- Dumping data for table `bank_titipan_a`
 --
 
 INSERT INTO `bank_titipan_a` (`id_bta`, `kode_perkiraan`, `nama_properti`, `status_properti`, `id_marketing`, `tgl_input`, `nilai_nominal`, `jenis`, `keterangan`) VALUES
@@ -55,7 +55,7 @@ INSERT INTO `bank_titipan_a` (`id_bta`, `kode_perkiraan`, `nama_properti`, `stat
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `co_broke`
+-- Table structure for table `co_broke`
 --
 
 CREATE TABLE `co_broke` (
@@ -69,7 +69,7 @@ CREATE TABLE `co_broke` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `co_broke`
+-- Dumping data for table `co_broke`
 --
 
 INSERT INTO `co_broke` (`id_cobroke`, `id_komisi`, `id_komisi_unik`, `nama_cobroke`, `status_cobroke`, `jenis_cobroke`, `persen_komisi_cobroke`) VALUES
@@ -78,7 +78,7 @@ INSERT INTO `co_broke` (`id_cobroke`, `id_komisi`, `id_komisi_unik`, `nama_cobro
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jabatan_pengaturan`
+-- Table structure for table `jabatan_pengaturan`
 --
 
 CREATE TABLE `jabatan_pengaturan` (
@@ -88,7 +88,7 @@ CREATE TABLE `jabatan_pengaturan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `jabatan_pengaturan`
+-- Dumping data for table `jabatan_pengaturan`
 --
 
 INSERT INTO `jabatan_pengaturan` (`id_jabatan`, `nama_jabatan`, `nilai_jabatan`) VALUES
@@ -99,7 +99,7 @@ INSERT INTO `jabatan_pengaturan` (`id_jabatan`, `nama_jabatan`, `nilai_jabatan`)
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jurnal_bttb`
+-- Table structure for table `jurnal_bttb`
 --
 
 CREATE TABLE `jurnal_bttb` (
@@ -112,7 +112,7 @@ CREATE TABLE `jurnal_bttb` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `jurnal_bttb`
+-- Dumping data for table `jurnal_bttb`
 --
 
 INSERT INTO `jurnal_bttb` (`id_bttb`, `tgl_input`, `kode_perkiraan`, `nomor_perkiraan`, `keterangan`, `admin_input`) VALUES
@@ -229,7 +229,7 @@ INSERT INTO `jurnal_bttb` (`id_bttb`, `tgl_input`, `kode_perkiraan`, `nomor_perk
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jurnal_pesan`
+-- Table structure for table `jurnal_pesan`
 --
 
 CREATE TABLE `jurnal_pesan` (
@@ -243,7 +243,7 @@ CREATE TABLE `jurnal_pesan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `jurnal_pesan`
+-- Dumping data for table `jurnal_pesan`
 --
 
 INSERT INTO `jurnal_pesan` (`id_pesan`, `pesan`, `tgl_input_pesan`, `tgl_pesan`, `bulan_pesan`, `status_pesan`, `admin_input`) VALUES
@@ -252,7 +252,7 @@ INSERT INTO `jurnal_pesan` (`id_pesan`, `pesan`, `tgl_input_pesan`, `tgl_pesan`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jurnal_umum`
+-- Table structure for table `jurnal_umum`
 --
 
 CREATE TABLE `jurnal_umum` (
@@ -267,7 +267,7 @@ CREATE TABLE `jurnal_umum` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `jurnal_umum`
+-- Dumping data for table `jurnal_umum`
 --
 
 INSERT INTO `jurnal_umum` (`id_jurnal`, `tgl_input_asli_jurnal`, `tgl_input_jurnal`, `id_bttb`, `keterangan_jurnal`, `jenis_jurnal`, `nominal_jurnal`, `admin_input`) VALUES
@@ -507,7 +507,7 @@ INSERT INTO `jurnal_umum` (`id_jurnal`, `tgl_input_asli_jurnal`, `tgl_input_jurn
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kantor_pengaturan`
+-- Table structure for table `kantor_pengaturan`
 --
 
 CREATE TABLE `kantor_pengaturan` (
@@ -516,7 +516,7 @@ CREATE TABLE `kantor_pengaturan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `kantor_pengaturan`
+-- Dumping data for table `kantor_pengaturan`
 --
 
 INSERT INTO `kantor_pengaturan` (`id_kantor`, `kantor`) VALUES
@@ -526,7 +526,7 @@ INSERT INTO `kantor_pengaturan` (`id_kantor`, `kantor`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `komisi`
+-- Table structure for table `komisi`
 --
 
 CREATE TABLE `komisi` (
@@ -550,7 +550,7 @@ CREATE TABLE `komisi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `komisi`
+-- Dumping data for table `komisi`
 --
 
 INSERT INTO `komisi` (`id_komisi`, `kantor_komisi`, `nomor_kantor_komisi`, `jenis_hitungan_komisi`, `alamat_komisi`, `jt_komisi`, `tgl_closing_komisi`, `mar_listing_komisi`, `mar_listing2_komisi`, `mar_selling_komisi`, `mar_selling2_komisi`, `bruto_komisi`, `waktu_komisi`, `tgl_disetujui`, `status_komisi`, `status_transfer`, `keterangan_komisi`) VALUES
@@ -559,12 +559,14 @@ INSERT INTO `komisi` (`id_komisi`, `kantor_komisi`, `nomor_kantor_komisi`, `jeni
 (304, 2, 3, 'Secondary', 'DUKUH KUPANG BARAT 107A, SURABAYA', 'Sewa', '2023-08-15', 53, 0, 53, 0, '1500000', '2023-11-02', '2023-12-08', 'Approve', '', ''),
 (305, 2, 4, 'Secondary', 'DUKUH KUPANG BARAT 107A, SURABAYA', 'Sewa', '2023-08-15', 53, 0, 53, 0, '1500000', '2023-11-02', '2023-12-08', 'Approve', '', ''),
 (321, 2, 5, 'Secondary', 'Jl. Kedinding tengah jaya 2 timur A/2-4 Surabaya', 'Sewa', '2023-06-12', 38, 0, 11, 0, '7250000', '2023-12-13', '0000-00-00', 'Proses Approve', 'Proses Transfer', ''),
-(323, 2, 6, 'Secondary', 'Surya Inti Permata 1 Blok C 06 Hr. Muhammad Surabaya', 'Sewa', '2023-09-12', 49, 0, 49, 0, '20000000', '2023-12-13', '0000-00-00', 'Proses Approve', 'Proses Transfer', 'FEE cobroke yang dihitung punya bu Lily Tan saja');
+(323, 2, 6, 'Secondary', 'Surya Inti Permata 1 Blok C 06 Hr. Muhammad Surabaya', 'Sewa', '2023-09-12', 49, 0, 49, 0, '20000000', '2023-12-13', '0000-00-00', 'Proses Approve', 'Proses Transfer', 'FEE cobroke yang dihitung punya bu Lily Tan saja'),
+(328, 2, 7, 'Secondary', 'Jl. Sukomanunggal Jaya 3Z (CSH No.26), Surabaya', 'Sewa', '2023-09-22', 48, 0, 48, 0, '4250000', '2023-12-19', '0000-00-00', 'Proses Approve', 'Proses Transfer', 'Ini hany testting'),
+(329, 2, 8, 'Secondary', 'Jl. Sukomanunggal Jaya 3Z (CSH No.26), Surabaya', 'Sewa', '2023-12-19', 2, 3, 10, 11, '50000000', '2023-12-19', '0000-00-00', 'Proses Approve', 'Proses Transfer', '');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kredit_bank_titipan_a`
+-- Table structure for table `kredit_bank_titipan_a`
 --
 
 CREATE TABLE `kredit_bank_titipan_a` (
@@ -576,7 +578,7 @@ CREATE TABLE `kredit_bank_titipan_a` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `kredit_bank_titipan_a`
+-- Dumping data for table `kredit_bank_titipan_a`
 --
 
 INSERT INTO `kredit_bank_titipan_a` (`id_kredit`, `id_bta`, `tgl_input_kredit`, `keterangan_kredit`, `nominal_kredit`) VALUES
@@ -590,7 +592,7 @@ INSERT INTO `kredit_bank_titipan_a` (`id_kredit`, `id_bta`, `tgl_input_kredit`, 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `marketing`
+-- Table structure for table `marketing`
 --
 
 CREATE TABLE `marketing` (
@@ -608,7 +610,7 @@ CREATE TABLE `marketing` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `marketing`
+-- Dumping data for table `marketing`
 --
 
 INSERT INTO `marketing` (`id_mar`, `nama_mar`, `nomor_mar`, `member_mar`, `upline_emd_mar`, `upline_cmo_mar`, `norek_mar`, `fasilitas_mar`, `jabatan_mar`, `gambar_ktp_mar`, `gambar_npwp_mar`) VALUES
@@ -659,7 +661,7 @@ INSERT INTO `marketing` (`id_mar`, `nama_mar`, `nomor_mar`, `member_mar`, `uplin
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_pph`
+-- Table structure for table `master_pph`
 --
 
 CREATE TABLE `master_pph` (
@@ -668,7 +670,7 @@ CREATE TABLE `master_pph` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `master_pph`
+-- Dumping data for table `master_pph`
 --
 
 INSERT INTO `master_pph` (`id_pph`, `id_komisi`) VALUES
@@ -680,7 +682,7 @@ INSERT INTO `master_pph` (`id_pph`, `id_komisi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_pph_aavision`
+-- Table structure for table `master_pph_aavision`
 --
 
 CREATE TABLE `master_pph_aavision` (
@@ -695,7 +697,7 @@ CREATE TABLE `master_pph_aavision` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `master_pph_aavision`
+-- Dumping data for table `master_pph_aavision`
 --
 
 INSERT INTO `master_pph_aavision` (`id_pph_aavision`, `id_pph`, `id_marketing`, `status_marketing`, `fee_setelah_adm`, `fgs`, `ptn_pph`, `total_pph`) VALUES
@@ -708,7 +710,7 @@ INSERT INTO `master_pph_aavision` (`id_pph_aavision`, `id_pph`, `id_marketing`, 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_pph_cobroke`
+-- Table structure for table `master_pph_cobroke`
 --
 
 CREATE TABLE `master_pph_cobroke` (
@@ -719,7 +721,7 @@ CREATE TABLE `master_pph_cobroke` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `master_pph_cobroke`
+-- Dumping data for table `master_pph_cobroke`
 --
 
 INSERT INTO `master_pph_cobroke` (`id_pph_cobroke`, `id_pph`, `fee_cobroke`, `pph_cobroke`) VALUES
@@ -728,7 +730,7 @@ INSERT INTO `master_pph_cobroke` (`id_pph_cobroke`, `id_pph`, `fee_cobroke`, `pp
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `member_pengaturan`
+-- Table structure for table `member_pengaturan`
 --
 
 CREATE TABLE `member_pengaturan` (
@@ -739,7 +741,7 @@ CREATE TABLE `member_pengaturan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `member_pengaturan`
+-- Dumping data for table `member_pengaturan`
 --
 
 INSERT INTO `member_pengaturan` (`id_member`, `member`, `nilai_secondary`, `nilai_kpr`) VALUES
@@ -751,7 +753,7 @@ INSERT INTO `member_pengaturan` (`id_member`, `member`, `nilai_secondary`, `nila
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `omzet`
+-- Table structure for table `omzet`
 --
 
 CREATE TABLE `omzet` (
@@ -760,7 +762,7 @@ CREATE TABLE `omzet` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `omzet`
+-- Dumping data for table `omzet`
 --
 
 INSERT INTO `omzet` (`id_omzet`, `id_komisi`) VALUES
@@ -772,7 +774,7 @@ INSERT INTO `omzet` (`id_omzet`, `id_komisi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `omzet_aavision`
+-- Table structure for table `omzet_aavision`
 --
 
 CREATE TABLE `omzet_aavision` (
@@ -789,7 +791,7 @@ CREATE TABLE `omzet_aavision` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `omzet_aavision`
+-- Dumping data for table `omzet_aavision`
 --
 
 INSERT INTO `omzet_aavision` (`id_omzetvision`, `id_omzet`, `id_marketing`, `fee_kantor`, `fee_marketing`, `ptn_admin`, `ptn_pph`, `ptn_pribadi`, `netto_vision`, `netto_marketing`) VALUES
@@ -801,7 +803,7 @@ INSERT INTO `omzet_aavision` (`id_omzetvision`, `id_omzet`, `id_marketing`, `fee
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengguna`
+-- Table structure for table `pengguna`
 --
 
 CREATE TABLE `pengguna` (
@@ -814,7 +816,7 @@ CREATE TABLE `pengguna` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `pengguna`
+-- Dumping data for table `pengguna`
 --
 
 INSERT INTO `pengguna` (`id_pengguna`, `nama_pengguna`, `username_pengguna`, `pass_pengguna`, `gambar_ttd_pengguna`, `level_pengguna`) VALUES
@@ -826,7 +828,7 @@ INSERT INTO `pengguna` (`id_pengguna`, `nama_pengguna`, `username_pengguna`, `pa
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengurangan_fee`
+-- Table structure for table `pengurangan_fee`
 --
 
 CREATE TABLE `pengurangan_fee` (
@@ -841,7 +843,7 @@ CREATE TABLE `pengurangan_fee` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `potongan`
+-- Table structure for table `potongan`
 --
 
 CREATE TABLE `potongan` (
@@ -854,20 +856,29 @@ CREATE TABLE `potongan` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `referal`
+-- Table structure for table `referal`
 --
 
 CREATE TABLE `referal` (
   `id_referal` int(250) NOT NULL,
   `id_komisi` int(250) NOT NULL,
-  `keterangan_referal` varchar(250) NOT NULL,
-  `jumlah_referal` varchar(250) NOT NULL
+  `jumlah_referal` varchar(250) NOT NULL,
+  `pph_referal` varchar(250) NOT NULL,
+  `keterangan_referal` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `referal`
+--
+
+INSERT INTO `referal` (`id_referal`, `id_komisi`, `jumlah_referal`, `pph_referal`, `keterangan_referal`) VALUES
+(48, 328, '425000', '3', 'Ratna Yunaningsih'),
+(49, 329, '425000', '2.5', 'Ratna Yunaningsih');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sub_komisi`
+-- Table structure for table `sub_komisi`
 --
 
 CREATE TABLE `sub_komisi` (
@@ -902,7 +913,7 @@ CREATE TABLE `sub_komisi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `sub_komisi`
+-- Dumping data for table `sub_komisi`
 --
 
 INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `npwpm_listing_komisi`, `npwpum_listing_komisi`, `jabatanum_listing_komisi`, `npwpum_listing2_komisi`, `jabatanum_listing2_komisi`, `mm2_listing_komisi`, `npwpm2_listing_komisi`, `npwpum2_listing_komisi`, `jabatanum2_listing_komisi`, `npwpum2_listing2_komisi`, `jabatanum2_listing2_komisi`, `mm_selling_komisi`, `npwpm_selling_komisi`, `npwpum_selling_komisi`, `jabatanum_selling_komisi`, `npwpum_selling2_komisi`, `jabatanum_selling2_komisi`, `mm2_selling_komisi`, `npwpm2_selling_komisi`, `npwpum2_selling_komisi`, `jabatanum2_selling_komisi`, `npwpum2_selling2_komisi`, `jabatanum2_selling2_komisi`, `admin_pengguna`, `admin_status_komisi`) VALUES
@@ -911,12 +922,14 @@ INSERT INTO `sub_komisi` (`id_sub_komisi`, `id_komisi`, `mm_listing_komisi`, `np
 (203, 304, 50, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 4),
 (204, 305, 50, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 4),
 (220, 321, 50, 0, 0, 5, 0, 5, 0, 0, 0, 0, 0, 0, 70, 1, 1, 5, 0, 5, 0, 0, 0, 0, 0, 0, 10, 0),
-(222, 323, 60, 1, 1, 5, 1, 5, 0, 0, 0, 0, 0, 0, 60, 1, 1, 5, 1, 5, 0, 0, 0, 0, 0, 0, 10, 0);
+(222, 323, 60, 1, 1, 5, 1, 5, 0, 0, 0, 0, 0, 0, 60, 1, 1, 5, 1, 5, 0, 0, 0, 0, 0, 0, 10, 0),
+(227, 328, 50, 1, 0, 5, 0, 5, 0, 0, 0, 0, 0, 0, 50, 1, 0, 5, 0, 5, 0, 0, 0, 0, 0, 0, 1, 0),
+(228, 329, 60, 1, 1, 3, 1, 5, 50, 1, 0, 5, 0, 5, 50, 1, 1, 3, 0, 5, 70, 1, 1, 5, 0, 5, 1, 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sub_komisi_afw`
+-- Table structure for table `sub_komisi_afw`
 --
 
 CREATE TABLE `sub_komisi_afw` (
@@ -943,7 +956,7 @@ CREATE TABLE `sub_komisi_afw` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `sub_komisi_afw`
+-- Dumping data for table `sub_komisi_afw`
 --
 
 INSERT INTO `sub_komisi_afw` (`id_afw`, `id_sub_komisi`, `m_ang`, `npwp_ang`, `npwp_up_ang`, `jabatan_up_ang`, `npwp_up2_ang`, `jabatan_up2_ang`, `m_fran`, `npwp_fran`, `npwp_up_fran`, `jabatan_up_fran`, `npwp_up2_fran`, `jabatan_up2_fran`, `m_win`, `npwp_win`, `npwp_up_win`, `jabatan_up_win`, `npwp_up2_win`, `jabatan_up2_win`) VALUES
@@ -952,7 +965,7 @@ INSERT INTO `sub_komisi_afw` (`id_afw`, `id_sub_komisi`, `m_ang`, `npwp_ang`, `n
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tutup_jurnal`
+-- Table structure for table `tutup_jurnal`
 --
 
 CREATE TABLE `tutup_jurnal` (
@@ -966,7 +979,7 @@ CREATE TABLE `tutup_jurnal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tutup_jurnal`
+-- Dumping data for table `tutup_jurnal`
 --
 
 INSERT INTO `tutup_jurnal` (`id_jurnal`, `tgl_jurnal`, `tgl_asli_input`, `bulan_jurnal`, `total_saldo`, `total_kredit`, `saldo_akhir`) VALUES
@@ -999,51 +1012,51 @@ INSERT INTO `tutup_jurnal` (`id_jurnal`, `tgl_jurnal`, `tgl_asli_input`, `bulan_
 --
 
 --
--- Indeks untuk tabel `bank_titipan_a`
+-- Indexes for table `bank_titipan_a`
 --
 ALTER TABLE `bank_titipan_a`
   ADD PRIMARY KEY (`id_bta`);
 
 --
--- Indeks untuk tabel `co_broke`
+-- Indexes for table `co_broke`
 --
 ALTER TABLE `co_broke`
   ADD PRIMARY KEY (`id_cobroke`),
   ADD KEY `id_komisi` (`id_komisi`);
 
 --
--- Indeks untuk tabel `jabatan_pengaturan`
+-- Indexes for table `jabatan_pengaturan`
 --
 ALTER TABLE `jabatan_pengaturan`
   ADD PRIMARY KEY (`id_jabatan`);
 
 --
--- Indeks untuk tabel `jurnal_bttb`
+-- Indexes for table `jurnal_bttb`
 --
 ALTER TABLE `jurnal_bttb`
   ADD PRIMARY KEY (`id_bttb`);
 
 --
--- Indeks untuk tabel `jurnal_pesan`
+-- Indexes for table `jurnal_pesan`
 --
 ALTER TABLE `jurnal_pesan`
   ADD PRIMARY KEY (`id_pesan`);
 
 --
--- Indeks untuk tabel `jurnal_umum`
+-- Indexes for table `jurnal_umum`
 --
 ALTER TABLE `jurnal_umum`
   ADD PRIMARY KEY (`id_jurnal`),
   ADD KEY `id_bttb` (`id_bttb`);
 
 --
--- Indeks untuk tabel `kantor_pengaturan`
+-- Indexes for table `kantor_pengaturan`
 --
 ALTER TABLE `kantor_pengaturan`
   ADD PRIMARY KEY (`id_kantor`);
 
 --
--- Indeks untuk tabel `komisi`
+-- Indexes for table `komisi`
 --
 ALTER TABLE `komisi`
   ADD PRIMARY KEY (`id_komisi`),
@@ -1051,315 +1064,315 @@ ALTER TABLE `komisi`
   ADD KEY `mar_selling_komisi` (`mar_selling_komisi`);
 
 --
--- Indeks untuk tabel `kredit_bank_titipan_a`
+-- Indexes for table `kredit_bank_titipan_a`
 --
 ALTER TABLE `kredit_bank_titipan_a`
   ADD PRIMARY KEY (`id_kredit`),
   ADD KEY `id_bta` (`id_bta`);
 
 --
--- Indeks untuk tabel `marketing`
+-- Indexes for table `marketing`
 --
 ALTER TABLE `marketing`
   ADD PRIMARY KEY (`id_mar`),
   ADD KEY `member_mar` (`member_mar`);
 
 --
--- Indeks untuk tabel `master_pph`
+-- Indexes for table `master_pph`
 --
 ALTER TABLE `master_pph`
   ADD PRIMARY KEY (`id_pph`),
   ADD KEY `id_komisi` (`id_komisi`);
 
 --
--- Indeks untuk tabel `master_pph_aavision`
+-- Indexes for table `master_pph_aavision`
 --
 ALTER TABLE `master_pph_aavision`
   ADD PRIMARY KEY (`id_pph_aavision`),
   ADD KEY `id_pph` (`id_pph`);
 
 --
--- Indeks untuk tabel `master_pph_cobroke`
+-- Indexes for table `master_pph_cobroke`
 --
 ALTER TABLE `master_pph_cobroke`
   ADD PRIMARY KEY (`id_pph_cobroke`),
   ADD KEY `id_pph` (`id_pph`);
 
 --
--- Indeks untuk tabel `member_pengaturan`
+-- Indexes for table `member_pengaturan`
 --
 ALTER TABLE `member_pengaturan`
   ADD PRIMARY KEY (`id_member`);
 
 --
--- Indeks untuk tabel `omzet`
+-- Indexes for table `omzet`
 --
 ALTER TABLE `omzet`
   ADD PRIMARY KEY (`id_omzet`),
   ADD KEY `id_komisi` (`id_komisi`);
 
 --
--- Indeks untuk tabel `omzet_aavision`
+-- Indexes for table `omzet_aavision`
 --
 ALTER TABLE `omzet_aavision`
   ADD PRIMARY KEY (`id_omzetvision`),
   ADD KEY `id_omzet` (`id_omzet`);
 
 --
--- Indeks untuk tabel `pengguna`
+-- Indexes for table `pengguna`
 --
 ALTER TABLE `pengguna`
   ADD PRIMARY KEY (`id_pengguna`);
 
 --
--- Indeks untuk tabel `pengurangan_fee`
+-- Indexes for table `pengurangan_fee`
 --
 ALTER TABLE `pengurangan_fee`
   ADD PRIMARY KEY (`id_pengurangan`),
   ADD KEY `id_komisi` (`id_komisi`);
 
 --
--- Indeks untuk tabel `potongan`
+-- Indexes for table `potongan`
 --
 ALTER TABLE `potongan`
   ADD PRIMARY KEY (`id_potongan`),
   ADD KEY `id_komisi` (`id_komisi`);
 
 --
--- Indeks untuk tabel `referal`
+-- Indexes for table `referal`
 --
 ALTER TABLE `referal`
   ADD PRIMARY KEY (`id_referal`),
   ADD KEY `id_komisi` (`id_komisi`);
 
 --
--- Indeks untuk tabel `sub_komisi`
+-- Indexes for table `sub_komisi`
 --
 ALTER TABLE `sub_komisi`
   ADD PRIMARY KEY (`id_sub_komisi`),
   ADD KEY `id_komisi` (`id_komisi`);
 
 --
--- Indeks untuk tabel `sub_komisi_afw`
+-- Indexes for table `sub_komisi_afw`
 --
 ALTER TABLE `sub_komisi_afw`
   ADD PRIMARY KEY (`id_afw`),
   ADD KEY `id_sub_komisi` (`id_sub_komisi`);
 
 --
--- Indeks untuk tabel `tutup_jurnal`
+-- Indexes for table `tutup_jurnal`
 --
 ALTER TABLE `tutup_jurnal`
   ADD PRIMARY KEY (`id_jurnal`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `bank_titipan_a`
+-- AUTO_INCREMENT for table `bank_titipan_a`
 --
 ALTER TABLE `bank_titipan_a`
   MODIFY `id_bta` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `co_broke`
+-- AUTO_INCREMENT for table `co_broke`
 --
 ALTER TABLE `co_broke`
   MODIFY `id_cobroke` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
--- AUTO_INCREMENT untuk tabel `jabatan_pengaturan`
+-- AUTO_INCREMENT for table `jabatan_pengaturan`
 --
 ALTER TABLE `jabatan_pengaturan`
   MODIFY `id_jabatan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `jurnal_bttb`
+-- AUTO_INCREMENT for table `jurnal_bttb`
 --
 ALTER TABLE `jurnal_bttb`
   MODIFY `id_bttb` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 
 --
--- AUTO_INCREMENT untuk tabel `jurnal_pesan`
+-- AUTO_INCREMENT for table `jurnal_pesan`
 --
 ALTER TABLE `jurnal_pesan`
   MODIFY `id_pesan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `jurnal_umum`
+-- AUTO_INCREMENT for table `jurnal_umum`
 --
 ALTER TABLE `jurnal_umum`
   MODIFY `id_jurnal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=361;
 
 --
--- AUTO_INCREMENT untuk tabel `komisi`
+-- AUTO_INCREMENT for table `komisi`
 --
 ALTER TABLE `komisi`
-  MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=328;
+  MODIFY `id_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=330;
 
 --
--- AUTO_INCREMENT untuk tabel `kredit_bank_titipan_a`
+-- AUTO_INCREMENT for table `kredit_bank_titipan_a`
 --
 ALTER TABLE `kredit_bank_titipan_a`
   MODIFY `id_kredit` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT untuk tabel `marketing`
+-- AUTO_INCREMENT for table `marketing`
 --
 ALTER TABLE `marketing`
   MODIFY `id_mar` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
--- AUTO_INCREMENT untuk tabel `master_pph`
+-- AUTO_INCREMENT for table `master_pph`
 --
 ALTER TABLE `master_pph`
   MODIFY `id_pph` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
--- AUTO_INCREMENT untuk tabel `master_pph_aavision`
+-- AUTO_INCREMENT for table `master_pph_aavision`
 --
 ALTER TABLE `master_pph_aavision`
   MODIFY `id_pph_aavision` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=330;
 
 --
--- AUTO_INCREMENT untuk tabel `master_pph_cobroke`
+-- AUTO_INCREMENT for table `master_pph_cobroke`
 --
 ALTER TABLE `master_pph_cobroke`
   MODIFY `id_pph_cobroke` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT untuk tabel `omzet`
+-- AUTO_INCREMENT for table `omzet`
 --
 ALTER TABLE `omzet`
   MODIFY `id_omzet` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
--- AUTO_INCREMENT untuk tabel `omzet_aavision`
+-- AUTO_INCREMENT for table `omzet_aavision`
 --
 ALTER TABLE `omzet_aavision`
   MODIFY `id_omzetvision` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=263;
 
 --
--- AUTO_INCREMENT untuk tabel `pengguna`
+-- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
   MODIFY `id_pengguna` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `pengurangan_fee`
+-- AUTO_INCREMENT for table `pengurangan_fee`
 --
 ALTER TABLE `pengurangan_fee`
   MODIFY `id_pengurangan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- AUTO_INCREMENT untuk tabel `potongan`
+-- AUTO_INCREMENT for table `potongan`
 --
 ALTER TABLE `potongan`
   MODIFY `id_potongan` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
--- AUTO_INCREMENT untuk tabel `referal`
+-- AUTO_INCREMENT for table `referal`
 --
 ALTER TABLE `referal`
-  MODIFY `id_referal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_referal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
--- AUTO_INCREMENT untuk tabel `sub_komisi`
+-- AUTO_INCREMENT for table `sub_komisi`
 --
 ALTER TABLE `sub_komisi`
-  MODIFY `id_sub_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=227;
+  MODIFY `id_sub_komisi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
 
 --
--- AUTO_INCREMENT untuk tabel `sub_komisi_afw`
+-- AUTO_INCREMENT for table `sub_komisi_afw`
 --
 ALTER TABLE `sub_komisi_afw`
   MODIFY `id_afw` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT untuk tabel `tutup_jurnal`
+-- AUTO_INCREMENT for table `tutup_jurnal`
 --
 ALTER TABLE `tutup_jurnal`
   MODIFY `id_jurnal` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `co_broke`
+-- Constraints for table `co_broke`
 --
 ALTER TABLE `co_broke`
   ADD CONSTRAINT `co_broke_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `kredit_bank_titipan_a`
+-- Constraints for table `kredit_bank_titipan_a`
 --
 ALTER TABLE `kredit_bank_titipan_a`
   ADD CONSTRAINT `kredit_bank_titipan_a_ibfk_1` FOREIGN KEY (`id_bta`) REFERENCES `bank_titipan_a` (`id_bta`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `marketing`
+-- Constraints for table `marketing`
 --
 ALTER TABLE `marketing`
   ADD CONSTRAINT `marketing_ibfk_1` FOREIGN KEY (`member_mar`) REFERENCES `member_pengaturan` (`id_member`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Ketidakleluasaan untuk tabel `master_pph`
+-- Constraints for table `master_pph`
 --
 ALTER TABLE `master_pph`
   ADD CONSTRAINT `master_pph_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `master_pph_aavision`
+-- Constraints for table `master_pph_aavision`
 --
 ALTER TABLE `master_pph_aavision`
   ADD CONSTRAINT `master_pph_aavision_ibfk_1` FOREIGN KEY (`id_pph`) REFERENCES `master_pph` (`id_pph`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `master_pph_cobroke`
+-- Constraints for table `master_pph_cobroke`
 --
 ALTER TABLE `master_pph_cobroke`
   ADD CONSTRAINT `master_pph_cobroke_ibfk_1` FOREIGN KEY (`id_pph`) REFERENCES `master_pph` (`id_pph`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `omzet`
+-- Constraints for table `omzet`
 --
 ALTER TABLE `omzet`
   ADD CONSTRAINT `omzet_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `omzet_aavision`
+-- Constraints for table `omzet_aavision`
 --
 ALTER TABLE `omzet_aavision`
   ADD CONSTRAINT `omzet_aavision_ibfk_1` FOREIGN KEY (`id_omzet`) REFERENCES `omzet` (`id_omzet`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `pengurangan_fee`
+-- Constraints for table `pengurangan_fee`
 --
 ALTER TABLE `pengurangan_fee`
   ADD CONSTRAINT `pengurangan_fee_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `potongan`
+-- Constraints for table `potongan`
 --
 ALTER TABLE `potongan`
   ADD CONSTRAINT `potongan_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `referal`
+-- Constraints for table `referal`
 --
 ALTER TABLE `referal`
   ADD CONSTRAINT `referal_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `sub_komisi`
+-- Constraints for table `sub_komisi`
 --
 ALTER TABLE `sub_komisi`
   ADD CONSTRAINT `sub_komisi_ibfk_1` FOREIGN KEY (`id_komisi`) REFERENCES `komisi` (`id_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `sub_komisi_afw`
+-- Constraints for table `sub_komisi_afw`
 --
 ALTER TABLE `sub_komisi_afw`
   ADD CONSTRAINT `sub_komisi_afw_ibfk_1` FOREIGN KEY (`id_sub_komisi`) REFERENCES `sub_komisi` (`id_sub_komisi`) ON DELETE CASCADE ON UPDATE CASCADE;
