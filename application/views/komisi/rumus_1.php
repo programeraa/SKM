@@ -11,6 +11,17 @@ foreach ($referal as $referal) {
     if ($referal->id_komisi == $komisi->id_komisi) {
         $referal_jumlah = $referal->jumlah_referal;
         $referal_keterangan = $referal->keterangan_referal;
+        $pph_referal = $referal->pph_referal; 
+
+        if ($pph_referal == 3) {
+            $keterangan_pph = 'NPWP';
+        }else{
+            $keterangan_pph = 'Non-NPWP';
+        }
+
+        $total_pph_ref = $pph_referal/100 * $referal_jumlah;
+        $fee_asli_referal = $referal_jumlah - $total_pph_ref;
+        
         break;
     }
 }
