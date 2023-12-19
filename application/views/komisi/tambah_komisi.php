@@ -63,18 +63,27 @@
                             <input type="hidden" id="komisi" name="komisi">
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="referal" class="col-form-label">Referal</label>
                                     <input type="text" class="form-control" id="referal" name="referal">
                                 </div>
                             </div> 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="j_referal" class="col-form-label">Jumlah
                                     </label>
                                     <input type="text" class="form-control" name="tampil_referal" id="tampil_referal" onkeyup="formatRupiah(this, 'j_referal')">
                                     <input type="hidden" class="form-control" id="j_referal" name="j_referal">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="pph_referal" class="col-form-label">Potongan</label>
+                                    <select class="form-control" id="pph_referal" name="pph_referal">
+                                        <option value="3">Non NPWP (3)</option>
+                                        <option value="2.5">NPWP (2.5)</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
