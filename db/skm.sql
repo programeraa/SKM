@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 19, 2023 at 09:31 PM
+-- Generation Time: Dec 20, 2023 at 02:37 PM
 -- Server version: 10.6.16-MariaDB-cll-lve
 -- PHP Version: 8.1.25
 
@@ -227,6 +227,22 @@ INSERT INTO `jurnal_bttb` (`id_bttb`, `tgl_input`, `kode_perkiraan`, `nomor_perk
 (123, '2023-12-13', '801', '00600', 'BI KENDARAAN (LAP/DIREKSI)', 11),
 (125, '2023-12-19', 'UTJ', '0039', 'UTJ NORTHWEST NV 11/3,5,6', 11),
 (126, '2023-12-19', 'UTJ', '0040', 'UTJ RUMAH PRAMBANAN EC', 11);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jurnal_pesan`
+--
+
+CREATE TABLE `jurnal_pesan` (
+  `id_pesan` int(250) NOT NULL,
+  `pesan` varchar(250) NOT NULL,
+  `tgl_input_pesan` date NOT NULL,
+  `tgl_pesan` varchar(250) NOT NULL,
+  `bulan_pesan` varchar(250) NOT NULL,
+  `status_pesan` varchar(250) NOT NULL,
+  `admin_input` int(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -604,6 +620,29 @@ INSERT INTO `kredit_bank_titipan_a` (`id_kredit`, `id_bta`, `tgl_input_kredit`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `level_pengaturan`
+--
+
+CREATE TABLE `level_pengaturan` (
+  `id_level` int(250) NOT NULL,
+  `level` varchar(250) NOT NULL,
+  `akses_level` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `level_pengaturan`
+--
+
+INSERT INTO `level_pengaturan` (`id_level`, `level`, `akses_level`) VALUES
+(1, 'Super Administrator', 'Semua'),
+(2, 'Admin Komisi', 'Komisi'),
+(3, 'Admin Akuntan', 'Akunting'),
+(4, 'Administrator', 'Komisi & Akunting'),
+(5, 'CMO', 'Komisi & Akunting');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `marketing`
 --
 
@@ -838,11 +877,11 @@ CREATE TABLE `pengguna` (
 --
 
 INSERT INTO `pengguna` (`id_pengguna`, `nama_pengguna`, `username_pengguna`, `pass_pengguna`, `gambar_ttd_pengguna`, `level_pengguna`) VALUES
-(1, 'Rohman', 'rohman', '2397977a0e43fb1f5ee26fe993674b5b', 'ttd_ku_baru.jpg', 'Administrator'),
-(4, 'Julia', 'julia', 'c2e285cb33cecdbeb83d2189e983a8c0', 'ttd_baru.jpg', 'CMO'),
-(10, 'Risca', 'risca', 'f5787529cb944fa9600457d30438d20d', 'ttd_baru1.jpg', 'Administrator'),
-(11, 'Salwa', 'salwa', 'af003347e9ad13dcb79763e2f66339d5', '', 'Akuntan'),
-(12, 'Febri', 'febri', '4689c75fd0935ff5818d62fd2083ed98', '', 'Administrator');
+(1, 'Rohman', 'rohman', '2397977a0e43fb1f5ee26fe993674b5b', 'ttd_ku_baru.jpg', '1'),
+(4, 'Julia', 'julia', 'c2e285cb33cecdbeb83d2189e983a8c0', 'ttd_baru.jpg', '5'),
+(10, 'Risca', 'risca', 'f5787529cb944fa9600457d30438d20d', 'ttd_baru1.jpg', '2'),
+(11, 'Salwa', 'salwa', 'af003347e9ad13dcb79763e2f66339d5', '', '3'),
+(12, 'Febri', 'febri', '4689c75fd0935ff5818d62fd2083ed98', '', '2');
 
 -- --------------------------------------------------------
 
@@ -1068,6 +1107,12 @@ ALTER TABLE `jurnal_bttb`
   ADD PRIMARY KEY (`id_bttb`);
 
 --
+-- Indexes for table `jurnal_pesan`
+--
+ALTER TABLE `jurnal_pesan`
+  ADD PRIMARY KEY (`id_pesan`);
+
+--
 -- Indexes for table `jurnal_umum`
 --
 ALTER TABLE `jurnal_umum`
@@ -1094,6 +1139,12 @@ ALTER TABLE `komisi`
 ALTER TABLE `kredit_bank_titipan_a`
   ADD PRIMARY KEY (`id_kredit`),
   ADD KEY `id_bta` (`id_bta`);
+
+--
+-- Indexes for table `level_pengaturan`
+--
+ALTER TABLE `level_pengaturan`
+  ADD PRIMARY KEY (`id_level`);
 
 --
 -- Indexes for table `marketing`
@@ -1219,6 +1270,12 @@ ALTER TABLE `jurnal_bttb`
   MODIFY `id_bttb` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
+-- AUTO_INCREMENT for table `jurnal_pesan`
+--
+ALTER TABLE `jurnal_pesan`
+  MODIFY `id_pesan` int(250) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `jurnal_umum`
 --
 ALTER TABLE `jurnal_umum`
@@ -1235,6 +1292,12 @@ ALTER TABLE `komisi`
 --
 ALTER TABLE `kredit_bank_titipan_a`
   MODIFY `id_kredit` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `level_pengaturan`
+--
+ALTER TABLE `level_pengaturan`
+  MODIFY `id_level` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `marketing`
