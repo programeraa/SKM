@@ -90,10 +90,21 @@ class M_jurnal extends CI_Model{
         $this->db->join('jurnal_bttb','jurnal_umum.id_bttb = jurnal_bttb.id_bttb','left');
         $this->db->order_by('tgl_input_jurnal ASC, id_jurnal ASC');
 
-        $dari_bulan_tahun = date('m-Y', strtotime($dari));
-        $ke_bulan_tahun = date('m-Y', strtotime($ke));
+        // $dari_bulan_tahun = date('m-Y', strtotime($dari));
+        // $ke_bulan_tahun = date('m-Y', strtotime($ke));
 
-        $a = $dari_bulan_tahun <= '10-2023' && $ke_bulan_tahun <= '10-2023';
+        // $compare_date = date('m-Y', strtotime('2023-10'));
+
+        // $a = $dari_bulan_tahun <= $compare_date && $ke_bulan_tahun <= $compare_date;
+
+        $dari_bulan_tahun = date('Y-m', strtotime($dari));
+        $ke_bulan_tahun = date('Y-m', strtotime($ke));
+
+        $compare_date = date('Y-m', strtotime('2023-10'));
+
+        $a = $dari_bulan_tahun <= $compare_date && $ke_bulan_tahun <= $compare_date;
+
+
         $b = $dari_bulan_tahun < $ke_bulan_tahun;
 
         $tanggal_format = date('F', strtotime($dari));
@@ -125,6 +136,7 @@ class M_jurnal extends CI_Model{
             $this->db->like('jurnal_bttb.kode_perkiraan', $j_kode);
 
             if ($b == 1) {
+
                 if ($j_kode == 'BT') {
                     if ($dari_bulan_tahun >= '11-2023') {
                         $this->db->or_like('keterangan_jurnal', 'Saldo Awal BT '.$bulan_indo);
