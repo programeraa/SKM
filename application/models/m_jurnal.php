@@ -93,19 +93,20 @@ class M_jurnal extends CI_Model{
         // $dari_bulan_tahun = date('m-Y', strtotime($dari));
         // $ke_bulan_tahun = date('m-Y', strtotime($ke));
 
-        // $compare_date = date('m-Y', strtotime('2023-10'));
-
-        // $a = $dari_bulan_tahun <= $compare_date && $ke_bulan_tahun <= $compare_date;
+        // $a = $dari_bulan_tahun <= '10-2023' && $ke_bulan_tahun <= '10-2023';
 
         $dari_bulan_tahun = date('Y-m', strtotime($dari));
         $ke_bulan_tahun = date('Y-m', strtotime($ke));
 
         $compare_date = date('Y-m', strtotime('2023-10'));
+        $compare_date_2 = date('Y-m', strtotime('2023-11'));
 
         $a = $dari_bulan_tahun <= $compare_date && $ke_bulan_tahun <= $compare_date;
 
-
         $b = $dari_bulan_tahun < $ke_bulan_tahun;
+
+        var_dump($a);
+        var_dump($b);
 
         $tanggal_format = date('F', strtotime($dari));
 
@@ -136,15 +137,14 @@ class M_jurnal extends CI_Model{
             $this->db->like('jurnal_bttb.kode_perkiraan', $j_kode);
 
             if ($b == 1) {
-
                 if ($j_kode == 'BT') {
-                    if ($dari_bulan_tahun >= '11-2023') {
+                    if ($dari_bulan_tahun >= $compare_date_2) {
                         $this->db->or_like('keterangan_jurnal', 'Saldo Awal BT '.$bulan_indo);
                     }else{
                         $this->db->or_like('keterangan_jurnal', 'Saldo Awal '.$bulan_indo);
                     }
                 }elseif($j_kode == 'UTJ'){
-                    if ($dari_bulan_tahun >= '11-2023') {
+                    if ($dari_bulan_tahun >= $compare_date_2) {
                         $this->db->or_like('keterangan_jurnal', 'Saldo Awal UTJ '.$bulan_indo);
                     }else{
                         $this->db->or_like('keterangan_jurnal', 'Saldo Awal '.$bulan_indo);
