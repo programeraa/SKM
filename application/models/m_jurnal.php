@@ -105,9 +105,6 @@ class M_jurnal extends CI_Model{
 
         $b = $dari_bulan_tahun < $ke_bulan_tahun;
 
-        var_dump($a);
-        var_dump($b);
-
         $tanggal_format = date('F', strtotime($dari));
 
         $monthTranslations = array(
@@ -185,6 +182,16 @@ class M_jurnal extends CI_Model{
 
         if (!empty($kode_per)) {
             $this->db->like('jurnal_umum.id_bttb', $kode_per);
+
+            if ($b == 1 ) {
+                if ($kode_per == 175) {
+                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal Bank Fee '.$bulan_indo);
+                }
+            }else{
+                if ($kode_per == 175) {
+                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal Bank Fee');
+                }
+            }
         }
 
         if (!empty($kode) && !empty($tgl)) {
