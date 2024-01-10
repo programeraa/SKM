@@ -10,6 +10,7 @@
                 foreach ($co_broke as $kubruk) {
                     if ($komisi->mar_listing_komisi == $kubruk->id_komisi_unik && $komisi->id_komisi == $kubruk->id_komisi ) {
                         $listing_1 = $kubruk->nama_cobroke;
+                        $jcl = $kubruk->jenis_cobroke;
                         if ($listing_2 = $kubruk->jenis_cobroke == 2) {
                             $j_cobroke = 'Badan';
                         }elseif ($listing_2 = $kubruk->jenis_cobroke == 2.5) {
@@ -35,6 +36,7 @@
                 foreach ($co_broke as $kubruk) {
                     if ($komisi->mar_selling_komisi == $kubruk->id_komisi_unik && $komisi->id_komisi == $kubruk->id_komisi ) {
                         $selling_1 = $kubruk->nama_cobroke;
+                        $jcs = $kubruk->jenis_cobroke;
                         if ($selling_2 = $kubruk->jenis_cobroke == 2) {
                             $s_cobroke = 'Badan';
                         }elseif ($selling_2 = $kubruk->jenis_cobroke == 2.5) {
