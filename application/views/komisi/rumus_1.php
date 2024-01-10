@@ -243,6 +243,8 @@ if (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_co
     }
     elseif ($persen_cobroke > 50) {
         $fmk = (((100 - $persen_cobroke) / 100) * $bruto_2) - $referal_jumlah;
+    }elseif ($persen_cobroke < 50) {
+        $fmk = (((100 - $persen_cobroke) / 100) * $bruto_2) - $referal_jumlah;
     }else{
         $fmk = $bruto;
     } 
@@ -250,7 +252,10 @@ if (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_co
 }elseif (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_cobroke) && $marketing_listing_2 == 0 && $marketing_selling_2 == 0) {
     if ($persen_cobroke > 50) {
         $fmk = ((100 - $persen_cobroke) / 100) * $bruto_2;
-    }else{
+    }elseif ($persen_cobroke < 50) {
+        $fmk = ((100 - $persen_cobroke) / 100) * $bruto_2;
+    }
+    else{
         $fmk = $bruto_2 / $total_marketing; 
     }
     //echo "B";
@@ -259,6 +264,8 @@ if (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_co
         $fmk = $bruto / 2;
     }elseif ($persen_cobroke > 50) {
         $fmk = ((((100 - $persen_cobroke) / 100) * $bruto_2) - $referal_jumlah) / 2;
+    }elseif ($persen_cobroke < 50) {
+        $fmk = ((((100 - $persen_cobroke) / 100) * $bruto_2) - $referal_jumlah) / 2;
     }else{
         $fmk = $bruto / 2 ;
     }
@@ -266,10 +273,12 @@ if (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_co
 }elseif (!empty($kubruk_nama) && ($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_cobroke)) {
     if ($persen_cobroke > 50) {
         $fmk = (((100 - $persen_cobroke) / 100) * $bruto_2) / 2;
+    }elseif ($persen_cobroke < 50) {
+        $fmk = (((100 - $persen_cobroke) / 100) * $bruto_2) / 2;
     }else{
         $fmk = $bruto_3 / 2 ;
     }
-    //echo "D";
+    echo "D";
 }else{
     $fmk = $bruto / $total_marketing; 
     //echo "E";
@@ -294,6 +303,8 @@ $s_member2 = $komisi->mm2_selling_komisi;
 if (!empty($marketing_listing) && !empty($kubruk_nama) && $marketing_listing_2 || $marketing_selling_2 != 0){
     $bruto_cobroke = $bruto_3;
 }elseif($persen_cobroke > 50){
+    $bruto_cobroke = $persen_cobroke / 100 * $bruto_2;
+}elseif($persen_cobroke < 50){
     $bruto_cobroke = $persen_cobroke / 100 * $bruto_2;
 }else{
     $bruto_cobroke = $fmk;
