@@ -288,7 +288,11 @@
                                 <td class="tg-0lax text-right"><?php echo $bruto_cobroke_r; ?></td>
                             </tr>
                             <tr>
-                                <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$j_cobroke_angka.'% - '.$j_cobroke.')'?></td>
+                                <?php if ($jcl == 2) {?>
+                                    <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 23 ('.$j_cobroke_angka.'% - '.$j_cobroke.')'?></td>
+                                <?php }else{ ?>
+                                    <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$j_cobroke_angka.'% - '.$j_cobroke.')'?></td>
+                                <?php } ?>
                                 <td class="tg-0lax text-right"><?php echo $pph_cobroke_listing_r ?></td>
                             </tr>
                             <tr>
@@ -393,7 +397,11 @@
                 <td class="tg-0lax text-right"><?php echo $bruto_cobroke_r; ?></td>
             </tr>
             <tr>
-                <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$s_cobroke_angka.'% - '.$s_cobroke.')'?></td>
+                <?php if ($jcs == 2) {?>
+                    <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 23 ('.$s_cobroke_angka.'% - '.$s_cobroke.')'?></td>
+                <?php }else{?>
+                    <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$s_cobroke_angka.'% - '.$s_cobroke.')'?></td>
+                <?php } ?>
                 <td class="tg-0lax text-right"><?php echo $pph_cobroke_selling_r ?></td>
             </tr>
             <tr>
