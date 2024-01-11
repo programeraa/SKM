@@ -131,7 +131,7 @@ class M_jurnal extends CI_Model{
 
         if (!empty($j_kode)) {
             $this->db->group_start();
-            $this->db->like('jurnal_bttb.kode_perkiraan', $j_kode);
+            $this->db->where('jurnal_bttb.kode_perkiraan', $j_kode);
 
             if ($b == 1) {
                 if ($j_kode == 'BT') {
@@ -181,7 +181,8 @@ class M_jurnal extends CI_Model{
         }
 
         if (!empty($kode_per)) {
-            $this->db->like('jurnal_umum.id_bttb', $kode_per);
+            $this->db->group_start();
+            $this->db->where('jurnal_umum.id_bttb', $kode_per);
 
             if ($b == 1 ) {
                 if ($kode_per == 175) {
@@ -192,6 +193,7 @@ class M_jurnal extends CI_Model{
                     $this->db->or_like('keterangan_jurnal', 'Saldo Awal Bank Fee');
                 }
             }
+            $this->db->group_end();
         }
 
         if (!empty($kode) && !empty($tgl)) {
