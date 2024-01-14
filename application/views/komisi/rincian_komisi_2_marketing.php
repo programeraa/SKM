@@ -346,7 +346,7 @@
                     </tbody>
                 </table>
                 <div>
-                    <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Approve'):?>
+                    <?php if (($level_asli == 'Administrator' || $level_asli == 'Admin Komisi') && $komisi->status_komisi != 'Approve'):?>
                         <?php if ($jumlah_kurang_listing == 0) {?>
                             <button type="button" class="btn btn-danger mb-3" id="toggleForm">Biaya Pengurang (Bila Ada)</button>
                         <?php }else{ ?>
@@ -456,7 +456,7 @@
             </table>
 
             <div>
-                <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Approve') :?>
+                <?php if (($level_asli == 'Administrator' || $level_asli == 'Admin Komisi') && $komisi->status_komisi != 'Approve') :?>
                     <?php if ($jumlah_kurang_selling == 0) {?>
                         <button type="button" class="btn btn-danger float-right" id="toggleForm2">Biaya Pengurang (Bila Ada)</button>
                     <?php }else{ ?>
@@ -560,7 +560,7 @@
                         </tbody>
                     </table>
                     <div>
-                        <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Approve'):?>
+                        <?php if (($level_asli == 'Administrator' || $level_asli == 'Admin Komisi') && $komisi->status_komisi != 'Approve'):?>
                             <?php if ($jumlah_kurang_listing2 == 0) {?>
                                 <button type="button" class="btn btn-danger mb-3" id="toggleForm3">Biaya Pengurang (Bila Ada)</button>
                             <?php }else{ ?>
@@ -643,7 +643,7 @@
             </tbody>
         </table>
         <div>
-            <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Approve') :?>
+            <?php if (($level_asli == 'Administrator' || $level_asli == 'Admin Komisi') && $komisi->status_komisi != 'Approve') :?>
                 <?php if ($jumlah_kurang_selling2 == 0) {?>
                     <button type="button" class="btn btn-danger float-right" id="toggleForm4">Biaya Pengurang (Bila Ada)</button>
                 <?php }else{ ?>
