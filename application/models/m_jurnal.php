@@ -10,7 +10,8 @@ class M_jurnal extends CI_Model{
         $this->db->join('jurnal_bttb','jurnal_umum.id_bttb = jurnal_bttb.id_bttb','left');
         $this->db->where("DATE_FORMAT(tgl_input_jurnal, '%Y-%m') = '$bulan_tahun_sekarang'");
         //$this->db->order_by("CASE WHEN keterangan_jurnal LIKE '%Saldo Awal%' THEN 1 ELSE 2 END", 'ASC');
-        $this->db->order_by('tgl_input_jurnal', 'ASC');
+        //$this->db->order_by('tgl_input_jurnal', 'ASC');
+        $this->db->order_by('tgl_input_jurnal ASC, id_jurnal ASC');
 
         // $this->db->where("NOT (keterangan_jurnal LIKE '%Saldo Awal%')", null, false);
         // $this->db->where("NOT (keterangan_jurnal LIKE '%Koreksi Saldo%')", null, false);
