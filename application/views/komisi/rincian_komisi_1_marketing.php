@@ -192,7 +192,7 @@
                 </tbody>
             </table>
             <div>
-                <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Approve'):?>
+                <?php if (($level_asli == 'Administrator' || $level_asli == 'Admin Komisi') && $komisi->status_komisi != 'Approve'):?>
                     <?php if ($jumlah_kurang_listing == 0) {?>
                         <button type="button" class="btn btn-danger mb-3" id="toggleForm">Biaya Pengurang (Bila Ada)</button>
                     <?php }else{ ?>
