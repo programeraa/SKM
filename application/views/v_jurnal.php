@@ -330,6 +330,8 @@ $monthTranslations = array(
 $t_nominal = 0;
 $t_nominal_bt = 0;
 $t_nominal_utj = 0;
+$t_nominal_bf = 0;
+$t_nominal_bvn = 0;
 
 $tgl_dari = null;
 $tgl_ke = null;
@@ -386,6 +388,12 @@ $totalKreditBT = 0;
 $totalDebitUTJ = 0;
 $totalKreditUTJ = 0;
 
+$totalDebitBF = 0;
+$totalKreditBF = 0;
+
+$totalDebitBVN = 0;
+$totalKreditBVN = 0;
+
 foreach ($jurnal_umum_2 as $j_umum2) {
     if ($tgl_dari == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && $tgl_ke == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && strpos($j_umum2->keterangan_jurnal, 'Saldo Awal') !== false && $j_umum2->id_bttb == 0){
         $t_nominal = $j_umum2->nominal_jurnal;
@@ -397,7 +405,7 @@ foreach ($jurnal_umum_2 as $j_umum2) {
         }
     }
 
-    //========================================
+    //======================================== Cari Saldo Awal BT
 
     if ($tgl_dari == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && $tgl_ke == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && strpos($j_umum2->keterangan_jurnal, 'Saldo Awal BT') !== false && $j_umum2->id_bttb == 0){
         $t_nominal_bt = $j_umum2->nominal_jurnal;
@@ -409,7 +417,7 @@ foreach ($jurnal_umum_2 as $j_umum2) {
         }
     }
 
-    //=======================================
+    //======================================= Cari Saldo Awal UTJ
 
     if ($tgl_dari == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && $tgl_ke == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && strpos($j_umum2->keterangan_jurnal, 'Saldo Awal UTJ') !== false && $j_umum2->id_bttb == 0){
         $t_nominal_utj = $j_umum2->nominal_jurnal;
@@ -421,6 +429,32 @@ foreach ($jurnal_umum_2 as $j_umum2) {
         }
     }
 
+    //======================================= Cari Saldo Awal Bank Fee
+
+    if ($tgl_dari == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && $tgl_ke == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && strpos($j_umum2->keterangan_jurnal, 'Saldo Awal Bank Fee') !== false && $j_umum2->id_bttb == 0){
+        $t_nominal_bf = $j_umum2->nominal_jurnal;
+    }
+
+    if ($tgl_dari == '' || $tgl_ke == '' ) {
+        if ($waktu == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && $waktu == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && strpos($j_umum2->keterangan_jurnal, 'Saldo Awal Bank Fee') !== false && $j_umum2->id_bttb == 0){
+            $t_nominal_bf = $j_umum2->nominal_jurnal;
+        }
+    }
+
+    //======================================= Cari Saldo Awal Bank Vision New
+
+    if ($tgl_dari == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && $tgl_ke == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && strpos($j_umum2->keterangan_jurnal, 'Saldo Awal Bank Vision New') !== false && $j_umum2->id_bttb == 0){
+        $t_nominal_bvn = $j_umum2->nominal_jurnal;
+    }
+
+    if ($tgl_dari == '' || $tgl_ke == '' ) {
+        if ($waktu == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && $waktu == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && strpos($j_umum2->keterangan_jurnal, 'Saldo Awal Bank Vision New') !== false && $j_umum2->id_bttb == 0){
+            $t_nominal_bvn = $j_umum2->nominal_jurnal;
+        }
+    }
+
+    //======================================= Cari Debit dan Kredit 
+
     if ($tgl_dari == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && $tgl_ke == date("m-Y", strtotime($j_umum2->tgl_input_jurnal))) {
         if ($j_umum2->id_bttb == 10 && $j_umum2->jenis_jurnal == 'Debit') {
             $totalDebitBT += $j_umum2->nominal_jurnal;
@@ -430,12 +464,34 @@ foreach ($jurnal_umum_2 as $j_umum2) {
             $totalKreditBT += $j_umum2->nominal_jurnal;
         }
 
+        //==========================================================================
+
         if ($j_umum2->kode_perkiraan == 'UTJ' && $j_umum2->jenis_jurnal == 'Debit') {
             $totalDebitUTJ += $j_umum2->nominal_jurnal;
         }
 
         if ($j_umum2->kode_perkiraan == 'UTJ' && $j_umum2->jenis_jurnal == 'Kredit') {
             $totalKreditUTJ += $j_umum2->nominal_jurnal;
+        }
+
+        //==========================================================================
+
+        if ($j_umum2->id_bttb == 175 && $j_umum2->jenis_jurnal == 'Debit') {
+            $totalDebitBF += $j_umum2->nominal_jurnal;
+        }
+
+        if ($j_umum2->id_bttb == 175 && $j_umum2->jenis_jurnal == 'Kredit') {
+            $totalKreditBF += $j_umum2->nominal_jurnal;
+        }
+
+        //==========================================================================
+
+        if ($j_umum2->id_bttb == 182 && $j_umum2->jenis_jurnal == 'Debit') {
+            $totalDebitBVN += $j_umum2->nominal_jurnal;
+        }
+
+        if ($j_umum2->id_bttb == 182 && $j_umum2->jenis_jurnal == 'Kredit') {
+            $totalKreditBVN += $j_umum2->nominal_jurnal;
         }
     }
 
@@ -449,6 +505,8 @@ foreach ($jurnal_umum_2 as $j_umum2) {
                 $totalKreditBT += $j_umum2->nominal_jurnal;
             }
 
+            //==========================================================================
+
             if ($j_umum2->kode_perkiraan == 'UTJ' && $j_umum2->jenis_jurnal == 'Debit') {
                 $totalDebitUTJ += $j_umum2->nominal_jurnal;
             }
@@ -456,6 +514,27 @@ foreach ($jurnal_umum_2 as $j_umum2) {
             if ($j_umum2->kode_perkiraan == 'UTJ' && $j_umum2->jenis_jurnal == 'Kredit') {
                 $totalKreditUTJ += $j_umum2->nominal_jurnal;
             }
+
+            //==========================================================================
+
+            if ($j_umum2->id_bttb == 175 && $j_umum2->jenis_jurnal == 'Debit') {
+                $totalDebitBF += $j_umum2->nominal_jurnal;
+            }
+
+            if ($j_umum2->id_bttb == 175 && $j_umum2->jenis_jurnal == 'Kredit') {
+                $totalKreditBF += $j_umum2->nominal_jurnal;
+            }
+
+            //==========================================================================
+
+            if ($j_umum2->id_bttb == 182 && $j_umum2->jenis_jurnal == 'Debit') {
+                $totalDebitBVN += $j_umum2->nominal_jurnal;
+            }
+
+            if ($j_umum2->id_bttb == 182 && $j_umum2->jenis_jurnal == 'Kredit') {
+                $totalKreditBVN += $j_umum2->nominal_jurnal;
+            }
+
         }
     }
 
@@ -464,6 +543,10 @@ foreach ($jurnal_umum_2 as $j_umum2) {
 $saldo_awal_bt = abs($t_nominal_bt + ($totalDebitBT - $totalKreditBT));
 
 $saldo_awal_utj = abs($t_nominal_utj + ($totalKreditUTJ - $totalDebitUTJ));
+
+$saldo_awal_bf = abs($t_nominal_bf + ($totalDebitBF - $totalKreditBF));
+
+$saldo_awal_bvn = abs($t_nominal_bvn + ($totalDebitBVN - $totalKreditBVN));
 
 $pesan_ada = false;
 
@@ -531,7 +614,7 @@ foreach ($tampil_pesan as $pesan) {
     ?>
     <?php if ($level_asli != 'CMO') {?>
         <div class="text-right mt-3">
-            <a href="<?= base_url('Jurnal/tutup_jurnal?tsa=0'.'&sas='.$t_nominal.'&ts='.$total_saldo.'&tk='.$total_kredit.'&dari='.$b. '&ke='.$t.'&bulan='.$bulanku.'&bulan_tahun='.$tahun_bulan. '&sa_bt='.$saldo_awal_bt. '&sa_utj='.$saldo_awal_utj); ?>"
+            <a href="<?= base_url('Jurnal/tutup_jurnal?tsa=0'.'&sas='.$t_nominal.'&ts='.$total_saldo.'&tk='.$total_kredit.'&dari='.$b. '&ke='.$t.'&bulan='.$bulanku.'&bulan_tahun='.$tahun_bulan. '&sa_bt='.$saldo_awal_bt. '&sa_utj='.$saldo_awal_utj. '&sa_bf='.$saldo_awal_bf . '&sa_bvn='.$saldo_awal_bvn); ?>"
                 onclick="javascript:return confirm('Apakah Anda yakin ingin tutup jurnal bulan (<?= $tampil_bulanku ?>) ?')" class="btn btn-primary mt-1">
                 Tutup Jurnal (<?= $tampil_bulanku ?>)
             </a>
