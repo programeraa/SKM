@@ -283,6 +283,30 @@ class M_jurnal extends CI_Model{
         return $query->num_rows() > 0;
     }
 
+    function cek_data_jurnal_umum_bf($tahun_bulan_berikutnya, $bulan_plus_1) {
+        $where = array(
+            'tgl_input_jurnal' => $tahun_bulan_berikutnya.'-01',
+            'id_bttb' => 0,
+            'keterangan_jurnal' => 'Saldo Awal Bank Fee '.$bulan_plus_1
+        );
+
+        $query = $this->db->get_where('jurnal_umum', $where);
+
+        return $query->num_rows() > 0;
+    }
+
+    function cek_data_jurnal_umum_bvn($tahun_bulan_berikutnya, $bulan_plus_1) {
+        $where = array(
+            'tgl_input_jurnal' => $tahun_bulan_berikutnya.'-01',
+            'id_bttb' => 0,
+            'keterangan_jurnal' => 'Saldo Awal Bank Vision New '.$bulan_plus_1
+        );
+
+        $query = $this->db->get_where('jurnal_umum', $where);
+
+        return $query->num_rows() > 0;
+    }
+
     function simpan_tutup_jurnal($data){
         $this->db->insert('tutup_jurnal',$data);
     }
@@ -299,6 +323,14 @@ class M_jurnal extends CI_Model{
         $this->db->insert('jurnal_umum',$data4);
     }
 
+    function simpan_jurnal_bf($data5){
+        $this->db->insert('jurnal_umum',$data5);
+    }
+
+    function simpan_jurnal_bvn($data6){
+        $this->db->insert('jurnal_umum',$data6);
+    }
+
     function update_jurnal2($data2_update, $data2_where){
         $this->db->where($data2_where);
         $this->db->update('jurnal_umum',$data2_update);
@@ -312,6 +344,16 @@ class M_jurnal extends CI_Model{
     function update_jurnal_utj($data4_update, $data4_where){
         $this->db->where($data4_where);
         $this->db->update('jurnal_umum',$data4_update);
+    }
+
+    function update_jurnal_bf($data5_update, $data5_where){
+        $this->db->where($data5_where);
+        $this->db->update('jurnal_umum',$data5_update);
+    }
+
+    function update_jurnal_bvn($data6_update, $data6_where){
+        $this->db->where($data6_where);
+        $this->db->update('jurnal_umum',$data6_update);
     }
 
     function hapus_tutup_jurnal($where){
