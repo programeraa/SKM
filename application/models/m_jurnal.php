@@ -189,9 +189,17 @@ class M_jurnal extends CI_Model{
                 if ($kode_per == 175) {
                     $this->db->or_like('keterangan_jurnal', 'Saldo Awal Bank Fee '.$bulan_indo);
                 }
+
+                if ($kode_per == 182) {
+                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal Bank Vision New '.$bulan_indo);
+                }
             }else{
                 if ($kode_per == 175) {
                     $this->db->or_like('keterangan_jurnal', 'Saldo Awal Bank Fee');
+                }
+
+                if ($kode_per == 182) {
+                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal Bank Vision New '.$bulan_indo);
                 }
             }
             $this->db->group_end();
