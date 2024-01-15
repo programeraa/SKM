@@ -80,8 +80,8 @@
                     $tgl_closing = date("d-m-Y", strtotime($pph->tgl_closing_komisi));
 
                     if ($pph->jenis_cobroke != 2 || $pph->jenis_cobroke != 0) {
-                     $j_pph = 21;
-                 }else{
+                       $j_pph = 21;
+                   }else{
                     $j_pph = 23;
                 }
 
@@ -173,8 +173,8 @@
                             }
                             ?>
                         </td>
+                        <?php $no++; } ?>
                     </tbody>
-                    <?php $no++; } ?>
                     <tfoot>
                         <tr>
                             <th>Total</th>
