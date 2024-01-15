@@ -187,6 +187,8 @@ class Jurnal extends CI_Controller {
 
 		$sa_bt = $this->input->get('sa_bt');
 		$sa_utj = $this->input->get('sa_utj');
+		$sa_bf = $this->input->get('sa_bf');
+		$sa_bvn = $this->input->get('sa_bvn');
 
 		$tahun_bulan = $this->input->get('bulan_tahun');
 		$bulan = $this->input->get('bulan');
@@ -268,6 +270,10 @@ class Jurnal extends CI_Controller {
 
 		$is_data_exist_utj = $this->m_jurnal->cek_data_jurnal_umum_utj($tahun_bulan_berikutnya, $bulan_plus_1);
 
+		$is_data_exist_bf = $this->m_jurnal->cek_data_jurnal_umum_bf($tahun_bulan_berikutnya, $bulan_plus_1);
+
+		$is_data_exist_bvn = $this->m_jurnal->cek_data_jurnal_umum_bvn($tahun_bulan_berikutnya, $bulan_plus_1);
+
 		$data2 = array(
 			'tgl_input_asli_jurnal' => $waktu,
 			'tgl_input_jurnal' => $tahun_bulan_berikutnya.'-01',
@@ -329,6 +335,48 @@ class Jurnal extends CI_Controller {
 			'keterangan_jurnal' => 'Saldo Awal UTJ '.$bulan_plus_1
 		);
 
+		//=====================================================================
+
+		$data5 = array(
+			'tgl_input_asli_jurnal' => $waktu,
+			'tgl_input_jurnal' => $tahun_bulan_berikutnya.'-01',
+			'id_bttb' => 0,
+			'keterangan_jurnal' => 'Saldo Awal Bank Fee '.$bulan_plus_1,
+			'jenis_jurnal' => $jenis_jurnal,
+			'nominal_jurnal' => $sa_bf
+		);
+
+		$data5_update = array(
+			'nominal_jurnal' => $sa_bf
+		);
+
+		$data5_where = array(
+			'tgl_input_jurnal' => $tahun_bulan_berikutnya.'-01',
+			'id_bttb' => 0,
+			'keterangan_jurnal' => 'Saldo Awal Bank Fee '.$bulan_plus_1
+		);
+
+		//=====================================================================
+
+		$data6 = array(
+			'tgl_input_asli_jurnal' => $waktu,
+			'tgl_input_jurnal' => $tahun_bulan_berikutnya.'-01',
+			'id_bttb' => 0,
+			'keterangan_jurnal' => 'Saldo Awal Bank Vision New '.$bulan_plus_1,
+			'jenis_jurnal' => $jenis_jurnal,
+			'nominal_jurnal' => $sa_bvn
+		);
+
+		$data6_update = array(
+			'nominal_jurnal' => $sa_bvn
+		);
+
+		$data6_where = array(
+			'tgl_input_jurnal' => $tahun_bulan_berikutnya.'-01',
+			'id_bttb' => 0,
+			'keterangan_jurnal' => 'Saldo Awal Bank Vision New '.$bulan_plus_1
+		);
+
 		$this->m_jurnal->simpan_tutup_jurnal($data);
 
 		if ($is_data_exist == true) {
@@ -347,6 +395,18 @@ class Jurnal extends CI_Controller {
 			$this->m_jurnal->update_jurnal_utj($data4_update, $data4_where);
 		}else{
 			$this->m_jurnal->simpan_jurnal_utj($data4);
+		} 
+
+		if ($is_data_exist_bf == true) {
+			$this->m_jurnal->update_jurnal_bf($data5_update, $data5_where);
+		}else{
+			$this->m_jurnal->simpan_jurnal_bf($data5);
+		} 
+
+		if ($is_data_exist_bvn == true) {
+			$this->m_jurnal->update_jurnal_bvn($data6_update, $data6_where);
+		}else{
+			$this->m_jurnal->simpan_jurnal_bvn($data6);
 		} 
 
 		echo '<script>
