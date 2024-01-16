@@ -217,7 +217,7 @@
                                 <?php
                                 if ($jurnal->kode_perkiraan == '') {
                                  echo '';
-                             }elseif ($jurnal->id_bttb == 10 || $jurnal->id_bttb == 175 || $jurnal->id_bttb == 182) {
+                             }elseif ($jurnal->id_bttb == 10 || $jurnal->id_bttb == 175 || $jurnal->id_bttb == 182 || $jurnal->id_bttb == 184) {
                                 echo "<span class='badge badge-primary p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>";
                             }else{
                                 echo "<span class='badge badge-success p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>"; 
@@ -332,6 +332,7 @@ $t_nominal_bt = 0;
 $t_nominal_utj = 0;
 $t_nominal_bf = 0;
 $t_nominal_bvn = 0;
+$t_nominal_kkp = 0;
 
 $tgl_dari = null;
 $tgl_ke = null;
@@ -394,6 +395,9 @@ $totalKreditBF = 0;
 $totalDebitBVN = 0;
 $totalKreditBVN = 0;
 
+$totalDebitKKP = 0;
+$totalKreditKKP = 0;
+
 foreach ($jurnal_umum_2 as $j_umum2) {
     if ($tgl_dari == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && $tgl_ke == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && strpos($j_umum2->keterangan_jurnal, 'Saldo Awal') !== false && $j_umum2->id_bttb == 0){
         $t_nominal = $j_umum2->nominal_jurnal;
@@ -453,6 +457,18 @@ foreach ($jurnal_umum_2 as $j_umum2) {
         }
     }
 
+    //======================================= Cari Saldo Awal Kas Kecil Pusat
+
+    if ($tgl_dari == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && $tgl_ke == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && strpos($j_umum2->keterangan_jurnal, 'Saldo Awal Kas Kecil Pusat') !== false && $j_umum2->id_bttb == 0){
+        $t_nominal_kkp = $j_umum2->nominal_jurnal;
+    }
+
+    if ($tgl_dari == '' || $tgl_ke == '' ) {
+        if ($waktu == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && $waktu == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && strpos($j_umum2->keterangan_jurnal, 'Saldo Awal Kas Kecil Pusat') !== false && $j_umum2->id_bttb == 0){
+            $t_nominal_kkp = $j_umum2->nominal_jurnal;
+        }
+    }
+
     //======================================= Cari Debit dan Kredit 
 
     if ($tgl_dari == date("m-Y", strtotime($j_umum2->tgl_input_jurnal)) && $tgl_ke == date("m-Y", strtotime($j_umum2->tgl_input_jurnal))) {
@@ -492,6 +508,14 @@ foreach ($jurnal_umum_2 as $j_umum2) {
 
         if ($j_umum2->id_bttb == 182 && $j_umum2->jenis_jurnal == 'Kredit') {
             $totalKreditBVN += $j_umum2->nominal_jurnal;
+        }
+
+        if ($j_umum2->id_bttb == 184 && $j_umum2->jenis_jurnal == 'Debit') {
+            $totalDebitKKP += $j_umum2->nominal_jurnal;
+        }
+
+        if ($j_umum2->id_bttb == 184 && $j_umum2->jenis_jurnal == 'Kredit') {
+            $totalKreditKKP += $j_umum2->nominal_jurnal;
         }
     }
 
@@ -535,6 +559,16 @@ foreach ($jurnal_umum_2 as $j_umum2) {
                 $totalKreditBVN += $j_umum2->nominal_jurnal;
             }
 
+            //==========================================================================
+
+            if ($j_umum2->id_bttb == 184 && $j_umum2->jenis_jurnal == 'Debit') {
+                $totalDebitKKP += $j_umum2->nominal_jurnal;
+            }
+
+            if ($j_umum2->id_bttb == 184 && $j_umum2->jenis_jurnal == 'Kredit') {
+                $totalKreditKKP += $j_umum2->nominal_jurnal;
+            }
+
         }
     }
 
@@ -547,6 +581,8 @@ $saldo_awal_utj = abs($t_nominal_utj + ($totalKreditUTJ - $totalDebitUTJ));
 $saldo_awal_bf = abs($t_nominal_bf + ($totalDebitBF - $totalKreditBF));
 
 $saldo_awal_bvn = abs($t_nominal_bvn + ($totalDebitBVN - $totalKreditBVN));
+
+$saldo_awal_kkp = abs($t_nominal_kkp + ($totalDebitKKP - $totalKreditKKP));
 
 $pesan_ada = false;
 
@@ -614,7 +650,7 @@ foreach ($tampil_pesan as $pesan) {
     ?>
     <?php if ($level_asli != 'CMO') {?>
         <div class="text-right mt-3">
-            <a href="<?= base_url('Jurnal/tutup_jurnal?tsa=0'.'&sas='.$t_nominal.'&ts='.$total_saldo.'&tk='.$total_kredit.'&dari='.$b. '&ke='.$t.'&bulan='.$bulanku.'&bulan_tahun='.$tahun_bulan. '&sa_bt='.$saldo_awal_bt. '&sa_utj='.$saldo_awal_utj. '&sa_bf='.$saldo_awal_bf . '&sa_bvn='.$saldo_awal_bvn); ?>"
+            <a href="<?= base_url('Jurnal/tutup_jurnal?tsa=0'.'&sas='.$t_nominal.'&ts='.$total_saldo.'&tk='.$total_kredit.'&dari='.$b. '&ke='.$t.'&bulan='.$bulanku.'&bulan_tahun='.$tahun_bulan. '&sa_bt='.$saldo_awal_bt. '&sa_utj='.$saldo_awal_utj. '&sa_bf='.$saldo_awal_bf . '&sa_bvn='.$saldo_awal_bvn . '&sa_kkp='.$saldo_awal_kkp); ?>"
                 onclick="javascript:return confirm('Apakah Anda yakin ingin tutup jurnal bulan (<?= $tampil_bulanku ?>) ?')" class="btn btn-primary mt-1">
                 Tutup Jurnal (<?= $tampil_bulanku ?>)
             </a>
