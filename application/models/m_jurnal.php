@@ -193,6 +193,10 @@ class M_jurnal extends CI_Model{
                 if ($kode_per == 182) {
                     $this->db->or_like('keterangan_jurnal', 'Saldo Awal Bank Vision New '.$bulan_indo);
                 }
+
+                if ($kode_per == 184) {
+                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal Kas Kecil Pusat '.$bulan_indo);
+                }
             }else{
                 if ($kode_per == 175) {
                     $this->db->or_like('keterangan_jurnal', 'Saldo Awal Bank Fee');
@@ -200,6 +204,10 @@ class M_jurnal extends CI_Model{
 
                 if ($kode_per == 182) {
                     $this->db->or_like('keterangan_jurnal', 'Saldo Awal Bank Vision New');
+                }
+
+                if ($kode_per == 184) {
+                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal Kas Kecil Pusat ');
                 }
             }
             $this->db->group_end();
@@ -307,6 +315,18 @@ class M_jurnal extends CI_Model{
         return $query->num_rows() > 0;
     }
 
+    function cek_data_jurnal_umum_kkp($tahun_bulan_berikutnya, $bulan_plus_1) {
+        $where = array(
+            'tgl_input_jurnal' => $tahun_bulan_berikutnya.'-01',
+            'id_bttb' => 0,
+            'keterangan_jurnal' => 'Saldo Awal Kas Kecil Pusat '.$bulan_plus_1
+        );
+
+        $query = $this->db->get_where('jurnal_umum', $where);
+
+        return $query->num_rows() > 0;
+    }
+
     function simpan_tutup_jurnal($data){
         $this->db->insert('tutup_jurnal',$data);
     }
@@ -329,6 +349,10 @@ class M_jurnal extends CI_Model{
 
     function simpan_jurnal_bvn($data6){
         $this->db->insert('jurnal_umum',$data6);
+    }
+
+    function simpan_jurnal_kkp($data7){
+        $this->db->insert('jurnal_umum',$data7);
     }
 
     function update_jurnal2($data2_update, $data2_where){
@@ -354,6 +378,11 @@ class M_jurnal extends CI_Model{
     function update_jurnal_bvn($data6_update, $data6_where){
         $this->db->where($data6_where);
         $this->db->update('jurnal_umum',$data6_update);
+    }
+
+    function update_jurnal_kkp($data7_update, $data7_where){
+        $this->db->where($data7_where);
+        $this->db->update('jurnal_umum',$data7_update);
     }
 
     function hapus_tutup_jurnal($where){
