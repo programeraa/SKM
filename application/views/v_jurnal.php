@@ -217,7 +217,7 @@
                                 <?php
                                 if ($jurnal->kode_perkiraan == '') {
                                  echo '';
-                             }elseif (strpos($jurnal->kode_perkiraan, 'BT') !== false || strpos($jurnal->keterangan, 'BANK FEE') !== false) {
+                             }elseif ($jurnal->id_bttb == 10 || $jurnal->id_bttb == 175 || $jurnal->id_bttb == 182) {
                                 echo "<span class='badge badge-primary p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>";
                             }else{
                                 echo "<span class='badge badge-success p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>"; 
