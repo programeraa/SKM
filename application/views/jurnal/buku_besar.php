@@ -206,7 +206,7 @@
 
                     $k_kiri = substr($k, 0, 1);
 
-                    if ($k == 'UTJ' || $_GET['j_kode'] == 'UTJ') {
+                    if (($k == 'UTJ' || $_GET['j_kode'] == 'UTJ') || (($k == 801 && in_array($n, [100, 101, 104, 105, 106, 107])) || ($k == 101 && in_array($n, [1, 2, 3, 4, 5])))) {
                         if ($jurnal->jenis_jurnal == 'Debit') {
                             $saldo_akhir -= $jurnal->nominal_jurnal;
                             $total_saldo = $sum_saldo += $jurnal->nominal_jurnal;
@@ -214,10 +214,9 @@
                             $saldo_akhir += $jurnal->nominal_jurnal;
                             $total_kredit = $sum_kredit += $jurnal->nominal_jurnal;
                         }
-
                         $warna = 'Tidak Merah';
-
-                    }elseif(($k_kiri == '2' || $k_kiri == '3' || $k_kiri == '4' || $k_kiri == '5') && ($angka_kiri == '2' || $angka_kiri == '3' || $angka_kiri == '4' || $angka_kiri == '5')){
+                    }
+                    elseif(($k_kiri == '2' || $k_kiri == '3' || $k_kiri == '4' || $k_kiri == '5') && ($angka_kiri == '2' || $angka_kiri == '3' || $angka_kiri == '4' || $angka_kiri == '5')){
                         if ($jurnal->jenis_jurnal == 'Debit') {
                             $saldo_akhir += $jurnal->nominal_jurnal;
                             $total_saldo = $sum_saldo += $jurnal->nominal_jurnal;
@@ -229,17 +228,6 @@
                         $warna = 'Tidak Merah';
 
                     }
-                    // elseif($_GET['j_kode'] == 'BT'){
-                    //     if ($jurnal->jenis_jurnal == 'Debit') {
-                    //         $saldo_akhir += $jurnal->nominal_jurnal;
-                    //         $total_saldo = $sum_saldo += $jurnal->nominal_jurnal;
-                    //     } elseif ($jurnal->jenis_jurnal == 'Kredit') {
-                    //         $saldo_akhir -= $jurnal->nominal_jurnal;
-                    //         $total_kredit = $sum_kredit += $jurnal->nominal_jurnal;
-                    //     }
-
-                    //     $warna = 'Tidak Merah';
-                    // }
                     else{
                         if ($jurnal->jenis_jurnal == 'Debit') {
                             $saldo_akhir += $jurnal->nominal_jurnal;
@@ -274,8 +262,8 @@
                     <td>
                         <?php 
                         if ($jurnal->kode_perkiraan == '') {
-                         echo '';
-                     }elseif (strpos($jurnal->kode_perkiraan, 'BT') !== false) {
+                           echo '';
+                       }elseif (strpos($jurnal->kode_perkiraan, 'BT') !== false) {
                         echo "<span class='badge badge-primary p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>";
                     }else{
                         echo "<span class='badge badge-success p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>";
@@ -303,11 +291,11 @@
                     }elseif ($jurnal->id_bttb == 0 && strpos($jurnal->keterangan_jurnal, 'Koreksi Saldo') !== false) {
                         echo "<span class='badge badge-primary p-2'>" . $jurnal->keterangan_jurnal." - ".number_format($jurnal->nominal_jurnal)."</span>";
                     }else{
-                     echo $jurnal->keterangan_jurnal;
-                 }
-                 ?>
-             </td>
-             <td>
+                       echo $jurnal->keterangan_jurnal;
+                   }
+                   ?>
+               </td>
+               <td>
                 <?php
                 if ($jurnal->jenis_jurnal == 'Debit') {
                     echo numberToRupiah2($jurnal->nominal_jurnal);
