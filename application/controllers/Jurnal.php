@@ -34,6 +34,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_jurnal', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -71,6 +72,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_jurnal', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -125,6 +127,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('jurnal/edit_jurnal', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -538,7 +541,8 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('jurnal/buku_besar', $data);
-		//$this->load->view('v_footer', $data);
+		//$this->load->view('js_semua_halaman', $data);
+		$this->load->view('v_footer', $data);
 	}
 
 	public function filterBukuBesar(){
@@ -571,7 +575,8 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('jurnal/buku_besar', $data);
-		//$this->load->view('v_footer', $data);
+		//$this->load->view('js_semua_halaman', $data);
+		$this->load->view('v_footer', $data);
 	}
 
 	public function bttb(){
@@ -597,6 +602,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('jurnal/master_bttb', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -627,6 +633,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('jurnal/master_bttb', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -724,6 +731,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('jurnal/jurnal_pesan', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -751,6 +759,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('jurnal/jurnal_pesan', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -857,6 +866,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('jurnal/biaya_administrasi', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -884,6 +894,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('jurnal/biaya_administrasi', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -908,6 +919,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('jurnal/biaya_marketing', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -935,6 +947,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('jurnal/biaya_marketing', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -976,6 +989,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_banktitipan', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -992,6 +1006,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('bank_titipan/jurnal_ledger', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -1011,6 +1026,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('bank_titipan/jurnal_ledger', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -1059,6 +1075,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('bank_titipan/edit_jl', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -1078,6 +1095,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('bank_titipan/rincian_jl', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
