@@ -33,6 +33,7 @@ class Laporan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('laporan/v_omzet_vision', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -62,6 +63,7 @@ class Laporan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('laporan/v_omzet_vision', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -87,6 +89,7 @@ class Laporan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('laporan/v_omzet_marketing', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -115,6 +118,7 @@ class Laporan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('laporan/v_omzet_marketing', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -138,6 +142,7 @@ class Laporan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('laporan/v_pph_cobroke', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -164,6 +169,7 @@ class Laporan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('laporan/v_pph_cobroke', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -187,6 +193,7 @@ class Laporan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('laporan/v_pph_marketing', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -212,6 +219,7 @@ class Laporan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('laporan/v_pph_marketing', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -236,6 +244,7 @@ class Laporan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('laporan/v_status_approve', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -266,6 +275,7 @@ class Laporan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('laporan/v_status_approve', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -290,6 +300,7 @@ class Laporan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('laporan/v_status_transfer', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -320,6 +331,7 @@ class Laporan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('laporan/v_status_transfer', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -345,6 +357,7 @@ class Laporan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('laporan/v_admin_komisi', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -376,6 +389,7 @@ class Laporan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('laporan/v_admin_komisi', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 }
