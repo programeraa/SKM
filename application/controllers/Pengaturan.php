@@ -24,6 +24,7 @@ class Pengaturan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('pengaturan/v_jabatan', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -102,6 +103,7 @@ class Pengaturan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('pengaturan/v_member', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -186,6 +188,7 @@ class Pengaturan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('pengaturan/v_kantor', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -261,6 +264,7 @@ class Pengaturan extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('pengaturan/v_level', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
