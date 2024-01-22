@@ -11,6 +11,8 @@
             <?php 
             $k = null;
             $n = null;
+            $ket_kp = null;
+
             if(isset($_GET['dari']) && isset($_GET['ke']) || isset($_GET['kode_per']) || isset($_GET['j_kode'])){
                 $b = $_GET['dari'];
                 $t = $_GET['ke'];
@@ -20,6 +22,7 @@
                     if ($each->id_bttb == $_GET['kode_per'] ) {
                         $k = $each->kode_perkiraan;
                         $n = $each->nomor_perkiraan;
+                        $ket_kp = $each->keterangan;
                     }
                 }
             }else{
@@ -359,3 +362,113 @@
 </div>
 </div>
 </body>
+
+
+<!-- footer -->
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<?php 
+$dari = isset($_GET['dari']) && strtotime($_GET['dari']) !== false ? date("d-m-Y", strtotime($_GET['dari'])) : null;
+$ke = isset($_GET['ke']) && strtotime($_GET['ke']) !== false ? date("d-m-Y", strtotime($_GET['ke'])) : null;
+$ket_1 = isset($_GET['kode_per']) ? $k : null;
+$ket_2 = isset($_GET['kode_per']) ? $n : null;
+$ket_3 = isset($_GET['kode_per']) ? $ket_kp : null;
+$ket_4 = isset($_GET['j_kode']) ? $_GET['j_kode'] : null;
+
+$title = $title; 
+
+if ($dari && $ke) {
+    if ($ket_1 || $ket_2 || $ket_3) {
+        $title .= '\n' . '\n ' . $ket_1 . $ket_2 . ' - ' . $ket_3 . '\n Tanggal : ' . $dari . ' sampai : ' . $ke;
+    }elseif($ket_4){
+        $title .= '\n' . '\n ' . $ket_4 . '\n Tanggal : ' . $dari . ' sampai : ' . $ke;
+    }else{
+        $title .= '\n' . '\n Tanggal : ' . $dari . ' sampai : ' . $ke;
+    }
+}
+elseif ($ket_1 || $ket_2 || $ket_3) {
+    $title .= '\n' . '\n ' . $ket_1 . $ket_2 . ' - ' . $ket_3;
+}
+elseif ($ket_4) {
+    $title .= '\n' . '\n ' . $ket_4;
+}
+?>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var fromDate = <?php echo json_encode($dari); ?>;
+        var toDate = <?php echo json_encode($ke); ?>;
+        var title = <?php echo json_encode($title); ?>;
+        var ket_1 = <?php echo json_encode($ket_1); ?>;
+        var ket_2 = <?php echo json_encode($ket_2); ?>;
+        var ket_3 = <?php echo json_encode($ket_3); ?>;
+
+        title = title.replace(/\\n/g, '\n');
+
+        var table = $('#myTable').DataTable({
+            buttons: [{
+                extend: 'copyHtml5',
+                footer: true,
+                title: title
+            },
+            {
+                extend: 'csvHtml5',
+                footer: true,
+                title: title
+            },
+            {
+                extend: 'excelHtml5',
+                footer: true,
+                title: title
+            },
+            {
+                extend: 'pdfHtml5',
+                footer: true,
+                title: title
+            },
+            {
+                extend: 'print',
+                footer: true,
+                title: title
+            }
+            ],
+            dom: "<'row'<'col-md-3'l><'col-md-5'B><'col-md-4'f>>" +
+            "<'row'<'col-md-12'tr>>" +
+            "<'row'<'col-md-5'i><'col-md-7'p>>",
+            lengthMenu: [
+            [10, 25, 50, 100, -1],
+            [10, 25, 50, 100, "All"]
+            ],
+            scrollX: true,
+            autoWidth: true
+        });
+
+        table.buttons().container().appendTo('#table_wrapper .col-md-5:eq(0)');
+    });
+</script>
+
+<!-- Select2 -->
+<script src="<?php echo base_url('plugin/select2/js/select2.full.min.js'); ?>"></script>
+
+<script>
+    $(function() {
+      //Initialize Select2 Elements
+      $('.select2').select2()
+
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+    })
+  })
+</script>
+
+<script src="https://cdn.datatables.net/buttons/2.3.5/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+
+</html>
