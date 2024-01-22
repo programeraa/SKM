@@ -6,7 +6,7 @@ $tahun = date("Y");
 <footer>
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<div class="container d-flex justify-content-center">
-			<a class="navbar-brand" href="#">&copy; Copyright A&A INDONESIA <?= $tahun ?></a>
+			<p class="navbar-brand">&copy; Copyright A&A INDONESIA <?= $tahun ?></p>
 		</div>
 	</nav>
 </footer>
