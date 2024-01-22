@@ -29,6 +29,7 @@ class Marketing extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_marketing', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -157,6 +158,7 @@ class Marketing extends CI_Controller {
 
     	$this->load->view('v_header', $data);
     	$this->load->view('v_edit_marketing',$data);
+    	$this->load->view('js_semua_halaman', $data);
     	$this->load->view('v_footer', $data);
     }
 
