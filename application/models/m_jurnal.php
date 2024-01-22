@@ -546,12 +546,12 @@ class M_jurnal extends CI_Model{
 
         $this->db->select('*');
         $this->db->from('jurnal_bttb');
-        $this->db->join('jurnal_umum', 'jurnal_umum.id_bttb = jurnal_bttb.id_bttb', 'left');
+        $this->db->join('jurnal_umum', 'jurnal_umum.id_bttb = jurnal_bttb.id_bttb');
         $this->db->where('kode_perkiraan', '801');
-        $this->db->where_not_in('nomor_perkiraan', ['00100', '00101', '00104', '00105', '00106', '00107']);
+        $this->db->where_not_in('nomor_perkiraan', ['00100', '00101', '00104', '00105', '00106', '00107', '06002', '06003']);
 
         $this->db->where("DATE_FORMAT(tgl_input_jurnal, '%Y-%m') = '$bulan_tahun_sekarang'");
-        
+
         $this->db->group_by('kode_perkiraan, nomor_perkiraan, keterangan');
 
         $query = $this->db->get();
