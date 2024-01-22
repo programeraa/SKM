@@ -538,7 +538,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('jurnal/buku_besar', $data);
-		$this->load->view('v_footer', $data);
+		//$this->load->view('v_footer', $data);
 	}
 
 	public function filterBukuBesar(){
@@ -571,7 +571,7 @@ class Jurnal extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('jurnal/buku_besar', $data);
-		$this->load->view('v_footer', $data);
+		//$this->load->view('v_footer', $data);
 	}
 
 	public function bttb(){
