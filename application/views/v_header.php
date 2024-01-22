@@ -39,6 +39,17 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
         <style type="text/css">
+            body {
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh; /* Set the body to be at least the height of the viewport */
+                margin: 0;
+            }
+
+            footer {
+                margin-top: auto; /* Push the footer to the bottom */
+            }
+
             /*.table th:first-child,
             .table td:first-child {
               position: sticky;
@@ -71,10 +82,10 @@
         table.dataTable thead .sorting_desc:before,
         table.dataTable thead .sorting_desc_disabled:after,
         table.dataTable thead .sorting_desc_disabled:before {
-         bottom: .5em;
-     }
+           bottom: .5em;
+       }
 
-     @media print {
+       @media print {
         .row {
             display: flex;
             flex-wrap: wrap;
