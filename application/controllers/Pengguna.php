@@ -30,6 +30,7 @@ class Pengguna extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_pengguna', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
