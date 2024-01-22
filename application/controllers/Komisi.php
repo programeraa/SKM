@@ -27,6 +27,7 @@ class Komisi extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_dashboard', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -52,6 +53,7 @@ class Komisi extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_komisi', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -505,6 +507,7 @@ class Komisi extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_rincian_komisi', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -564,6 +567,7 @@ class Komisi extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_edit_komisi', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
