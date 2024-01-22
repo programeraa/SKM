@@ -1,9 +1,75 @@
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </body>
 
+
+
+<?php 
+$dari = isset($_GET['dari']) && strtotime($_GET['dari']) !== false ? date("d-m-Y", strtotime($_GET['dari'])) : null;
+$ke = isset($_GET['ke']) && strtotime($_GET['ke']) !== false ? date("d-m-Y", strtotime($_GET['ke'])) : null;
+
+$title = $title; 
+
+if ($dari && $ke) {
+    $title .= "\n\n Tanggal : " . $dari . ' sampai : ' . $ke;
+}
+?>
+
 <script type="text/javascript">
+    $(document).ready(function () {
+        var fromDate = <?php echo json_encode($dari); ?>;
+        var toDate = <?php echo json_encode($ke); ?>;
+        var title = <?php echo json_encode($title); ?>;
+
+        title = title.replace(/\\n/g, '\n');
+
+        var table = $('#myTable').DataTable({
+            buttons: [{
+                    extend: 'copyHtml5',
+                    footer: true,
+                    title: title
+                },
+                {
+                    extend: 'csvHtml5',
+                    footer: true,
+                    title: title
+                },
+                {
+                    extend: 'excelHtml5',
+                    footer: true,
+                    title: title
+                },
+                {
+                    extend: 'pdfHtml5',
+                    footer: true,
+                    title: title
+                },
+                {
+                    extend: 'print',
+                    footer: true,
+                    title: title
+                }
+            ],
+            dom: "<'row'<'col-md-3'l><'col-md-5'B><'col-md-4'f>>" +
+                "<'row'<'col-md-12'tr>>" +
+                "<'row'<'col-md-5'i><'col-md-7'p>>",
+            lengthMenu: [
+                [10, 25, 50, 100, -1],
+                [10, 25, 50, 100, "All"]
+            ],
+            scrollX: true,
+            autoWidth: true
+        });
+
+        table.buttons().container().appendTo('#table_wrapper .col-md-5:eq(0)');
+    });
+</script>
+
+
+
+<!-- <script type="text/javascript">
 	$(document).ready(function() {
 		var table = $('#myTable').DataTable( {
 			buttons: [
@@ -43,7 +109,7 @@
 		table.buttons().container()
 		.appendTo( '#table_wrapper .col-md-5:eq(0)' );
 	} );
-</script>
+</script> -->
 
 <!-- Select2 -->
 <script src="<?php echo base_url('plugin/select2/js/select2.full.min.js'); ?>"></script>
@@ -78,7 +144,7 @@
 </script>
 
 <script>
-    function formatRupiah2(input, resultId) {
+	function formatRupiah2(input, resultId) {
         var formatTitik = input.value.replace(/\D/g, ''); // Hapus semua karakter selain angka
         var parsedValue = parseFloat(formatTitik) / 100; // Konversi ke float dan bagi 100
         var formattedValue = '';
