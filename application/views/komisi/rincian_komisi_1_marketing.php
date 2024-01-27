@@ -240,43 +240,43 @@
 
     <?php } ?>
 
-    <?php if (!empty($referal_keterangan)) {?>
-        <div class="card-header-sm text-dark">
-            <h4 class="card-title p-2 m-0" style="text-align: center;">Rincian Komisi Referal <?php echo $referal_keterangan; ?></h4>
-        </div>
-
-        <div class="card-body p-0 pt-2">
-            <table class="tg table table-striped table-dark">
-                <tbody>
-                  <tr>
-                    <td class="tg-0lax"><?php echo 'Fee Referal'?></td>
-                    <?php if (strlen($referal_jumlah) <= 2) {?>
-                        <td class="tg-0lax text-right"><?php echo numberToRupiah($hitung_referal); ?></td>
-                    <?php }else{ ?>
-                        <td class="tg-0lax text-right"><?php echo numberToRupiah($referal_jumlah); ?></td>
-                    <?php } ?>
-                </tr>
-                <tr>
-                    <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$pph_referal.'% - '.$keterangan_pph.')'?></td>
-                    <?php if (strlen($referal_jumlah) <= 2) {?>
-                        <td class="tg-0lax text-right"><?php echo numberToRupiah($pajak_ref_2) ?></td>
-                    <?php }else{ ?>
-                        <td class="tg-0lax text-right"><?php echo numberToRupiah($total_pph_ref) ?></td>
-                    <?php } ?>
-                </tr>
-                <tr>
-                    <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
-                    <?php if (strlen($referal_jumlah) <= 2) {?>
-                        <td class="tg-0lax text-right"><?php echo numberToRupiah($fee_ref_diterima_2) ?></td>
-                    <?php }else{ ?>
-                        <td class="tg-0lax text-right text-warning"><?php echo numberToRupiah($fee_asli_referal); ?></td>
-                    <?php } ?>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 <?php } ?>
 
+<?php if (!empty($referal_keterangan)) {?>
+    <div class="card-header-sm text-dark">
+        <h4 class="card-title p-2 m-0" style="text-align: center;">Rincian Komisi Referal <?php echo $referal_keterangan; ?></h4>
+    </div>
+
+    <div class="card-body p-0 pt-2">
+        <table class="tg table table-striped table-dark">
+            <tbody>
+              <tr>
+                <td class="tg-0lax"><?php echo 'Fee Referal'?></td>
+                <?php if (strlen($referal_jumlah) <= 2) {?>
+                    <td class="tg-0lax text-right"><?php echo numberToRupiah($hitung_referal); ?></td>
+                <?php }else{ ?>
+                    <td class="tg-0lax text-right"><?php echo numberToRupiah($referal_jumlah); ?></td>
+                <?php } ?>
+            </tr>
+            <tr>
+                <td class="tg-0lax text-warning"><?php echo 'Dikurangi PPH 21 ('.$pph_referal.'% - '.$keterangan_pph.')'?></td>
+                <?php if (strlen($referal_jumlah) <= 2) {?>
+                    <td class="tg-0lax text-right"><?php echo numberToRupiah($pajak_ref_2) ?></td>
+                <?php }else{ ?>
+                    <td class="tg-0lax text-right"><?php echo numberToRupiah($total_pph_ref) ?></td>
+                <?php } ?>
+            </tr>
+            <tr>
+                <td class="tg-0lax"><?php echo 'Fee Diterima'?></td>
+                <?php if (strlen($referal_jumlah) <= 2) {?>
+                    <td class="tg-0lax text-right"><?php echo numberToRupiah($fee_ref_diterima_2) ?></td>
+                <?php }else{ ?>
+                    <td class="tg-0lax text-right text-warning"><?php echo numberToRupiah($fee_asli_referal); ?></td>
+                <?php } ?>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <?php } ?>
 
 </div>
