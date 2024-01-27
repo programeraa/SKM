@@ -129,7 +129,7 @@
                         <?php } ?>
 
                     </thead>
-                    <?php if ($komisi->kantor_komisi == 1) {?>
+                    <?php if ($komisi->kantor_komisi == 1 && $komisi->mar_listing_komisi == 77 || $komisi->mar_selling_komisi == 77) {?>
                     <?php }else{ ?>
                         <tbody>
                             <tr>
@@ -162,7 +162,7 @@
 
         <?php }else{ ?>
 
-            <?php if ($komisi->kantor_komisi == 1) {?>
+            <?php if ($komisi->kantor_komisi == 1 && $komisi->mar_listing_komisi == 77 || $komisi->mar_selling_komisi == 77) {?>
             <?php }else{ ?>
                 <div class="card-body p-0 pt-2">
                     <table class="tg table table-striped table-dark">
