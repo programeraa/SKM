@@ -97,12 +97,17 @@ class Jurnal extends CI_Controller {
 			'admin_jurnal' => $id
 		);
 
-		$this->m_jurnal->simpan_jurnal($data);
-
-		echo '<script>
-		alert("Selamat! Berhasil Menambah Data Jurnal");
-		window.location="' . base_url('Jurnal') . '"
-		</script>';
+		if ($this->m_jurnal->simpan_jurnal($data)) {
+			echo '<script>
+			alert("Selamat! Berhasil Menambah Data Jurnal");
+			window.location="' . base_url('Jurnal') . '"
+			</script>';
+		} else {
+			echo '<script>
+			alert("Gagal Simpan, Jurnal Sudah Ditutup");
+			window.location="' . base_url('Jurnal') . '"
+			</script>';
+		}
 	}
 
 	public function edit_jurnal($id){
