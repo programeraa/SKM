@@ -234,8 +234,25 @@ class M_jurnal extends CI_Model{
         return $query->result();
     }
 
-    function simpan_jurnal($data){
-        $this->db->insert('jurnal_umum',$data);
+    function cek_jurnal($tgl_input_jurnal) {
+        $tgl_jurnal = date("Y-m", strtotime($tgl_input_jurnal));
+
+        $this->db->where("DATE_FORMAT(tgl_jurnal, '%Y-%m') = ", $tgl_jurnal);
+
+        $query = $this->db->get('tutup_jurnal');
+
+        return $query->num_rows() > 0;
+    }
+
+    function simpan_jurnal($data) {
+        $tgl_input_jurnal = $data['tgl_input_jurnal'];
+        
+        if ($this->cek_jurnal($tgl_input_jurnal)) {
+            return false; 
+        } else {
+            $this->db->insert('jurnal_umum', $data);
+            return true; 
+        }
     }
 
     function edit_jurnal($where){
