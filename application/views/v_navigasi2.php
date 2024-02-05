@@ -28,21 +28,27 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="<?= base_url('Jurnal/biaya_administrasi');?>">Biaya Administrasi (701)</a>
                         <a class="dropdown-item" href="<?= base_url('Jurnal/biaya_marketing');?>">Biaya Marketing (801)</a>
+                        <a class="dropdown-item" href="<?= base_url('Jurnal/saldo_utj');?>">Saldo UTJ</a>
                     </div>
                 </div>
             </div>
 
-            <?php if ($level_asli != 'Admin Komisi' && $level_asli != 'Admin Akuntan') {?>
-                <div class="text-right ml-2">
-                    <a href="<?= base_url('Jurnal/pesan');?>">
-                        <button type="button" class="btn btn-dark" data-whatever="@getbootstrap" >Pesan Jurnal<span class="badge badge-danger badge-counter ml-1"><?php
-                        if ($tutup != 0) {
-                            echo $tutup;
-                        }else{
-                            echo '';
-                        } ?></span></button></a>
-                    </div>
-                <?php } ?>
+            <div class="text-right ml-2">
+                <a href="<?= base_url('Jurnal/saldo_utj');?>">
+                    <button type="button" class="btn btn-success" data-whatever="@getbootstrap" >Saldo UTJ</button></a>
+                </div>
+
+                <?php if ($level_asli != 'Admin Komisi' && $level_asli != 'Admin Akuntan') {?>
+                    <div class="text-right ml-2">
+                        <a href="<?= base_url('Jurnal/pesan');?>">
+                            <button type="button" class="btn btn-dark" data-whatever="@getbootstrap" >Pesan Jurnal<span class="badge badge-danger badge-counter ml-1"><?php
+                            if ($tutup != 0) {
+                                echo $tutup;
+                            }else{
+                                echo '';
+                            } ?></span></button></a>
+                        </div>
+                    <?php } ?>
 
 
         <!-- <div class="text-right ml-2">
