@@ -621,6 +621,71 @@ class M_jurnal extends CI_Model{
         return $query->result();
     }
 
+    function tampil_data_saldo_utj(){
+       $this->db->select('*');
+       $this->db->from('jurnal_umum');
+       $this->db->group_start();
+       $this->db->where('jurnal_umum.keterangan_jurnal', 'Koreksi Saldo');
+       $this->db->or_group_start();
+       $this->db->join('jurnal_bttb', 'jurnal_umum.id_bttb = jurnal_bttb.id_bttb', 'left');
+       $this->db->like('jurnal_bttb.kode_perkiraan', 'UTJ');
+       $this->db->group_end();
+       $this->db->group_end();
 
+       $query = $this->db->get();
+       $data = $query->result();
+
+    // Susun ulang array hasil query
+       $resultData = array();
+       $koreksiSaldoData = array();
+
+       foreach ($data as $row) {
+        if ($row->keterangan_jurnal == 'Koreksi Saldo') {
+            $koreksiSaldoData[] = $row;
+        } else {
+            $resultData[] = $row;
+        }
+    }
+
+    // Gabungkan data 'Koreksi Saldo' di urutan pertama
+    $resultData = array_merge($koreksiSaldoData, $resultData);
+
+    return $resultData;
+}
+
+function filter_saldo_utj($dari, $ke){
+    $this->db->select('*');
+    $this->db->from('jurnal_umum');
+    $this->db->group_start();
+    $this->db->where('jurnal_umum.keterangan_jurnal', 'Koreksi Saldo');
+    $this->db->or_group_start();
+    $this->db->join('jurnal_bttb', 'jurnal_umum.id_bttb = jurnal_bttb.id_bttb', 'left');
+    $this->db->like('jurnal_bttb.kode_perkiraan', 'UTJ');
+    $this->db->group_end();
+    $this->db->group_end();
+
+    if (!empty($dari) && !empty($ke)) {
+        $this->db->where('jurnal_umum.tgl_input_jurnal >=', $dari);
+        $this->db->where('jurnal_umum.tgl_input_jurnal <=', $ke);
+    }
+
+    $query = $this->db->get();
+    $data = $query->result();
+
+    $resultData = array();
+    $koreksiSaldoData = array();
+
+    foreach ($data as $row) {
+        if ($row->keterangan_jurnal == 'Koreksi Saldo') {
+            $koreksiSaldoData[] = $row;
+        } else {
+            $resultData[] = $row;
+        }
+    }
+
+    $resultData = array_merge($koreksiSaldoData, $resultData);
+
+    return $resultData;
+}
 
 }
