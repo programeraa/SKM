@@ -987,6 +987,58 @@ class Jurnal extends CI_Controller {
 	}
 
 
+	public function saldo_utj(){
+		$level = $this->session->userdata('level');
+		$level_asli = $this->session->userdata('level_asli');
+		$akses_level = $this->session->userdata('level_akses');
+
+		if ($level == '') {
+			$this->session->set_flashdata('gagal', 'Anda Belum Login');
+			redirect(base_url('login'));
+		} elseif ($level_asli == 'Admin Komisi') {
+			redirect(base_url('komisi'));
+		}
+
+		$total_tutup = $this->m_jurnal->hitung_total_tutup_pesan();
+		$data['tutup'] = $total_tutup;
+
+		$data['title'] = "Total Saldo UTJ";
+		$data['total_biaya'] = $this->m_jurnal->tampil_data_saldo_utj();
+		$data['jurnal_umum'] = $this->m_jurnal->tampil_data_jurnal_2();
+
+		$this->load->view('v_header', $data);
+		$this->load->view('jurnal/saldo_utj', $data);
+		$this->load->view('js_semua_halaman', $data);
+		$this->load->view('v_footer', $data);
+	}
+
+	public function filterSaldoUTJ(){
+		$level = $this->session->userdata('level');
+		$level_asli = $this->session->userdata('level_asli');
+		$akses_level = $this->session->userdata('level_akses');
+
+		if ($level == '') {
+			$this->session->set_flashdata('gagal', 'Anda Belum Login');
+			redirect(base_url('login'));
+		} elseif ($level_asli == 'Admin Komisi') {
+			redirect(base_url('komisi'));
+		}
+
+		$dari = $this->input->get('dari');
+		$ke = $this->input->get('ke');
+
+		$total_tutup = $this->m_jurnal->hitung_total_tutup_pesan();
+		$data['tutup'] = $total_tutup;
+
+		$data['title'] = "Total Saldo UTJ";
+		$data['total_biaya'] = $this->m_jurnal->filter_saldo_utj($dari, $ke);
+		$data['jurnal_umum'] = $this->m_jurnal->tampil_data_jurnal_2();
+
+		$this->load->view('v_header', $data);
+		$this->load->view('jurnal/saldo_utj', $data);
+		$this->load->view('js_semua_halaman', $data);
+		$this->load->view('v_footer', $data);
+	}
 
 
 
