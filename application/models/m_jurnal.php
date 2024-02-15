@@ -560,6 +560,7 @@ class M_jurnal extends CI_Model{
         $this->db->from('jurnal_bttb');
         $this->db->join('jurnal_umum', 'jurnal_umum.id_bttb = jurnal_bttb.id_bttb', 'left');
         $this->db->where('kode_perkiraan', '701');
+        $this->db->not_like('nomor_perkiraan', '.VS');
 
         $this->db->where("DATE_FORMAT(tgl_input_jurnal, '%Y-%m') = '$bulan_tahun_sekarang'");
 
@@ -574,6 +575,7 @@ class M_jurnal extends CI_Model{
         $this->db->from('jurnal_bttb');
         $this->db->join('jurnal_umum', 'jurnal_umum.id_bttb = jurnal_bttb.id_bttb', 'left');
         $this->db->where('kode_perkiraan', '701');
+        $this->db->not_like('nomor_perkiraan', '.VS');
         $this->db->group_by('kode_perkiraan, nomor_perkiraan, keterangan');
 
 
@@ -586,6 +588,45 @@ class M_jurnal extends CI_Model{
         return $query->result();
     }
 
+    //=======================================================================
+
+    function tampil_data_biaya_administrasi_v(){
+        $bulan_tahun_sekarang = date('Y-m');
+
+        $this->db->select('*');
+        $this->db->from('jurnal_bttb');
+        $this->db->join('jurnal_umum', 'jurnal_umum.id_bttb = jurnal_bttb.id_bttb', 'left');
+        $this->db->where('kode_perkiraan', '701');
+        $this->db->like('nomor_perkiraan', '.VS');
+
+        $this->db->where("DATE_FORMAT(tgl_input_jurnal, '%Y-%m') = '$bulan_tahun_sekarang'");
+
+        $this->db->group_by('kode_perkiraan, nomor_perkiraan, keterangan');
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function filter_biaya_administrasi_v($dari, $ke){
+        $this->db->select('*');
+        $this->db->from('jurnal_bttb');
+        $this->db->join('jurnal_umum', 'jurnal_umum.id_bttb = jurnal_bttb.id_bttb', 'left');
+        $this->db->where('kode_perkiraan', '701');
+        $this->db->like('nomor_perkiraan', '.VS');
+        $this->db->group_by('kode_perkiraan, nomor_perkiraan, keterangan');
+
+
+        if (!empty($dari) && !empty($ke)) {
+            $this->db->where('jurnal_umum.tgl_input_jurnal >=', $dari);
+            $this->db->where('jurnal_umum.tgl_input_jurnal <=', $ke);
+        }
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    //=================================================================
+
     function tampil_data_biaya_marketing(){
         $bulan_tahun_sekarang = date('Y-m');
 
@@ -594,6 +635,7 @@ class M_jurnal extends CI_Model{
         $this->db->join('jurnal_umum', 'jurnal_umum.id_bttb = jurnal_bttb.id_bttb');
         $this->db->where('kode_perkiraan', '801');
         $this->db->where_not_in('nomor_perkiraan', ['00001', '0002', '00100', '00101', '00104', '00105', '00106', '00107', '06002', '06003']);
+        $this->db->not_like('nomor_perkiraan', '.VS');
 
         $this->db->where("DATE_FORMAT(tgl_input_jurnal, '%Y-%m') = '$bulan_tahun_sekarang'");
 
@@ -610,6 +652,7 @@ class M_jurnal extends CI_Model{
         $this->db->join('jurnal_umum', 'jurnal_umum.id_bttb = jurnal_bttb.id_bttb', 'left');
         $this->db->where('kode_perkiraan', '801');
         $this->db->where_not_in('nomor_perkiraan', ['00001', '0002', '00100', '00101', '00104', '00105', '00106', '00107', '06002', '06003']);
+        $this->db->not_like('nomor_perkiraan', '.VS');
         $this->db->group_by('kode_perkiraan, nomor_perkiraan, keterangan');
 
         if (!empty($dari) && !empty($ke)) {
@@ -620,6 +663,47 @@ class M_jurnal extends CI_Model{
         $query = $this->db->get();
         return $query->result();
     }
+
+    //==============================================================
+
+    function tampil_data_biaya_marketing_v(){
+        $bulan_tahun_sekarang = date('Y-m');
+
+        $this->db->select('*');
+        $this->db->from('jurnal_bttb');
+        $this->db->join('jurnal_umum', 'jurnal_umum.id_bttb = jurnal_bttb.id_bttb');
+        $this->db->where('kode_perkiraan', '801');
+        $this->db->where_not_in('nomor_perkiraan', ['00001', '0002', '00100', '00101', '00104', '00105', '00106', '00107', '06002', '06003']);
+        $this->db->like('nomor_perkiraan', '.VS');
+
+        $this->db->where("DATE_FORMAT(tgl_input_jurnal, '%Y-%m') = '$bulan_tahun_sekarang'");
+
+        $this->db->group_by('kode_perkiraan, nomor_perkiraan, keterangan');
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
+    function filter_biaya_marketing_v($dari, $ke){
+        $this->db->select('*');
+        $this->db->from('jurnal_bttb');
+        $this->db->join('jurnal_umum', 'jurnal_umum.id_bttb = jurnal_bttb.id_bttb', 'left');
+        $this->db->where('kode_perkiraan', '801');
+        $this->db->where_not_in('nomor_perkiraan', ['00001', '0002', '00100', '00101', '00104', '00105', '00106', '00107', '06002', '06003']);
+        $this->db->like('nomor_perkiraan', '.VS');
+        $this->db->group_by('kode_perkiraan, nomor_perkiraan, keterangan');
+
+        if (!empty($dari) && !empty($ke)) {
+            $this->db->where('jurnal_umum.tgl_input_jurnal >=', $dari);
+            $this->db->where('jurnal_umum.tgl_input_jurnal <=', $ke);
+        }
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    //===========================================================
 
     function tampil_data_saldo_utj(){
      $this->db->select('*');
