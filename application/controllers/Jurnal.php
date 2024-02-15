@@ -895,7 +895,7 @@ class Jurnal extends CI_Controller {
 		$total_tutup = $this->m_jurnal->hitung_total_tutup_pesan();
 		$data['tutup'] = $total_tutup;
 
-		$data['title'] = "Biaya Administrasi";
+		$data['title'] = "Biaya Administrasi Pusat";
 		$data['total_biaya'] = $this->m_jurnal->tampil_data_biaya_administrasi();
 		$data['jurnal_umum'] = $this->m_jurnal->tampil_data_jurnal_2();
 
@@ -923,7 +923,7 @@ class Jurnal extends CI_Controller {
 		$total_tutup = $this->m_jurnal->hitung_total_tutup_pesan();
 		$data['tutup'] = $total_tutup;
 
-		$data['title'] = "Biaya Administrasi";
+		$data['title'] = "Biaya Administrasi Pusat";
 		$data['total_biaya'] = $this->m_jurnal->filter_biaya_administrasi($dari, $ke);
 		$data['jurnal_umum'] = $this->m_jurnal->tampil_data_jurnal_2();
 
@@ -932,6 +932,63 @@ class Jurnal extends CI_Controller {
 		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
+
+	//====================================================================================
+
+	public function biaya_administrasi_v(){
+		$level = $this->session->userdata('level');
+		$level_asli = $this->session->userdata('level_asli');
+		$akses_level = $this->session->userdata('level_akses');
+
+		if ($level == '') {
+			$this->session->set_flashdata('gagal', 'Anda Belum Login');
+			redirect(base_url('login'));
+		} elseif ($level_asli == 'Admin Komisi') {
+			redirect(base_url('komisi'));
+		}
+
+		$total_tutup = $this->m_jurnal->hitung_total_tutup_pesan();
+		$data['tutup'] = $total_tutup;
+
+		$data['title'] = "Biaya Administrasi Vision";
+		$data['total_biaya'] = $this->m_jurnal->tampil_data_biaya_administrasi_v();
+		$data['jurnal_umum'] = $this->m_jurnal->tampil_data_jurnal_2();
+
+		$this->load->view('v_header', $data);
+		$this->load->view('jurnal/biaya_administrasi_v', $data);
+		$this->load->view('js_semua_halaman', $data);
+		$this->load->view('v_footer', $data);
+	}
+
+	public function filterBiayaAdministrasi_v(){
+		$level = $this->session->userdata('level');
+		$level_asli = $this->session->userdata('level_asli');
+		$akses_level = $this->session->userdata('level_akses');
+
+		if ($level == '') {
+			$this->session->set_flashdata('gagal', 'Anda Belum Login');
+			redirect(base_url('login'));
+		} elseif ($level_asli == 'Admin Komisi') {
+			redirect(base_url('komisi'));
+		}
+
+		$dari = $this->input->get('dari');
+		$ke = $this->input->get('ke');
+
+		$total_tutup = $this->m_jurnal->hitung_total_tutup_pesan();
+		$data['tutup'] = $total_tutup;
+
+		$data['title'] = "Biaya Administrasi Vision";
+		$data['total_biaya'] = $this->m_jurnal->filter_biaya_administrasi_v($dari, $ke);
+		$data['jurnal_umum'] = $this->m_jurnal->tampil_data_jurnal_2();
+
+		$this->load->view('v_header', $data);
+		$this->load->view('jurnal/biaya_administrasi_v', $data);
+		$this->load->view('js_semua_halaman', $data);
+		$this->load->view('v_footer', $data);
+	}
+
+	//==========================================================================
 
 	public function biaya_marketing(){
 		$level = $this->session->userdata('level');
@@ -948,7 +1005,7 @@ class Jurnal extends CI_Controller {
 		$total_tutup = $this->m_jurnal->hitung_total_tutup_pesan();
 		$data['tutup'] = $total_tutup;
 
-		$data['title'] = "Biaya Marketing";
+		$data['title'] = "Biaya Marketing Pusat";
 		$data['total_biaya'] = $this->m_jurnal->tampil_data_biaya_marketing();
 		$data['jurnal_umum'] = $this->m_jurnal->tampil_data_jurnal_2();
 
@@ -976,7 +1033,7 @@ class Jurnal extends CI_Controller {
 		$total_tutup = $this->m_jurnal->hitung_total_tutup_pesan();
 		$data['tutup'] = $total_tutup;
 
-		$data['title'] = "Biaya Marketing";
+		$data['title'] = "Biaya Marketing Pusat";
 		$data['total_biaya'] = $this->m_jurnal->filter_biaya_marketing($dari, $ke);
 		$data['jurnal_umum'] = $this->m_jurnal->tampil_data_jurnal_2();
 
@@ -985,6 +1042,63 @@ class Jurnal extends CI_Controller {
 		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
+
+	//=======================================================================
+
+	public function biaya_marketing_v(){
+		$level = $this->session->userdata('level');
+		$level_asli = $this->session->userdata('level_asli');
+		$akses_level = $this->session->userdata('level_akses');
+
+		if ($level == '') {
+			$this->session->set_flashdata('gagal', 'Anda Belum Login');
+			redirect(base_url('login'));
+		} elseif ($level_asli == 'Admin Komisi') {
+			redirect(base_url('komisi'));
+		}
+
+		$total_tutup = $this->m_jurnal->hitung_total_tutup_pesan();
+		$data['tutup'] = $total_tutup;
+
+		$data['title'] = "Biaya Marketing Vision";
+		$data['total_biaya'] = $this->m_jurnal->tampil_data_biaya_marketing_v();
+		$data['jurnal_umum'] = $this->m_jurnal->tampil_data_jurnal_2();
+
+		$this->load->view('v_header', $data);
+		$this->load->view('jurnal/biaya_marketing_v', $data);
+		$this->load->view('js_semua_halaman', $data);
+		$this->load->view('v_footer', $data);
+	}
+
+	public function filterBiayaMarketing_v(){
+		$level = $this->session->userdata('level');
+		$level_asli = $this->session->userdata('level_asli');
+		$akses_level = $this->session->userdata('level_akses');
+
+		if ($level == '') {
+			$this->session->set_flashdata('gagal', 'Anda Belum Login');
+			redirect(base_url('login'));
+		} elseif ($level_asli == 'Admin Komisi') {
+			redirect(base_url('komisi'));
+		}
+
+		$dari = $this->input->get('dari');
+		$ke = $this->input->get('ke');
+
+		$total_tutup = $this->m_jurnal->hitung_total_tutup_pesan();
+		$data['tutup'] = $total_tutup;
+
+		$data['title'] = "Biaya Marketing Vision";
+		$data['total_biaya'] = $this->m_jurnal->filter_biaya_marketing_v($dari, $ke);
+		$data['jurnal_umum'] = $this->m_jurnal->tampil_data_jurnal_2();
+
+		$this->load->view('v_header', $data);
+		$this->load->view('jurnal/biaya_marketing_v', $data);
+		$this->load->view('js_semua_halaman', $data);
+		$this->load->view('v_footer', $data);
+	}
+
+	//===========================================================================
 
 
 	public function saldo_utj(){
