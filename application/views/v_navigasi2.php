@@ -26,8 +26,11 @@
                         Sub Ledger Biaya
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="<?= base_url('Jurnal/biaya_administrasi');?>">Biaya Administrasi (701)</a>
-                        <a class="dropdown-item" href="<?= base_url('Jurnal/biaya_marketing');?>">Biaya Marketing (801)</a>
+                        <a class="dropdown-item" href="<?= base_url('Jurnal/biaya_administrasi');?>">Biaya Administrasi (701) - PUSAT</a>
+                        <a class="dropdown-item" href="<?= base_url('Jurnal/biaya_administrasi_v');?>">Biaya Administrasi (701) - VISION</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="<?= base_url('Jurnal/biaya_marketing');?>">Biaya Marketing (801) - PUSAT</a>
+                        <a class="dropdown-item" href="<?= base_url('Jurnal/biaya_marketing_v');?>">Biaya Marketing (801) - VISION</a>
                     </div>
                 </div>
             </div>
