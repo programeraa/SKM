@@ -676,6 +676,8 @@ class M_jurnal extends CI_Model{
         $this->db->where_not_in('nomor_perkiraan', ['00001', '0002', '00100', '00101', '00104', '00105', '00106', '00107', '06002', '06003']);
         $this->db->like('nomor_perkiraan', '.VS');
 
+        $this->db->where_not_in('nomor_perkiraan', ['00001.VS', '00100.VS', '00101.VS', '00105.VS']);
+
         $this->db->where("DATE_FORMAT(tgl_input_jurnal, '%Y-%m') = '$bulan_tahun_sekarang'");
 
         $this->db->group_by('kode_perkiraan, nomor_perkiraan, keterangan');
@@ -692,6 +694,9 @@ class M_jurnal extends CI_Model{
         $this->db->where('kode_perkiraan', '801');
         $this->db->where_not_in('nomor_perkiraan', ['00001', '0002', '00100', '00101', '00104', '00105', '00106', '00107', '06002', '06003']);
         $this->db->like('nomor_perkiraan', '.VS');
+
+        $this->db->where_not_in('nomor_perkiraan', ['00001.VS', '00100.VS', '00101.VS', '00105.VS']);
+        
         $this->db->group_by('kode_perkiraan, nomor_perkiraan, keterangan');
 
         if (!empty($dari) && !empty($ke)) {
