@@ -17,7 +17,7 @@
                 $t = null;
             }
             ?>
-            <h4 class="card-title" style="text-align: center;">Sub Ledger Biaya Administrasi</h4>
+            <h4 class="card-title" style="text-align: center;">Sub Ledger Biaya Administrasi Pusat</h4>
             <?php if ($b != null){ ?>
                 <h5>
                   <?php 
