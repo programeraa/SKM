@@ -201,6 +201,18 @@ class M_jurnal extends CI_Model{
                 if ($kode_per == 189) {
                     $this->db->or_like('keterangan_jurnal', 'Saldo Awal Kas Kecil Vision '.$bulan_indo);
                 }
+
+                if ($kode_per == 195) {
+                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal Pinjaman Karyawan Eko');
+                }
+
+                if ($kode_per == 196) {
+                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal Pinjaman Karyawan Julia');
+                }
+
+                if ($kode_per == 200) {
+                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal Pinjaman Karyawan Elina');
+                }
             }else{
                 if ($kode_per == 175) {
                     $this->db->or_like('keterangan_jurnal', 'Saldo Awal Bank Fee Januari');
@@ -216,6 +228,18 @@ class M_jurnal extends CI_Model{
 
                 if ($kode_per == 189) {
                     $this->db->or_like('keterangan_jurnal', 'Saldo Awal Kas Kecil Vision Januari');
+                }
+
+                if ($kode_per == 195) {
+                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal Pinjaman Karyawan Eko');
+                }
+
+                if ($kode_per == 196) {
+                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal Pinjaman Karyawan Julia');
+                }
+
+                if ($kode_per == 200) {
+                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal Pinjaman Karyawan Elina');
                 }
             }
             $this->db->group_end();
@@ -441,7 +465,7 @@ class M_jurnal extends CI_Model{
     }
 
     function tampil_data_bttb(){
-        $this->db->order_by('kode_perkiraan', 'ASC');
+        $this->db->order_by('kode_perkiraan ASC, nomor_perkiraan ASC');
         return $this->db->get('jurnal_bttb');
     }
 
