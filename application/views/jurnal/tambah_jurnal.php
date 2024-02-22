@@ -39,7 +39,7 @@
                     </div>
                     <div class="form-group">
                         <label for="j_jurnal" class="col-form-label">Jenis Jurnal</label>
-                        <select class="form-control" id="j_jurnal" name="j_jurnal">
+                        <select class="form-control" id="j_jurnal" name="j_jurnal" required>
                             <option value="">Pilih Jenis Jurnal</option>
                             <option value="Debit">Debit</option>
                             <option value="Kredit">Kredit</option>
