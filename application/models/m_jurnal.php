@@ -57,7 +57,8 @@ class M_jurnal extends CI_Model{
     $this->db->from('jurnal_umum');
     $this->db->join('jurnal_bttb','jurnal_umum.id_bttb = jurnal_bttb.id_bttb','left');
     $this->db->where("DATE_FORMAT(tgl_input_jurnal, '%Y-%m') = '$bulan_tahun_sekarang'");
-    $this->db->order_by('tgl_input_jurnal', 'ASC');
+    //$this->db->order_by('tgl_input_jurnal', 'ASC');
+    $this->db->order_by('tgl_input_jurnal ASC, kode_jurnal ASC, id_jurnal ASC');
 
     $query = $this->db->get();
     return $query->result();
@@ -68,7 +69,7 @@ function filter_jurnal($dari, $ke, $j_kode, $kode_per, $kode, $tgl, $bt){
     $this->db->from('jurnal_umum');
     $this->db->join('jurnal_bttb','jurnal_umum.id_bttb = jurnal_bttb.id_bttb','left');
     //$this->db->order_by('tgl_input_jurnal ASC, id_jurnal ASC');
-	$this->db->order_by('tgl_input_jurnal ASC, kode_jurnal ASC, id_jurnal ASC');
+    $this->db->order_by('tgl_input_jurnal ASC, kode_jurnal ASC, id_jurnal ASC');
 
     if (!empty($dari) && !empty($ke)) {
         $this->db->where('tgl_input_jurnal >=', $dari);
@@ -106,7 +107,8 @@ function filter_jurnal_buku_besar($dari, $ke, $j_kode, $kode_per, $kode, $tgl, $
     $this->db->select('*');
     $this->db->from('jurnal_umum');
     $this->db->join('jurnal_bttb','jurnal_umum.id_bttb = jurnal_bttb.id_bttb','left');
-    $this->db->order_by('tgl_input_jurnal ASC, id_jurnal ASC');
+    //$this->db->order_by('tgl_input_jurnal ASC, id_jurnal ASC');
+    $this->db->order_by('tgl_input_jurnal ASC, kode_jurnal ASC, id_jurnal ASC');
 
         // $dari_bulan_tahun = date('m-Y', strtotime($dari));
         // $ke_bulan_tahun = date('m-Y', strtotime($ke));
