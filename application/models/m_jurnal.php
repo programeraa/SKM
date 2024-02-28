@@ -67,7 +67,8 @@ function filter_jurnal($dari, $ke, $j_kode, $kode_per, $kode, $tgl, $bt){
     $this->db->select('*');
     $this->db->from('jurnal_umum');
     $this->db->join('jurnal_bttb','jurnal_umum.id_bttb = jurnal_bttb.id_bttb','left');
-    $this->db->order_by('tgl_input_jurnal ASC, id_jurnal ASC');
+    //$this->db->order_by('tgl_input_jurnal ASC, id_jurnal ASC');
+	$this->db->order_by('tgl_input_jurnal ASC, kode_jurnal ASC, id_jurnal ASC');
 
     if (!empty($dari) && !empty($ke)) {
         $this->db->where('tgl_input_jurnal >=', $dari);
