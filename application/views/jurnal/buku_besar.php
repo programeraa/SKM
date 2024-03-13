@@ -211,7 +211,7 @@
 
                     $k_kiri = substr($k, 0, 1);
 
-                    if (($k == 'UTJ' || $_GET['j_kode'] == 'UTJ' || $_GET['j_kode'] == 'PUT' || $_GET['j_kode'] == 'PUT.VS' || $put == 'PUT' || $put == 'PUT.VS') || ($_GET['kode_per'] == 164 || $_GET['kode_per'] == 183 || $_GET['kode_per'] == 163 || $_GET['kode_per'] == 178 || $_GET['kode_per'] == 241) || (($k == 801 && in_array($n, [100, 101, 104, 105, 106, 107])) || ($k == 101 && in_array($n, [1, 2, 3, 4, 5])))) {
+                    if (($k == 'UTJ' || $_GET['j_kode'] == 'UTJ' || $_GET['j_kode'] == 'PUT' || $_GET['j_kode'] == 'PUT.VS' || $put == 'PUT' || $put == 'PUT.VS') || ($_GET['kode_per'] == 164 || $_GET['kode_per'] == 183 || $_GET['kode_per'] == 163 || $_GET['kode_per'] == 178 || $_GET['kode_per'] == 241 || $_GET['kode_per'] == 307) || (($k == 801 && in_array($n, [100, 101, 104, 105, 106, 107])) || ($k == 101 && in_array($n, [1, 2, 3, 4, 5])))) {
                         if ($jurnal->jenis_jurnal == 'Debit') {
                             $saldo_akhir -= $jurnal->nominal_jurnal;
                             $total_saldo = $sum_saldo += $jurnal->nominal_jurnal;
