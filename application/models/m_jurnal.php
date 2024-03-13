@@ -859,6 +859,7 @@ function tampil_data_saldo_put(){
    $this->db->from('jurnal_umum');
    $this->db->join('jurnal_bttb', 'jurnal_umum.id_bttb = jurnal_bttb.id_bttb', 'left');
    $this->db->where('jurnal_bttb.kode_perkiraan', 'PUT');
+   $this->db->order_by('jurnal_umum.tgl_input_jurnal', 'ASC');
    $this->db->group_by('kode_perkiraan, nomor_perkiraan');
 
    $query = $this->db->get();
@@ -875,7 +876,7 @@ function filter_data_saldo_put($dari, $ke){
     $this->db->where('jurnal_umum.tgl_input_jurnal >=', $dari);
     $this->db->where('jurnal_umum.tgl_input_jurnal <=', $ke);
 }
-
+$this->db->order_by('jurnal_umum.tgl_input_jurnal', 'ASC');
 $this->db->group_by('kode_perkiraan, nomor_perkiraan');
 
 $query = $this->db->get();
@@ -887,6 +888,7 @@ function tampil_data_saldo_put_v(){
    $this->db->from('jurnal_umum');
    $this->db->join('jurnal_bttb', 'jurnal_umum.id_bttb = jurnal_bttb.id_bttb', 'left');
    $this->db->where('jurnal_bttb.kode_perkiraan', 'PUT.VS');
+   $this->db->order_by('jurnal_umum.tgl_input_jurnal', 'ASC');
    $this->db->group_by('kode_perkiraan, nomor_perkiraan');
 
    $query = $this->db->get();
@@ -903,7 +905,7 @@ function filter_data_saldo_put_v($dari, $ke){
     $this->db->where('jurnal_umum.tgl_input_jurnal >=', $dari);
     $this->db->where('jurnal_umum.tgl_input_jurnal <=', $ke);
 }
-
+$this->db->order_by('jurnal_umum.tgl_input_jurnal', 'ASC');
 $this->db->group_by('kode_perkiraan, nomor_perkiraan');
 
 $query = $this->db->get();
