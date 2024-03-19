@@ -119,46 +119,124 @@ function filter_jurnal($dari, $ke, $j_kode, $kode_per, $kode, $tgl, $bt){
     return $query->result();
 }
 
+// public function get_saldo_sebelumnya($bulan_sekarang, $tahun_sekarang, $kode_perkiraan) {
+//     $bulan_sebelumnya = date('m', strtotime($tahun_sekarang.'-'.$bulan_sekarang.'-01 -1 month'));
+//     $tahun_sebelumnya = date('Y', strtotime($tahun_sekarang.'-'.$bulan_sekarang.'-01 -1 month'));
+
+//     if ($kode_perkiraan = 175) {
+//         $this->db->select('SUM(CASE WHEN jenis_jurnal = "Debit" THEN -nominal_jurnal ELSE nominal_jurnal END) AS saldo_sebelumnya');
+//     }else{
+//         $this->db->select_sum('nominal_jurnal');
+//     }
+
+//     $this->db->from('jurnal_umum');
+//     $this->db->join('jurnal_bttb', 'jurnal_umum.id_bttb = jurnal_bttb.id_bttb', 'left');
+//     $this->db->where('MONTH(tgl_input_jurnal)', $bulan_sebelumnya);
+//     $this->db->where('YEAR(tgl_input_jurnal)', $tahun_sebelumnya);
+//     $this->db->where('jurnal_umum.id_bttb', $kode_perkiraan);
+
+//     $query = $this->db->get();
+//     $result = $query->row();
+
+//     return $result->saldo_sebelumnya ?? 0;
+// }
+
+// public function get_saldo_sebelumnya($bulan_sekarang, $tahun_sekarang, $kode_perkiraan, $j_kode) {
+//     $total_saldo = 0;
+
+//     for ($i = 1; $i < $bulan_sekarang; $i++) {
+//         $bulan_sebelumnya = str_pad($i, 2, '0', STR_PAD_LEFT);
+
+//         $this->db->select('SUM(CASE WHEN jenis_jurnal = "Debit" THEN -nominal_jurnal ELSE nominal_jurnal END) AS saldo_bulan');
+
+//         $this->db->from('jurnal_umum');
+//         $this->db->join('jurnal_bttb', 'jurnal_umum.id_bttb = jurnal_bttb.id_bttb', 'left');
+//         $this->db->where('MONTH(tgl_input_jurnal)', $bulan_sebelumnya);
+//         $this->db->where('YEAR(tgl_input_jurnal)', $tahun_sekarang);
+
+//         if (!empty($kode_perkiraan)) {
+//             $this->db->where('jurnal_umum.id_bttb', $kode_perkiraan);
+//         }
+
+//         if (!empty($j_kode)) {
+//             $this->db->where('kode_perkiraan', $j_kode);
+//         }
+
+//         $query = $this->db->get();
+//         $result = $query->row();
+//         $saldo_bulan = $result->saldo_bulan ?? 0;
+
+//         $total_saldo += $saldo_bulan;
+//     }
+
+//     return $total_saldo;
+// }
+
+public function get_saldo_sebelumnya($bulan_sekarang, $tahun_sekarang, $kode_perkiraan, $j_kode) {
+    $total_saldo = 0;
+
+    // Menggabungkan semua query dalam satu query menggunakan UNION
+    $sql = "(SELECT 
+    SUM(CASE WHEN jenis_jurnal = 'Debit' THEN -nominal_jurnal ELSE nominal_jurnal END) AS saldo_bulan
+    FROM 
+    jurnal_umum
+    LEFT JOIN 
+    jurnal_bttb ON jurnal_umum.id_bttb = jurnal_bttb.id_bttb
+    WHERE 
+    MONTH(tgl_input_jurnal) < $bulan_sekarang AND YEAR(tgl_input_jurnal) = $tahun_sekarang";
+    
+    if (!empty($kode_perkiraan)) {
+        $sql .= " AND jurnal_umum.id_bttb = $kode_perkiraan";
+    }
+
+    if (!empty($j_kode)) {
+        $sql .= " AND kode_perkiraan = '$j_kode'";
+    }
+    
+    $sql .= ")";
+
+    $sql .= " UNION ";
+
+    $sql .= "(SELECT 
+    SUM(CASE WHEN jenis_jurnal = 'Debit' THEN -nominal_jurnal ELSE nominal_jurnal END) AS saldo_bulan
+    FROM 
+    jurnal_umum
+    LEFT JOIN 
+    jurnal_bttb ON jurnal_umum.id_bttb = jurnal_bttb.id_bttb";
+
+    $sql .= " WHERE 
+    YEAR(tgl_input_jurnal) < $tahun_sekarang";
+
+    if (!empty($kode_perkiraan)) {
+        $sql .= " AND jurnal_umum.id_bttb = $kode_perkiraan";
+    }
+
+    if (!empty($j_kode)) {
+        $sql .= " AND kode_perkiraan = '$j_kode'";
+    }
+
+    if ($j_kode == 'BT' || $j_kode == 'UTJ') {
+        $this->db->or_like('keterangan_jurnal', 'Koreksi Saldo');
+    }
+
+    $sql .= ")";
+
+    $query = $this->db->query($sql);
+    $results = $query->result();
+
+    foreach ($results as $result) {
+        $saldo_bulan = $result->saldo_bulan ?? 0;
+        $total_saldo += $saldo_bulan;
+    }
+
+    return $total_saldo;
+}
+
 function filter_jurnal_buku_besar($dari, $ke, $j_kode, $kode_per, $kode, $tgl, $bt){
     $this->db->select('*');
     $this->db->from('jurnal_umum');
     $this->db->join('jurnal_bttb','jurnal_umum.id_bttb = jurnal_bttb.id_bttb','left');
-    //$this->db->order_by('tgl_input_jurnal ASC, id_jurnal ASC');
     $this->db->order_by('tgl_input_jurnal ASC, kode_jurnal ASC, id_jurnal ASC');
-
-        // $dari_bulan_tahun = date('m-Y', strtotime($dari));
-        // $ke_bulan_tahun = date('m-Y', strtotime($ke));
-
-        // $a = $dari_bulan_tahun <= '10-2023' && $ke_bulan_tahun <= '10-2023';
-
-    $dari_bulan_tahun = date('Y-m', strtotime($dari));
-    $ke_bulan_tahun = date('Y-m', strtotime($ke));
-
-    $compare_date = date('Y-m', strtotime('2023-10'));
-    $compare_date_2 = date('Y-m', strtotime('2023-11'));
-
-    $a = $dari_bulan_tahun <= $compare_date && $ke_bulan_tahun <= $compare_date;
-
-    $b = $dari_bulan_tahun < $ke_bulan_tahun;
-
-    $tanggal_format = date('F', strtotime($dari));
-
-    $monthTranslations = array(
-        'January' => 'Januari',
-        'February' => 'Februari',
-        'March' => 'Maret',
-        'April' => 'April',
-        'May' => 'Mei',
-        'June' => 'Juni',
-        'July' => 'Juli',
-        'August' => 'Agustus',
-        'September' => 'September',
-        'October' => 'Oktober',
-        'November' => 'November',
-        'December' => 'Desember'
-    );
-
-    $bulan_indo = isset($monthTranslations[$tanggal_format]) ? $monthTranslations[$tanggal_format] : $tanggal_format;
 
     if (!empty($dari) && !empty($ke)) {
         $this->db->where('tgl_input_jurnal >=', $dari);
@@ -168,46 +246,7 @@ function filter_jurnal_buku_besar($dari, $ke, $j_kode, $kode_per, $kode, $tgl, $
     if (!empty($j_kode)) {
         $this->db->group_start();
         $this->db->where('jurnal_bttb.kode_perkiraan', $j_kode);
-
-        if ($b == 1) {
-            if ($j_kode == 'BT') {
-                if ($dari_bulan_tahun >= $compare_date_2) {
-                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal BT '.$bulan_indo);
-                }else{
-                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal '.$bulan_indo);
-                }
-            }elseif($j_kode == 'UTJ'){
-                if ($dari_bulan_tahun >= $compare_date_2) {
-                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal UTJ '.$bulan_indo);
-                }else{
-                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal '.$bulan_indo);
-                }
-            }else{
-                    //$this->db->or_like('keterangan_jurnal', 'Saldo Awal '.$bulan_indo);
-            }
-        }else{
-            if ($j_kode == 'BT') {
-                if ($a == 1) {
-                    if ($dari == '' && $ke == '') {
-                    }else{
-                        $this->db->or_like('keterangan_jurnal', 'Saldo Awal');
-                    }
-                }else{
-                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal BT');
-                }
-            }elseif($j_kode == 'UTJ'){
-                if ($a == 1) {
-                    if ($dari == '' && $ke == '') {
-                    }else{
-                        $this->db->or_like('keterangan_jurnal', 'Saldo Awal');
-                    }
-                }else{
-                    $this->db->or_like('keterangan_jurnal', 'Saldo Awal UTJ');
-                }
-            }else{
-                    //$this->db->or_like('keterangan_jurnal', 'Saldo Awal');
-            }
-        }
+        $this->db->not_like('keterangan_jurnal', 'Saldo Awal');
 
         if ($j_kode == 'BT' || $j_kode == 'UTJ') {
             $this->db->or_like('keterangan_jurnal', 'Koreksi Saldo');
@@ -217,67 +256,7 @@ function filter_jurnal_buku_besar($dari, $ke, $j_kode, $kode_per, $kode, $tgl, $
     }
 
     if (!empty($kode_per)) {
-        $this->db->group_start();
         $this->db->where('jurnal_umum.id_bttb', $kode_per);
-
-        if ($b != true ) {
-            if ($kode_per == 175) {
-                $this->db->or_like('keterangan_jurnal', 'Saldo Awal Bank Fee '.$bulan_indo);
-            }
-
-            if ($kode_per == 182) {
-                $this->db->or_like('keterangan_jurnal', 'Saldo Awal Bank Vision New '.$bulan_indo);
-            }
-
-            if ($kode_per == 184) {
-                $this->db->or_like('keterangan_jurnal', 'Saldo Awal Kas Kecil Pusat '.$bulan_indo);
-            }
-
-            if ($kode_per == 189) {
-                $this->db->or_like('keterangan_jurnal', 'Saldo Awal Kas Kecil Vision '.$bulan_indo);
-            }
-
-            if ($kode_per == 195) {
-                $this->db->or_like('keterangan_jurnal', 'Saldo Awal Pinjaman Karyawan Eko');
-            }
-
-            if ($kode_per == 196) {
-                $this->db->or_like('keterangan_jurnal', 'Saldo Awal Pinjaman Karyawan Julia');
-            }
-
-            if ($kode_per == 200) {
-                $this->db->or_like('keterangan_jurnal', 'Saldo Awal Pinjaman Karyawan Elina');
-            }
-        }else{
-            if ($kode_per == 175) {
-                $this->db->or_like('keterangan_jurnal', 'Saldo Awal Bank Fee Januari');
-            }
-
-            if ($kode_per == 182) {
-                $this->db->or_like('keterangan_jurnal', 'Saldo Awal Bank Vision New Januari');
-            }
-
-            if ($kode_per == 184) {
-                $this->db->or_like('keterangan_jurnal', 'Saldo Awal Kas Kecil Pusat Januari');
-            }
-
-            if ($kode_per == 189) {
-                $this->db->or_like('keterangan_jurnal', 'Saldo Awal Kas Kecil Vision Januari');
-            }
-
-            if ($kode_per == 195) {
-                $this->db->or_like('keterangan_jurnal', 'Saldo Awal Pinjaman Karyawan Eko');
-            }
-
-            if ($kode_per == 196) {
-                $this->db->or_like('keterangan_jurnal', 'Saldo Awal Pinjaman Karyawan Julia');
-            }
-
-            if ($kode_per == 200) {
-                $this->db->or_like('keterangan_jurnal', 'Saldo Awal Pinjaman Karyawan Elina');
-            }
-        }
-        $this->db->group_end();
     }
 
     if (!empty($kode) && !empty($tgl)) {
