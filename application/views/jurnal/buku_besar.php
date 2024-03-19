@@ -1,5 +1,5 @@
 <?php include __DIR__ . '/../session_identitas.php'; ?>
-<div class="container pt-5 pb-5">
+<div class="container-fluid pt-5 pb-5 mx-0">
     <div class="d-flex justify-content-between mb-2">
         <div class="text-right">
             <?php require __DIR__ . '/../v_navigasi2.php'; ?>
@@ -331,7 +331,7 @@
                             echo "<span class='badge badge-success p-2'>".$jurnal->kode_perkiraan.$jurnal->nomor_perkiraan." - ".$jurnal->keterangan."</span>";
                         }?>
                     </td>
-                    <td>
+                    <td class="text-wrap">
                         <?php
                         if ($jurnal->id_bttb == 0 && strpos($jurnal->keterangan_jurnal, 'Saldo Awal') !== false) {
                             echo "<span class='badge badge-success p-2'>" . $jurnal->keterangan_jurnal." - ".number_format($jurnal->nominal_jurnal). "</span>";
