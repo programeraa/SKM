@@ -1,5 +1,5 @@
 <?php include 'session_identitas.php'; ?>
-<div class="container pt-5 pb-5">
+<div class="container-fluid pt-5 pb-5 mx-0">
     <div class="d-flex justify-content-between mb-2">
         <div class="text-right">
             <?php require 'v_navigasi2.php'; ?>
@@ -144,7 +144,7 @@
         <thead>
             <tr>
                 <th>Aksi</th>
-                <th>Admin</th>
+                <!-- <th>Admin</th> -->
                 <th>Tgl Input</th>
                 <th class="sticky">Kode Perkiraan</th>
                 <th>Keterangan</th>
@@ -198,6 +198,7 @@
                 ?>
                 <tr>
                     <td>
+                        <div>
                         <?php //if (strpos($jurnal->keterangan_jurnal, 'Saldo Awal') === false) {?>
                             <?php if ($level_asli != 'CMO' && $tampil_tambah) {?>
                                 <div>
@@ -209,10 +210,15 @@
                                     <a href="<?= base_url('jurnal/hapus_jurnal/' . $jurnal->id_jurnal); ?>" onclick="javascript:return confirm('Apakah Anda yakin ingin menghapus data jurnal ?')" class="btn btn-danger btn-sm"><i class="fas fa-trash" title="Hapus"></i></a>
                                 </div>
                                 <?php //} ?>
+                                </div>
+                                <div class="mt-2 mx-auto text-center">
+                                    <?php  $admin_input; 
+                                    echo "<span class='badge badge-warning p-2'>".$admin_input."</span>"; ?>
+                                </div>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <?=  $admin_input; ?>
-                            </td>
+                            </td> -->
                             <td><?= $tgl_input_jurnal ?></td>
                             <td class="sticky">
                                 <?php
@@ -236,7 +242,7 @@
                                 <span class="red-dot">&#8226;</span>
                             <?php } ?>
                         </td>
-                        <td>
+                        <td class="text-wrap">
                             <?php
                             if (strpos($jurnal->keterangan_jurnal, 'Saldo Awal') !== false) {
                                 echo "<span class='badge badge-success p-2'>" . $jurnal->keterangan_jurnal . "</span>";
@@ -283,7 +289,7 @@
             <tr>
                 <th>Total</th>
                 <th></th>
-                <th></th>
+                <!-- <th></th> -->
                 <th class="sticky"></th>
                 <th></th>
                 <th><?= numberToRupiah2($total_saldo) ?></th>
