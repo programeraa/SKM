@@ -745,6 +745,16 @@ class Jurnal extends CI_Controller {
 		$total_tutup = $this->m_jurnal->hitung_total_tutup_pesan();
 		$data['tutup'] = $total_tutup;
 
+		$bulan_sekarang = date("m", strtotime($this->input->get('dari')));
+		$tahun_sekarang = date("Y", strtotime($this->input->get('dari')));
+
+        $bulan_sebelumnya = date('F', strtotime($tahun_sekarang.'-'.$bulan_sekarang.'-01 -1 month'));
+
+        $saldo_sebelumnya = $this->m_jurnal->get_saldo_sebelumnya($bulan_sekarang, $tahun_sekarang, $kode_per, $j_kode);
+
+        $data['saldo_sebelumnya'] = $saldo_sebelumnya;
+        $data['bulan_sebelumnya'] = $bulan_sebelumnya;
+    
 		$this->load->view('v_header', $data);
 		$this->load->view('jurnal/buku_besar', $data);
 		//$this->load->view('js_semua_halaman', $data);
