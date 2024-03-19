@@ -111,15 +111,24 @@
 
 .red-dot {
     color: red;
-  }
+}
 </style>
 
 </head>
+<?php 
+$url_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$url_segments = explode('/', $url_path);
+$url = end($url_segments);
+?>
 
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <div class="container d-flex justify-content-between">
-            <a class="navbar-brand" href="">A&A INDONESIA</a>
-            <a class="navbar-brand mr-0" href="<?= base_url('Komisi');?>"><?= $nama ?> - <?= $level_asli; ?></a>
-        </div>
-    </nav>
+        <?php if ($url == 'Jurnal' || $url == 'buku_besar' || $url == 'filterBukuBesar' || $url == 'filterJurnal'): ?>
+            <div class="container-fluid mx-0 p-0 d-flex justify-content-between">
+            <?php else: ?>
+                <div class="container d-flex justify-content-between">
+                <?php endif; ?>
+                <a class="navbar-brand" href="">A&A INDONESIA</a>
+                <a class="navbar-brand mr-0" href="<?= base_url('Komisi');?>"><?= $nama ?> - <?= $level_asli; ?></a>
+            </div>
+        </nav>
