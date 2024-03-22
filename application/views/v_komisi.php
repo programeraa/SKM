@@ -1,5 +1,5 @@
 <?php include "session_identitas.php"; ?>
-<div class="container pt-5 pb-5">
+<div class="container-fluid pt-5 pb-5 mx-0">
     <div class="d-flex justify-content-between mb-2">
         <?php require'v_navigasi.php'; ?>
         <?php if ($level_asli != 'CMO'): ?> 
@@ -23,10 +23,10 @@
                             <th>No</th>
                             <th>Kantor</th>
                             <th>Alamat</th>
-                            <th>Jenis Transaksi</th>
+                            <th>Jenis</th>
                             <th>Closing</th>
-                            <th>Marketing Listing</th>
-                            <th>Marketing Selling</th> 
+                            <th>Listing</th>
+                            <th>Selling</th> 
                             <th>Bruto</th>
                             <th>Status</th>
                             <th>Aksi</th>
@@ -102,7 +102,7 @@
                                         ?>
                                     </div>
                                 </td>
-                                <td><?= $komisi->alamat_komisi ?></td>
+                                <td class="text-wrap"><?= $komisi->alamat_komisi ?></td>
                                 <td><?= $komisi->jt_komisi?></td>
                                 <td><?= $tgl_closing?></td>
                                 <td><?= $listing_1 ?> <?= $listing2_baru?> </td>
@@ -127,7 +127,7 @@
                                         }?>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="text-wrap">
                                     <a href="#" data-toggle="modal" data-target="#lihat_komisi<?php echo $komisi->id_komisi; ?>" class="btn btn-primary btn-sm mt-1"><i class="fas fa-eye" title="Detail"></i></a>
 
                                     <?php include "komisi/lihat_komisi.php"; ?>
