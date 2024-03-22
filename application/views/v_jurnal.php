@@ -150,7 +150,7 @@
                 <th>Keterangan</th>
                 <th>Debit</th>
                 <th>Kredit</th>
-                <!-- <th>CEK</th> -->
+                <th>CEK</th>
             </tr>
         </thead>
         <tbody>
@@ -238,9 +238,9 @@
 
                             }?>
 
-                            <?php if ($saldo_akhir < 0) {?>
+                            <!-- <?php if ($saldo_akhir < 0) {?>
                                 <span class="red-dot">&#8226;</span>
-                            <?php } ?>
+                            <?php } ?> -->
                         </td>
                         <td class="text-wrap">
                             <?php
@@ -269,18 +269,23 @@
                         }
                         ?> 
                     </td>
-                    <!-- <td>
+                    <td>
                         <?php
-                        if (strpos($jurnal->keterangan_jurnal, 'Saldo Awal') !== false) {
-                            echo "<span class='badge badge-success p-2'>" . numberToRupiah2($saldo_akhir) . "</span>";
-                        } elseif ($saldo_akhir != 0 && $jurnal->jenis_jurnal == 'Kredit') {
+                        // if (strpos($jurnal->keterangan_jurnal, 'Saldo Awal') !== false) {
+                        //     echo "<span class='badge badge-success p-2'>" . numberToRupiah2($saldo_akhir) . "</span>";
+                        // } else
+
+                        if ($saldo_akhir != 0 && $jurnal->jenis_jurnal == 'Kredit') {
                             echo "<span class='badge badge-danger p-2'>" . numberToRupiah2($saldo_akhir) . "</span>";
-                        } else {
-                            echo numberToRupiah2($saldo_akhir);
+                        }elseif($saldo_akhir == 0){
+                            echo "<span class='badge badge-success p-2'>" . numberToRupiah2($saldo_akhir) . "</span>";
+                        } 
+                        else {
+                            echo "<span class='badge badge-secondary p-2 '>" . numberToRupiah2($saldo_akhir) . "</span>";
                         }
                         ?>
 
-                    </td> -->
+                    </td>
                 </tr>
                 <?php $no++;
             } ?>
@@ -294,14 +299,14 @@
                 <th></th>
                 <th><?= numberToRupiah2($total_saldo) ?></th>
                 <th><?= numberToRupiah2($total_kredit) ?></th>
-                <!-- <th><?php
+                <th><?php
                 if ($saldo_akhir != 0) {
                     echo "<span class='badge badge-danger p-2'>" . numberToRupiah2($saldo_akhir) . "</span>";
                 } else {
-                    echo numberToRupiah2($saldo_akhir);
+                   echo "<span class='badge badge-primary p-2'>" .'BALANCE'. "</span>";
                 }
                 ?>
-            </th> -->
+            </th>
         </tr>
     </tfoot>
 </table>
