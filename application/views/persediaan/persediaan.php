@@ -1,5 +1,5 @@
 <?php include __DIR__ . '/../session_identitas.php'; ?>
-<div class="container pt-5 pb-5">
+<div class="container-fluid pt-5 pb-5 mx-0">
     <div class="d-flex justify-content-between mb-2">
         <div class="text-right">
             <?php require __DIR__ . '/../v_navigasi3.php'; ?>
