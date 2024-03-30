@@ -1,5 +1,5 @@
 <?php include __DIR__ . '/../session_identitas.php'; ?>
-<div class="container pt-5 pb-5">
+<div class="container-fluid pt-5 pb-5 mx-0">
     <div class="d-flex justify-content-between mb-2">
         <div class="text-right">
             <?php require __DIR__ . '/../v_navigasi3.php'; ?>
@@ -30,7 +30,7 @@
             }
 
             foreach ($master_persediaan as $master) {
-               if ($master->id_persediaan == $k) {
+             if ($master->id_persediaan == $k) {
                 $kode = $master->kode_persediaan;
                 $nama = $master->nama_persediaan;
             }
@@ -133,122 +133,158 @@
         </form>
     </div>
     <div class="table-responsive">
-        <table id="myTable" class="myTable table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th style="display: none;">Aksi</th>
-                    <th>Tgl Input</th>
-                    <th>Nama Barang</th>
-                    <th>Keterangan</th>
-                    <th>Harga Satuan</th>
-                    <th>Kuantitas</th>
-                    <th>Debit</th>
-                    <th>Kredit</th>
-                    <th>Saldo Akhir</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                $no = 0;
-                $sum_saldo = 0;
-                $sum_kredit = 0;
-
-                $total_kuantitas = 0;
-                $total_saldo = 0;
-                $total_kredit = 0;
-
-                $saldo_akhir = 0;
-
-                $tanggal_jurnal = []; 
-
-                foreach ($jurnal_persediaan as $jurnal) { 
-
-                    $cell_content = '';
-
-                    if (!in_array($jurnal->tgl_input_jurnal, $tanggal_jurnal)) {
-                        $cell_content = $jurnal->tgl_input_jurnal;
-                        $tanggal_jurnal[] = $jurnal->tgl_input_jurnal; 
-                    }
-
-                    $tgl_input_jurnal = ($cell_content !== '') ? date("d-m-Y", strtotime($cell_content)) : '';
-
-                    foreach ($master_persediaan as $master) {
-                        if ($jurnal->id_barang == $master->id_persediaan) {
-                            $kode_barang = $master->kode_persediaan;
-                            $nama_barang = $master->nama_persediaan;
-                        }
-                    }
-
-                    if ($jurnal->jenis_jurnal == 'Debit') {
-                        $total_saldo = $sum_saldo += $jurnal->nominal_jurnal;
-                        $saldo_akhir += $jurnal->nominal_jurnal;
-                    } else {
-                        $total_kredit = $sum_kredit += $jurnal->nominal_jurnal;
-                        $saldo_akhir -= $jurnal->nominal_jurnal;
-                    }
-
-                    $total_kuantitas += $jurnal->kuantitas_jurnal;
-
-                    ?>
+        <?php if (isset($_GET['dari']) || isset($_GET['ke']) || isset($_GET['kode_barang']) || isset($_GET['jenis_jurnal'])) {?>
+            <table id="myTable" class="myTable table table-bordered table-striped">
+                <thead>
                     <tr>
-                        <td style="display:none;">
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#lihat_jurnal<?php echo $jurnal->id_jurnal; ?>" data-whatever="@getbootstrap" ><i class="fas fa-eye" title="Lihat Jurnal"></i></button>
-
-                            <?php include "lihat_jurnal.php"; ?>
-
-                            <a href="<?= base_url('persediaan/edit_jurnal/' . $jurnal->id_jurnal.'?Kojur='.$jurnal->kode_jurnal); ?>" class="btn btn-success btn-sm" data-target="#editModal"><i class="fas fa-edit" title="Edit Jurnal"></i></a>
-
-                            <a href="<?= base_url('persediaan/hapus_jurnal/' . $jurnal->id_jurnal); ?>" onclick="javascript:return confirm('Apakah Anda yakin ingin menghapus data jurnal ?')" class="btn btn-danger btn-sm"><i class="fas fa-trash" title="Hapus"></i></a>
-                        </td>
-                        <td><?= $tgl_input_jurnal ?></td>
-                        <td>
-                            <?php
-                            echo "<span class='badge badge-success p-2'>".$kode_barang.' - '.$nama_barang."</span>";?>
-                        </td>
-                        <td><?= $jurnal->keterangan_jurnal ?></td>
-                        <td><?= numberToRupiah2($jurnal->harga_satuan_jurnal); ?></td>
-                        <td><?= $jurnal->kuantitas_jurnal ?></td>
-                        <td>
-                            <?php
-                            if ($jurnal->jenis_jurnal == 'Debit') {
-                                echo numberToRupiah2($jurnal->nominal_jurnal);
-                            }else{
-                                echo '';
-                            }
-                            ?> 
-                        </td>
-                        <td>
-                            <?php
-                            if ($jurnal->jenis_jurnal == 'Kredit') {
-                                echo numberToRupiah2($jurnal->nominal_jurnal);
-                            }else{
-                                echo '';
-                            }
-                            ?>
-                        </td>
-                        <td>
-                            <?php
-                            if ($saldo_akhir < 0) {
-                                echo "<span class='badge badge-danger p-2'>" . numberToRupiah2($saldo_akhir) . "</span>";
-                            }else{
-                                echo numberToRupiah2($saldo_akhir);
-                            } ?>
-                        </td>
-
+                        <th style="display: none;">Aksi</th>
+                        <th>Tgl Input</th>
+                        <th>Nama Barang</th>
+                        <th>Keterangan</th>
+                        <th>Harga Satuan</th>
+                        <th>Kuantitas</th>
+                        <th>Debit</th>
+                        <th>Kredit</th>
+                        <th>Saldo Akhir</th>
                     </tr>
-                    <?php $no++; } ?>
-                </tbody>
-                <tfoot>
-                    <th>Total</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th><?= numberToRupiah($total_kuantitas) ?></th>
-                    <th><?= numberToRupiah2($total_saldo) ?></th>
-                    <th><?= numberToRupiah2($total_kredit) ?></th>
-                    <th></th>
-                </tfoot>
-            </table>
+                </thead>
+                <tbody>
+                    <?php 
+                    $no = 0;
+                    $sum_saldo = 0;
+                    $sum_kredit = 0;
+
+                    $total_kuantitas = 0;
+                    $total_saldo = 0;
+                    $total_kredit = 0;
+
+                    $saldo_akhir = 0;
+
+                    $tanggal_jurnal = []; 
+
+                    foreach ($jurnal_persediaan as $jurnal) { 
+
+                        $cell_content = '';
+
+                        if (!in_array($jurnal->tgl_input_jurnal, $tanggal_jurnal)) {
+                            $cell_content = $jurnal->tgl_input_jurnal;
+                            $tanggal_jurnal[] = $jurnal->tgl_input_jurnal; 
+                        }
+
+                        $tgl_input_jurnal = ($cell_content !== '') ? date("d-m-Y", strtotime($cell_content)) : '';
+
+                        foreach ($master_persediaan as $master) {
+                            if ($jurnal->id_barang == $master->id_persediaan) {
+                                $kode_barang = $master->kode_persediaan;
+                                $nama_barang = $master->nama_persediaan;
+                            }
+                        }
+
+                        if ($jurnal->jenis_jurnal == 'Debit') {
+                            $total_saldo = $sum_saldo += $jurnal->nominal_jurnal;
+                            $saldo_akhir += $jurnal->nominal_jurnal;
+                        } else {
+                            $total_kredit = $sum_kredit += $jurnal->nominal_jurnal;
+                            $saldo_akhir -= $jurnal->nominal_jurnal;
+                        }
+
+                        $total_kuantitas += $jurnal->kuantitas_jurnal;
+
+                        ?>
+                        <tr>
+                            <td style="display:none;">
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#lihat_jurnal<?php echo $jurnal->id_jurnal; ?>" data-whatever="@getbootstrap" ><i class="fas fa-eye" title="Lihat Jurnal"></i></button>
+
+                                <?php include "lihat_jurnal.php"; ?>
+
+                                <a href="<?= base_url('persediaan/edit_jurnal/' . $jurnal->id_jurnal.'?Kojur='.$jurnal->kode_jurnal); ?>" class="btn btn-success btn-sm" data-target="#editModal"><i class="fas fa-edit" title="Edit Jurnal"></i></a>
+
+                                <a href="<?= base_url('persediaan/hapus_jurnal/' . $jurnal->id_jurnal); ?>" onclick="javascript:return confirm('Apakah Anda yakin ingin menghapus data jurnal ?')" class="btn btn-danger btn-sm"><i class="fas fa-trash" title="Hapus"></i></a>
+                            </td>
+                            <td><?= $tgl_input_jurnal ?></td>
+                            <td>
+                                <?php
+                                echo "<span class='badge badge-success p-2'>".$kode_barang.' - '.$nama_barang."</span>";?>
+                            </td>
+                            <td><?= $jurnal->keterangan_jurnal ?></td>
+                            <td><?= numberToRupiah2($jurnal->harga_satuan_jurnal); ?></td>
+                            <td><?= $jurnal->kuantitas_jurnal ?></td>
+                            <td>
+                                <?php
+                                if ($jurnal->jenis_jurnal == 'Debit') {
+                                    echo numberToRupiah2($jurnal->nominal_jurnal);
+                                }else{
+                                    echo '';
+                                }
+                                ?> 
+                            </td>
+                            <td>
+                                <?php
+                                if ($jurnal->jenis_jurnal == 'Kredit') {
+                                    echo numberToRupiah2($jurnal->nominal_jurnal);
+                                }else{
+                                    echo '';
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                if ($saldo_akhir < 0) {
+                                    echo "<span class='badge badge-danger p-2'>" . numberToRupiah2($saldo_akhir) . "</span>";
+                                }else{
+                                    echo numberToRupiah2($saldo_akhir);
+                                } ?>
+                            </td>
+
+                        </tr>
+                        <?php $no++; } ?>
+                    </tbody>
+                    <tfoot>
+                        <th>Total</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th><?= numberToRupiah($total_kuantitas) ?></th>
+                        <th><?= numberToRupiah2($total_saldo) ?></th>
+                        <th><?= numberToRupiah2($total_kredit) ?></th>
+                        <th></th>
+                    </tfoot>
+                </table>
+            <?php }else{?>
+                <table id="myTable" class="myTable table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th style="display: none;">Aksi</th>
+                            <th>Tgl Input</th>
+                            <th>Nama Barang</th>
+                            <th>Keterangan</th>
+                            <th>Harga Satuan</th>
+                            <th>Kuantitas</th>
+                            <th>Debit</th>
+                            <th>Kredit</th>
+                            <th>Saldo Akhir</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="display:none;"></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <?php
+                                echo "<span class='badge badge-success p-2'>".'Silahkan Gunakan Fitur Filter Untuk Tampilkan Data'."</span>"; ?>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            <?php } ?>
         </div>
     </div>
 </div>
