@@ -5,7 +5,7 @@
         </div>
 
         <div class="text-right ml-2">
-            <a href="<?= base_url('persediaan');?>">
+            <a href="<?= base_url('Persediaan');?>">
                 <button type="button" class="btn btn-primary" data-whatever="@getbootstrap" >Jurnal Persediaan</button></a>
             </div>
 
