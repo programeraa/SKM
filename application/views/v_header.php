@@ -123,7 +123,7 @@ $url = end($url_segments);
 
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <?php if ($url == 'Jurnal' || $url == 'buku_besar' || $url == 'filterBukuBesar' || $url == 'filterJurnal' || $url == 'komisi'): ?>
+        <?php if ($url == 'Jurnal' || $url == 'buku_besar' || $url == 'filterBukuBesar' || $url == 'filterJurnal' || $url == 'komisi' || $url == 'Persediaan'): ?>
             <div class="container-fluid mx-0 p-0 d-flex justify-content-between">
             <?php else: ?>
                 <div class="container d-flex justify-content-between">
