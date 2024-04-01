@@ -497,7 +497,7 @@ function tampil_data_bttb(){
 function filter_bttb($dari, $ke, $j_kode){
     $this->db->select('*');
     $this->db->from('jurnal_bttb');
-    $this->db->order_by('kode_perkiraan', 'ASC');
+    $this->db->order_by('nomor_perkiraan', 'ASC');
 
     if (!empty($dari) && !empty($ke)) {
         $this->db->where('tgl_input >=', $dari);
