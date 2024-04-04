@@ -35,7 +35,9 @@
 
         if ($_GET['j_kode'] == 'UTJ') {
             $saldo_akhir_baru = $saldo_sebelumnya + $saldo_awal;
-        }else{
+        }elseif ($saldo_awal == 0) {
+            $saldo_akhir_baru = $saldo_awal;
+        }else {
             $saldo_akhir_baru = $saldo_awal - $saldo_sebelumnya;
         }
 
