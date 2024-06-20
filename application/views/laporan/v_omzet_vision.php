@@ -54,15 +54,16 @@
                 <thead>
                     <tr>
                         <th rowspan="2">No</th>
-                        <th rowspan="2">ID Komisi</th>
+                        <!-- <th rowspan="2">ID Komisi</th> -->
+                        <th rowspan="2">Kantor</th>
                         <th rowspan="2">Tanggal Closing</th>
                         <th rowspan="2">ID Marketing</th>
                         <th rowspan="2">Marketing</th>
                         <th rowspan="2">Alamat Properti</th>
                         <th rowspan="2">Jenis</th>
                         <th colspan="2" class="text-center">Fee Bruto</th>
-                        <th colspan="2" class="text-center">Potongan</th>
-                        <th colspan="3" class="text-center">Netto</th>
+                        <th colspan="3" class="text-center">Potongan</th>
+                        <th colspan="2" class="text-center">Netto</th>
                         <th rowspan="2">Rincian Komisi</th>
                     </tr>
                     <tr>
@@ -70,8 +71,8 @@
                         <th>Marketing</th>
                         <th>ADM</th>
                         <th>PPH 21</th>
+                        <th>Pribadi</th>
                         <th>A&A Vision</th>
-                        <th>Potongan Marketing</th>
                         <th>Marketing</th>
                     </tr>
                 </thead>
@@ -123,6 +124,8 @@
                     $sum_ptn_prib_r = null;
 
                     $id_komisi_values = []; 
+
+                    $unique_kantor_nomor_values = []; 
 
                     foreach ($omzet as $vision) {
                         $cell_content = '';
@@ -199,11 +202,49 @@
                             }
                         }
 
+                        foreach ($kantor as $ktr) {
+                            if ($ktr->id_kantor == $vision->kantor_komisi) {
+                                $kantor_komisi = $ktr->kantor;
+                            }
+                        }
+
                         $tgl_closing = date("d-m-Y", strtotime($vision->tgl_closing_komisi));
                         ?>
                         <tr>
                             <td><?= $no; ?></td>
-                            <td><?= $cell_content ?></td>
+                            <!-- <td><?= $cell_content ?></td> -->
+                            <td>
+                                <?php 
+                                $kantor_nomor_key = $vision->kantor_komisi . '-' . $vision->nomor_kantor_komisi;
+
+                                if (!in_array($kantor_nomor_key, $unique_kantor_nomor_values)) {
+                                    $unique_kantor_nomor_values[] = $kantor_nomor_key; ?>
+
+                                    <div>
+                                        <?php 
+                                        if ($kantor_komisi == 'Pusat') {
+                                            echo "<span class='badge badge-primary p-2'>".strtoupper($kantor_komisi)." - ".$vision->nomor_kantor_komisi."</span>";
+                                        } else {
+                                            echo "<span class='badge badge-success p-2'>".strtoupper($kantor_komisi)." - ".$vision->nomor_kantor_komisi."</span>";
+                                        }
+                                        ?>
+
+                                    </div>
+
+                                    <div class="mt-2">
+                                        <?php 
+                                        if ($vision->jenis_hitungan_komisi == 'Secondary') {
+                                            echo "<span class='badge badge-secondary p-2'>".strtoupper($vision->jenis_hitungan_komisi)."</span>";
+                                        } elseif($vision->jenis_hitungan_komisi == 'KPR') {
+                                            echo "<span class='badge badge-warning p-2'>".strtoupper($vision->jenis_hitungan_komisi)."</span>";
+                                        }else{
+                                            echo "<span class='badge badge-danger p-2'>".strtoupper($vision->jenis_hitungan_komisi)."</span>";
+                                        }
+                                        ?>
+                                    </div>
+                                    
+                                <?php } ?>
+                            </td>
                             <td><?= $tgl_closing; ?></td>
                             <td><?= $id_mar ?></td>
                             <td><?= $nama_mar ?></td>
@@ -213,8 +254,8 @@
                             <td><?= $fee_marketing_r ?></td>
                             <td><?= $ptn_admin_r ?></td>
                             <td><?= $ptn_pph_r ?></td>
-                            <td><?= $total_fee_vision_r ?></td>
                             <td><?= $ptn_pribadi_r?></td>
+                            <td><?= $total_fee_vision_r ?></td>
                             <td><?= $netto_marketing_r ?></td>
                             <td>
                                 <?php if ($cell_content != '') {?>
@@ -238,8 +279,8 @@
                         <th><?= $bruto_marketing_r ?></th>
                         <th><?= $sum_ptn_admin_r ?></th>
                         <th><?= $sum_ptn_pph_r ?></th>
-                        <th><?= $sum_total_fee_vision_r ?></th>
                         <th><?= $sum_ptn_prib_r ?></th>
+                        <th><?= $sum_total_fee_vision_r ?></th>
                         <th><?= $sum_netto_marketing_r ?></th>
                         <th></th>
                     </tr>

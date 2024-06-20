@@ -82,7 +82,7 @@
                 </select>
             </div>
             <div class="col-auto pr-0">
-                <select class="form-control" id="admin_komisi" name="admin_komisi">
+                <select class="form-control select2bs4" id="admin_komisi" name="admin_komisi">
                     <option value="">Pilih Admin Komisi</option>
                     <?php 
                     foreach($pengguna as $each){ ?>
@@ -103,6 +103,7 @@
         <thead>
             <tr>
                 <th>No</th>
+                <th>Kantor</th>
                 <th>Alamat</th>
                 <th>Jenis Transaksi</th>
                 <th>Closing</th>
@@ -155,9 +156,39 @@
                     $selling2_baru = '';
                 }
 
+                foreach ($kantor as $ktr) {
+                    if ($ktr->id_kantor == $komisi->kantor_komisi) {
+                        $kantor_komisi = $ktr->kantor;
+                    }
+                }
+
                 ?>
                 <tr>
                     <td><?= $no; ?></td>
+                    <td>
+                        <div>
+                            <?php 
+                            if ($kantor_komisi == 'Pusat') {
+                                echo "<span class='badge badge-primary p-2'>".strtoupper($kantor_komisi)." - ".$komisi->nomor_kantor_komisi."</span>";
+                            } else {
+                                echo "<span class='badge badge-success p-2'>".strtoupper($kantor_komisi)." - ".$komisi->nomor_kantor_komisi."</span>";
+                            }
+                            ?>
+
+                        </div>
+
+                        <div class="mt-2">
+                            <?php 
+                            if ($komisi->jenis_hitungan_komisi == 'Secondary') {
+                                echo "<span class='badge badge-secondary p-2'>".strtoupper($komisi->jenis_hitungan_komisi)."</span>";
+                            } elseif($komisi->jenis_hitungan_komisi == 'KPR') {
+                                echo "<span class='badge badge-warning p-2'>".strtoupper($komisi->jenis_hitungan_komisi)."</span>";
+                            }else{
+                                echo "<span class='badge badge-danger p-2'>".strtoupper($komisi->jenis_hitungan_komisi)."</span>";
+                            }
+                            ?>
+                        </div>
+                    </td>
                     <td><?= $komisi->alamat_komisi ?></td>
                     <td><?= $komisi->jt_komisi?></td>
                     <td><?= $tgl_closing?></td>
@@ -165,7 +196,7 @@
                     <td><?= $selling_1 ?> <?= $selling2_baru?></td>
                     <td><?= $bruto_r ?></td>
                     <td>
-                       <div>
+                     <div>
                         <?php 
                         if ($komisi->status_komisi=='Proses Approve') {
                             echo "<span class='badge badge-warning p-2'>Proses Approve</span>";

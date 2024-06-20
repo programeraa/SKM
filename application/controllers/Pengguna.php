@@ -4,20 +4,35 @@ class Pengguna extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('m_pengguna');
+		$this->load->model('m_komisi');
+		$this->load->model('m_jurnal');
+		$this->load->model('m_pengaturan');
+		$this->load->model('m_persediaan');
 	}
 
 	public function index(){
 		$level = $this->session->userdata('level');
+		$level_asli = $this->session->userdata('level_asli');
+		$akses_level = $this->session->userdata('level_akses');
+
 		if ($level == '') {
-			$this->session->set_flashdata('gagal','Anda Belum Login');
+			$this->session->set_flashdata('gagal', 'Anda Belum Login');
 			redirect(base_url('login'));
+		} elseif ($level_asli != 'Super Administrator') {
+			redirect(base_url('komisi'));
 		}
 
 		$data['title'] = "Data Pengguna";
-		$data['pengguna'] = $this->m_pengguna->tampil_data()->result();
+		$data['pengguna'] = $this->m_pengguna->tampil_data();
+		$data['komisi'] = $this->m_komisi->tampil_data()->result();
+		$data['jurnal_umum'] = $this->m_jurnal->tampil_data_jurnal_2();
+		$data['master_akun'] = $this->m_jurnal->tampil_data_bttb()->result();
+		$data['jurnal_persediaan'] = $this->m_persediaan->tampil_data_jurnal();
+		$data['tampil_level'] = $this->m_pengaturan->tampil_data_level()->result();
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_pengguna', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 

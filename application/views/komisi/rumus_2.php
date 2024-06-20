@@ -1,9 +1,12 @@
 <?php
 //=================================================== cari upline listing 1 dan 2
 //cari upline listing 1
+$id_up_1_listing = 0;
+
 foreach ($marketing as $mkt) {
     if ($mkt->id_mar == $komisi->up_1_listing) {
         $up_1_listing = $mkt->nama_mar;
+        $id_up_1_listing = $mkt->id_mar;
         break;
     }else{
         $up_1_listing = '';
@@ -12,9 +15,12 @@ foreach ($marketing as $mkt) {
 
 $up_1_listing;
 
+$id_up_2_listing = 0;
+
 foreach ($marketing as $mkt) {
     if ($mkt->id_mar == $komisi->up_2_listing) {
         $up_2_listing = $mkt->nama_mar;
+        $id_up_2_listing = $mkt->id_mar;
         break;
     }else{
         $up_2_listing = '';
@@ -38,9 +44,12 @@ if (!empty($up_2_listing)) {
 
 //============================================================
 //cari upline listing 2
+$id_up_1_listing2 = 0;
+
 foreach ($marketing as $mkt) {
     if ($mkt->id_mar == $komisi->up_1_listing2) {
         $up_1_listing2 = $mkt->nama_mar;
+        $id_up_1_listing2 = $mkt->id_mar;
         break;
     }else{
         $up_1_listing2 = '';
@@ -49,9 +58,12 @@ foreach ($marketing as $mkt) {
 
 $up_1_listing2;
 
+$id_up_2_listing2 = 0;
+
 foreach ($marketing as $mkt) {
     if ($mkt->id_mar == $komisi->up_2_listing2) {
         $up_2_listing2 = $mkt->nama_mar;
+        $id_up_2_listing2 = $mkt->id_mar;
         break;
     }else{
         $up_2_listing2 = '';
@@ -255,9 +267,12 @@ $netto2_listing_2_r = numberToRupiah($netto2_listing_2_n);
 
 //=================================================== cari upline selling 1 dan 2
 //cari upline selling 1
+$id_up_1_selling = 0;
+
 foreach ($marketing as $mkt) {
     if ($mkt->id_mar == $komisi->up_1_selling) {
         $up_1_selling = $mkt->nama_mar;
+        $id_up_1_selling = $mkt->id_mar;
         break;
     }else{
         $up_1_selling = '';
@@ -266,9 +281,12 @@ foreach ($marketing as $mkt) {
 
 $up_1_selling;
 
+$id_up_2_selling = 0;
+
 foreach ($marketing as $mkt) {
     if ($mkt->id_mar == $komisi->up_2_selling) {
         $up_2_selling = $mkt->nama_mar;
+        $id_up_2_selling = $mkt->id_mar;
         break;
     }else{
         $up_2_selling = '';
@@ -291,9 +309,12 @@ if (!empty($up_2_selling)) {
 }
 
 //================================================ cari upline selling 2
+$id_up_1_selling2 = 0;
+
 foreach ($marketing as $mkt) {
     if ($mkt->id_mar == $komisi->up_1_selling2) {
         $up_1_selling2 = $mkt->nama_mar;
+        $id_up_1_selling2 = $mkt->id_mar;
         break;
     }else{
         $up_1_selling2 = '';
@@ -302,9 +323,12 @@ foreach ($marketing as $mkt) {
 
 $up_1_selling2;
 
+$id_up_2_selling2 = 0;
+
 foreach ($marketing as $mkt) {
     if ($mkt->id_mar == $komisi->up_2_selling2) {
         $up_2_selling2 = $mkt->nama_mar;
+        $id_up_2_selling2 = $mkt->id_mar;
         break;
     }else{
         $up_2_selling2 = '';
@@ -590,18 +614,21 @@ foreach ($marketing as $upline) {
     }
 
 //Cari Upline ANG
+    $id_upline1_ang = '';
     $nama_upline1_ang = '';
     $npwp_upline1_ang = '';
     $norek_upline1_ang = '';
 
+    $id_upline2_ang = '';
     $nama_upline2_ang = '';
     $npwp_upline2_ang = '';
     $norek_upline2_ang = '';
 
     foreach ($marketing as $ang) { 
-        if ($ang->nama_mar == "Ang") {
+        if ($ang->nama_mar == "Ang" && $ang->nomor_mar == "AA0007") {
             foreach ($marketing as $ang_2) {
                 if ($ang_2->id_mar == $ang->upline_emd_mar) {
+                    $id_upline1_ang = $ang_2->id_mar;
                     $nama_upline1_ang = $ang_2->nama_mar;
                     $npwp_upline1_ang = $ang_2->gambar_npwp_mar;
                     $norek_upline1_ang = $ang_2->norek_mar;
@@ -616,6 +643,7 @@ foreach ($marketing as $upline) {
 
             foreach ($marketing as $ang_3) {
                 if ($ang_3->id_mar == $ang->upline_cmo_mar) {
+                    $id_upline2_ang = $ang_3->id_mar;
                     $nama_upline2_ang = $ang_3->nama_mar;
                     $npwp_upline2_ang = $ang_3->gambar_npwp_mar;
                     $norek_upline2_ang = $ang_3->norek_mar;
@@ -725,18 +753,21 @@ foreach ($marketing as $upline) {
 
 
 //Cari Upline FRAN
+    $id_upline1_fran = '';
     $nama_upline1_fran = '';
     $npwp_upline1_fran = '';
     $norek_upline1_fran = '';
 
+    $id_upline2_fran = '';
     $nama_upline2_fran = '';
     $npwp_upline2_fran = '';
     $norek_upline2_fran = '';
 
     foreach ($marketing as $fran) { 
-        if ($fran->nama_mar == "Fran") {
+        if ($fran->nama_mar == "Fran" && $fran->nomor_mar == "AA0009") {
             foreach ($marketing as $fran_2) {
                 if ($fran_2->id_mar == $fran->upline_emd_mar) {
+                    $id_upline1_fran = $fran_2->id_mar;
                     $nama_upline1_fran = $fran_2->nama_mar;
                     $npwp_upline1_fran = $fran_2->gambar_npwp_mar;
                     $norek_upline1_fran = $fran_2->norek_mar;
@@ -751,6 +782,7 @@ foreach ($marketing as $upline) {
 
             foreach ($marketing as $fran_3) {
                 if ($fran_3->id_mar == $fran->upline_cmo_mar) {
+                    $id_upline2_fran = $fran_3->id_mar;
                     $nama_upline2_fran = $fran_3->nama_mar;
                     $npwp_upline2_fran = $fran_3->gambar_npwp_mar;
                     $norek_upline2_fran = $fran_3->norek_mar;
@@ -861,18 +893,21 @@ foreach ($marketing as $upline) {
 
 
 //Cari Upline WIN
+    $id_upline1_win = '';
     $nama_upline1_win = '';
     $npwp_upline1_win = '';
     $norek_upline1_win = '';
 
+    $id_upline2_win = '';
     $nama_upline2_win = '';
     $npwp_upline2_win = '';
     $norek_upline2_win = '';
 
     foreach ($marketing as $win) { 
-        if ($win->nama_mar == "Winata") {
+        if ($win->nama_mar == "Winata" && $win->nomor_mar == "AA0207") {
             foreach ($marketing as $win_2) {
                 if ($win_2->id_mar == $win->upline_emd_mar) {
+                    $id_upline1_win = $win_2->id_mar;
                     $nama_upline1_win = $win_2->nama_mar;
                     $npwp_upline1_win = $win_2->gambar_npwp_mar;
                     $norek_upline1_win = $win_2->norek_mar;
@@ -887,6 +922,7 @@ foreach ($marketing as $upline) {
 
             foreach ($marketing as $win_3) {
                 if ($win_3->id_mar == $win->upline_cmo_mar) {
+                    $id_upline2_win = $win_3->id_mar;
                     $nama_upline2_win = $win_3->nama_mar;
                     $npwp_upline2_win = $win_3->gambar_npwp_mar;
                     $norek_upline2_win = $win_3->norek_mar;

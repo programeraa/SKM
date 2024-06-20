@@ -3,12 +3,26 @@
 class M_pengguna extends CI_Model{
 
 	function tampil_data(){
-		return $this->db->get('pengguna');
-	}
+        $this->db->select('*');
+        $this->db->from('pengguna');
+        $this->db->join('level_pengaturan','level_pengaturan.id_level = pengguna.level_pengguna','inner');
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    // function tampil_data_admin(){
+    //     $this->db->where_in('level_pengguna', ['1', '2', '4']);
+    //     return $this->db->get('pengguna');
+    // }
 
     function tampil_data_admin(){
-        $this->db->where('level_pengguna', 'Administrator');
-        return $this->db->get('pengguna');
+        $this->db->select('*');
+        $this->db->from('pengguna');
+        $this->db->join('sub_komisi','pengguna.id_pengguna = sub_komisi.admin_pengguna','inner');
+        $this->db->group_by('pengguna.id_pengguna');
+        $query = $this->db->get();
+        return $query->result();
     }
 
     function simpan($data){

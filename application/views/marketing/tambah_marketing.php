@@ -24,10 +24,13 @@
                                 <label for="member" class="col-form-label">Member</label>
                                 <select class="form-control" id="member" name="member" required>
                                     <option value="">Pilih Member</option>
-                                    <option value="Silver">Silver (50)</option>
-                                    <option value="Gold Express">Gold Express (60)</option>
-                                    <option value="Prime Pro">Prime Pro (70)</option>
-                                    <option value="Black Jack">Black Jack (80)</option>
+                                    <?php foreach ($member_marketing as $each) { ?>
+                                        <?php if (strpos($each->member, 'Setting Nilai Primary') === false) { ?>
+                                            <option value="<?php echo $each->id_member; ?>">
+                                                <?php echo $each->member; ?> (<?php echo "Sec : " . $each->nilai_secondary; ?>) - (<?php echo "Kpr : " . $each->nilai_kpr; ?>)
+                                            </option>
+                                        <?php } ?>
+                                    <?php } ?>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -41,7 +44,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="emd" class="col-form-label">Upline 1</label>
+                                <label for="emd" class="col-form-label">Upline</label>
                                 <select class="form-control select2bs4" id="emd" name="emd">
                                     <option value="">Pilih Nama</option>
                                     <?php 
@@ -53,7 +56,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="cmo" class="col-form-label">Upline 2</label>
+                                <label for="cmo" class="col-form-label">Upline (CMO)</label>
                                 <select class="form-control select2bs4" id="cmo" name="cmo">
                                     <option value="">Pilih Nama</option>
                                     <?php 
@@ -77,29 +80,30 @@
                                     <option value="emd">Executive Marketing Director (EMD)</option>
                                     <option value="cmo">Chief Marketing Officer (CMO)</option> -->
                                     <?php 
-                                    foreach($jabatan as $jabatan){ ?>
-                                        <option value="<?php echo $jabatan->nilai_jabatan; ?>,<?php echo $jabatan->nama_jabatan; ?>">
-                                            <?php echo $jabatan->nama_jabatan; ?> (<?php echo $jabatan->nilai_jabatan; ?>)
-                                        </option>;
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="g_ktp" class="col-form-label">Foto KTP</label>
-                                <input type="file" class="form-control" id="g_ktp" name="g_ktp">
-                            </div>
-                            <div class="form-group">
-                                <label for="g_npwp" class="col-form-label">Foto NPWP</label>
-                                <input type="file" class="form-control" id="g_npwp" name="g_npwp">
+                                    foreach($tampil_jabatan as $jabatan){ ?>
+                                        <!-- <option value="<?php echo $jabatan->id_jabatan; ?>,<?php echo $jabatan->nama_jabatan; ?>"> -->
+                                            <option value="<?php echo $jabatan->id_jabatan; ?>">
+                                                <?php echo $jabatan->nama_jabatan; ?> (<?php echo $jabatan->nilai_jabatan; ?>)
+                                            </option>;
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="g_ktp" class="col-form-label">Foto KTP</label>
+                                    <input type="file" class="form-control" id="g_ktp" name="g_ktp">
+                                </div>
+                                <div class="form-group">
+                                    <label for="g_npwp" class="col-form-label">Foto NPWP</label>
+                                    <input type="file" class="form-control" id="g_npwp" name="g_npwp">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>

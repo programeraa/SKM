@@ -22,17 +22,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="member" class="col-form-label">Member</label>
-                                <input type="text" class="form-control" id="member" name="member" value="<?php $member = $mkt->member_mar; 
-                                if ($member == 'Silver') {
-                                    echo $mkt->member_mar; echo ' (50%)';
-                                    }elseif ($member == 'Gold Express') {
-                                        echo $mkt->member_mar; echo ' (60%)';
-                                        }elseif ($member == 'Prime Pro') {
-                                            echo $mkt->member_mar; echo ' (70%)';
-                                            }else{
-                                                echo $mkt->member_mar; echo ' (80%)';
-                                            }
-                                        ?>" readonly>
+                                <input type="text" class="form-control" id="member" name="member" value="<?= $jenis_member ?> (<?= $member_sec ?>/<?= $member_kpr ?>)" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label for="fasilitas" class="col-form-label">Fasilitas</label>
@@ -46,11 +36,11 @@
                                         <input type="text" class="form-control" id="npwp" name="npwp" value="<?php echo $mkt->npwp_mar; ?>" readonly>
                                     </div> -->
                                     <div class="form-group">
-                                        <label for="emd" class="col-form-label">Upline 1</label>
+                                        <label for="emd" class="col-form-label">Upline</label>
                                         <input type="text" class="form-control" id="emd" name="emd" value="<?php echo $emd_baru; ?>" readonly>
                                     </div>
                                     <div class="form-group">
-                                        <label for="cmo" class="col-form-label">Upline 2</label>
+                                        <label for="cmo" class="col-form-label">Upline (CMO)</label>
                                         <input type="text" class="form-control" id="cmo" name="cmo" value="<?php echo $cmo_baru;; ?>" readonly>
                                     </div>
                                     <div class="form-group">
@@ -59,12 +49,13 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="jabatan" class="col-form-label">Jabatan</label>
-                                        <input type="text" class="form-control" id="jabatan" name="jabatan" value="<?php echo $mkt->jabatan_mar; ?>" readonly>
+                                        <input type="text" class="form-control" id="jabatan" name="jabatan" value="<?php echo $jabatan_marketing; ?>" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="ktp" class="col-form-label">Foto KTP</label>
+                                        <br>
                                         <?php if ($gambar_ktp == 1) { ?>
                                             <img style="width: 200px; height: 130px; " src="<?= base_url('assets/foto_marketing/' . $mkt->gambar_ktp_mar) ?>" alt="Marketing Image">
                                         <?php }else{ ?>
@@ -73,6 +64,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="npwp" class="col-form-label">Foto NPWP</label>
+                                        <br>
                                         <?php if ($gambar_npwp == 1) { ?>
                                             <img style="width: 200px; height: 130px; " src="<?= base_url('assets/foto_marketing/' . $mkt->gambar_npwp_mar) ?>" alt="Marketing Image">
                                         <?php }else{ ?>

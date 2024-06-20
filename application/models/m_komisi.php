@@ -3,7 +3,7 @@
 class M_komisi extends CI_Model{
 
 	function tampil_data(){
-		$hasil = $this->db->query('SELECT a.id_komisi, a.alamat_komisi, a.jt_komisi, a.tgl_closing_komisi, a.bruto_komisi, a.mar_listing_komisi, a.mar_selling_komisi, a.waktu_komisi, a.status_komisi, a.tgl_disetujui, a.status_transfer,
+		$this->db->select('a.id_komisi, a.alamat_komisi, a.jt_komisi, a.tgl_closing_komisi, a.bruto_komisi, a.mar_listing_komisi, a.mar_selling_komisi, a.waktu_komisi, a.status_komisi, a.tgl_disetujui, a.status_transfer, a.keterangan_komisi, a.nomor_kantor_komisi, a.kantor_komisi, a.jenis_hitungan_komisi,
 
 			a.mar_listing2_komisi, a.mar_selling2_komisi, 
 
@@ -23,21 +23,23 @@ class M_komisi extends CI_Model{
 
 			j.id_pengguna, j.nama_pengguna as admin_disetujui, j.level_pengguna as level_disetujui, j.gambar_ttd_pengguna,
 
-			k.id_afw, k.id_sub_komisi, k.m_ang, k.npwp_ang, k.npwp_up_ang, k.npwp_up2_ang, k.m_fran, k.npwp_fran, k.npwp_up_fran, k.npwp_up2_fran, k.m_win, k.npwp_win, k.npwp_up_win, k.npwp_up2_win 
+			k.id_afw, k.id_sub_komisi, k.m_ang, k.npwp_ang, k.npwp_up_ang, k.npwp_up2_ang, k.m_fran, k.npwp_fran, k.npwp_up_fran, k.npwp_up2_fran, k.m_win, k.npwp_win, k.npwp_up_win, k.npwp_up2_win'
+		);
 
-			FROM komisi as a LEFT JOIN marketing as b ON a.mar_listing_komisi = b.id_mar LEFT JOIN marketing as c ON a.mar_selling_komisi = c.id_mar INNER JOIN sub_komisi as d ON a.id_komisi = d.id_komisi INNER JOIN pengguna as e ON e.id_pengguna = d.admin_pengguna
+		$this->db->from('komisi as a');
+		$this->db->join('marketing as b', 'a.mar_listing_komisi = b.id_mar', 'left');
+		$this->db->join('marketing as c', 'a.mar_selling_komisi = c.id_mar', 'left');
+		$this->db->join('sub_komisi as d', 'a.id_komisi = d.id_komisi');
+		$this->db->join('pengguna as e', 'e.id_pengguna = d.admin_pengguna');
+		$this->db->join('marketing as h', 'h.id_mar = a.mar_listing2_komisi', 'left');
+		$this->db->join('marketing as i', 'i.id_mar = a.mar_selling2_komisi', 'left');
+		$this->db->join('pengguna as j', 'j.id_pengguna = d.admin_status_komisi', 'left');
+		$this->db->join('sub_komisi_afw as k', 'k.id_sub_komisi = d.id_sub_komisi', 'left');
 
-			LEFT JOIN marketing as h ON h.id_mar = a.mar_listing2_komisi
+		$this->db->order_by('a.id_komisi', 'ASC');
 
-			LEFT JOIN marketing as i ON i.id_mar = a.mar_selling2_komisi
+		$hasil = $this->db->get();
 
-			LEFT JOIN pengguna as j ON j.id_pengguna = d.admin_status_komisi
-
-			LEFT JOIN sub_komisi_afw as k ON k.id_sub_komisi = d.id_sub_komisi
-
-			ORDER BY a.id_komisi ASC
-
-			');
 		return $hasil;
 	}
 
@@ -72,7 +74,7 @@ class M_komisi extends CI_Model{
 	function getDataByDateRange($dari, $ke, $j_tanggal, $admin_komisi, $status, $transfer) {
 		$this->db->distinct();
 		$this->db->select('a.id_komisi, a.alamat_komisi, a.jt_komisi, a.tgl_closing_komisi, a.bruto_komisi, a.mar_listing_komisi, a.mar_selling_komisi, a.waktu_komisi, a.status_komisi, a.tgl_disetujui, a.status_transfer,
-			a.mar_listing2_komisi, a.mar_selling2_komisi');
+			a.mar_listing2_komisi, a.mar_selling2_komisi, a.nomor_kantor_komisi, a.kantor_komisi, a.jenis_hitungan_komisi');
 
 		$this->db->select('b.id_mar, b.nama_mar, b.member_mar as member_listing, c.id_mar, c.member_mar as member_selling, b.upline_emd_mar as up_1_listing, b.upline_cmo_mar as up_2_listing, b.norek_mar as norek_listing,
 			c.upline_emd_mar as up_1_selling, c.upline_cmo_mar as up_2_selling, c.nama_mar as nama_mar2, c.norek_mar as norek_selling');
@@ -121,7 +123,8 @@ class M_komisi extends CI_Model{
 
 	function tampil_data_rincian($where){
 		$data = implode($where);
-		$hasil = $this->db->query("SELECT a.id_komisi, a.alamat_komisi, a.jt_komisi, a.tgl_closing_komisi, a.bruto_komisi, a.mar_listing_komisi, a.mar_selling_komisi, a.waktu_komisi, a.status_komisi, a.tgl_disetujui, a.status_transfer,
+		
+		$this->db->select('a.id_komisi, a.alamat_komisi, a.jt_komisi, a.tgl_closing_komisi, a.bruto_komisi, a.mar_listing_komisi, a.mar_selling_komisi, a.waktu_komisi, a.status_komisi, a.tgl_disetujui, a.status_transfer, a.keterangan_komisi, a.nomor_kantor_komisi, a.kantor_komisi, a.jenis_hitungan_komisi,
 
 			a.mar_listing2_komisi, a.mar_selling2_komisi, 
 
@@ -129,7 +132,7 @@ class M_komisi extends CI_Model{
 
 			c.upline_emd_mar as up_1_selling, c.upline_cmo_mar as up_2_selling, c.nama_mar as nama_mar2, c.norek_mar as norek_selling,
 
-			d.id_sub_komisi, d.id_komisi, d.mm_listing_komisi, d.npwpm_listing_komisi, d.npwpum_listing_komisi, d.npwpum_listing2_komisi, d.mm_selling_komisi, d.npwpm_selling_komisi, d.npwpum_selling_komisi, d.npwpum_selling2_komisi, d.admin_pengguna, d.admin_status_komisi, d.jabatanum_listing_komisi, d.jabatanum_listing2_komisi, d.jabatanum2_listing_komisi, d.jabatanum2_listing2_komisi, d.jabatanum_selling_komisi, d.jabatanum_selling2_komisi, d.jabatanum2_selling_komisi, d.jabatanum2_selling2_komisi,
+			d.id_sub_komisi, d.primary_komisi, d.id_komisi, d.mm_listing_komisi, d.npwpm_listing_komisi, d.npwpum_listing_komisi, d.npwpum_listing2_komisi, d.mm_selling_komisi, d.npwpm_selling_komisi, d.npwpum_selling_komisi, d.npwpum_selling2_komisi, d.admin_pengguna, d.admin_status_komisi, d.jabatanum_listing_komisi, d.jabatanum_listing2_komisi, d.jabatanum2_listing_komisi, d.jabatanum2_listing2_komisi, d.jabatanum_selling_komisi, d.jabatanum_selling2_komisi, d.jabatanum2_selling_komisi, d.jabatanum2_selling2_komisi,
 
 			d.mm2_listing_komisi, d.npwpm2_listing_komisi, d.npwpum2_listing_komisi, d.npwpum2_listing2_komisi, d.mm2_selling_komisi, d.npwpm2_selling_komisi, d.npwpum2_selling_komisi, d.npwpum2_selling2_komisi,
 
@@ -141,21 +144,26 @@ class M_komisi extends CI_Model{
 
 			j.id_pengguna, j.nama_pengguna as admin_disetujui, j.level_pengguna as level_disetujui, j.gambar_ttd_pengguna,
 
-			k.id_afw, k.id_sub_komisi, k.m_ang, k.npwp_ang, k.npwp_up_ang, k.npwp_up2_ang, k.m_fran, k.npwp_fran, k.npwp_up_fran, k.npwp_up2_fran, k.m_win, k.npwp_win, k.npwp_up_win, k.npwp_up2_win
+			k.id_afw, k.id_sub_komisi, k.m_ang, k.npwp_ang, k.npwp_up_ang, k.npwp_up2_ang, k.m_fran, k.npwp_fran, k.npwp_up_fran, k.npwp_up2_fran, k.m_win, k.npwp_win, k.npwp_up_win, k.npwp_up2_win'
+		);
 
-			FROM komisi as a LEFT JOIN marketing as b ON a.mar_listing_komisi = b.id_mar LEFT JOIN marketing as c ON a.mar_selling_komisi = c.id_mar INNER JOIN sub_komisi as d ON a.id_komisi = d.id_komisi INNER JOIN pengguna as e ON e.id_pengguna = d.admin_pengguna
+		$this->db->from('komisi as a');
+		$this->db->join('marketing as b', 'a.mar_listing_komisi = b.id_mar', 'left');
+		$this->db->join('marketing as c', 'a.mar_selling_komisi = c.id_mar', 'left');
+		$this->db->join('sub_komisi as d', 'a.id_komisi = d.id_komisi');
+		$this->db->join('pengguna as e', 'e.id_pengguna = d.admin_pengguna');
+		$this->db->join('marketing as h', 'h.id_mar = a.mar_listing2_komisi', 'left');
+		$this->db->join('marketing as i', 'i.id_mar = a.mar_selling2_komisi', 'left');
+		$this->db->join('pengguna as j', 'j.id_pengguna = d.admin_status_komisi', 'left');
+		$this->db->join('sub_komisi_afw as k', 'k.id_sub_komisi = d.id_sub_komisi', 'left');
 
-			LEFT JOIN marketing as h ON h.id_mar = a.mar_listing2_komisi
+		$this->db->where('a.id_komisi', $data);
 
-			LEFT JOIN marketing as i ON i.id_mar = a.mar_selling2_komisi
+		$hasil = $this->db->get();
 
-			LEFT JOIN pengguna as j ON j.id_pengguna = d.admin_status_komisi
-
-			LEFT JOIN sub_komisi_afw as k ON k.id_sub_komisi = d.id_sub_komisi
-
-			WHERE a.id_komisi = '$data'");
 		return $hasil;
 	}
+
 
 	function simpan($data){
 		$this->db->insert('komisi',$data);
@@ -209,6 +217,23 @@ class M_komisi extends CI_Model{
 			return null;
 		}
 	}
+
+	public function get_last_data_by_kantor_komisi($kantor) {
+		$this->db->select('*');
+		$this->db->from('komisi');
+		$this->db->where('kantor_komisi', $kantor);
+		$this->db->order_by('nomor_kantor_komisi', 'DESC');
+		$this->db->limit(1);
+		$query = $this->db->get();
+
+		return $query->row();
+	}
+
+	// public function hitung_kantor_komisi($kantor) {
+ 	//      $this->db->from('komisi');
+ 	//      $this->db->where('kantor_komisi', $kantor);
+ 	//      return $this->db->count_all_results();
+ 	//    }
 
 	function update($where,$data){
 		$this->db->where($where);

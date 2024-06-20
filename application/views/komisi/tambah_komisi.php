@@ -12,65 +12,104 @@
                 <form method="post" action="<?= base_url('komisi/tambah_komisi'); ?>">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="alamat" class="col-form-label">Alamat Closing</label>
-                                <input type="text" class="form-control" id="alamat" name="alamat">
-                            </div>
-                            <div class="form-group">
-                                <label for="jt" class="col-form-label">Jenis Transaksi</label>
-                                <select class="form-control" id="jt" name="jt">
-                                    <option value="">Pilih Jenis Transaksi</option>
-                                    <option value="Jual">Jual</option>
-                                    <option value="Sewa">Sewa</option>
-                                    <option value="Jual/Sewa">Jual / Sewa</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="tgl_closing" class="col-form-label">Tanggal Closing</label>
-                                <input type="date" class="form-control" id="tgl_closing" name="tgl_closing">
-                            </div>
-                            <div class="form-group">
-                                <label for="komisi" class="col-form-label">Komisi Bruto</label>
-                                <input type="text" class="form-control" name="tampil_komisi" id="tampil_komisi" onkeyup="formatRupiah(this, 'komisi')">
-                                <input type="hidden" id="komisi" name="komisi">
-                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="referal" class="col-form-label">Referal</label>
-                                        <input type="text" class="form-control" id="referal" name="referal">
-                                    </div>
-                                </div> 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="j_referal" class="col-form-label">Jumlah
-                                        </label>
-                                        <input type="text" class="form-control" name="tampil_referal" id="tampil_referal" onkeyup="formatRupiah(this, 'j_referal')">
-                                        <input type="hidden" class="form-control" id="j_referal" name="j_referal">
-                                    </div>
+                                        <label for="kantor" class="col-form-label">Kantor</label>
+                                        <select class="form-control" id="kantor" name="kantor">
+                                            <option value="">Pilih Member</option>
+                                            <?php 
+                                            foreach($kantor as $each){ ?>
+                                                <option value="<?php echo $each->id_kantor; ?>">
+                                                    <?php echo $each->kantor; ?>
+                                                </option>;
+                                            </option>;
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="jenis_hitungan" class="col-form-label">Jenis Hitungan</label>
+                                    <select class="form-control" id="jenis_hitungan" name="jenis_hitungan">
+                                        <option value="">Pilih Jenis Hitungan</option>
+                                        <option value="Primary">Primary</option>
+                                        <option value="Secondary">Secondary</option>
+                                        <option value="KPR">KPR</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="ml" class="col-form-label">Marketing Listing</label>
-                                <select class="form-control" id="ml" name="ml" onchange="showOtherInput(this.value);">
-                                    <option value="">Pilih Marketing</option>
-                                    <option value="A&A">Sesama A&A</option>
-                                    <option value="Broker">CO-Broker Lain</option>
-                                </select>
+                        <div class="form-group">
+                            <label for="alamat" class="col-form-label">Alamat Closing</label>
+                            <input type="text" class="form-control" id="alamat" name="alamat">
+                        </div>
+                        <div class="form-group">
+                            <label for="jt" class="col-form-label">Jenis Transaksi</label>
+                            <select class="form-control" id="jt" name="jt">
+                                <option value="">Pilih Jenis Transaksi</option>
+                                <option value="Jual">Jual</option>
+                                <option value="Sewa">Sewa</option>
+                                <option value="Jual/Sewa">Jual / Sewa</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tgl_closing" class="col-form-label">Tanggal Closing</label>
+                            <input type="date" class="form-control" id="tgl_closing" name="tgl_closing">
+                        </div>
+                        <div class="form-group">
+                            <label for="komisi" class="col-form-label">Komisi Bruto</label>
+                            <input type="text" class="form-control" name="tampil_komisi" id="tampil_komisi" onkeyup="formatRupiah(this, 'komisi')">
+                            <input type="hidden" id="komisi" name="komisi">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="referal" class="col-form-label">Referal</label>
+                                    <input type="text" class="form-control" id="referal" name="referal">
+                                </div>
+                            </div> 
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="j_referal" class="col-form-label">Jumlah
+                                    </label>
+                                    <input type="text" class="form-control" name="tampil_referal" id="tampil_referal" onkeyup="formatRupiah(this, 'j_referal')">
+                                    <input type="hidden" class="form-control" id="j_referal" name="j_referal">
+                                </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="pph_referal" class="col-form-label">Potongan</label>
+                                    <select class="form-control" id="pph_referal" name="pph_referal">
+                                        <option value="3">Non NPWP (3)</option>
+                                        <option value="2.5">NPWP (2.5)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                            <!-- Marketing A&A Indonesia -->
-                            <div id="marketing_listing2" class="form-group" style="display: none;">
-                                <label for="marketing_listing" class="col-form-label">Marketing Listing</label>
-                                <select class="form-control select2bs4" id="marketing_listing2" name="marketing_listing[]" multiple onchange="changeValue(this)">
-                                    <option value="">Pilih Nama</option>
-                                    <?php 
-                                    $jsArray = "var prdName = new Array();\n";
-                                    foreach($marketing as $each){ 
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="ml" class="col-form-label">Marketing Listing</label>
+                            <select class="form-control" id="ml" name="ml" onchange="showOtherInput(this.value);">
+                                <option value="">Pilih Marketing</option>
+                                <option value="A&A">Sesama A&A</option>
+                                <option value="Broker">CO-Broker Lain</option>
+                            </select>
+                        </div>
+
+                        <!-- Marketing A&A Indonesia -->
+                        <div id="marketing_listing2" class="form-group" style="display: none;">
+                            <label for="marketing_listing" class="col-form-label">Marketing Listing</label>
+                            <select class="form-control select2bs4" id="marketing_listing2" name="marketing_listing[]" multiple onchange="changeValue(this)">
+                                <option value="">Pilih Nama</option>
+                                <?php 
+                                $jsArray = "var prdName = new Array();\n";
+                                foreach($marketing as $each){ 
                                         $a = ''; // Inisialisasi $a di sini
+                                        $mm_listing = '';
+                                        $mm_listing_kpr = '';
 
                                         ?>
                                         <option value="<?php echo $each->id_mar; ?>">
@@ -78,16 +117,23 @@
                                         </option>;
                                         <?php
 
+                                        foreach ($member_marketing as $member) {
+                                            if ($member->id_member == $each->member_mar) {
+                                                $mm_listing = $member->nilai_secondary;
+                                                $mm_listing_kpr = $member->nilai_kpr;
+                                            }
+                                        }
+
                                         //ubah teks member menjadi angka
-                                        if ($each->member_mar== 'Silver') {
-                                            $mm_listing = 50;
-                                        }elseif ($each->member_mar == 'Gold Express') {
-                                            $mm_listing = 60;
-                                        }elseif ($each->member_mar == 'Prime Pro') {
-                                            $mm_listing = 70;
-                                        }elseif ($each->member_mar == 'Black Jack') {
-                                            $mm_listing = 80;
-                                        }  
+                                        // if ($each->member_mar== 1) {
+                                        //     $mm_listing = 50;
+                                        // }elseif ($each->member_mar == 2) {
+                                        //     $mm_listing = 60;
+                                        // }elseif ($each->member_mar == 3) {
+                                        //     $mm_listing = 70;
+                                        // }elseif ($each->member_mar == 4) {
+                                        //     $mm_listing = 80;
+                                        // }  
 
                                         if (!empty($each->gambar_npwp_mar)) {
                                             $npwp_mar = 1;
@@ -99,7 +145,16 @@
                                         foreach ($marketing as $upline) {
                                             if ($upline->id_mar == $each->upline_emd_mar) {
                                                 $a = $upline->gambar_npwp_mar;
-                                                $j_upline1 = $upline->nilai_jabatan_mar;
+                                                foreach ($tampil_jabatan as $jabatan) {
+                                                    if ($jabatan->id_jabatan == $upline->jabatan_mar) {
+                                                        $j_upline1 = $jabatan->nilai_jabatan;
+                                                        break;
+                                                    }else{
+                                                        $j_upline1 = 0;
+                                                    }
+                                                }
+                                                //$j_upline1 = $upline->nilai_jabatan_mar;
+
                                                 break;
                                             }elseif($each->upline_emd_mar == null){
                                                 $a = null;
@@ -126,7 +181,15 @@
                                         foreach ($marketing as $upline2) {
                                             if ($upline2->id_mar == $each->upline_cmo_mar) {
                                                 $b = $upline2->gambar_npwp_mar;
-                                                $j_upline2 = $upline2->nilai_jabatan_mar;
+                                                foreach ($tampil_jabatan as $jabatan) {
+                                                    if ($jabatan->id_jabatan == $upline2->jabatan_mar) {
+                                                        $j_upline2 = $jabatan->nilai_jabatan;
+                                                        break;
+                                                    }else{
+                                                        $j_upline2 = 0;
+                                                    }
+                                                }
+                                                //$j_upline2 = $upline2->nilai_jabatan_mar;
                                                 break;
                                             }elseif($each->upline_cmo_mar == null){
                                                 $b = null;
@@ -151,6 +214,7 @@
 
                                         $jsArray .= "prdName['" . $each->id_mar . "'] = {
                                             member_mar:'" . addslashes($mm_listing) ."',
+                                            member_mar_kpr:'" . addslashes($mm_listing_kpr) ."',
                                             npwp_mar:'" . addslashes($npwp_mar) ."',
                                             npwpum_listing:'" . addslashes($npwpum_listing) ."',
                                             jabatan_upline1:'" . addslashes($jabatan_upline1) ."',
@@ -207,21 +271,32 @@
                                         <option value="">Pilih Nama</option>
                                         <?php 
                                         $jsArray_s = "var prdName_s = new Array();\n";
-                                        foreach($marketing as $each){ ?>
+                                        foreach($marketing as $each){ 
+                                            $a = ''; // Inisialisasi $a di sini
+                                            $mm_selling = '';
+                                            $mm_selling_kpr = '';
+                                            ?>
                                             <option value="<?php echo $each->id_mar; ?>">
                                                 <?php echo $each->nama_mar; ?>
                                             </option>;
                                             <?php
 
-                                            if ($each->member_mar== 'Silver') {
-                                                $mm_selling = 50;
-                                            }elseif ($each->member_mar == 'Gold Express') {
-                                                $mm_selling = 60;
-                                            }elseif ($each->member_mar == 'Prime Pro') {
-                                                $mm_selling = 70;
-                                            }elseif ($each->member_mar == 'Black Jack') {
-                                                $mm_selling = 80;
-                                            }  
+                                            foreach ($member_marketing as $member) {
+                                                if ($member->id_member == $each->member_mar) {
+                                                    $mm_selling = $member->nilai_secondary;
+                                                    $mm_selling_kpr = $member->nilai_kpr;
+                                                }
+                                            }
+
+                                            // if ($each->member_mar== 'Silver') {
+                                            //     $mm_selling = 50;
+                                            // }elseif ($each->member_mar == 'Gold Express') {
+                                            //     $mm_selling = 60;
+                                            // }elseif ($each->member_mar == 'Prime Pro') {
+                                            //     $mm_selling = 70;
+                                            // }elseif ($each->member_mar == 'Black Jack') {
+                                            //     $mm_selling = 80;
+                                            // }  
 
                                             if (!empty($each->gambar_npwp_mar)) {
                                                 $npwp_mar = 1;
@@ -233,7 +308,15 @@
                                             foreach ($marketing as $upline) {
                                                 if ($upline->id_mar == $each->upline_emd_mar) {
                                                     $a = $upline->gambar_npwp_mar;
-                                                    $js_upline1 = $upline->nilai_jabatan_mar;
+                                                    foreach ($tampil_jabatan as $jabatan) {
+                                                        if ($jabatan->id_jabatan == $upline->jabatan_mar) {
+                                                            $js_upline1 = $jabatan->nilai_jabatan;
+                                                            break;
+                                                        }else{
+                                                            $js_upline1 = 0;
+                                                        }
+                                                    }
+                                                    //$js_upline1 = $upline->nilai_jabatan_mar;
                                                     break;
                                                 }elseif($each->upline_emd_mar == null){
                                                     $a = null;
@@ -261,7 +344,15 @@
                                             foreach ($marketing as $upline2) {
                                                 if ($upline2->id_mar == $each->upline_cmo_mar) {
                                                     $b = $upline2->gambar_npwp_mar;
-                                                    $js_upline2 = $upline2->nilai_jabatan_mar;
+                                                    foreach ($tampil_jabatan as $jabatan) {
+                                                        if ($jabatan->id_jabatan == $upline2->jabatan_mar) {
+                                                            $js_upline2 = $jabatan->nilai_jabatan;
+                                                            break;
+                                                        }else{
+                                                            $js_upline2 = 0;
+                                                        }
+                                                    }
+                                                    //$js_upline2 = $upline2->nilai_jabatan_mar;
                                                     break;
                                                 }elseif($each->upline_cmo_mar == null){
                                                     $b = null;
@@ -286,6 +377,7 @@
 
                                             $jsArray_s .= "prdName_s['" . $each->id_mar . "'] = {
                                                 member_mar:'" . addslashes($mm_selling) ."',
+                                                member_mar_kpr:'" . addslashes($mm_selling_kpr) ."',
                                                 npwp_mar:'" . addslashes($npwp_mar) ."',
                                                 npwpum_selling:'" . addslashes($npwpum_selling) ."',
                                                 jabatans_upline1:'" . addslashes($jabatans_upline1) ."',
@@ -342,9 +434,23 @@
                                     </div>
                                     <div class="d-xl-none">
                                         <!--tambahan input marketing listing-->
+                                        <?php 
+                                        foreach ($member_marketing as $primary) {
+                                            if ($primary->member == 'Setting Nilai Primary') {
+                                                $primary = $primary->nilai_secondary;
+                                                break;
+                                            }
+                                        }
+                                        ?>
+                                        <input type="text" class="form-control" id="nilai_primary" name="nilai_primary" value="<?= $primary ?>">
+
                                         <div class="form-group">
-                                            <label for="mm_listing" class="col-form-label">Member ML</label>
+                                            <label for="mm_listing" class="col-form-label">Member Secondary ML</label>
                                             <input type="text" class="form-control" id="mm_listing" name="mm_listing[]">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mm_listing_kpr" class="col-form-label">Member KPR ML</label>
+                                            <input type="text" class="form-control" id="mm_listing_kpr" name="mm_listing_kpr[]">
                                         </div>
                                         <div class="form-group">
                                             <label for="npwpm_listing" class="col-form-label">NPWP ML</label>
@@ -369,8 +475,12 @@
 
                                         <!--tambahan input marketing selling-->
                                         <div class="form-group">
-                                            <label for="mm_selling" class="col-form-label">Member MS</label>
+                                            <label for="mm_selling" class="col-form-label">Member Secondary MS</label>
                                             <input type="text" class="form-control" id="mm_selling" name="mm_selling[]">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mm_selling_kpr" class="col-form-label">Member KPR MS</label>
+                                            <input type="text" class="form-control" id="mm_selling_kpr" name="mm_selling_kpr[]">
                                         </div>
                                         <div class="form-group">
                                             <label for="npwpm_selling" class="col-form-label">NPWP MS</label>
@@ -402,6 +512,7 @@
                                         
                                         <div class="form-group">
                                             <input type="text" class="form-control" id="m_ang" name="m_ang" value="<?php echo $member_ang ?>">
+                                            <input type="text" class="form-control" id="m_ang_kpr" name="m_ang_kpr" value="<?php echo $member_ang_kpr ?>">
                                             <input type="text" class="form-control" id="npwp_ang" name="npwp_ang" value="<?php echo $npwp_ang ?>">
                                             <input type="text" class="form-control" id="npwp_up_ang" name="npwp_up_ang" value="<?php echo $npwp_up_ang ?>">
                                             <input type="text" class="form-control" id="jabatan_up_ang" name="jabatan_up_ang" value="<?php echo $jabatan_up_ang ?>">
@@ -410,6 +521,7 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control" id="m_fran" name="m_fran" value="<?php echo $member_fran ?>">
+                                            <input type="text" class="form-control" id="m_fran_kpr" name="m_fran_kpr" value="<?php echo $member_fran_kpr ?>">
                                             <input type="text" class="form-control" id="npwp_fran" name="npwp_fran" value="<?php echo $npwp_fran ?>">
                                             <input type="text" class="form-control" id="npwp_up_fran" name="npwp_up_fran" value="<?php echo $npwp_up_fran ?>">
                                             <input type="text" class="form-control" id="jabatan_up_fran" name="jabatan_up_fran" value="<?php echo $jabatan_up_fran ?>">
@@ -418,14 +530,17 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control" id="m_win" name="m_win" value="<?php echo $member_win ?>">
+                                            <input type="text" class="form-control" id="m_win_kpr" name="m_win_kpr" value="<?php echo $member_win_kpr ?>">
                                             <input type="text" class="form-control" id="npwp_win" name="npwp_win" value="<?php echo $npwp_win ?>">
                                             <input type="text" class="form-control" id="npwp_up_win" name="npwp_up_win" value="<?php echo $npwp_up_win ?>">
                                             <input type="text" class="form-control" id="jabatan_up_win" name="jabatan_up_win" value="<?php echo $jabatan_up_win ?>">
                                             <input type="text" class="form-control" id="npwp_up2_win" name="npwp_up2_win" value="<?php echo $npwp_up2_win ?>">
                                             <input type="text" class="form-control" id="jabatan_up2_win" name="jabatan_up2_win" value="<?php echo $jabatan_up2_win ?>">
                                         </div>
-
-
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="keterangan" class="col-form-label">Keterangan</label>
+                                        <input type="teks" class="form-control" id="keterangan" name="keterangan">
                                     </div>
                                 </div>
                             </div>
@@ -446,6 +561,7 @@
             function changeValue(select) {
                 var selectedOptions = select.selectedOptions;
                 var mm_listing = [];
+                var mm_listing_kpr = [];
                 var npwpm_listing = [];
                 var npwpum_listing = [];
                 var jabatan_upline1 = [];
@@ -455,6 +571,7 @@
                 for (var i = 0; i < selectedOptions.length; i++) {
                     var id = selectedOptions[i].value;
                     mm_listing.push(prdName[id].member_mar);
+                    mm_listing_kpr.push(prdName[id].member_mar_kpr);
                     npwpm_listing.push(prdName[id].npwp_mar);
                     npwpum_listing.push(prdName[id].npwpum_listing);
                     jabatan_upline1.push(prdName[id].jabatan_upline1);
@@ -463,6 +580,7 @@
                 }
 
                 document.getElementById('mm_listing').value = mm_listing.join(', ');
+                document.getElementById('mm_listing_kpr').value = mm_listing_kpr.join(', ');
                 document.getElementById('npwpm_listing').value = npwpm_listing.join(', ');
                 document.getElementById('npwpum_listing').value = npwpum_listing.join(', ');
                 document.getElementById('jabatanum_listing').value = jabatan_upline1.join(', ');
@@ -478,6 +596,7 @@
             function changeValue_s(select) {
                 var selectedOptions = select.selectedOptions;
                 var mm_selling = [];
+                var mm_selling_kpr = [];
                 var npwpm_selling = [];
                 var npwpum_selling = [];
                 var jabatans_upline1 = [];
@@ -487,6 +606,7 @@
                 for (var i = 0; i < selectedOptions.length; i++) {
                     var id = selectedOptions[i].value;
                     mm_selling.push(prdName_s[id].member_mar);
+                    mm_selling_kpr.push(prdName_s[id].member_mar_kpr);
                     npwpm_selling.push(prdName_s[id].npwp_mar);
                     npwpum_selling.push(prdName_s[id].npwpum_selling);
                     jabatans_upline1.push(prdName_s[id].jabatans_upline1);
@@ -495,6 +615,7 @@
                 }
 
                 document.getElementById('mm_selling').value = mm_selling.join(', ');
+                document.getElementById('mm_selling_kpr').value = mm_selling_kpr.join(', ');
                 document.getElementById('npwpm_selling').value = npwpm_selling.join(', ');
                 document.getElementById('npwpum_selling').value = npwpum_selling.join(', ');
                 document.getElementById('jabatanum_selling').value = jabatans_upline1.join(', ');

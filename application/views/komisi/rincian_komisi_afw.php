@@ -48,7 +48,7 @@ if ($komisi->mar_listing_komisi == 38) {
 </table>
 
 <div>
-    <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Approve'):?>
+    <?php if (($level_asli == 'Administrator' || $level_asli == 'Admin Komisi') && $komisi->status_komisi != 'Approve'):?>
         <?php if ($jumlah_kurang_ang == 0) {?>
 
             <?php if (!empty($ml_afw) || !empty($ml_2_afw)) { ?>
@@ -146,7 +146,7 @@ if ($komisi->mar_listing_komisi == 38) {
     </table>
 
     <div>
-        <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Approve'):?>
+        <?php if (($level_asli == 'Administrator' || $level_asli == 'Admin Komisi') && $komisi->status_komisi != 'Approve'):?>
             <?php if ($jumlah_kurang_fran == 0) {?>
                 <?php if (!empty($ml_afw) || !empty($ml_2_afw)) { ?>
                     <div class="d-flex justify-content-start">
@@ -239,7 +239,7 @@ if ($komisi->mar_listing_komisi == 38) {
         </table>
 
         <div>
-            <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Approve'):?>
+            <?php if (($level_asli == 'Administrator' || $level_asli == 'Admin Komisi') && $komisi->status_komisi != 'Approve'):?>
                 <?php if ($jumlah_kurang_win == 0) {?>
                     <?php if (!empty($ml_afw) || !empty($ml_2_afw)) { ?>
                         <div class="d-flex justify-content-start">

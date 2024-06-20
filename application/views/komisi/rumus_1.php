@@ -11,6 +11,17 @@ foreach ($referal as $referal) {
     if ($referal->id_komisi == $komisi->id_komisi) {
         $referal_jumlah = $referal->jumlah_referal;
         $referal_keterangan = $referal->keterangan_referal;
+        $pph_referal = $referal->pph_referal; 
+
+        if ($pph_referal == 3) {
+            $keterangan_pph = 'Non-NPWP';
+        }else{
+            $keterangan_pph = 'NPWP';
+        }
+
+        $total_pph_ref = $pph_referal/100 * $referal_jumlah;
+        $fee_asli_referal = $referal_jumlah - $total_pph_ref;
+        
         break;
     }
 }
@@ -61,21 +72,40 @@ if ($komisi->mar_selling2_komisi == 38) {
     //echo "4";
 }
 
-//================================================================ langkah 1 - 4 
+//================================================================ langkah 0 - 4 
+//langkah 0 - hitung apakah ada jenis hitungan primary
+$nilai_primary = $komisi->primary_komisi;
+
+if ($komisi->jenis_hitungan_komisi == 'Primary') {
+    $komisi_kordinator = $nilai_primary/100 * $bruto_awal;
+    $bruto_0 = $bruto_awal - $komisi_kordinator;
+}else{
+    $komisi_kordinator = 0;
+    $bruto_0 = $bruto_awal;
+}
+
+$komisi_kordinator_n = stringToNumber($komisi_kordinator);
+$komisi_kordinator_r = numberToRupiah($komisi_kordinator_n);
+
 //langkah 1 - hitung apakah ada referal awal
 $hitung_referal = null;
 //cek jika ada referal dan tidak ada co broke, maka referal dipotong di awal
 if (!empty($referal_keterangan) && empty($kubruk_nama)) {
     if (strlen($referal_jumlah) <= 2) {
-        $hitung_referal = $referal_jumlah / 100 * $bruto_awal;
-        $bruto_1 = $bruto_awal - $hitung_referal;
+        $hitung_referal = $referal_jumlah / 100 * $bruto_0;
+        $bruto_1 = $bruto_0 - $hitung_referal;
     }else{
-        $bruto_1 = $bruto_awal - $referal_jumlah;
+        $bruto_1 = $bruto_0 - $referal_jumlah;
+
     }
 }
 else{
-    $bruto_1 = $bruto_awal;
+    $bruto_1 = $bruto_0;
 }
+
+//string to rupiah
+$bruto_1_n = stringToNumber($bruto_1);
+$bruto_1_r = numberToRupiah($bruto_1_n);
 
 //string to rupiah
 $hitung_referal_n = stringToNumber($hitung_referal);
@@ -125,6 +155,25 @@ if (!empty($referal_keterangan) && !empty($kubruk_nama)) {
 //string to rupiah
 $hitung_referal_baru_n = stringToNumber($hitung_referal_baru);
 $hitung_referal_baru_r = numberToRupiah($hitung_referal_baru_n);
+
+//hitung ref bila referal berupa persenan
+$pajak_ref_1 = null;
+$fee_ref_diterima_1 = null;
+
+$pajak_ref_2 = null;
+$fee_ref_diterima_2 = null;
+
+if (!empty($referal_keterangan)){
+    if (strlen($referal_jumlah) <= 2) {
+        if (!empty($kubruk_nama)) {
+            $pajak_ref_1 = $pph_referal/100 * $hitung_referal_baru;
+            $fee_ref_diterima_1 = $hitung_referal_baru - $pajak_ref_1;
+        }else{
+            $pajak_ref_2 = $pph_referal/100 * $hitung_referal;
+            $fee_ref_diterima_2 = $hitung_referal - $pajak_ref_2;
+        }
+    }
+}
 
 //====================================================== hitung jumlah marketing yang terlibat
 //total bruto
@@ -194,6 +243,8 @@ if (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_co
     }
     elseif ($persen_cobroke > 50) {
         $fmk = (((100 - $persen_cobroke) / 100) * $bruto_2) - $referal_jumlah;
+    }elseif ($persen_cobroke < 50) {
+        $fmk = (((100 - $persen_cobroke) / 100) * $bruto_2) - $referal_jumlah;
     }else{
         $fmk = $bruto;
     } 
@@ -201,7 +252,10 @@ if (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_co
 }elseif (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_cobroke) && $marketing_listing_2 == 0 && $marketing_selling_2 == 0) {
     if ($persen_cobroke > 50) {
         $fmk = ((100 - $persen_cobroke) / 100) * $bruto_2;
-    }else{
+    }elseif ($persen_cobroke < 50) {
+        $fmk = ((100 - $persen_cobroke) / 100) * $bruto_2;
+    }
+    else{
         $fmk = $bruto_2 / $total_marketing; 
     }
     //echo "B";
@@ -210,6 +264,8 @@ if (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_co
         $fmk = $bruto / 2;
     }elseif ($persen_cobroke > 50) {
         $fmk = ((((100 - $persen_cobroke) / 100) * $bruto_2) - $referal_jumlah) / 2;
+    }elseif ($persen_cobroke < 50) {
+        $fmk = ((((100 - $persen_cobroke) / 100) * $bruto_2) - $referal_jumlah) / 2;
     }else{
         $fmk = $bruto / 2 ;
     }
@@ -217,10 +273,12 @@ if (($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_co
 }elseif (!empty($kubruk_nama) && ($marketing_listing == $id_unik_cobroke || $marketing_selling == $id_unik_cobroke)) {
     if ($persen_cobroke > 50) {
         $fmk = (((100 - $persen_cobroke) / 100) * $bruto_2) / 2;
+    }elseif ($persen_cobroke < 50) {
+        $fmk = (((100 - $persen_cobroke) / 100) * $bruto_2) / 2;
     }else{
         $fmk = $bruto_3 / 2 ;
     }
-    //echo "D";
+    echo "D";
 }else{
     $fmk = $bruto / $total_marketing; 
     //echo "E";
@@ -245,6 +303,8 @@ $s_member2 = $komisi->mm2_selling_komisi;
 if (!empty($marketing_listing) && !empty($kubruk_nama) && $marketing_listing_2 || $marketing_selling_2 != 0){
     $bruto_cobroke = $bruto_3;
 }elseif($persen_cobroke > 50){
+    $bruto_cobroke = $persen_cobroke / 100 * $bruto_2;
+}elseif($persen_cobroke < 50){
     $bruto_cobroke = $persen_cobroke / 100 * $bruto_2;
 }else{
     $bruto_cobroke = $fmk;
@@ -301,14 +361,22 @@ $fee_cobroke_selling_r = numberToRupiah($fee_cobroke_selling_n);
 
 //====================================================== cari fee marketing listing 1 & 2
 //fee marketing listing
-$fmk2_listing = $l_member / 100 * $fmk ;
+if ($komisi->mar_listing_komisi == 77) {
+    $fmk2_listing = $fmk ;
+}else{
+    $fmk2_listing = $l_member / 100 * $fmk ;
+}
 
 //string to rupiah
 $fmk2_listing_n = stringToNumber($fmk2_listing);
 $fmk2_listing_r = numberToRupiah($fmk2_listing_n);
 
 //fee marketing listing ke 2
-$fmk2_listing2 = $l_member2 / 100 * $fmk ;
+if ($komisi->mar_listing2_komisi == 77) {
+    $fmk2_listing2 = $fmk ;
+}else{
+    $fmk2_listing2 = $l_member2 / 100 * $fmk ;
+}
 
 //string to rupiah
 $fmk2_listing2_n = stringToNumber($fmk2_listing2);
@@ -316,14 +384,22 @@ $fmk2_listing2_r = numberToRupiah($fmk2_listing2_n);
 
 //====================================================== cari fee marketing selling 1 & 2
 //fee marketing selling
-$fmk2_selling = $s_member / 100 * $fmk ;
+if ($komisi->mar_selling_komisi == 77) {
+    $fmk2_selling = $fmk ;
+}else{
+    $fmk2_selling = $s_member / 100 * $fmk ;
+}
 
 //string to rupiah
 $fmk2_selling_n = stringToNumber($fmk2_selling);
 $fmk2_selling_r = numberToRupiah($fmk2_selling_n);
 
 //fee marketing selling ke 2
-$fmk2_selling2 = $s_member2 / 100 * $fmk ;
+if ($komisi->mar_selling2_komisi == 77) {
+    $fmk2_selling2 = $fmk ;
+}else{
+    $fmk2_selling2 = $s_member2 / 100 * $fmk ;
+}
 
 //string to rupiah
 $fmk2_selling2_n = stringToNumber($fmk2_selling2);
@@ -368,21 +444,21 @@ $bruto_r = numberToRupiah($bruto_n);
 //===================================================================== Rumus Bila Ada Pengurangan Fee
 
 foreach ($marketing as $ang) {
-    if ($ang->nama_mar == "Ang") {
+    if ($ang->nama_mar == "Ang" && $ang->nomor_mar == "AA0007") {
         $norek_ang = $ang->norek_mar;
         $id_ang = $ang->id_mar;
     }
 }
 
 foreach ($marketing as $fran) {
-    if ($fran->nama_mar == "Fran") {
+    if ($fran->nama_mar == "Fran" && $fran->nomor_mar == "AA0009") {
         $norek_fran = $fran->norek_mar;
         $id_fran = $fran->id_mar;
     }
 }
 
 foreach ($marketing as $win) {
-    if ($win->nama_mar == "Winata") {
+    if ($win->nama_mar == "Winata" && $win->nomor_mar == "AA0207") {
         $norek_win = $win->norek_mar;
         $id_win = $win->id_mar;
     }
@@ -491,7 +567,11 @@ $fmk3_listing_r = numberToRupiah($fmk3_listing_n);
 $npwp_listing = $komisi->npwpm_listing_komisi; 
 
 if ($npwp_listing == 1) {
-    $n_listing = 1;
+    if ($komisi->mar_listing_komisi == 77) {
+        $n_listing = 0;
+    }else{
+        $n_listing = 1;
+    }
 } else {
     $n_listing = 0;
 }
@@ -499,13 +579,21 @@ if ($npwp_listing == 1) {
 if ($n_listing == 1) {
     $pph_listing = '2.5% - NPWP';
 }else{
-    $pph_listing = '3% - Non NPWP';
+    if ($komisi->mar_listing_komisi == 77) {
+        $pph_listing = 'Tidak Ada';
+    }else{
+        $pph_listing = '3% - Non NPWP';
+    }
 }
 
 if ($pph_listing == '2.5% - NPWP') {
     $pph_listing_angka = 2.5;
 }else{
-    $pph_listing_angka = 3;
+    if ($komisi->mar_listing_komisi == 77) {
+        $pph_listing_angka = 0;
+    }else{
+        $pph_listing_angka = 3;
+    }
 }
 
 $biaya_pph_l = $pph_listing_angka / 100 * $fmk3_listing;
@@ -549,7 +637,11 @@ $fmk3_listing2_r = numberToRupiah($fmk3_listing2_n);
 $npwp_listing2 = $komisi->npwpm2_listing_komisi; 
 
 if ($npwp_listing2 == 1) {
-    $n_listing2 = 1;
+    if ($komisi->mar_listing2_komisi == 77) {
+        $n_listing2 = 0;
+    }else{
+        $n_listing2 = 1;
+    }
 } else {
     $n_listing2 = 0;
 }
@@ -557,13 +649,21 @@ if ($npwp_listing2 == 1) {
 if ($n_listing2 == 1) {
     $pph_listing2 = '2.5% - NPWP';
 }else{
-    $pph_listing2 = '3% - Non NPWP';
+    if ($komisi->mar_listing2_komisi == 77) {
+        $pph_listing2 = 'Tidak Ada';
+    }else{
+        $pph_listing2 = '3% - Non NPWP';
+    }
 }
 
-if ($pph_listing == '2.5% - NPWP') {
+if ($pph_listing2 == '2.5% - NPWP') {
     $pph_listing2_angka = 2.5;
 }else{
-    $pph_listing2_angka = 3;
+    if ($komisi->mar_listing2_komisi == 77) {
+        $pph_listing2_angka = 0;
+    }else{
+        $pph_listing2_angka = 3;
+    }
 }
 
 $biaya_pph_l2 = $pph_listing2_angka / 100 * $fmk3_listing2;
@@ -605,7 +705,11 @@ $fmk3_selling_r = numberToRupiah($fmk3_selling_n);
 $npwp_selling = $komisi->npwpm_selling_komisi; 
 
 if ($npwp_selling == 1) {
-    $n_selling = 1;
+    if ($komisi->mar_selling_komisi == 77) {
+        $n_selling = 0;
+    }else{
+        $n_selling = 1;
+    }
 } else {
     $n_selling = 0;
 }
@@ -613,13 +717,21 @@ if ($npwp_selling == 1) {
 if ($n_selling == 1) {
     $pph_selling = '2.5% - NPWP';
 }else{
-    $pph_selling = '3% - Non NPWP';
+    if ($komisi->mar_selling_komisi == 77) {
+        $pph_selling = 'Tidak Ada';
+    }else{
+        $pph_selling = '3% - Non NPWP';
+    }
 }
 
 if ($pph_selling == '2.5% - NPWP') {
     $pph_selling_angka = 2.5;
 }else{
-    $pph_selling_angka = 3;
+    if ($komisi->mar_selling_komisi == 77) {
+        $pph_selling_angka = 0;
+    }else{
+        $pph_selling_angka = 3;
+    }
 }
 
 $biaya_pph_s = $pph_selling_angka / 100 * $fmk3_selling;
@@ -661,7 +773,11 @@ $fmk3_selling2_r = numberToRupiah($fmk3_selling2_n);
 $npwp_selling2 = $komisi->npwpm2_selling_komisi; 
 
 if ($npwp_selling2 == 1) {
-    $n_selling2 = 1;
+    if ($komisi->mar_selling2_komisi == 77) {
+        $n_selling2 = 0;
+    }else{
+        $n_selling2 = 1;
+    }
 } else {
     $n_selling2 = 0;
 }
@@ -669,13 +785,21 @@ if ($npwp_selling2 == 1) {
 if ($n_selling2 == 1) {
     $pph_selling2 = '2.5% - NPWP';
 }else{
-    $pph_selling2 = '3% - Non NPWP';
+    if ($komisi->mar_selling2_komisi == 77) {
+        $pph_selling2 = 'Tidak Ada';
+    }else{
+        $pph_selling2 = '3% - Non NPWP';
+    }
 }
 
 if ($pph_selling2 == '2.5% - NPWP') {
     $pph_selling2_angka = 2.5;
 }else{
-    $pph_selling2_angka = 3;
+    if ($komisi->mar_selling2_komisi == 77) {
+        $pph_selling2_angka = 0;
+    }else{
+        $pph_selling2_angka = 3;
+    }
 }
 
 $biaya_pph_s2 = $pph_selling2_angka / 100 * $fmk3_selling2;

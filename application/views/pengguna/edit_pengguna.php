@@ -29,42 +29,52 @@
                                 <label for="level" class="col-form-label">Level Akun</label>
                                 <select class="form-control" id="level" name="level" required>
                                     <option value="">Pilih Level</option>
-                                    <?php
+                                    <?php 
+                                    foreach($tampil_level as $each){ ?>
+                                        <option value="<?php echo $each->id_level; ?>"
+                                            <?=$user->level_pengguna==$each->id_level ? "selected" : null ?>>
+                                            <?php echo $each->level; ?>
+                                        </option>
+                                    <?php } ?>
+                                    <!-- <?php
+                                    if ($user->level_pengguna == "Akuntan") echo "<option value='Akuntan' selected>Akuntan</option>";
+                                    else echo "<option value='Akuntan'>Akuntan</option>";
+
                                     if ($user->level_pengguna == "Administrator") echo "<option value='Administrator' selected>Administrator</option>";
                                     else echo "<option value='Administrator'>Administrator</option>";
 
                                     if ($user->level_pengguna == "CMO") echo "<option value='CMO' selected>CMO</option>";
                                     else echo "<option value='CMO'>CMO</option>";
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="g_ktp" class="col-form-label">Foto TTD</label>
-                                <br>
-                                <?php if ($gambar_ttd == 1) { ?>
-                                    <img style="width: 200px; height: 130px;" src="<?= base_url('assets/foto_ttd/' . $user->gambar_ttd_pengguna) ?>" alt="Gambar TTD">
-                                    <br>
-                                    <a style="width: 200px;" href="<?= base_url('Pengguna/hapus_gambar_ttd/' . $user->id_pengguna); ?>" class="btn btn-danger">Hapus Gambar TTD</a>
-                                <?php } else { ?>
-                                    <img style="width: 200px; height: 130px;" src="<?= base_url('assets/foto_ttd/tidak_ada.jpg') ?>" alt="Gambar TTD">
-                                <?php } ?>
-                                <br>
-                                <br>
-                                <input type="file" class="form-control" id="g_ttd" name="g_ttd" value="<?php echo $user->gambar_ttd_pengguna; ?>">
-                                <input type="hidden" class="form-control" name="g_ttd2" value="<?php echo $user->gambar_ttd_pengguna; ?>">
-                            </div>
+                                ?> -->
+                            </select>
                         </div>
                     </div>
-                    <input type="hidden" class="form-control" id="id_pengguna" name="id_pengguna" value="<?= $user->id_pengguna ?>" required>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="g_ktp" class="col-form-label">Foto TTD</label>
+                            <br>
+                            <?php if ($gambar_ttd == 1) { ?>
+                                <img style="width: 200px; height: 130px;" src="<?= base_url('assets/foto_ttd/' . $user->gambar_ttd_pengguna) ?>" alt="Gambar TTD">
+                                <br>
+                                <a style="width: 200px;" href="<?= base_url('Pengguna/hapus_gambar_ttd/' . $user->id_pengguna); ?>" class="btn btn-danger">Hapus Gambar TTD</a>
+                            <?php } else { ?>
+                                <img style="width: 200px; height: 130px;" src="<?= base_url('assets/foto_ttd/tidak_ada.jpg') ?>" alt="Gambar TTD">
+                            <?php } ?>
+                            <br>
+                            <br>
+                            <input type="file" class="form-control" id="g_ttd" name="g_ttd" value="<?php echo $user->gambar_ttd_pengguna; ?>">
+                            <input type="hidden" class="form-control" name="g_ttd2" value="<?php echo $user->gambar_ttd_pengguna; ?>">
+                        </div>
                     </div>
-                </form>
-            </div>
+                </div>
+                <input type="hidden" class="form-control" id="id_pengguna" name="id_pengguna" value="<?= $user->id_pengguna ?>" required>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 </div>
 

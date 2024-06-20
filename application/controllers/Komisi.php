@@ -9,6 +9,7 @@ class Komisi extends CI_Controller {
 		$this->load->model('m_dashboard');
 		$this->load->model('m_marketing');	
 		$this->load->model('m_laporan');
+		$this->load->model('m_pengaturan');
 	}
 
 	public function index()
@@ -26,27 +27,38 @@ class Komisi extends CI_Controller {
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_dashboard', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
 	public function komisi(){
 		$level = $this->session->userdata('level');
+		$level_asli = $this->session->userdata('level_asli');
+		$akses_level = $this->session->userdata('level_akses');
+
 		if ($level == '') {
-			$this->session->set_flashdata('gagal','Anda Belum Login');
+			$this->session->set_flashdata('gagal', 'Anda Belum Login');
 			redirect(base_url('login'));
+		} elseif ($level_asli == 'Admin Akuntan' || $level_asli == 'Admin Persediaan') {
+			redirect(base_url('komisi'));
 		}
 
 		$data['title'] = 'Data Komisi Marketing';
 		$data['komisi'] = $this->m_komisi->tampil_data()->result();
 		$data['marketing'] = $this->m_komisi->tampil_data_marketing()->result();
 		$data['co_broke'] = $this->m_komisi->tampil_data_cobroke()->result();
+		$data['member_marketing'] = $this->m_pengaturan->tampil_data_member()->result();
+		$data['kantor'] = $this->m_pengaturan->tampil_data_kantor()->result();
+		$data['tampil_jabatan'] = $this->m_pengaturan->tampil_data_jabatan()->result();
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_komisi', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
 	public function tambah_komisi(){
+		$kantor = $this->input->post('kantor');
 		$alamat = $this->input->post('alamat');
 		$jt = $this->input->post('jt');
 		$tgl_closing = $this->input->post('tgl_closing');
@@ -54,9 +66,22 @@ class Komisi extends CI_Controller {
 		$ms = $this->input->post('marketing_selling');
 		$komisi = $this->input->post('komisi');
 		$admin = $this->input->post('admin');
+		$keterangan = $this->input->post('keterangan');
+		$jenis_hitungan = $this->input->post('jenis_hitungan');
 
 		//tambahan m listing
-		$mm_listing = $this->input->post('mm_listing');
+
+		if ($jenis_hitungan == 'Secondary') {
+			$mm_listing = $this->input->post('mm_listing');
+			$nilai_primary = 0;
+		}elseif($jenis_hitungan == 'KPR'){
+			$mm_listing = $this->input->post('mm_listing_kpr');
+			$nilai_primary = 0;
+		}else{
+			$mm_listing = $this->input->post('mm_listing');
+			$nilai_primary = $this->input->post('nilai_primary');
+		}
+
 		$npwpm_listing = $this->input->post('npwpm_listing');
 		$npwpum_listing = $this->input->post('npwpum_listing');
 		$npwpum_listing2 = $this->input->post('npwpum_listing2');
@@ -65,13 +90,24 @@ class Komisi extends CI_Controller {
 		$jabatan_upline2 = $this->input->post('jabatanum_listing2');
 
 		//tambahan m selling
-		$mm_selling = $this->input->post('mm_selling');
+
+		if ($jenis_hitungan == 'Secondary') {
+			$mm_selling = $this->input->post('mm_selling');
+		}elseif($jenis_hitungan == 'KPR'){
+			$mm_selling = $this->input->post('mm_selling_kpr');
+		}else{
+			$mm_selling = $this->input->post('mm_selling');
+		}
+
 		$npwpm_selling = $this->input->post('npwpm_selling');
 		$npwpum_selling = $this->input->post('npwpum_selling');
 		$npwpum_selling2 = $this->input->post('npwpum_selling2');
 
 		$jabatans_upline1 = $this->input->post('jabatanum_selling');
 		$jabatans_upline2 = $this->input->post('jabatanum_selling2');
+
+		// var_dump($nilai_primary);
+		// die();
 
 		date_default_timezone_set("Asia/Jakarta");
 		$waktu = date("Y-m-d H:i:s");
@@ -120,6 +156,7 @@ class Komisi extends CI_Controller {
 
 		//referal
 		$referal = $this->input->post('referal');
+		$pph_referal = $this->input->post('pph_referal');
 		$j_referal = $this->input->post('j_referal');
 
 		// Menentukan biji (seed)
@@ -155,10 +192,16 @@ class Komisi extends CI_Controller {
 			$ms_new = '';
 		}
 
+		$hasil_cek = $this->m_komisi->get_last_data_by_kantor_komisi($kantor);
+		$nomor_kantor = $hasil_cek && property_exists($hasil_cek, 'nomor_kantor_komisi') ? $hasil_cek->nomor_kantor_komisi + 1 : 1;
+
 		//setting jumlah marketing A&A 
 		//===============================================
 
 		$data = array(
+			'kantor_komisi' => $kantor,
+			'nomor_kantor_komisi' => $nomor_kantor,
+			'jenis_hitungan_komisi' => $jenis_hitungan,
 			'alamat_komisi' => $alamat,
 			'jt_komisi' => $jt,
 			'tgl_closing_komisi' => $tgl_closing,
@@ -169,9 +212,10 @@ class Komisi extends CI_Controller {
 			'bruto_komisi' => $komisi,
 			'waktu_komisi' => $waktu,
 			'status_komisi' => 'Proses Approve',
-			'status_transfer' => 'Proses Transfer'
+			'status_transfer' => 'Proses Transfer',
+			'keterangan_komisi' => $keterangan
 		);
-
+		
 		$this->m_komisi->simpan($data);
 
 		$id_komisi_baru = $this->m_komisi->get_last_inserted_id();
@@ -317,6 +361,8 @@ class Komisi extends CI_Controller {
 
 		$data2 = array(
 			'id_komisi' => $id_komisi_baru,
+			'primary_komisi' => $nilai_primary,
+			
 			'mm_listing_komisi' => $new_mm_listing,
 			'npwpm_listing_komisi' => $new_npwpm_listing,
 			'npwpum_listing_komisi' => $new_npwpum_listing,
@@ -376,6 +422,7 @@ class Komisi extends CI_Controller {
 		$data5 = array(
 			'id_komisi' => $id_komisi_baru,
 			'keterangan_referal' => $referal,
+			'pph_referal' => $pph_referal,
 			'jumlah_referal' => $j_referal
 		);
 
@@ -383,23 +430,37 @@ class Komisi extends CI_Controller {
 			$this->m_komisi->simpan_referal($data5);
 		}
 
+		if ($jenis_hitungan == 'Secondary') {
+			$m_ang = $this->input->post('m_ang');
+			$m_fran = $this->input->post('m_fran');
+			$m_win = $this->input->post('m_win');
+		}elseif($jenis_hitungan == 'KPR'){
+			$m_ang = $this->input->post('m_ang_kpr');
+			$m_fran = $this->input->post('m_fran_kpr');
+			$m_win = $this->input->post('m_win_kpr');
+		}else{
+			$m_ang = $this->input->post('m_ang');
+			$m_fran = $this->input->post('m_fran');
+			$m_win = $this->input->post('m_win');
+		}
+
 		$data6 = array(
 			'id_sub_komisi' => $id_sub_komisi_baru,
-			'm_ang' => $this->input->post('m_ang'),
+			'm_ang' => $m_ang,
 			'npwp_ang' => $this->input->post('npwp_ang'),
 			'npwp_up_ang' => $this->input->post('npwp_up_ang'),
 			'jabatan_up_ang' => $this->input->post('jabatan_up_ang'),
 			'npwp_up2_ang' => $this->input->post('npwp_up2_ang'),
 			'jabatan_up2_ang' => $this->input->post('jabatan_up2_ang'),
 
-			'm_fran' => $this->input->post('m_fran'),
+			'm_fran' => $m_fran,
 			'npwp_fran' => $this->input->post('npwp_fran'),
 			'npwp_up_fran' => $this->input->post('npwp_up_fran'),
 			'jabatan_up_fran' => $this->input->post('jabatan_up_fran'),
 			'npwp_up2_fran' => $this->input->post('npwp_up2_fran'),
 			'jabatan_up2_fran' => $this->input->post('jabatan_up2_fran'),
 
-			'm_win' => $this->input->post('m_win'),
+			'm_win' => $m_win,
 			'npwp_win' => $this->input->post('npwp_win'),
 			'npwp_up_win' => $this->input->post('npwp_up_win'),
 			'jabatan_up_win' => $this->input->post('jabatan_up_win'),
@@ -421,9 +482,14 @@ class Komisi extends CI_Controller {
 	}
 	public function rincian_komisi($id_komisi){
 		$level = $this->session->userdata('level');
+		$level_asli = $this->session->userdata('level_asli');
+		$akses_level = $this->session->userdata('level_akses');
+
 		if ($level == '') {
-			$this->session->set_flashdata('gagal','Anda Belum Login');
+			$this->session->set_flashdata('gagal', 'Anda Belum Login');
 			redirect(base_url('login'));
+		} elseif ($level_asli == 'Admin Akuntan' || $level_asli == 'Admin Persediaan') {
+			redirect(base_url('komisi'));
 		}
 
 		$where = array('id_komisi'=>$id_komisi);
@@ -436,9 +502,12 @@ class Komisi extends CI_Controller {
 		$data['pengurangan'] = $this->m_komisi->tampil_data_pengurangan()->result();
 		$data['sub_komisi'] = $this->m_komisi->tampil_data_sub_komisi()->result();
 		$data['sub_afw'] = $this->m_komisi->tampil_data_sub_afw()->result();
+		$data['kantor'] = $this->m_pengaturan->tampil_data_kantor()->result();
+		$data['tampil_level'] = $this->m_pengaturan->tampil_data_level()->result();
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_rincian_komisi', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -479,9 +548,14 @@ class Komisi extends CI_Controller {
 
 	public function edit_komisi($id_komisi){
 		$level = $this->session->userdata('level');
+		$level_asli = $this->session->userdata('level_asli');
+		$akses_level = $this->session->userdata('level_akses');
+
 		if ($level == '') {
-			$this->session->set_flashdata('gagal','Anda Belum Login');
+			$this->session->set_flashdata('gagal', 'Anda Belum Login');
 			redirect(base_url('login'));
+		} elseif ($level_asli == 'Admin Akuntan' || $level_asli == 'Admin Persediaan' || $level_asli == 'CMO') {
+			redirect(base_url('komisi'));
 		}
 
 		$where = array('id_komisi'=>$id_komisi);
@@ -489,9 +563,11 @@ class Komisi extends CI_Controller {
 		$data['komisi'] = $this->m_komisi->edit($where)->result();
 		$data['marketing'] = $this->m_komisi->tampil_data_marketing()->result();
 		$data['co_broke'] = $this->m_komisi->tampil_data_cobroke()->result();
+		$data['kantor'] = $this->m_pengaturan->tampil_data_kantor()->result();
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_edit_komisi', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -501,6 +577,7 @@ class Komisi extends CI_Controller {
 		$tgl_closing = $this->input->post('tgl_closing');
 		$komisi = $this->input->post('komisi');
 		$status_transfer = $this->input->post('st');
+		$keterangan = $this->input->post('keterangan');
 		$id_komisi = $this->input->post('id_komisi');
 
 			//$ml = $this->input->post('marketing_listing');
@@ -516,7 +593,8 @@ class Komisi extends CI_Controller {
 			'jt_komisi' => $jt,
 			'tgl_closing_komisi' => $tgl_closing,
 			'status_transfer' => $status_transfer,
-			'bruto_komisi' => $komisi
+			'bruto_komisi' => $komisi,
+			'keterangan_komisi' => $keterangan
 
 				//'status_komisi' => $status_komisi
 				//'mar_listing_komisi' => $ml,
@@ -566,6 +644,42 @@ class Komisi extends CI_Controller {
 		$id_mar3 = $this->input->post('id_marketing3');
 		$id_mar4 = $this->input->post('id_marketing4');
 
+		//fgs listing 1
+		$fgs1_l1 = $this->input->post('fgs1_l1');
+		$fee_fgs1_l1 = $this->input->post('fee_fgs1_l1');
+		$pph_fgs1_l1 = $this->input->post('pph_fgs1_l1');
+
+		$fgs2_l1 = $this->input->post('fgs2_l1');
+		$fee_fgs2_l1 = $this->input->post('fee_fgs2_l1');
+		$pph_fgs2_l1 = $this->input->post('pph_fgs2_l1');
+
+		//fgs listing 2
+		$fgs1_l2 = $this->input->post('fgs1_l2');
+		$fee_fgs1_l2 = $this->input->post('fee_fgs1_l2');
+		$pph_fgs1_l2 = $this->input->post('pph_fgs1_l2');
+
+		$fgs2_l2 = $this->input->post('fgs2_l2');
+		$fee_fgs2_l2 = $this->input->post('fee_fgs2_l2');
+		$pph_fgs2_l2 = $this->input->post('pph_fgs2_l2');
+
+		//fgs selling 1
+		$fgs1_s1 = $this->input->post('fgs1_s1');
+		$fee_fgs1_s1 = $this->input->post('fee_fgs1_s1');
+		$pph_fgs1_s1 = $this->input->post('pph_fgs1_s1');
+
+		$fgs2_s1 = $this->input->post('fgs2_s1');
+		$fee_fgs2_s1 = $this->input->post('fee_fgs2_s1');
+		$pph_fgs2_s1 = $this->input->post('pph_fgs2_s1');
+
+		//fgs selling 2
+		$fgs1_s2 = $this->input->post('fgs1_s2');
+		$fee_fgs1_s2 = $this->input->post('fee_fgs1_s2');
+		$pph_fgs1_s2 = $this->input->post('pph_fgs1_s2');
+
+		$fgs2_s2 = $this->input->post('fgs2_s2');
+		$fee_fgs2_s2 = $this->input->post('fee_fgs2_s2');
+		$pph_fgs2_s2 = $this->input->post('pph_fgs2_s2');
+
 		$fee_kantor1 = $this->input->post('fee_kantor1');
 		$fee_kantor2 = $this->input->post('fee_kantor2');
 		$fee_kantor3 = $this->input->post('fee_kantor3');
@@ -575,6 +689,11 @@ class Komisi extends CI_Controller {
 		$fee_mar2 = $this->input->post('fee_marketing2');
 		$fee_mar3 = $this->input->post('fee_marketing3');
 		$fee_mar4 = $this->input->post('fee_marketing4');
+
+		$fee_setelah_adm1 = $this->input->post('fee_marketing_smtr1');
+		$fee_setelah_adm2 = $this->input->post('fee_marketing_smtr2');
+		$fee_setelah_adm3 = $this->input->post('fee_marketing_smtr3');
+		$fee_setelah_adm4 = $this->input->post('fee_marketing_smtr4');
 
 		$ptn_admin1 = $this->input->post('ptn_admin1');
 		$ptn_admin2 = $this->input->post('ptn_admin2');
@@ -623,6 +742,19 @@ class Komisi extends CI_Controller {
 		$ppribadi_ang = $this->input->post('ppribadi_ang');
 		$netto_ang = $this->input->post('netto_ang');
 
+		$fee_setelah_adm_ang = $this->input->post('fee_smtr_ang');
+
+		//fgs ang
+		$fgs1_ang = $this->input->post('fgs1_ang');
+		$fee_fgs1_ang = $this->input->post('fee_fgs1_ang');
+		$pph_fgs1_ang = $this->input->post('pph_fgs1_ang');
+
+		$fgs2_ang = $this->input->post('fgs2_ang');
+		$fee_fgs2_ang = $this->input->post('fee_fgs2_ang');
+		$pph_fgs2_ang = $this->input->post('pph_fgs2_ang');
+
+		//==============================================================================
+
 		$id_fran = $this->input->post('id_fran');
 		$fee_kantor_fran = 0;
 		$fee_fran = $this->input->post('fee_fran');
@@ -630,6 +762,19 @@ class Komisi extends CI_Controller {
 		$pph_fran = $this->input->post('pph_fran');
 		$ppribadi_fran = $this->input->post('ppribadi_fran');
 		$netto_fran = $this->input->post('netto_fran');
+
+		$fee_setelah_adm_fran = $this->input->post('fee_smtr_fran');
+
+		//fgs fran
+		$fgs1_fran = $this->input->post('fgs1_fran');
+		$fee_fgs1_fran = $this->input->post('fee_fgs1_fran');
+		$pph_fgs1_fran = $this->input->post('pph_fgs1_fran');
+
+		$fgs2_fran = $this->input->post('fgs2_fran');
+		$fee_fgs2_fran = $this->input->post('fee_fgs2_fran');
+		$pph_fgs2_fran = $this->input->post('pph_fgs2_fran');
+
+		//==============================================================================
 
 		$id_win = $this->input->post('id_win');
 		$fee_kantor_win = 0;
@@ -639,8 +784,26 @@ class Komisi extends CI_Controller {
 		$ppribadi_win = $this->input->post('ppribadi_win');
 		$netto_win = $this->input->post('netto_win');
 
+		$fee_setelah_adm_win = $this->input->post('fee_smtr_win');
+
+		//fgs win
+		$fgs1_win = $this->input->post('fgs1_win');
+		$fee_fgs1_win = $this->input->post('fee_fgs1_win');
+		$pph_fgs1_win = $this->input->post('pph_fgs1_win');
+
+		$fgs2_win = $this->input->post('fgs2_win');
+		$fee_fgs2_win = $this->input->post('fee_fgs2_win');
+		$pph_fgs2_win = $this->input->post('pph_fgs2_win');
+
+		//==============================================================================
+
 		$fee_cobroke = $this->input->post('fee_cobroke1');
 		$pph_cobroke = $this->input->post('pph_cobroke1');
+
+		//==============================================================================
+
+		$fee_referal = $this->input->post('fee_referal');
+		$pph_referal = $this->input->post('pph_referal');
 		
 		date_default_timezone_set("Asia/Jakarta");
 		$waktu = date("Y-m-d H:i:s");
@@ -681,10 +844,9 @@ class Komisi extends CI_Controller {
 
 				$id_omzet_baru = $this->m_laporan->get_last_inserted_id_data_omzet();
 
-				if (!empty($fee_cobroke)) {
-					$this->m_laporan->simpan_pph($data_pph);	
-				}
+				$this->m_laporan->simpan_pph($data_pph);	
 			}
+
 		}elseif($this->m_komisi->get_status($id_komisi) == 'Approve' && $status_komisi == 'Proses Approve') {
 			$where = array('id_komisi'=>$id_komisi);
 			$this->m_laporan->hapus_omzet($where);
@@ -777,10 +939,262 @@ class Komisi extends CI_Controller {
 			'netto_marketing' => $netto_win
 		);
 
+		// var_dump($data_ang);
+		// die();
+
+		//=================================================================================
+
+		$dataX1 = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $id_mar1,
+			'status_marketing' => 'Listing/Selling',
+			'fee_setelah_adm' => $fee_setelah_adm1,
+			'ptn_pph' => $ptn_pph1,
+			'total_pph' => $ptn_pph1
+		);
+
+		$dataUp1L1 = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $fgs1_l1,
+			'status_marketing' => 'Upline',
+			'fgs' => $fee_fgs1_l1,
+			'ptn_pph' => $pph_fgs1_l1,
+			'total_pph' => $pph_fgs1_l1
+		);
+
+		$dataUp2L1 = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $fgs2_l1,
+			'status_marketing' => 'Upline',
+			'fgs' => $fee_fgs2_l1,
+			'ptn_pph' => $pph_fgs2_l1,
+			'total_pph' => $pph_fgs2_l1
+		);
+
+		//================================================
+
+		$dataX2 = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $id_mar2,
+			'status_marketing' => 'Listing/Selling',
+			'fee_setelah_adm' => $fee_setelah_adm2,
+			'ptn_pph' => $ptn_pph2,
+			'total_pph' => $ptn_pph2
+		);
+
+		$dataUp1L2 = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $fgs1_l2,
+			'status_marketing' => 'Upline',
+			'fgs' => $fee_fgs1_l2,
+			'ptn_pph' => $pph_fgs1_l2,
+			'total_pph' => $pph_fgs1_l2
+		);
+
+		$dataUp2L2 = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $fgs2_l2,
+			'status_marketing' => 'Upline',
+			'fgs' => $fee_fgs2_l2,
+			'ptn_pph' => $pph_fgs2_l2,
+			'total_pph' => $pph_fgs2_l2
+		);
+
+		//==============================================
+
+		$dataX3 = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $id_mar3,
+			'status_marketing' => 'Listing/Selling',
+			'fee_setelah_adm' => $fee_setelah_adm3,
+			'ptn_pph' => $ptn_pph3,
+			'total_pph' => $ptn_pph3
+		);
+
+		$dataUp1S1 = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $fgs1_s1,
+			'status_marketing' => 'Upline',
+			'fgs' => $fee_fgs1_s1,
+			'ptn_pph' => $pph_fgs1_s1,
+			'total_pph' => $pph_fgs1_s1
+		);
+
+		$dataUp2S1 = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $fgs2_s1,
+			'status_marketing' => 'Upline',
+			'fgs' => $fee_fgs2_s1,
+			'ptn_pph' => $pph_fgs2_s1,
+			'total_pph' => $pph_fgs2_s1
+		);
+
+		//==============================================
+
+		$dataX4 = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $id_mar4,
+			'status_marketing' => 'Listing/Selling',
+			'fee_setelah_adm' => $fee_setelah_adm4,
+			'ptn_pph' => $ptn_pph4,
+			'total_pph' => $ptn_pph4
+		); 
+
+		$dataUp1S2 = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $fgs1_s2,
+			'status_marketing' => 'Upline',
+			'fgs' => $fee_fgs1_s2,
+			'ptn_pph' => $pph_fgs1_s2,
+			'total_pph' => $pph_fgs1_s2
+		);
+
+		$dataUp2S2 = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $fgs2_s2,
+			'status_marketing' => 'Upline',
+			'fgs' => $fee_fgs2_s2,
+			'ptn_pph' => $pph_fgs2_s2,
+			'total_pph' => $pph_fgs2_s2
+		);
+
+		//=============================================
+
+		$dataX_ang = array(
+			'id_pph' => $id_omzet_baru,
+			'id_marketing' => $id_ang,
+			'fee_kantor' => $fee_kantor_ang,
+			'fee_marketing' => $fee_ang,
+			'ptn_admin' => $admin_ang,
+			'ptn_pph' => $pph_ang,
+			'ptn_pribadi' => $ppribadi_ang,
+			'netto_vision' => $fee_kantor_ang + $admin_ang,
+			'netto_marketing' => $netto_ang
+		);
+
+		$dataX_fran = array(
+			'id_pph' => $id_omzet_baru,
+			'id_marketing' => $id_fran,
+			'fee_kantor' => $fee_kantor_fran,
+			'fee_marketing' => $fee_fran,
+			'ptn_admin' => $admin_fran,
+			'ptn_pph' => $pph_fran,
+			'ptn_pribadi' => $ppribadi_fran,
+			'netto_vision' => $fee_kantor_fran + $admin_fran,
+			'netto_marketing' => $netto_fran
+		);
+
+		$dataX_win = array(
+			'id_pph' => $id_omzet_baru,
+			'id_marketing' => $id_win,
+			'fee_kantor' => $fee_kantor_win,
+			'fee_marketing' => $fee_win,
+			'ptn_admin' => $admin_win,
+			'ptn_pph' => $pph_win,
+			'ptn_pribadi' => $ppribadi_win,
+			'netto_vision' => $fee_kantor_win + $admin_win,
+			'netto_marketing' => $netto_win
+		);
+
+		//=================================================================================
+
+		$dataX_Pph_Ang = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $id_ang,
+			'status_marketing' => 'Listing/Selling',
+			'fee_setelah_adm' => $fee_setelah_adm_ang,
+			'ptn_pph' => $pph_ang,
+			'total_pph' => $pph_ang
+		);
+
+		$dataUp1_Ang = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $fgs1_ang,
+			'status_marketing' => 'Upline',
+			'fgs' => $fee_fgs1_ang,
+			'ptn_pph' => $pph_fgs1_ang,
+			'total_pph' => $pph_fgs1_ang
+		);
+
+		$dataUp2_Ang = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $fgs2_ang,
+			'status_marketing' => 'Upline',
+			'fgs' => $fee_fgs2_ang,
+			'ptn_pph' => $pph_fgs2_ang,
+			'total_pph' => $pph_fgs2_ang
+		);
+
+		//=======================================================================
+
+		$dataX_Pph_Fran = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $id_fran,
+			'status_marketing' => 'Listing/Selling',
+			'fee_setelah_adm' => $fee_setelah_adm_fran,
+			'ptn_pph' => $pph_fran,
+			'total_pph' => $pph_fran
+		);
+
+		$dataUp1_Fran = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $fgs1_fran,
+			'status_marketing' => 'Upline',
+			'fgs' => $fee_fgs1_fran,
+			'ptn_pph' => $pph_fgs1_fran,
+			'total_pph' => $pph_fgs1_fran
+		);
+
+		$dataUp2_Fran = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $fgs2_fran,
+			'status_marketing' => 'Upline',
+			'fgs' => $fee_fgs2_fran,
+			'ptn_pph' => $pph_fgs2_fran,
+			'total_pph' => $pph_fgs2_fran
+		);
+
+		//=======================================================================
+
+		$dataX_Pph_Win = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $id_win,
+			'status_marketing' => 'Listing/Selling',
+			'fee_setelah_adm' => $fee_setelah_adm_win,
+			'ptn_pph' => $pph_win,
+			'total_pph' => $pph_win
+		);
+
+		$dataUp1_Win = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $fgs1_win,
+			'status_marketing' => 'Upline',
+			'fgs' => $fee_fgs1_win,
+			'ptn_pph' => $pph_fgs1_win,
+			'total_pph' => $pph_fgs1_win
+		);
+
+		$dataUp2_Win = array(
+			'id_pph' => $id_pph_baru,
+			'id_marketing' => $fgs2_win,
+			'status_marketing' => 'Upline',
+			'fgs' => $fee_fgs2_win,
+			'ptn_pph' => $pph_fgs2_win,
+			'total_pph' => $pph_fgs2_win
+		);
+
 		$data_pph_cobroke = array(
 			'id_pph' => $id_pph_baru,
 			'fee_cobroke' => $fee_cobroke,
-			'pph_cobroke' => $pph_cobroke
+			'pph_cobroke' => $pph_cobroke,
+			'ref_cobroke' => 0
+		);
+
+		$data_pph_referal = array(
+			'id_pph' => $id_pph_baru,
+			'fee_cobroke' => $fee_referal,
+			'pph_cobroke' => $pph_referal,
+			'ref_cobroke' => 1
 		);
 
 		if ($status_komisi == 'Approve') {
@@ -789,36 +1203,125 @@ class Komisi extends CI_Controller {
 			if ($previous_status != 'Approve') {
 				if (!empty($id_mar1) && $id_mar1 != 0 && $id_mar1 != $id_mar2 && $id_mar1 != 38 && $id_mar1 != null) {
 					$this->m_laporan->simpan1($data1);
+
+					$this->m_laporan->simpan_pph1($dataX1);
 				}
 
 				if (!empty($id_mar2) && $id_mar2 != 0 && $id_mar2 != 38 && $id_mar2 != null) {
 					$this->m_laporan->simpan2($data2);
+
+					$this->m_laporan->simpan_pph2($dataX2);
 				}
 
 				if (!empty($id_mar3) && $id_mar3 != 0 && $id_mar3 != 38) {
 					$this->m_laporan->simpan3($data3);
+
+					$this->m_laporan->simpan_pph3($dataX3);
 				}
 
 				if (!empty($id_mar4) && $id_mar4 != 0 && $id_mar4 != 38) {
 					$this->m_laporan->simpan4($data4);
+
+					$this->m_laporan->simpan_pph4($dataX4);
 				}
 
 				if ($id_ang != 0) {
 					$this->m_laporan->simpan_ang($data_ang);
+
+					$this->m_laporan->simpan_pph_ang($dataX_Pph_Ang);
 				}
 
 				if ($id_fran != 0) {
 					$this->m_laporan->simpan_fran($data_fran);
+
+					$this->m_laporan->simpan_pph_fran($dataX_Pph_Fran);
 				}
 
 				if ($id_win != 0) {
 					$this->m_laporan->simpan_win($data_win);
+
+					$this->m_laporan->simpan_pph_win($dataX_Pph_Win);
 				}
 
 				if (!empty($fee_cobroke)) {
 					$this->m_laporan->simpan_pph_cobroke($data_pph_cobroke);	
 				}
 
+				if (!empty($fee_referal)) {
+					$this->m_laporan->simpan_pph_referal($data_pph_referal);	
+				}
+
+				//=========================================== upline listing 1
+
+				if ($fgs1_l1 != 0) {
+					$this->m_laporan->simpan_fgs1_listing1($dataUp1L1);
+				}
+
+				if ($fgs2_l1 != 0) {
+					$this->m_laporan->simpan_fgs2_listing1($dataUp2L1);
+				}
+
+				//=========================================== upline listing 2
+
+				if ($fgs1_l2 != 0) {
+					$this->m_laporan->simpan_fgs1_listing2($dataUp1L2);
+				}
+
+				if ($fgs2_l2 != 0) {
+					$this->m_laporan->simpan_fgs2_listing2($dataUp2L2);
+				}
+
+				//=========================================== upline selling 1
+
+				if ($fgs1_s1 != 0 && $id_mar1 != $id_mar2) {
+					$this->m_laporan->simpan_fgs1_selling1($dataUp1S1);
+				}
+
+				if ($fgs2_s1 != 0 && $id_mar1 != $id_mar2) {
+					$this->m_laporan->simpan_fgs2_selling1($dataUp2S1);
+				}
+
+				//=========================================== upline selling 2
+
+				if ($fgs1_s2 != 0) {
+					$this->m_laporan->simpan_fgs1_selling2($dataUp1S2);
+				}
+
+				if ($fgs2_s2 != 0) {
+					$this->m_laporan->simpan_fgs2_selling2($dataUp2S2);
+				}
+
+				//===============================================================================
+
+				//=========================================== upline ang
+
+				if ($fgs1_ang != 0) {
+					$this->m_laporan->simpan_fgs1_ang($dataUp1_Ang);
+				}
+
+				if ($fgs2_ang != 0) {
+					$this->m_laporan->simpan_fgs2_ang($dataUp2_Ang);
+				}
+
+				//=========================================== upline fran
+
+				if ($fgs1_fran != 0) {
+					$this->m_laporan->simpan_fgs1_fran($dataUp1_Fran);
+				}
+
+				if ($fgs2_fran != 0) {
+					$this->m_laporan->simpan_fgs2_fran($dataUp2_Fran);
+				}
+
+				//=========================================== upline win
+
+				if ($fgs1_win != 0) {
+					$this->m_laporan->simpan_fgs1_win($dataUp1_Win);
+				}
+
+				if ($fgs2_win != 0) {
+					$this->m_laporan->simpan_fgs2_win($dataUp2_Win);
+				}
 			}
 		}
 
@@ -855,5 +1358,26 @@ class Komisi extends CI_Controller {
 			</script>';
 		}
 	}
+
+	public function komisi_print($id_komisi){
+
+		$where = array('id_komisi'=>$id_komisi);
+
+		$data['title'] = 'Data Komisi Marketing';
+		$data['title'] = 'Rincian Komisi Marketing';
+		$data['komisi'] = $this->m_komisi->tampil_data_rincian($where)->result();
+		$data['marketing'] = $this->m_komisi->tampil_data_marketing()->result();
+		$data['co_broke'] = $this->m_komisi->tampil_data_cobroke()->result();
+		$data['potongan'] = $this->m_komisi->tampil_data_potongan()->result();
+		$data['referal'] = $this->m_komisi->tampil_data_referal()->result();
+		$data['pengurangan'] = $this->m_komisi->tampil_data_pengurangan()->result();
+		$data['sub_komisi'] = $this->m_komisi->tampil_data_sub_komisi()->result();
+		$data['sub_afw'] = $this->m_komisi->tampil_data_sub_afw()->result();
+		$data['kantor'] = $this->m_pengaturan->tampil_data_kantor()->result();
+		$data['tampil_level'] = $this->m_pengaturan->tampil_data_level()->result();
+
+		$this->load->view('print/komisi_print', $data);
+	}
+
 }
 ?>

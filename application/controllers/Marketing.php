@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Marketing extends CI_Controller {
 	function __construct(){
 		parent::__construct();
+		$this->load->model('m_komisi');
 		$this->load->model('m_marketing');
 		$this->load->model('m_pengaturan');
 	}
@@ -10,17 +11,25 @@ class Marketing extends CI_Controller {
 	public function index()
 	{
 		$level = $this->session->userdata('level');
+		$level_asli = $this->session->userdata('level_asli');
+		$akses_level = $this->session->userdata('level_akses');
+
 		if ($level == '') {
-			$this->session->set_flashdata('gagal','Anda Belum Login');
+			$this->session->set_flashdata('gagal', 'Anda Belum Login');
 			redirect(base_url('login'));
+		} elseif ($level_asli == 'Admin Akuntan' || $level_asli == 'Admin Persediaan' || $level_asli == 'CMO') {
+			redirect(base_url('komisi'));
 		}
 
 		$data['title'] = "Data Marketing";
+		$data['komisi'] = $this->m_komisi->tampil_data()->result();
 		$data['marketing'] = $this->m_marketing->tampil_data()->result();
-		$data['jabatan'] = $this->m_pengaturan->tampil_data_jabatan()->result();
+		$data['tampil_jabatan'] = $this->m_pengaturan->tampil_data_jabatan()->result();
+		$data['member_marketing'] = $this->m_pengaturan->tampil_data_member()->result();
 
 		$this->load->view('v_header', $data);
 		$this->load->view('v_marketing', $data);
+		$this->load->view('js_semua_halaman', $data);
 		$this->load->view('v_footer', $data);
 	}
 
@@ -32,15 +41,22 @@ class Marketing extends CI_Controller {
 		$cmo = $this->input->post('cmo');
 		$norek = $this->input->post('norek');
 		$fasilitas = $this->input->post('fasilitas');
-		$jabatan = explode(",", $this->input->post('jabatan'));
+		$jabatan = $this->input->post('jabatan');
+		// $jabatan = explode(",", $this->input->post('jabatan'));
 
-		if ($jabatan[0] == '') {
-    		$jabatan_nilai = 0;
-    		$jabatan_nama = 'Belum Ditentukan';
-    	}else{
-    		$jabatan_nilai = trim($jabatan[0]);
-    		$jabatan_nama = trim($jabatan[1]);
-    	}
+		// if ($jabatan[0] == '') {
+  //   		$jabatan_nilai = 0;
+  //   		$jabatan_nama = 'Belum Ditentukan';
+  //   	}else{
+  //   		$jabatan_nilai = trim($jabatan[0]);
+  //   		$jabatan_nama = trim($jabatan[1]);
+  //   	}
+
+		if ($jabatan == '') {
+			$jabatan_nama = 'Belum Ditentukan';
+		}else{
+			$jabatan_nama = $jabatan;
+		}
 
 		$config['upload_path'] = './assets/foto_marketing/';
 		$config['allowed_types'] = 'jpg|jpeg|png|gif';
@@ -86,8 +102,7 @@ class Marketing extends CI_Controller {
     			'upline_cmo_mar' => $cmo,
     			'norek_mar' => $norek,
     			'fasilitas_mar' => $fasilitas,
-    			'jabatan_mar' => $jabatan_nama,
-    			'nilai_jabatan_mar' => $jabatan_nilai
+    			'jabatan_mar' => $jabatan_nama
     		);
 
         // Hanya jika gambar KTP diunggah, simpan nama file gambar KTP
@@ -124,19 +139,26 @@ class Marketing extends CI_Controller {
 
     public function edit($id){
     	$level = $this->session->userdata('level');
-    	if ($level == '') {
-    		$this->session->set_flashdata('gagal','Anda Belum Login');
-    		redirect(base_url('login'));
-    	}
+		$level_asli = $this->session->userdata('level_asli');
+		$akses_level = $this->session->userdata('level_akses');
+
+		if ($level == '') {
+			$this->session->set_flashdata('gagal', 'Anda Belum Login');
+			redirect(base_url('login'));
+		} elseif ($level_asli == 'Admin Akuntan' || $level_asli == 'Admin Persediaan' || $level_asli == 'CMO') {
+			redirect(base_url('komisi'));
+		}
 
     	$where = array('id_mar'=>$id);
     	$data['marketing'] = $this->m_marketing->edit($where)->result();
     	$data['marketing_all'] = $this->m_marketing->tampil_data()->result();
-    	$data['jabatan'] = $this->m_pengaturan->tampil_data_jabatan()->result();
+    	$data['tampil_jabatan'] = $this->m_pengaturan->tampil_data_jabatan()->result();
+    	$data['member_marketing'] = $this->m_pengaturan->tampil_data_member()->result();
     	$data['title'] = 'Edit Marketing';
 
     	$this->load->view('v_header', $data);
     	$this->load->view('v_edit_marketing',$data);
+    	$this->load->view('js_semua_halaman', $data);
     	$this->load->view('v_footer', $data);
     }
 
@@ -196,15 +218,23 @@ class Marketing extends CI_Controller {
     	$cmo = $this->input->post('cmo');
     	$norek = $this->input->post('norek');
     	$fasilitas = $this->input->post('fasilitas');
-    	$jabatan = explode(",", $this->input->post('jabatan'));
+    	// $jabatan = explode(",", $this->input->post('jabatan'));
 
-    	if ($jabatan[0] == '') {
-    		$jabatan_nilai = 0;
-    		$jabatan_nama = 'Belum Ditentukan';
-    	}else{
-    		$jabatan_nilai = trim($jabatan[0]);
-    		$jabatan_nama = trim($jabatan[1]);
-    	}
+    	// if ($jabatan[0] == '') {
+    	// 	$jabatan_nilai = 0;
+    	// 	$jabatan_nama = 'Belum Ditentukan';
+    	// }else{
+    	// 	$jabatan_nilai = trim($jabatan[0]);
+    	// 	$jabatan_nama = trim($jabatan[1]);
+    	// }
+
+    	$jabatan = $this->input->post('jabatan');
+
+		if ($jabatan == '') {
+			$jabatan_nama = 'Belum Ditentukan';
+		}else{
+			$jabatan_nama = $jabatan;
+		}
 
     	$upload_ktp_success = false;
     	$upload_npwp_success = false;
@@ -251,8 +281,7 @@ class Marketing extends CI_Controller {
 	    	'upline_cmo_mar' => $cmo,
 	    	'norek_mar' => $norek,
 	    	'fasilitas_mar' => $fasilitas,
-	    	'jabatan_mar' => $jabatan_nama,
-	    	'nilai_jabatan_mar' => $jabatan_nilai
+	    	'jabatan_mar' => $jabatan_nama
 	    );
 
 	    // Hanya jika gambar KTP diunggah, simpan nama file gambar KTP

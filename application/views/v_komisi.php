@@ -1,7 +1,12 @@
 <?php include "session_identitas.php"; ?>
-<div class="container pt-5 pb-5">
+<div class="container-fluid pt-5 pb-5 mx-0">
     <div class="d-flex justify-content-between mb-2">
         <?php require'v_navigasi.php'; ?>
+        <?php if ($level_asli != 'CMO'): ?> 
+            <div class="text-right">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" >Tambah Data</button>
+            </div>
+        <?php endif ?>
     </div>
     <div class="card">
         <div class="card-header bg-dark text-white">
@@ -16,11 +21,12 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Kantor</th>
                             <th>Alamat</th>
-                            <th>Jenis Transaksi</th>
+                            <th>Jenis</th>
                             <th>Closing</th>
-                            <th>Marketing Listing</th>
-                            <th>Marketing Selling</th> 
+                            <th>Listing</th>
+                            <th>Selling</th> 
                             <th>Bruto</th>
                             <th>Status</th>
                             <th>Aksi</th>
@@ -64,10 +70,39 @@
                                 $selling2_baru = '';
                             }
 
+                            foreach ($kantor as $ktr) {
+                                if ($ktr->id_kantor == $komisi->kantor_komisi) {
+                                    $kantor_komisi = $ktr->kantor;
+                                }
+                            }
+
                             ?>
                             <tr>
                                 <td><?= $no; ?></td>
-                                <td><?= $komisi->alamat_komisi ?></td>
+                                <td>
+                                    <div>
+                                        <?php 
+                                        if ($kantor_komisi == 'Pusat') {
+                                            echo "<span class='badge badge-primary p-2'>".strtoupper($kantor_komisi)." - ".$komisi->nomor_kantor_komisi."</span>";
+                                        } else {
+                                            echo "<span class='badge badge-success p-2'>".strtoupper($kantor_komisi)." - ".$komisi->nomor_kantor_komisi."</span>";
+                                        }
+                                        ?>
+                                    </div>
+
+                                    <div class="mt-2">
+                                        <?php 
+                                        if ($komisi->jenis_hitungan_komisi == 'Secondary') {
+                                            echo "<span class='badge badge-secondary p-2'>".strtoupper($komisi->jenis_hitungan_komisi)."</span>";
+                                        } elseif($komisi->jenis_hitungan_komisi == 'KPR') {
+                                            echo "<span class='badge badge-warning p-2'>".strtoupper($komisi->jenis_hitungan_komisi)."</span>";
+                                        }else{
+                                            echo "<span class='badge badge-danger p-2'>".strtoupper($komisi->jenis_hitungan_komisi)."</span>";
+                                        }
+                                        ?>
+                                    </div>
+                                </td>
+                                <td class="text-wrap"><?= $komisi->alamat_komisi ?></td>
                                 <td><?= $komisi->jt_komisi?></td>
                                 <td><?= $tgl_closing?></td>
                                 <td><?= $listing_1 ?> <?= $listing2_baru?> </td>
@@ -92,14 +127,14 @@
                                         }?>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="text-wrap">
                                     <a href="#" data-toggle="modal" data-target="#lihat_komisi<?php echo $komisi->id_komisi; ?>" class="btn btn-primary btn-sm mt-1"><i class="fas fa-eye" title="Detail"></i></a>
 
                                     <?php include "komisi/lihat_komisi.php"; ?>
 
                                     <a href="<?= base_url('komisi/rincian_komisi/' . $komisi->id_komisi); ?>" class="btn btn-warning btn-sm mt-1" data-target="#editModal"><i class="fas fa-list" title="Lihat Rincian"></i></a>
 
-                                    <?php if ($level == 'Administrator' && $komisi->status_komisi != 'Approve'): ?>  
+                                    <?php if ($level_asli != 'CMO' && $komisi->status_komisi != 'Approve'): ?>  
                                         <a href="<?= base_url('komisi/edit_komisi/' . $komisi->id_komisi); ?>" class="btn btn-success btn-sm mt-1" data-target="#editModal"><i class="fas fa-edit" title="Edit Komisi"></i></a>
 
                                         <a href="<?= base_url('komisi/hapus/' . $komisi->id_komisi); ?>" onclick="javascript:return confirm('Apakah Anda yakin ingin menghapus data komisi?')" class="btn btn-danger btn-sm mt-1"><i class="fas fa-trash" title="Hapus"></i></a>

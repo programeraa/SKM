@@ -1,14 +1,15 @@
+<?php include __DIR__ . '/../session_identitas.php'; ?>
 <div class="container pt-5 pb-5">
     <div class="d-flex justify-content-between mb-2">
-        <div class="text-right">
-            <a href="<?= base_url('Komisi/komisi'); ?>" class="btn btn-secondary mb-2"><i class="fas fa-home"></i></a>
-        </div>
-        <div class="text-right">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" >Tambah Data</button>
-        </div>
+        <?php require __DIR__ . '/../v_navigasi.php'; ?>
+        <?php if ($level_asli != 'CMO'): ?> 
+            <div class="text-right">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" >Tambah Data</button>
+            </div>
+        <?php endif ?>
     </div>
 
-    <?php include "pengaturan/tambah_jabatan.php" ?>
+    <?php include "tambah_jabatan.php" ?>
 
     <div class="card">
         <div class="card-header bg-dark text-white">
@@ -34,11 +35,13 @@
                                 <td><?= $jabatan->nama_jabatan; ?></td>
                                 <td><?= $jabatan->nilai_jabatan; ?></td>
                                 <td>
-                                    <a href="#" data-toggle="modal" data-target="#edit_jabatan<?php echo $jabatan->id_jabatan; ?>" class="btn btn-primary"><i class="fas fa-edit" title="Edit"></i></a>
+                                    <?php if ($level_asli != 'CMO'){ ?> 
+                                        <a href="#" data-toggle="modal" data-target="#edit_jabatan<?php echo $jabatan->id_jabatan; ?>" class="btn btn-primary"><i class="fas fa-edit" title="Edit"></i></a>
 
-                                    <?php include "pengaturan/edit_jabatan.php" ?>
+                                        <?php include "edit_jabatan.php" ?>
 
-                                    <a href="<?= base_url('pengaturan/hapus_jabatan/' . $jabatan->id_jabatan); ?>" onclick="javascript:return confirm('Apakah Anda yakin ingin menghapus data jabatan?')" class="btn btn-danger"><i class="fas fa-trash" title="Hapus"></i></a>
+                                        <a href="<?= base_url('pengaturan/hapus_jabatan/' . $jabatan->id_jabatan); ?>" onclick="javascript:return confirm('Apakah Anda yakin ingin menghapus data jabatan?')" class="btn btn-danger"><i class="fas fa-trash" title="Hapus"></i></a>
+                                    <?php } ?>
                                 </td>
                             </tr>
                             <?php $no++;

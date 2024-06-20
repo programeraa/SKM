@@ -12,13 +12,37 @@
                 <form method="post" action=" ">
                     <div class="row">
                        <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="kantor" class="col-form-label">Kantor</label>
+                                    <input type="text" class="form-control" id="kantor" name="kantor" value="<?= $kantor_komisi ?>" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="nomor_kantor" class="col-form-label">Nomor Kantor</label>
+                                    <input type="text" class="form-control" id="nomor_kantor" name="nomor_kantor" value="<?= $komisi->nomor_kantor_komisi ?>" readonly>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="alamat" class="col-form-label">Alamat</label>
                             <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $komisi->alamat_komisi ?>" readonly>
                         </div>
-                        <div class="form-group">
-                            <label for="jt" class="col-form-label">Jenis Transaksi</label>
-                            <input type="text" class="form-control" id="jt" name="jt" value="<?= $komisi->jt_komisi ?>" readonly>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="jt" class="col-form-label">Jenis Transaksi</label>
+                                    <input type="text" class="form-control" id="jt" name="jt" value="<?= $komisi->jt_komisi ?>" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="jenis_hitungan" class="col-form-label">Jenis Hitungan</label>
+                                    <input type="text" class="form-control" id="jenis_hitungan" name="jenis_hitungan" value="<?= $komisi->jenis_hitungan_komisi ?>" readonly>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="tgl_closing" class="col-form-label">Tanggal Closing</label>
@@ -38,6 +62,10 @@
                         <div class="form-group">
                             <label for="komisi" class="col-form-label">Komisi Bruto</label>
                             <input type="text" class="form-control" id="komisi" name="komisi" value="<?= $bruto_r ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="keterangan" class="col-form-label">Keterangan</label>
+                            <input type="teks" class="form-control" id="keterangan" name="keterangan" value="<?= $komisi->keterangan_komisi ?>" readonly>
                         </div>
                     </div>
                 </div>

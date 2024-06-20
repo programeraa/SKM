@@ -63,41 +63,71 @@
                     $selling2_baru = '';
                 }
 
+                foreach ($kantor as $ktr) {
+                    if ($ktr->id_kantor == $komisi->kantor_komisi) {
+                        $kantor_komisi = $ktr->kantor;
+                    }
+                }
+
                 ?>
                 <form method="post" action="<?= base_url('komisi/update_komisi'); ?>">
                     <div class="row">
                         <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="kantor" class="col-form-label">Kantor</label>
+                                        <input type="text" class="form-control" id="kantor" name="kantor" value="<?= $kantor_komisi ?>" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="nomor_kantor" class="col-form-label">Nomor Kantor</label>
+                                        <input type="text" class="form-control" id="nomor_kantor" name="nomor_kantor" value="<?= $komisi->nomor_kantor_komisi ?>" readonly>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="alamat" class="col-form-label">Alamat</label>
-                                <?php if ($level == 'Administrator') {?>
+                                <?php if ($level_asli != 'CMO') {?>
                                     <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $komisi->alamat_komisi ?>">
                                 <?php }else{ ?>
                                     <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $komisi->alamat_komisi ?>" readonly>
                                 <?php } ?>
                             </div>
-                            <div class="form-group">
-                                <label for="jt" class="col-form-label">Jenis Transaksi</label>
-                                <?php if ($level == 'Administrator') {?>
-                                    <select class="form-control" id="jt" name="jt">
-                                        <option value="">Pilih</option>
-                                        <?php
-                                        if ($komisi->jt_komisi == "Jual") echo "<option value='Jual' selected>Jual</option>";
-                                        else echo "<option value='Jual'>Jual</option>";
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="jt" class="col-form-label">Jenis Transaksi</label>
+                                        <?php if ($level_asli != 'CMO') {?>
+                                            <select class="form-control" id="jt" name="jt">
+                                                <option value="">Pilih</option>
+                                                <?php
+                                                if ($komisi->jt_komisi == "Jual") echo "<option value='Jual' selected>Jual</option>";
+                                                else echo "<option value='Jual'>Jual</option>";
 
-                                        if ($komisi->jt_komisi == "Sewa") echo "<option value='Sewa' selected>Sewa</option>";
-                                        else echo "<option value='Sewa'>Sewa</option>";
+                                                if ($komisi->jt_komisi == "Sewa") echo "<option value='Sewa' selected>Sewa</option>";
+                                                else echo "<option value='Sewa'>Sewa</option>";
 
-                                        if ($komisi->jt_komisi == "Jual/Sewa") echo "<option value='Jual/Sewa' selected>Jual/Sewa</option>";
-                                        else echo "<option value='Jual/Sewa'>Jual/Sewa</option>";
-                                        ?>
-                                    </select>
-                                <?php }else{ ?>
-                                    <input type="text" class="form-control" id="jt" name="jt" value="<?= $komisi->jt_komisi ?>" readonly>
-                                <?php } ?>
+                                                if ($komisi->jt_komisi == "Jual/Sewa") echo "<option value='Jual/Sewa' selected>Jual/Sewa</option>";
+                                                else echo "<option value='Jual/Sewa'>Jual/Sewa</option>";
+                                                ?>
+                                            </select>
+                                        <?php }else{ ?>
+                                            <input type="text" class="form-control" id="jt" name="jt" value="<?= $komisi->jt_komisi ?>" readonly>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="jenis_hitungan" class="col-form-label">Jenis Hitungan</label>
+                                        <input type="text" class="form-control" id="jenis_hitungan" name="jenis_hitungan" value="<?= $komisi->jenis_hitungan_komisi ?>" readonly>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="tgl_closing" class="col-form-label">Tanggal Closing</label>
-                                <?php if ($level == 'Administrator') {?>
+                                <?php if ($level_asli != 'CMO') {?>
                                     <input type="date" class="form-control" id="tgl_closing" name="tgl_closing" value="<?= $komisi->tgl_closing_komisi ?>" >
                                 <?php }else{ ?>
                                     <input type="date" class="form-control" id="tgl_closing" name="tgl_closing" value="<?= $komisi->tgl_closing_komisi ?>" readonly>
@@ -147,7 +177,7 @@
             <div class="form-group">
                 <label for="komisi" class="col-form-label">Komisi Bruto</label>
 
-                <?php if ($level == 'Administrator') {?>
+                <?php if ($level_asli != 'CMO') {?>
                     <input type="text" class="form-control" id="tampil_komisi" name="tampil_komisi" value="<?= $komisi->bruto_komisi ?>" onkeyup="formatRupiah(this, 'komisi')">
 
                     <input type="hidden" class="form-control" id="komisi" name="komisi" value="<?= $komisi->bruto_komisi ?>">
@@ -158,7 +188,7 @@
 
             <div class="form-group">
                 <label for="st" class="col-form-label">Status Transfer</label>
-                <?php if ($level == 'Administrator') {?>
+                <?php if ($level_asli != 'CMO') {?>
                     <select class="form-control" id="st" name="st">
                         <!-- <option value="Proses Transfer">Pilih Status Transfer</option> -->
                         <?php
@@ -172,6 +202,10 @@
                 <?php }else{ ?>
                     <input type="text" class="form-control" id="st" name="st" value="<?= $komisi->status_transfer ?>" readonly>
                 <?php } ?>
+            </div>
+            <div class="form-group">
+                <label for="keterangan" class="col-form-label">Keterangan</label>
+                <input type="teks" class="form-control" id="keterangan" name="keterangan" value="<?= $komisi->keterangan_komisi ?>">
             </div>
         </div>
     </div>

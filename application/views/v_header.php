@@ -39,16 +39,29 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
         <style type="text/css">
+            body {
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh; /* Set the body to be at least the height of the viewport */
+                margin: 0;
+            }
+
+            footer {
+                margin-top: auto; /* Push the footer to the bottom */
+            }
+
             /*.table th:first-child,
             .table td:first-child {
               position: sticky;
               left: 0;
               background-color: #f8f9fa;
           }*/
+
           .myTable {
               max-width: 600px;
               margin: 0 auto;
           }
+
           #myTable th, td {
               white-space: nowrap;
           }
@@ -61,38 +74,61 @@
             width: 100% !important;
         }
 
-        table.dataTable thead .sorting:after,
-        table.dataTable thead .sorting:before,
-        table.dataTable thead .sorting_asc:after,
-        table.dataTable thead .sorting_asc:before,
-        table.dataTable thead .sorting_asc_disabled:after,
-        table.dataTable thead .sorting_asc_disabled:before,
-        table.dataTable thead .sorting_desc:after,
-        table.dataTable thead .sorting_desc:before,
-        table.dataTable thead .sorting_desc_disabled:after,
-        table.dataTable thead .sorting_desc_disabled:before {
-         bottom: .5em;
-     }
+        thead th.sticky {
+          position: sticky !important;
+      }
 
-     @media print {
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .col-md-6 {
-            width: 50%;
-        }
-
-        /* Atau sesuaikan ukuran kolom sesuai kebutuhan Anda */
+      .myTable .sticky{
+        position: sticky;
+        left: 0;
+        background-color: #f8f9fa;
+        z-index: 2;
     }
+
+    table.dataTable thead .sorting:after,
+    table.dataTable thead .sorting:before,
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_asc:before,
+    table.dataTable thead .sorting_asc_disabled:after,
+    table.dataTable thead .sorting_asc_disabled:before,
+    table.dataTable thead .sorting_desc:after,
+    table.dataTable thead .sorting_desc:before,
+    table.dataTable thead .sorting_desc_disabled:after,
+    table.dataTable thead .sorting_desc_disabled:before {
+     bottom: .5em;
+ }
+
+ @media print {
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .col-md-6 {
+        width: 50%;
+    }
+}
+
+.red-dot {
+    color: red;
+}
 </style>
+
 </head>
+<?php 
+$url_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$url_segments = explode('/', $url_path);
+$url = end($url_segments);
+?>
 
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <div class="container d-flex justify-content-between">
-            <a class="navbar-brand" href="">A&A INDONESIA</a>
-            <a class="navbar-brand mr-0" href="<?= base_url('Komisi');?>"><?= $nama ?> - <?= $level; ?></a>
-        </div>
-    </nav>
+        <?php if ($url == 'Jurnal' || $url == 'buku_besar' || $url == 'filterBukuBesar' || $url == 'filterJurnal' || $url == 'komisi' || $url == 'Persediaan'): ?>
+            <div class="container-fluid mx-0 p-0 d-flex justify-content-between">
+            <?php else: ?>
+                <div class="container d-flex justify-content-between">
+                <?php endif; ?>
+                <a class="navbar-brand" href="">A&A INDONESIA</a>
+                <a class="navbar-brand mr-0" href="<?= base_url('Komisi');?>"><?= $nama ?> - <?= $level_asli; ?></a>
+            </div>
+        </nav>

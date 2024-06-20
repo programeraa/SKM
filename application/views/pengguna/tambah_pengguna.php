@@ -30,8 +30,16 @@
                         <label for="level" class="col-form-label">Level Akun</label>
                         <select class="form-control" id="level" name="level">
                             <option value="">Pilih Level</option>
+                            <?php 
+                            foreach($tampil_level as $each){ ?>
+                                <option value="<?php echo $each->id_level; ?>">
+                                    <?php echo $each->level; ?>
+                                </option>;
+                            <?php } ?>
+                            <!-- <option value="">Pilih Level</option>
+                            <option value="Akuntan">Akuntan</option>
                             <option value="Administrator">Administrator</option>
-                            <option value="CMO">CMO</option>
+                            <option value="CMO">CMO</option> -->
                         </select>
                     </div>
                     <div class="modal-footer">

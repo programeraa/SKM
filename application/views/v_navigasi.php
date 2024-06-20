@@ -12,11 +12,18 @@
         <div class="dropdown-menu">
             <a class="dropdown-item" href="<?= base_url('Komisi/komisi');?>">Data Komisi</a>
             <a class="dropdown-item" href="<?= base_url('Marketing');?>">Data Marketing</a>
-            <?php if ($level == 'Administrator'): ?> 
+            <?php if ($level_asli == 'Super Administrator'): ?> 
                 <a class="dropdown-item" href="<?= base_url('Pengguna');?>">Data Pengguna</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="<?= base_url('Pengaturan');?>">Pengaturan</a>
             <?php endif ?>
+            <div class="dropdown-divider"></div>
+            <?php if ($level_asli != 'CMO') {?>
+                <a class="dropdown-item" href="<?= base_url('Pengaturan/jabatan');?>">Pengaturan Jabatan</a>
+                <?php if ($level_asli == 'Super Administrator'): ?> 
+                <a class="dropdown-item" href="<?= base_url('Pengaturan/level');?>">Pengaturan Level</a>
+                <?php endif ?>
+                <a class="dropdown-item" href="<?= base_url('Pengaturan/member');?>">Pengaturan Member</a>
+                <a class="dropdown-item" href="<?= base_url('Pengaturan/kantor');?>">Pengaturan Kantor</a>
+            <?php } ?>
         </div>
     </div>
 </div>
@@ -30,8 +37,8 @@
     <div class="dropdown-menu">
         <a class="dropdown-item" href="<?= base_url('Laporan/omzet_vision');?>">Omzet A&A Vision</a>
         <a class="dropdown-item" href="<?= base_url('Laporan/omzet_marketing');?>">Omzet Per Marketing</a>
-        <a class="dropdown-item" href="<?= base_url('Laporan/pph_cobroke');?>">PPH 21 Cobroke</a>
-        <a class="dropdown-item" href="<?= base_url('Laporan/pph_marketing');?>">PPH 21 Marketing Vision</a>
+        <a class="dropdown-item" href="<?= base_url('Laporan/pph_cobroke');?>">PPH 21 Non A&A</a>
+        <a class="dropdown-item" href="<?= base_url('Laporan/pph_marketing');?>">PPH 21 Marketing</a>
         <a class="dropdown-item" href="<?= base_url('Laporan/status_approve');?>">Status Approve</a>
         <a class="dropdown-item" href="<?= base_url('Laporan/status_transaksi');?>">Status Transfer</a>
         <a class="dropdown-item" href="<?= base_url('Laporan/admin_komisi');?>">Admin Komisi</a>
@@ -56,9 +63,9 @@
                 <?php endif ?> -->
             </div>
 
-            <?php if ($level == 'Administrator'): ?> 
+            <!-- <?php if ($level == 'Administrator'): ?> 
                 <div class="text-right">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" >Tambah Data</button>
                 </div>
-            <?php endif ?>
+                <?php endif ?> -->
 
